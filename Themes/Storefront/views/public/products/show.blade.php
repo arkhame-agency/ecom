@@ -207,15 +207,27 @@
 
                                 @if ($product->hasAnyAttribute())
                                     <li class="nav-item">
-                                        <a href="#specification" data-toggle="tab" class="nav-link" :class="{ active: activeTab === 'specification' }">
+                                        <a href="#specification" data-toggle="tab" class="nav-link"
+                                           :class="{ active: activeTab === 'specification' }">
                                             {{ trans('storefront::product.specification') }}
+                                        </a>
+                                    </li>
+                                @endif
+
+
+                                @if ($product->hasDownloadsAttribute())
+                                    <li class="nav-item">
+                                        <a href="#download" data-toggle="tab" class="nav-link"
+                                           :class="{ active: activeTab === 'download' }">
+                                            {{ trans('product::products.tabs.downloads') }}
                                         </a>
                                     </li>
                                 @endif
 
                                 @if (setting('reviews_enabled'))
                                     <li class="nav-item">
-                                        <a href="#reviews" data-toggle="tab" class="nav-link" :class="{ active: activeTab === 'reviews' }" v-cloak>
+                                        <a href="#reviews" data-toggle="tab" class="nav-link"
+                                           :class="{ active: activeTab === 'reviews' }" v-cloak>
                                             @{{ $trans('storefront::product.reviews', { count: totalReviews }) }}
                                         </a>
                                     </li>
@@ -225,6 +237,7 @@
                             <div class="tab-content">
                                 @include('public.products.show.tab_description')
                                 @include('public.products.show.tab_specification')
+                                @include('public.products.show.tab_download')
                                 @include('public.products.show.tab_reviews')
                             </div>
                         </div>

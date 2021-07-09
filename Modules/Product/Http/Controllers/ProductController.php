@@ -47,14 +47,18 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
+        /**
+         * @var $product Product
+         */
         $product = Product::findBySlug($slug);
         $relatedProducts = $product->relatedProducts()->forCard()->get();
         $upSellProducts = $product->upSellProducts()->forCard()->get();
+        $downloadFiles = $product->getDownloadsAttribute();
         $review = $this->getReviewData($product);
 
         event(new ProductViewed($product));
 
-        return view('public.products.show', compact('product', 'relatedProducts', 'upSellProducts', 'review'));
+        return view('public.products.show', compact('product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
     }
 
     private function getReviewData(Product $product)

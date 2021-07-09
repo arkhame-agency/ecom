@@ -21,6 +21,7 @@ return [
     'tumblr' => 'Tumblr',
     'you_might_also_like' => 'You might also like',
     'description' => 'Description',
+    'downloadFiles' => 'Download',
     'specification' => 'Specification',
     'reviews' => 'Reviews (:count)',
     'add_a_review' => 'Add a review',

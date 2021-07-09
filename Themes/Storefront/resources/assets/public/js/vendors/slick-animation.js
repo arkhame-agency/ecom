@@ -15,8 +15,8 @@
         var firstSlickItem = currentSlickSlider.find('[data-slick-index="0"]');
 
         var animatedClass = 'animated';
-        var visible = {opacity: '1'};
-        var hidden = {opacity: '0'};
+        var visible = { opacity: '1' };
+        var hidden = { opacity: '0' };
 
         /**
          * function for setting animationIn and animationOut class
@@ -33,7 +33,7 @@
             slickRemoveAnimation(obj, 'delay');
             slickRemoveAnimation(obj, 'duration');
 
-            if (type['opacity'] == 1) {
+            if (type['opacity'] === 1) {
                 obj.addClass(animationIn);
                 obj.addClass(animatedClass);
             } else {
@@ -76,7 +76,7 @@
                 '-webkit-animation-' + animation,
                 '-moz-animation-' + animation,
                 '-o-animation-' + animation,
-                '-ms-animation-' + animation
+                '-ms-animation-' + animation,
             ];
             var delayInAttributes = {};
             delayInAttr.forEach(function (entry) {
@@ -97,7 +97,7 @@
                 '-webkit-animation-' + animation,
                 '-moz-animation-' + animation,
                 '-o-animation-' + animation,
-                '-ms-animation-' + animation
+                '-ms-animation-' + animation,
             ];
             var delayInAttributes = {};
             delayInAttr.forEach(function (entry) {
@@ -144,7 +144,7 @@
                                 if (durationOut) {
                                     slickAddAnimation(self, 'duration', durationOut);
                                 }
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     slickRemoveAnimation(self, 'delay');
                                     slickRemoveAnimation(self, 'duration');
                                 }, getTimeout(delayOut, durationOut));
@@ -175,7 +175,7 @@
                                 if (durationOut) {
                                     slickAddAnimation(self, 'duration', durationOut);
                                 }
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     slickRemoveAnimation(self, 'delay');
                                     slickRemoveAnimation(self, 'duration');
                                 }, getTimeout(delayOut, durationOut));
@@ -226,5 +226,5 @@
             });
         });
         return this;
-    }
+    };
 })(jQuery);

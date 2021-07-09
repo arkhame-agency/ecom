@@ -286,7 +286,7 @@ class Product extends Model
      *
      * @return \Modules\Media\Entities\File
      */
-    public function getBaseImageAttribute()
+    public function getBaseImageAttribute(): File
     {
         return $this->files->where('pivot.zone', 'base_image')->first() ?: new File;
     }
@@ -296,7 +296,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAdditionalImagesAttribute()
+    public function getAdditionalImagesAttribute(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->files
             ->where('pivot.zone', 'additional_images')
@@ -314,6 +314,11 @@ class Product extends Model
             ->where('pivot.zone', 'downloads')
             ->sortBy('pivot.id')
             ->flatten();
+    }
+
+    public function hasDownloadsAttribute()
+    {
+        return $this->files->isNotEmpty();
     }
 
     public function getFormattedPriceAttribute()
