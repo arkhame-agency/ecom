@@ -29,7 +29,7 @@
     "Translation": true,
     "User": true,
     "Wishlist": true,
-    "FlashSale": true,
+    "FlashSale": false,
     "Brand": true,
     "Newsletter": true,
     "Tag": true,
