@@ -318,7 +318,10 @@ class Product extends Model
 
     public function hasDownloadsAttribute()
     {
-        return $this->files->isNotEmpty();
+        return $this->files
+            ->where('pivot.zone', 'downloads')
+            ->sortBy('pivot.id')
+            ->flatten()->isNotEmpty();
     }
 
     public function getFormattedPriceAttribute()

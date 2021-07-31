@@ -15,8 +15,8 @@
         var firstSlickItem = currentSlickSlider.find('[data-slick-index="0"]');
 
         var animatedClass = 'animated';
-        var visible = { opacity: '1' };
-        var hidden = { opacity: '0' };
+        var visible = { opacity: 1 };
+        var hidden = { opacity: 0 };
 
         /**
          * function for setting animationIn and animationOut class
@@ -33,7 +33,7 @@
             slickRemoveAnimation(obj, 'delay');
             slickRemoveAnimation(obj, 'duration');
 
-            if (type['opacity'] === 1) {
+            if (parseInt(type['opacity']) === 1) {
                 obj.addClass(animationIn);
                 obj.addClass(animatedClass);
             } else {
