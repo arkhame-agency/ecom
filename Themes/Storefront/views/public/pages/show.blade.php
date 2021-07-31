@@ -20,8 +20,13 @@
 @section('content')
     <section class="custom-page-wrap clearfix">
         <div class="container">
-            <div class="custom-page-content clearfix">
-                {!! $page->body !!}
+            <div class="custom-page-content clearfix row px-3">
+                <div class="custom-page_product-search-left">
+                @include('public.products.index.latest_products')
+                </div>
+                <div class="custom-page_product-search-right">
+                    {!! $page->body !!}
+                </div>
             </div>
         </div>
     </section>
