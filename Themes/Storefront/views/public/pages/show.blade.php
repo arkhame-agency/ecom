@@ -18,13 +18,13 @@
 @endpush
 
 @section('content')
-    <section class="custom-page-wrap clearfix">
+    <section class="custom-page-wrap">
         <div class="container">
-            <div class="custom-page-content clearfix row px-3">
-                <div class="custom-page_product-search-left">
-                @include('public.products.index.latest_products')
+            <div class="custom-page-content">
+                <div class="custom-page-left">
+                    @include('public.products.index.latest_products')
                 </div>
-                <div class="custom-page_product-search-right">
+                <div class="custom-page-right">
                     {!! $page->body !!}
                 </div>
             </div>

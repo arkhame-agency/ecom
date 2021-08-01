@@ -1,4 +1,4 @@
-.product-search-right, .custom-page_product-search-right {
+.product-search-right {
     width: calc(100% - 293px);
 
     .categories-banner {
@@ -24,13 +24,13 @@
 }
 
 @media screen and (max-width: 1400px) {
-    .product-search-right, .custom-page_product-search-right {
+    .product-search-right {
         width: calc(100% - 276px);
     }
 }
 
 @media screen and (max-width: $lg) {
-    .product-search-right, .custom-page_product-search-right {
+    .product-search-right {
         width: 100%;
         margin-top: 20px;
     }
