@@ -19,6 +19,7 @@ export default {
         'initialPerPage',
         'initialPage',
         'initialViewMode',
+        'initialPromotions',
     ],
 
     data() {
@@ -41,6 +42,7 @@ export default {
                 sort: this.initialSort,
                 perPage: this.initialPerPage,
                 page: this.initialPage,
+                promotions: this.initialPromotions,
             },
         };
     },

@@ -33,6 +33,7 @@
         :initial-per-page="{{ request('perPage', 30) }}"
         :initial-page="{{ request('page', 1) }}"
         initial-view-mode="{{ request('viewMode', 'grid') }}"
+        initial-promotions="{{request('promotions', false)}}"
         inline-template
     >
         <section class="product-search-wrap">

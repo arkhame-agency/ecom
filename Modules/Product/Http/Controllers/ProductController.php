@@ -63,10 +63,29 @@ class ProductController extends Controller
 
     private function getReviewData(Product $product)
     {
-        if (! setting('reviews_enabled')) {
+        if (!setting('reviews_enabled')) {
             return;
         }
 
         return Review::countAndAvgRating($product);
+    }
+
+    /**
+     * Display a listing of promotions.
+     *
+     * @param string $slug
+     * @param \Modules\Product\Entities\Product $model
+     * @param \Modules\Product\Filters\ProductFilter $productFilter
+     * @return \Illuminate\Http\Response
+     */
+    public function promotions(Product $model, ProductFilter $productFilter)
+    {
+        request()->merge(['promotions' => true]);
+
+        if (request()->expectsJson()) {
+            return $this->searchProducts($model, $productFilter);
+        }
+
+        return view('public.products.index');
     }
 }
