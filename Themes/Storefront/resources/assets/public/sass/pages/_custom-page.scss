@@ -3,6 +3,7 @@
 
     .custom-page-content {
         display: flex;
+        text-align: justify;
     }
 }
 
@@ -18,7 +19,8 @@
     }
 
     ul, ol {
-        padding-left: 16px;
+        padding-left: 40px;
+        margin-bottom: revert;
         overflow: hidden;
 
         li {
