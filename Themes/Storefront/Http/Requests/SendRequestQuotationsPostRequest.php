@@ -4,7 +4,7 @@ namespace Themes\Storefront\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendRequestsPostRequest extends FormRequest
+class SendRequestQuotationsPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

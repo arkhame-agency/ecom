@@ -27,7 +27,7 @@
                 <div class="custom-page-right">
                     <div class="row">
                         <div class="col-md">
-                            <form method="POST" action="{{route('postDemandes')}}" id="demande-form">
+                            <form method="POST" action="{{route('post.request.quotations')}}" id="demande-form">
                                 <div class="mb-5">
                                     <h1>Formulaire de demande de soumission</h1>
                                     <p>
@@ -42,7 +42,7 @@
                                     {{ csrf_field() }}
                                     <div class="col-md-17 mx-auto">
                                         <div class="form-row">
-                                            <div class="form-group col-md-9">
+                                            <div class="form-group col-md-9 required">
                                                 <label for="name">{{trans('storefront::requests_form.name')}}</label>
                                                 <input type="text"
                                                        class="form-control @error('name') is-invalid @enderror"
@@ -55,7 +55,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-9">
+                                            <div class="form-group col-md-9 required">
                                                 <label for="email">{{trans('storefront::requests_form.email')}}</label>
                                                 <input type="email"
                                                        class="form-control @error('email') is-invalid @enderror"
@@ -69,7 +69,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label for="address">{{trans('storefront::requests_form.address')}}</label>
                                             <input type="text"
                                                    class="form-control @error('address') is-invalid @enderror"
@@ -83,7 +83,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 required">
                                                 <label for="city">{{trans('storefront::requests_form.city')}}</label>
                                                 <input type="text"
                                                        class="form-control @error('city') is-invalid @enderror"
@@ -96,7 +96,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 required">
                                                 <label
                                                     for="postalCode">{{trans('storefront::requests_form.postal_code')}}</label>
                                                 <input type="text"
@@ -110,7 +110,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 required">
                                                 <label
                                                     for="telephone">{{trans('storefront::requests_form.telephone')}}</label>
                                                 <input type="text"
@@ -125,9 +125,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <div class="mb-2">
-                                                <strong>{{trans('storefront::requests_form.why_do_you_want_technician')}}</strong>
+                                                <label>{{trans('storefront::requests_form.why_do_you_want_technician')}}</label>
                                             </div>
                                             <div class="form-radio">
                                                 <input

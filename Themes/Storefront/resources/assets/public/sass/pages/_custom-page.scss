@@ -7,6 +7,18 @@
     }
 }
 
+.form-group.required,
+.form-group.required div,
+.form-check.required,
+.form-check.required div,
+.form-radio.required,
+.form-radio.required div {
+    label::after {
+        content: " *";
+        color: #ff0000;
+    }
+}
+
 .custom-page-content {
     h1, h2, h3, h4, h5, h6 {
         margin-bottom: 14px;
