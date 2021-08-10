@@ -287,7 +287,7 @@
                                                     10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
-                                                    <input type="range" class="custom-range" id="service_received"
+                                                    <input type="range" class="form-control-range" id="service_received"
                                                            name="service_received"
                                                            min="1" max="10" step="1" value="1">
                                                 </div>
@@ -305,7 +305,7 @@
                                                     10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
-                                                    <input type="range" class="custom-range"
+                                                    <input type="range" class="form-control-range"
                                                            id="satisfied_answers_questions"
                                                            name="satisfied_answers_questions"
                                                            min="1" max="10" step="1" value="1">
@@ -325,7 +325,7 @@
                                                     10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
-                                                    <input type="range" class="custom-range"
+                                                    <input type="range" class="form-control-range"
                                                            id="satisfied_explanations_vacuum"
                                                            name="satisfied_explanations_vacuum"
                                                            min="1" max="10" step="1" value="1">
@@ -344,7 +344,7 @@
                                                     10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
-                                                    <input type="range" class="custom-range"
+                                                    <input type="range" class="form-control-range"
                                                            id="recommend_to_friends"
                                                            name="recommend_to_friends"
                                                            min="1" max="10" step="1" value="1">
