@@ -67,9 +67,7 @@ class PageController
         if ($registerGuaranteePostRequest->subscribe_to_mailchimp) {
             Newsletter::subscribeOrUpdate($registerGuaranteePostRequest->email, ['FNAME' => $registerGuaranteePostRequest->name, 'LNAME' => $registerGuaranteePostRequest->name]);
             if (!Newsletter::lastActionSucceeded()) {
-                return response()->json([
-                    'message' => str_after(Newsletter::getLastError(), '400: '),
-                ], 403);
+                return redirect()->route('registration.guarantee')->with('error', str_after(Newsletter::getLastError(), '400: '));
             }
         }
 
