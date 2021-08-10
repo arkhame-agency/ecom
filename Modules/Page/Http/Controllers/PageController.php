@@ -65,7 +65,7 @@ class PageController
         \Mail::to(setting('store_email'))->send(new RegisterGuarantee($registerGuaranteePostRequest));
 
         if ($registerGuaranteePostRequest->subscribe_to_mailchimp) {
-            Newsletter::subscribeOrUpdate($registerGuaranteePostRequest->email);
+            Newsletter::subscribeOrUpdate($registerGuaranteePostRequest->email, ['FNAME' => $registerGuaranteePostRequest->name, 'LNAME' => $registerGuaranteePostRequest->name]);
             if (!Newsletter::lastActionSucceeded()) {
                 return response()->json([
                     'message' => str_after(Newsletter::getLastError(), '400: '),
