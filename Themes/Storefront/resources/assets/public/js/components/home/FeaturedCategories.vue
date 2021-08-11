@@ -12,6 +12,7 @@
                         v-for="(tab, index) in tabs"
                         :key="index"
                         :class="classes(tab)"
+                        :title="title(tab)"
                         @click="change(tab)"
                     >
                         <div class="featured-category-image">
@@ -40,11 +41,11 @@
 </template>
 
 <script>
-    import ProductCard from '../ProductCard.vue';
-    import DynamicTabsMixin from '../../mixins/DynamicTabsMixin';
-    import { slickPrevArrow, slickNextArrow } from '../../functions';
+import ProductCard from '../ProductCard.vue';
+import DynamicTabsMixin from '../../mixins/DynamicTabsMixin';
+import { slickNextArrow, slickPrevArrow } from '../../functions';
 
-    export default {
+export default {
         components: { ProductCard },
 
         mixins: [
