@@ -4,10 +4,10 @@ namespace Modules\Setting\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
-use Modules\Support\Locale;
-use Modules\Support\Country;
-use Modules\Support\TimeZone;
 use Modules\Currency\Currency;
+use Modules\Support\Country;
+use Modules\Support\Locale;
+use Modules\Support\TimeZone;
 use Modules\User\Entities\Role;
 
 class SettingTabs extends Tabs
@@ -36,6 +36,7 @@ class SettingTabs extends Tabs
 
         $this->group('shipping_methods', trans('setting::settings.tabs.group.shipping_methods'))
             ->add($this->freeShipping())
+            ->add($this->commercialShipping())
             ->add($this->localPickup())
             ->add($this->flatRate());
 
@@ -245,6 +246,21 @@ class SettingTabs extends Tabs
             $tab->weight(45);
             $tab->fields(['local_pickup_enabled', 'translatable.local_pickup_label']);
             $tab->view('setting::admin.settings.tabs.local_pickup');
+        });
+    }
+
+    private function commercialShipping()
+    {
+        return tap(new Tab('commercial_shipping', trans('setting::settings.tabs.commercial_shipping')), function (Tab $tab) {
+            $tab->weight(42);
+
+            $tab->fields([
+                'commercial_shipping_enabled',
+                'translatable.commercial_shipping_label',
+                'commercial_shipping_cost',
+            ]);
+
+            $tab->view('setting::admin.settings.tabs.commercial_shipping');
         });
     }
 

@@ -2,9 +2,9 @@
 
 namespace Modules\Shipping\Providers;
 
-use Modules\Shipping\Method;
 use Illuminate\Support\ServiceProvider;
 use Modules\Shipping\Facades\ShippingMethod;
+use Modules\Shipping\Method;
 
 class ShippingServiceProvider extends ServiceProvider
 {
@@ -15,18 +15,19 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (! config('app.installed')) {
+        if (!config('app.installed')) {
             return;
         }
 
         $this->registerFreeShipping();
+        $this->registerCommercialShipping();
         $this->registerLocalPickup();
         $this->registerFlatRate();
     }
 
     private function registerFreeShipping()
     {
-        if (! setting('free_shipping_enabled')) {
+        if (!setting('free_shipping_enabled')) {
             return;
         }
 
@@ -35,9 +36,20 @@ class ShippingServiceProvider extends ServiceProvider
         });
     }
 
+    private function registerCommercialShipping()
+    {
+        if (!setting('commercial_shipping_enabled')) {
+            return;
+        }
+
+        ShippingMethod::register('commercial_shipping', function () {
+            return new Method('commercial_shipping', setting('commercial_shipping_label'), setting('commercial_shipping_cost'));
+        });
+    }
+
     private function registerLocalPickup()
     {
-        if (! setting('local_pickup_enabled')) {
+        if (!setting('local_pickup_enabled')) {
             return;
         }
 
@@ -48,7 +60,7 @@ class ShippingServiceProvider extends ServiceProvider
 
     private function registerFlatRate()
     {
-        if (! setting('flat_rate_enabled')) {
+        if (!setting('flat_rate_enabled')) {
             return;
         }
 

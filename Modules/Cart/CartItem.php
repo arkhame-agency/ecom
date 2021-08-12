@@ -3,8 +3,8 @@
 namespace Modules\Cart;
 
 use JsonSerializable;
-use Modules\Support\Money;
 use Modules\Product\Entities\Product;
+use Modules\Support\Money;
 
 class CartItem implements JsonSerializable
 {
@@ -24,6 +24,15 @@ class CartItem implements JsonSerializable
     public function unitPrice()
     {
         return $this->product->selling_price->add($this->optionsPrice());
+    }
+
+    public function isCommercialCategory() {
+        foreach ($this->product->categories as $category) {
+            if (str_contains($category->slug, 'commercial')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function total()

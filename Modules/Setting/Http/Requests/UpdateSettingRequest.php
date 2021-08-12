@@ -2,12 +2,12 @@
 
 namespace Modules\Setting\Http\Requests;
 
-use Modules\Support\Locale;
-use Modules\Support\Country;
-use Modules\Support\TimeZone;
-use Modules\Currency\Currency;
 use Illuminate\Validation\Rule;
 use Modules\Core\Http\Requests\Request;
+use Modules\Currency\Currency;
+use Modules\Support\Country;
+use Modules\Support\Locale;
+use Modules\Support\TimeZone;
 
 class UpdateSettingRequest extends Request
 {
@@ -86,6 +86,10 @@ class UpdateSettingRequest extends Request
             'local_pickup_enabled' => 'required|boolean',
             'translatable.local_pickup_label' => 'required_if:local_pickup_enabled,1',
             'local_pickup_cost' => ['required_if:local_pickup_enabled,1', 'nullable', 'numeric'],
+
+            'commercial_shipping_enabled' => 'required|boolean',
+            'translatable.commercial_shipping_label' => 'required_if:commercial_shipping_enabled,1',
+            'commercial_shipping_cost' => ['required_if:commercial_shipping_enabled,1', 'nullable', 'numeric'],
 
             'flat_rate_enabled' => 'required|boolean',
             'translatable.flat_rate_label' => 'required_if:flat_rate_enabled,1',

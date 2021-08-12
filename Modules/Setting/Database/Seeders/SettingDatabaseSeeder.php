@@ -36,6 +36,7 @@ class SettingDatabaseSeeder extends Seeder
             'translatable' => [
                 'store_name' => 'FleetCart',
                 'free_shipping_label' => 'Free Shipping',
+                'cpmmercial_shipping_label' => 'Commercial Shipping',
                 'local_pickup_label' => 'Local Pickup',
                 'flat_rate_label' => 'Flat Rate',
                 'paypal_label' => 'PayPal',

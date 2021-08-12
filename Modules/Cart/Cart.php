@@ -2,16 +2,16 @@
 
 namespace Modules\Cart;
 
-use JsonSerializable;
-use Modules\Support\Money;
-use Modules\Tax\Entities\TaxRate;
+use Darryldecode\Cart\Cart as DarryldecodeCart;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
+use JsonSerializable;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Product\Entities\Product;
-use Modules\Shipping\Facades\ShippingMethod;
-use Darryldecode\Cart\Cart as DarryldecodeCart;
 use Modules\Product\Services\ChosenProductOptions;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Modules\Shipping\Facades\ShippingMethod;
+use Modules\Support\Money;
+use Modules\Tax\Entities\TaxRate;
 
 class Cart extends DarryldecodeCart implements JsonSerializable
 {
@@ -146,11 +146,37 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function availableShippingMethods()
     {
+        if ($this->isCommercialCategory()) {
+            return collect(array('commercial_shipping' => ShippingMethod::available()->get('commercial_shipping')));
+        }
+
         if ($this->allItemsAreVirtual()) {
             return collect();
         }
 
-        return ShippingMethod::available();
+        if ($this->isLessThenFeeShippingMinAmount()) {
+            return collect(array('flat_rate' => ShippingMethod::available()->get('flat_rate')));
+        }
+
+        return ShippingMethod::available()->forget(['commercial_shipping','flat_rate']);
+    }
+
+    public function isLessThenFeeShippingMinAmount()
+    {
+        $minimumAmount = Money::inDefaultCurrency(setting('free_shipping_min_amount'));
+        return $this->subTotal()->lessThan($minimumAmount);
+    }
+
+    public function isCommercialCategory()
+    {
+        return $this->items()->every(function (CartItem $cartItem) {
+            foreach ($cartItem->product->categories as $category) {
+                if (str_contains($category->slug, 'commercial')) {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
     public function allItemsAreVirtual()
@@ -167,7 +193,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function shippingMethod()
     {
-        if (! $this->hasShippingMethod()) {
+        if (!$this->hasShippingMethod()) {
             return new NullCartShippingMethod;
         }
 
@@ -229,7 +255,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function coupon()
     {
-        if (! $this->hasCoupon()) {
+        if (!$this->hasCoupon()) {
             return new NullCartCoupon;
         }
 
@@ -285,7 +311,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function taxes()
     {
-        if (! $this->hasTax()) {
+        if (!$this->hasTax()) {
             return new Collection;
         }
 
