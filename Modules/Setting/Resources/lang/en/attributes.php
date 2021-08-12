@@ -79,7 +79,7 @@ return [
 
     'commercial_shipping_enabled' => 'Status',
     'translatable.commercial_shipping_label' => 'Label',
-    'commercial_shipping_cost' => 'Minimum Amount',
+    'commercial_shipping_cost' => 'Cost',
 
     'local_pickup_enabled' => 'Status',
     'translatable.local_pickup_label' => 'Label',
