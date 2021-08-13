@@ -274,6 +274,14 @@ $(() => {
     let homeSlider = $('.home-slider');
 
     if (homeSlider.length !== 0) {
+
+        homeSlider.on('init', function () {
+            BackgroundCheck.init({
+                targets: '.caption-1, .caption-2',
+                images: '.slider-image',
+            });
+        });
+
         homeSlider.slick({
             rows: 0,
             rtl: window.FleetCart.rtl,

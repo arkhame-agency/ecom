@@ -117,6 +117,7 @@
         @stack('pre-scripts')
 
         <script src="{{ v(Theme::url('public/js/app.js')) }}"></script>
+        <script src="/background-check.min.js" type="text/javascript"></script>
 
         @stack('scripts')
 
