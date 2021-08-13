@@ -25,7 +25,7 @@ class SettingTabs extends Tabs
             ->add($this->maintenance())
             ->add($this->store())
             ->add($this->currency())
-            ->add($this->sms())
+//            ->add($this->sms())
             ->add($this->mail())
             ->add($this->newsletter())
             ->add($this->customCssJs());
