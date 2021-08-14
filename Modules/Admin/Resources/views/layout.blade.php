@@ -48,6 +48,7 @@
         @include('admin::partials.footer')
 
         @include('admin::partials.confirmation_modal')
+        @include('admin::partials.viewer_image_modal')
 
         @foreach ($assets->allJs() as $js)
             <script src="{{ v($js) }}"></script>

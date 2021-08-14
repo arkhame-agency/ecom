@@ -25,7 +25,7 @@
 
 @push('scripts')
     <script>
-        Mousetrap.bind('u', function() {
+        Mousetrap.bind('u', function () {
             $('.dropzone').trigger('click');
         });
 
@@ -47,5 +47,12 @@
                 { data: 'created', name: 'created_at' },
             ],
         });
+        $('#media-table .table').on('draw.dt', function(e, settings, json) {
+            $('.pop').on('click', function (e) {
+                e.preventDefault();
+                $('.imagepreview').attr('src', $(this).attr('src'));
+                $('#imagemodal').modal('show');
+            });
+        })
     </script>
 @endpush
