@@ -275,14 +275,12 @@ $(() => {
 
     if (homeSlider.length !== 0) {
 
-        setTimeout(function () {
-            homeSlider.on('init', function () {
-                BackgroundCheck.init({
-                    targets: '.caption-1, .caption-2',
-                    images: '.slider-image',
-                });
+        homeSlider.on('init', function () {
+            BackgroundCheck.init({
+                targets: '.caption-1, .caption-2',
+                images: '.slider-image',
             });
-        }, 100);
+        });
 
         homeSlider.on('beforeChange', function () {
             BackgroundCheck.refresh();
