@@ -48,6 +48,7 @@ class UpdateSettingRequest extends Request
 
             'translatable.store_name' => 'required',
             'store_phone' => ['required'],
+            'store_fax' => 'nullable',
             'store_email' => 'required|email',
             'store_country' => ['required', Rule::in(Country::codes())],
 
@@ -57,12 +58,12 @@ class UpdateSettingRequest extends Request
             'auto_refresh_currency_rates' => 'required|boolean',
             'auto_refresh_currency_rate_frequency' => ['required_if:auto_refresh_currency_rates,1', Rule::in($this->refreshFrequencies())],
 
-            'sms_service' => ['nullable', Rule::in($this->smsServices())],
-            'vonage_key' => ['required_if:sms_service,vonage'],
-            'vonage_secret' => ['required_if:sms_service,vonage'],
-            'twilio_sid' => ['required_if:sms_service,twilio'],
-            'twilio_token' => ['required_if:sms_service,twilio'],
-            'sms_order_statuses.*' => ['nullable', Rule::in($this->orderStatuses())],
+//            'sms_service' => ['nullable', Rule::in($this->smsServices())],
+//            'vonage_key' => ['required_if:sms_service,vonage'],
+//            'vonage_secret' => ['required_if:sms_service,vonage'],
+//            'twilio_sid' => ['required_if:sms_service,twilio'],
+//            'twilio_token' => ['required_if:sms_service,twilio'],
+//            'sms_order_statuses.*' => ['nullable', Rule::in($this->orderStatuses())],
 
             'mail_from_address' => 'nullable|email',
             'mail_encryption' => ['nullable', Rule::in($this->mailEncryptionProtocols())],

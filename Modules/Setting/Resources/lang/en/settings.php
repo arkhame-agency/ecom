@@ -37,7 +37,7 @@ return [
         'approve_reviews_automatically' => 'Customer reviews will be approved automatically',
         'show_cookie_bar' => 'Show cookie bar in your website',
         'privacy_settings' => 'Privacy Settings',
-        'hide_store_phone' => 'Hide store phone from the storefront',
+        'hide_store_phone' => 'Hide store phone and fax from the storefront',
         'hide_store_email' => 'Hide store email from the storefront',
         'put_the_application_into_maintenance_mode' => 'Put the application into maintenance mode',
         'ip_addreses_seperated_in_new_line' => 'IP addreses seperated in new line',

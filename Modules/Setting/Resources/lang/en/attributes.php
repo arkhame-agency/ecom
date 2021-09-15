@@ -16,6 +16,7 @@ return [
     'translatable.store_tagline' => 'Store Tagline',
     'translatable.store_name' => 'Store Name',
     'store_phone' => 'Store Phone',
+    'store_fax' => 'Store Fax',
     'store_email' => 'Store Email',
     'store_address_1' => 'Store Address 1',
     'store_address_2' => 'Store Address 2',
@@ -23,7 +24,7 @@ return [
     'store_country' => 'Store Country',
     'store_state' => 'Store State',
     'store_zip' => 'Store Zip',
-    'store_phone_hide' => 'Hide Store Phone',
+    'store_phone_hide' => 'Hide Store Phone and Fax',
     'store_email_hide' => 'Hide Store Email',
 
     'supported_currencies' => 'Supported Currencies',

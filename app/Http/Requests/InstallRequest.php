@@ -2,8 +2,8 @@
 
 namespace FleetCart\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InstallRequest extends FormRequest
 {
@@ -38,6 +38,7 @@ class InstallRequest extends FormRequest
             'store.store_name' => 'required',
             'store.store_email' => 'required|email',
             'store.store_phone' => 'required',
+            'store.store_fax' => 'nullable',
             'store.search_engine' => ['required', Rule::in(['mysql', 'algolia'])],
             'store.algolia_app_id' => 'required_if:store.search_engine,algolia',
             'store.algolia_secret' => 'required_if:store.search_engine,algolia',

@@ -92,6 +92,7 @@ class SettingTabs extends Tabs
                 'translatable.store_name',
                 'translatable.store_tagline',
                 'store_phone',
+                'store_fax',
                 'store_email',
                 'store_address_1',
                 'store_address_2',

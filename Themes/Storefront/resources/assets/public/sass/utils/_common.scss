@@ -110,7 +110,7 @@
         transition: 500ms ease-in-out;
 
         &.animating {
-            animation: zoomInOut 500ms ease-in-out; 
+            animation: zoomInOut 500ms ease-in-out;
         }
     }
 }
@@ -242,7 +242,7 @@
             line-height: 22px;
             display: block;
             margin-left: 24px;
-            word-break: break-all;
+            //word-break: break-all;
             white-space: pre-wrap;
         }
     }

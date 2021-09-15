@@ -5,6 +5,7 @@
             {{ Form::text('translatable[store_tagline]', trans('setting::attributes.translatable.store_tagline'), $errors, $settings, ['rows' => 2]) }}
             {{ Form::text('store_email', trans('setting::attributes.store_email'), $errors, $settings, ['required' => true]) }}
             {{ Form::text('store_phone', trans('setting::attributes.store_phone'), $errors, $settings, ['required' => true]) }}
+            {{ Form::text('store_fax', trans('setting::attributes.store_fax'), $errors, $settings) }}
             {{ Form::text('store_address_1', trans('setting::attributes.store_address_1'), $errors, $settings) }}
             {{ Form::text('store_address_2', trans('setting::attributes.store_address_2'), $errors, $settings) }}
             {{ Form::text('store_city', trans('setting::attributes.store_city'), $errors, $settings) }}

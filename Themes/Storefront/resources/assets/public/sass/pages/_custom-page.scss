@@ -7,6 +7,16 @@
     }
 }
 
+@media screen and (max-width: $lg) {
+    .custom-page-wrap {
+        margin-top: 24px;
+    }
+
+    .custom-page-content {
+        flex-direction: column-reverse;
+    }
+}
+
 .form-group.required,
 .form-group.required div,
 .form-check.required,
