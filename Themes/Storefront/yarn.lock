@@ -21,10 +21,6 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-"background-check@https://github.com/kennethcachia/background-check":
-  version "1.2.2"
-  resolved "https://github.com/kennethcachia/background-check#f52e3f8116dca46f95ce0da548d1458f22eec7f1"
-
 bootstrap@^4.3.1:
   version "4.6.0"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-4.6.0.tgz"

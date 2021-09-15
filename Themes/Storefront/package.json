@@ -12,7 +12,6 @@
     },
     "devDependencies": {
         "animate.css": "^3.7.2",
-        "background-check": "https://github.com/kennethcachia/background-check",
         "bootstrap": "^4.3.1",
         "flatpickr": "^4.6.3",
         "jquery": "^3.4.1",
