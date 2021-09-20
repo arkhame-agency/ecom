@@ -159,7 +159,7 @@ export default {
             }
 
             if (window.Stripe) {
-                this.stripe = window.Stripe(FleetCart.stripePublishableKey);
+                this.stripe = window.Stripe(FleetCart.stripePublishableKey, { 'locale': FleetCart.locale });
 
                 this.renderStripeElements();
             }

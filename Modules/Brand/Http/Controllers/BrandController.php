@@ -15,7 +15,7 @@ class BrandController
     public function index()
     {
         return view('public.brands.index', [
-            'brands' => Brand::with('files')->get(),
+            'brands' => Brand::all()->SortBy('name'),
         ]);
     }
 }

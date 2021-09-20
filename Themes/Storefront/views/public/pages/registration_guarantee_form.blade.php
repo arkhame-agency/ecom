@@ -28,22 +28,20 @@
                     <div class="row">
                         <div class="col-md">
                             <form method="POST" action="{{route('post.registration.guarantee')}}" id="guarantee-form">
-                                <div class="mb-5">
-                                    <h1>Enregistrement d'une garantie</h1>
-                                    <p>
-                                        Pour enregistrer votre produit, il suffit d'avoir en main:
-                                    </p>
-                                    <ul>
-                                        <li>
-                                            le numéro de série du produit
-                                        </li>
-                                        <li>
-                                            le reçu ou la facture avec référence à la date d'achat du produit
-                                        </li>
-                                    </ul>
-                                </div>
+                                {{ csrf_field() }}
+                                <h1>{{trans('storefront::guarantee_form.title')}}</h1>
                                 @if (!session('success'))
-                                    {{ csrf_field() }}
+                                    <div class="mb-5">
+                                        <p>{{trans('storefront::guarantee_form.register_product')}}</p>
+                                        <ul>
+                                            <li>
+                                                {{trans('storefront::guarantee_form.serial_number')}}
+                                            </li>
+                                            <li>
+                                                {{trans('storefront::guarantee_form.receipt_or_bill')}}
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <div class="col-md-17 mx-auto">
                                         <div class="form-row">
                                             <div class="form-group col-md-9 required">
@@ -121,7 +119,8 @@
                                                 <select
                                                     class="form-control custom-select @error('province') is-invalid @enderror"
                                                     name="province">
-                                                    <option value="">{{trans('storefront::guarantee_form.select')}}</option>
+                                                    <option
+                                                        value="">{{trans('storefront::guarantee_form.select')}}</option>
                                                     @foreach($provinces as $code => $province)
                                                         <option value="{{$code}}"
                                                                 @if(old('province')=== $code) selected @endif>{{$province}}</option>
@@ -163,7 +162,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <h4>Vacuum cleaner information</h4>
+                                        <h4>{{trans('storefront::guarantee_form.vacuum_cleaner_information')}}</h4>
 
                                         <div class="form-row">
                                             <div class="form-group col-md-9 required">
@@ -253,14 +252,15 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-9">
+                                            <div class="form-group col-md-18">
                                                 <label
                                                     for="assigned_registration_number">{{trans('storefront::guarantee_form.vacuum_cleaner.assigned_registration_number')}}</label>
                                                 <input type="text"
                                                        class="form-control @error('assigned_registration_number') is-invalid @enderror"
                                                        id="assigned_registration_number"
                                                        placeholder="{{trans('storefront::guarantee_form.vacuum_cleaner.assigned_registration_number')}}"
-                                                       name="assigned_registration_number" value="{{ old('assigned_registration_number') }}" step=".01">
+                                                       name="assigned_registration_number"
+                                                       value="{{ old('assigned_registration_number') }}" step=".01">
                                                 @error('assigned_registration_number')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -270,21 +270,21 @@
                                         </div>
                                         <hr style="background: orange;height: 2px" class="mb-5">
                                         <h3>
-                                            Satisfaction survey
+                                            {{trans('storefront::guarantee_form.survey.title')}}
                                         </h3>
                                         <p>
-                                            On a scale of 1 to 10:
+                                            {{trans('storefront::guarantee_form.survey.1_to_10')}}
                                         </p>
                                         <div class="form-group">
                                             <label for="service_received">
-                                                How would you rate the service you received in store?:
+                                                {{trans('storefront::guarantee_form.survey.rate_the_service_received')}}
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    1 not at all satisfied
+                                                    {{trans('storefront::guarantee_form.survey.not_at_all_satisfied')}}
                                                 </div>
                                                 <div class="col-md-9 text-xl-right">
-                                                    10 very satisfied
+                                                    {{trans('storefront::guarantee_form.survey.very_satisfied')}}
                                                 </div>
                                                 <div class="col-md-18">
                                                     <input type="range" class="form-control-range" id="service_received"
@@ -295,14 +295,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="satisfied_answers_questions">
+                                                {{trans('storefront::guarantee_form.survey.satisfied_with_answers')}}
                                                 How satisfied are you with the answers to your questions?:
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    1 not at all satisfied
+                                                    {{trans('storefront::guarantee_form.survey.not_at_all_satisfied')}}
                                                 </div>
                                                 <div class="col-md-9 text-xl-right">
-                                                    10 very satisfied
+                                                    {{trans('storefront::guarantee_form.survey.very_satisfied')}}
                                                 </div>
                                                 <div class="col-md-18">
                                                     <input type="range" class="form-control-range"
@@ -314,15 +315,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="satisfied_explanations_vacuum">
-                                                How satisfied are you with the explanations on the operation of your
-                                                vacuum cleaner and the necessary maintenance?:
+                                                {{trans('storefront::guarantee_form.survey.satisfied_with_explanation')}}
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    1 not at all satisfied
+                                                    {{trans('storefront::guarantee_form.survey.not_at_all_satisfied')}}
                                                 </div>
                                                 <div class="col-md-9 text-xl-right">
-                                                    10 very satisfied
+                                                    {{trans('storefront::guarantee_form.survey.very_satisfied')}}
                                                 </div>
                                                 <div class="col-md-18">
                                                     <input type="range" class="form-control-range"
@@ -334,13 +334,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="recommend_to_friends">
-                                                How likely are you to recommend us to your friends and family?:
+                                                {{trans('storefront::guarantee_form.survey.recommend_to_friend_family')}}
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    1 not at all satisfied
+                                                    {{trans('storefront::guarantee_form.survey.not_at_all_satisfied')}}
                                                 </div>
                                                 <div class="col-md-9 text-xl-right">
+                                                    {{trans('storefront::guarantee_form.survey.very_satisfied')}}
                                                     10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
@@ -353,12 +354,12 @@
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary" data-loading>
-                                                {{ trans('storefront::requests_form.send_my_request') }}
+                                                {{ trans('storefront::guarantee_form.register_guarantee') }}
                                             </button>
                                         </div>
                                     </div>
                                 @else
-                                    {{trans('storefront::requests_form.once_your_request_received_we_will_contact_you')}}
+                                    {{trans('storefront::guarantee_form.success_message')}}
                                 @endif
                             </form>
                         </div>

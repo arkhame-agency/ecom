@@ -11,7 +11,7 @@
                                 @if (setting('store_phone') && ! setting('store_phone_hide'))
                                     <li>
                                         <i class="las la-phone"></i>
-                                        <span>{{ setting('store_phone') }}</span>
+                                        <span><a href="tel:{{ setting('store_phone') }}">{{ setting('store_phone') }}</a></span>
                                         @if (setting('store_fax') && ! setting('store_phone_hide'))
                                         <i class="las la-fax"></i>
                                         <span>{{ setting('store_fax') }}</span>
@@ -22,14 +22,14 @@
                                 @if (setting('store_email') && ! setting('store_email_hide'))
                                     <li>
                                         <i class="las la-envelope"></i>
-                                        <span>{{ setting('store_email') }}</span>
+                                        <span><a href="mailto:{{ setting('store_email') }}>">{{ setting('store_email') }}</a></span>
                                     </li>
                                 @endif
 
                                 @if (setting('storefront_address'))
                                     <li>
                                         <i class="las la-map"></i>
-                                        <span>{{ setting('storefront_address') }}</span>
+                                        <span><a href="https://www.google.com/maps/search/{{ setting('storefront_address') }}" target="_blank">{{ setting('storefront_address') }}</a></span>
                                     </li>
                                 @endif
                             </ul>

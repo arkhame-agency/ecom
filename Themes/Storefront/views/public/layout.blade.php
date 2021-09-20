@@ -45,6 +45,7 @@
                 loggedIn: {{ auth()->check() ? 'true' : 'false' }},
                 csrfToken: '{{ csrf_token() }}',
                 stripePublishableKey: '{{ setting("stripe_publishable_key") }}',
+                locale: '{{ locale() }}',
                 razorpayKeyId: '{{ setting("razorpay_key_id") }}',
                 cart: {!! $cart !!},
                 wishlist: {!! $wishlist !!},

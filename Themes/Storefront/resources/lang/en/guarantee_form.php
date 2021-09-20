@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'title' => 'Register Guarantee',
+    'register_product' => 'To register your product, all you need to have:',
+    'serial_number' => 'The serial number of the product',
+    'receipt_or_bill' => 'The receipt or invoice with reference to the date\'s purchase of the product',
     'name' => 'Name',
     'first_name' => 'First name',
     'address' => 'Address',
@@ -15,6 +19,7 @@ return [
     'email' => 'Email address',
     'email_placeholder' => 'name@example.com',
     'subscribe_to_mailchimp' => 'I would like to receive personalized offers as well as news on the different products. (I can unsubscribe at any time).',
+    'vacuum_cleaner_information' => 'Vacuum cleaner information',
     'vacuum_cleaner' => [
         'make'=>'Make',
         'model' => 'Model',
@@ -38,5 +43,17 @@ return [
         'serial_number'=>'Serial number is required',
         'date_of_purchase'=>'Date of Purchase is required',
         'invoice_number'=>'Invoice number is required'
-    ]
+    ],
+    'survey' => [
+        'title' => 'Satisfaction survey',
+        '1_to_10' => 'On a scale of 1 to 10:',
+        'not_at_all_satisfied' => '1 not at all satisfied',
+        'very_satisfied' => '10 very satisfied',
+        'rate_the_service_received' => 'How would you rate the service you received in store?:',
+        'satisfied_with_answers' => 'How satisfied are you with the answers to your questions?:',
+        'satisfied_with_explanation' => 'How satisfied are you with the explanations on the operation of your vacuum cleaner and the necessary maintenance?:',
+        'recommend_to_friend_family' => 'How likely are you to recommend us to your friends and family?:',
+    ],
+    'register_guarantee' => 'Register',
+    'success_message' => 'We thank you for your interest in our company, as soon as we have processed your request we will contact you at the address you provided'
 ];

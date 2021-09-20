@@ -29,13 +29,9 @@
                         <div class="col-md">
                             <form method="POST" action="{{route('post.request.quotations')}}" id="demande-form">
                                 <div class="mb-5">
-                                    <h1>Formulaire de demande de soumission</h1>
+                                    <h1>{{trans('storefront::requests_form.title')}}</h1>
                                     <p>
-                                        Vous aimeriez avoir une idée précise du prix d'installation ou de réparation ?
-                                        Remplissez le formulaire suivant et nous serons en mesure de vous fournir un
-                                        maximum
-                                        d’informations sur les coûts. N’hésitez pas à poser toutes vos questions à nos
-                                        experts qui chercheront à cerner vos réels besoins.
+                                        {{trans('storefront::requests_form.introduction')}}
                                     </p>
                                 </div>
                                 @if (!session('success'))

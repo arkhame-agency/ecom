@@ -82,9 +82,9 @@
         }
 
         .caption-1 {
-            font-size: 48px;
+            font-size: 2rem;
             font-weight: 300;
-            line-height: 48px;
+            line-height: 2rem;
             color: $color-black;
             &.background--light {
                 color: $color-black;
@@ -101,8 +101,8 @@
         }
 
         .caption-2 {
-            font-size: 16px;
-            line-height: 26px;
+            font-size: 1rem;
+            line-height: 1.5rem;
             color: $color-gray;
             margin-top: 16px;
             &.background--light {
@@ -202,13 +202,13 @@
             }
 
             .caption-1 {
-                font-size: 38px;
-                line-height: 38px
+                font-size: 2rem;
+                line-height: 2rem;
             }
 
             .caption-2 {
-                font-size: 15px;
-                line-height: 25px;
+                font-size: 1.1rem;
+                line-height: 1.2rem;
                 margin-top: 13px;
             }
 
@@ -245,18 +245,18 @@
             }
 
             .caption-1 {
-                font-size: 28px;
-                line-height: 28px;
+                font-size: 1rem;
+                line-height: 1.2rem;
             }
 
             .caption-2 {
-                font-size: 14px;
-                line-height: 24px;
+                font-size: 0.8rem;
+                line-height: 1rem;
                 margin-top: 10px;
             }
 
             .btn-slider {
-                font-size: 13px;
+                font-size: 0.8rem;
                 margin-top: 27px;
                 padding: 6px 16px;
             }
