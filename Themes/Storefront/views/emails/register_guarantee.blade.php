@@ -1,6 +1,6 @@
 @component('mail::message')
     <p>
-        Une demande d'enregsitrement de garantie a été formulée :
+        Une demande d'enregistrement de garantie a été formulée :
     </p>
     <ul>
         <li>Nom : {{$request->name}}</li>
@@ -58,15 +58,10 @@
             <b style="font-size: larger">{{$request->satisfied_explanations_vacuum}}/10</b>
         </li>
         <li>
-            Quelle est votre niveau de satisfaction sur les explications du fonctionnement de votre aspirateur ainsi que
-            l’entretien nécessaire?:<br>
-            <b style="font-size: larger">{{$request->satisfied_explanations_vacuum}}/10</b>
-        </li>
-        <li>
             Quelle sont les chances que vous nous recommandiez à vos amis et votre familles?:<br>
             <b style="font-size: larger">{{$request->recommend_to_friends}}/10</b>
         </li>
     </ul>
-    Thanks,<br>
+    Merci,<br>
     {{ config('app.name') }}
 @endcomponent

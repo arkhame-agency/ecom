@@ -296,7 +296,6 @@
                                         <div class="form-group">
                                             <label for="satisfied_answers_questions">
                                                 {{trans('storefront::guarantee_form.survey.satisfied_with_answers')}}
-                                                How satisfied are you with the answers to your questions?:
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-9">
@@ -342,7 +341,6 @@
                                                 </div>
                                                 <div class="col-md-9 text-xl-right">
                                                     {{trans('storefront::guarantee_form.survey.very_satisfied')}}
-                                                    10 very satisfied
                                                 </div>
                                                 <div class="col-md-18">
                                                     <input type="range" class="form-control-range"
