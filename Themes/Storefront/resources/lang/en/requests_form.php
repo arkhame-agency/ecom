@@ -31,5 +31,5 @@ return [
         'telephone' => 'Telephone number is required',
         'request_for' => 'Request for ?'
     ],
-    'success_message' => 'We thank you for your interest in our company, as soon as we have processed your request we will contact you at the address you provided'
+    'success_message' => 'Thank you for your quote request, as soon as we have processed your request we will contact you at the address you provided'
 ];

@@ -55,5 +55,5 @@ return [
         'recommend_to_friend_family' => 'How likely are you to recommend us to your friends and family?:',
     ],
     'register_guarantee' => 'Register',
-    'success_message' => 'We thank you for your interest in our company, as soon as we have processed your request we will contact you at the address you provided'
+    'success_message' => 'We thank you for your product registration, as soon as we have processed your request we will contact you at the address you provided'
 ];
