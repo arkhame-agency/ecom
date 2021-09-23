@@ -170,7 +170,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    {{trans('storefront::requests_form.once_your_request_received_we_will_contact_you')}}
+                                    {{trans('storefront::requests_form.success_message')}}
                                 @endif
                             </form>
                         </div>
