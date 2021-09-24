@@ -28,14 +28,14 @@
                     <div class="row">
                         <div class="col-md">
                             <form method="POST" action="{{route('post.request.quotations')}}" id="demande-form">
-                                <div class="mb-5">
-                                    <h1>{{trans('storefront::requests_form.title')}}</h1>
-                                    <p>
-                                        {{trans('storefront::requests_form.introduction')}}
-                                    </p>
-                                </div>
+                                <h1>{{trans('storefront::requests_form.title')}}</h1>
                                 @if (!session('success'))
                                     {{ csrf_field() }}
+                                    <div class="mb-5">
+                                        <p>
+                                            {{trans('storefront::requests_form.introduction')}}
+                                        </p>
+                                    </div>
                                     <div class="col-md-17 mx-auto">
                                         <div class="form-row">
                                             <div class="form-group col-md-9 required">

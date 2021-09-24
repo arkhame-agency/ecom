@@ -28,9 +28,9 @@
                     <div class="row">
                         <div class="col-md">
                             <form method="POST" action="{{route('post.registration.guarantee')}}" id="guarantee-form">
-                                {{ csrf_field() }}
                                 <h1>{{trans('storefront::guarantee_form.title')}}</h1>
                                 @if (!session('success'))
+                                    {{ csrf_field() }}
                                     <div class="mb-5">
                                         <p>{{trans('storefront::guarantee_form.register_product')}}</p>
                                         <ul>
