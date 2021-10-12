@@ -53,7 +53,7 @@
                             <ul class="list-inline social-links">
                                 @foreach (social_links() as $icon => $socialLink)
                                     <li>
-                                        <a href="{{ $socialLink }}">
+                                        <a href="{{ $socialLink }}" target="_blank">
                                             <i class="{{ $icon }}"></i>
                                         </a>
                                     </li>
