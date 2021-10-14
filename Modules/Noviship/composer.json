@@ -1,0 +1,24 @@
+{
+    "name": "khemdane/noviship",
+    "description": "API Noviship",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Kamel HEMDANE",
+            "email": "k_hemdane@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3.0",
+        "guzzle/http": "v3.9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Noviship\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

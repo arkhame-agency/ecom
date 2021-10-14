@@ -10,7 +10,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-    'name' => 'La Maison de l\'Aspirateur',
+    'name' => env('APP_NAME', 'La Maison de l\'Aspirateur'),
 
     'installed' => env('APP_INSTALLED', false),
 

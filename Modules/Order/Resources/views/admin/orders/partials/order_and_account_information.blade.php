@@ -56,7 +56,12 @@
                         @if ($order->shipping_method)
                             <tr>
                                 <td>{{ trans('order::orders.shipping_method') }}</td>
-                                <td>{{ $order->shipping_method }}</td>
+                                <td>
+                                    {{ $order->shipping_method }}
+                                    @if($order->noviship_id)
+                                        (<a target="_blank" href="https://ship.parcelz.com/{{locale()}}/shipment/{{$order->noviship_id}}">{{ $order->noviship_id }}</a>)
+                                    @endif
+                                </td>
                             </tr>
                         @endif
 

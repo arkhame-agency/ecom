@@ -2,14 +2,14 @@
 
 namespace Modules\Payment\Responses;
 
-use Stripe\PaymentIntent;
 use Modules\Order\Entities\Order;
 use Modules\Payment\GatewayResponse;
 use Modules\Payment\HasTransactionReference;
+use Stripe\PaymentIntent;
 
 class StripeResponse extends GatewayResponse implements HasTransactionReference
 {
-    private $order;
+    public $order;
     private $intent;
 
     public function __construct(Order $order, PaymentIntent $intent)

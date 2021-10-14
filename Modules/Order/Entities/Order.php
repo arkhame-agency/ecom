@@ -2,22 +2,22 @@
 
 namespace Modules\Order\Entities;
 
-use Modules\Cart\CartTax;
-use Modules\Cart\CartItem;
-use Modules\Support\Money;
-use Modules\Support\State;
-use Modules\Support\Country;
-use Modules\Media\Entities\File;
-use Modules\Tax\Entities\TaxRate;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Modules\Order\OrderCollection;
+use Modules\Cart\CartItem;
+use Modules\Cart\CartTax;
 use Modules\Coupon\Entities\Coupon;
+use Modules\Media\Entities\File;
 use Modules\Order\Admin\OrderTable;
-use Modules\Support\Eloquent\Model;
+use Modules\Order\OrderCollection;
 use Modules\Payment\Facades\Gateway;
 use Modules\Payment\HasTransactionReference;
 use Modules\Shipping\Facades\ShippingMethod;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Support\Country;
+use Modules\Support\Eloquent\Model;
+use Modules\Support\Money;
+use Modules\Support\State;
+use Modules\Tax\Entities\TaxRate;
 use Modules\Transaction\Entities\Transaction;
 
 class Order extends Model
@@ -60,12 +60,12 @@ class Order extends Model
 
     public function hasShippingMethod()
     {
-        return ! is_null($this->shipping_method);
+        return !is_null($this->shipping_method);
     }
 
     public function hasCoupon()
     {
-        return ! is_null($this->coupon);
+        return !is_null($this->coupon);
     }
 
     public function hasTax()
@@ -175,6 +175,10 @@ class Order extends Model
         return ShippingMethod::get($shippingMethod)->label ?? null;
     }
 
+    public function getOrderId() {
+        return $this->id;
+    }
+
     /**
      * Get the order's payment method.
      *
@@ -206,6 +210,41 @@ class Order extends Model
         return Country::name($this->billing_country);
     }
 
+    public function getCustomerTelephone()
+    {
+        return $this->customer_phone;
+    }
+
+    public function getCustomerEmail()
+    {
+        return $this->customer_email;
+    }
+
+    public function getShippingAddress1()
+    {
+        return $this->shipping_address_1;
+    }
+
+    public function getShippingAddress2()
+    {
+        return $this->shipping_address_2;
+    }
+
+    public function getShippingCity()
+    {
+        return $this->shipping_city;
+    }
+
+    public function getShippingPostalCode()
+    {
+        return $this->shipping_zip;
+    }
+
+    public function getShippingCountryCode()
+    {
+        return $this->shipping_country;
+    }
+
     public function getShippingCountryNameAttribute()
     {
         return Country::name($this->shipping_country);
@@ -214,6 +253,11 @@ class Order extends Model
     public function getBillingStateNameAttribute()
     {
         return State::name($this->billing_country, $this->billing_state);
+    }
+
+    public function getShippingStateCode()
+    {
+        return $this->shipping_state;
     }
 
     public function getShippingStateNameAttribute()
@@ -252,7 +296,7 @@ class Order extends Model
 
     public function storeTransaction($response)
     {
-        if (! $response instanceof HasTransactionReference) {
+        if (!$response instanceof HasTransactionReference) {
             return;
         }
 

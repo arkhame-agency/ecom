@@ -3,10 +3,11 @@
 namespace Modules\Checkout\Http\Controllers;
 
 use Exception;
-use Modules\Order\Entities\Order;
-use Modules\Payment\Facades\Gateway;
 use Modules\Checkout\Events\OrderPlaced;
 use Modules\Checkout\Services\OrderService;
+use Modules\Noviship\Noviship;
+use Modules\Order\Entities\Order;
+use Modules\Payment\Facades\Gateway;
 
 class CheckoutCompleteController
 {
@@ -25,6 +26,8 @@ class CheckoutCompleteController
 
         try {
             $response = $gateway->complete($order);
+            $noviship = new Noviship();
+            $noviship->CreateShipment($response->order);
         } catch (Exception $e) {
             $orderService->delete($order);
 
