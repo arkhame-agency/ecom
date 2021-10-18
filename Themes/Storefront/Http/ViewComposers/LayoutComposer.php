@@ -2,18 +2,18 @@
 
 namespace Themes\Storefront\Http\ViewComposers;
 
-use Mexitek\PHPColors\Color;
-use Modules\Compare\Compare;
-use Spatie\SchemaOrg\Schema;
-use Modules\Tag\Entities\Tag;
-use Modules\Cart\Facades\Cart;
-use Modules\Menu\Entities\Menu;
-use Modules\Page\Entities\Page;
-use Modules\Media\Entities\File;
-use Modules\Menu\MegaMenu\MegaMenu;
 use Illuminate\Support\Facades\Cache;
+use Mexitek\PHPColors\Color;
+use Modules\Cart\Facades\Cart;
 use Modules\Category\Entities\Category;
+use Modules\Compare\Compare;
+use Modules\Media\Entities\File;
+use Modules\Menu\Entities\Menu;
+use Modules\Menu\MegaMenu\MegaMenu;
+use Modules\Page\Entities\Page;
 use Modules\Product\Entities\SearchTerm;
+use Modules\Tag\Entities\Tag;
+use Spatie\SchemaOrg\Schema;
 
 class LayoutComposer
 {
@@ -96,9 +96,9 @@ class LayoutComposer
 
     private function getPrivacyPageUrl()
     {
-        return Cache::tags('settings')->rememberForever('privacy_page_url', function () {
+//        return Cache::tags('settings')->rememberForever('privacy_page_url', function () {
             return Page::urlForPage(setting('storefront_privacy_page'));
-        });
+//        });
     }
 
     private function getCategories()

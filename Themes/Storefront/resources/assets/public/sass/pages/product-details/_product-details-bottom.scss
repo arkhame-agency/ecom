@@ -17,6 +17,9 @@
         .banner {
             margin-top: 20px;
         }
+        &:empty {
+            display: none;
+        }
 	}
 
 	.product-details-bottom-inner {

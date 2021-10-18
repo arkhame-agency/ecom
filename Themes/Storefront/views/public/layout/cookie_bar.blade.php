@@ -7,6 +7,7 @@
                         <div class="cookie-bar">
                             <div class="cookie-bar-text">
                                 {!! trans('storefront::layout.the_website_uses_cookies') !!}
+                                <a href="{{ $privacyPageUrl }}">{{ trans('user::auth.privacy_policy') }}</a>
                             </div>
 
                             <div class="cookie-bar-action">
