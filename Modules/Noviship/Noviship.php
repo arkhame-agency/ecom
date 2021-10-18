@@ -68,7 +68,7 @@ class Noviship
                 'key' => $this->api_key,
                 'shipment' => [
                     'shipper' => [
-                        'attn' => 'Stephane Dumais',
+                        'attn' => config('app.name'),
                         'street1' => setting('store_address_1'),
                         'orgname' => config('app.name'),
                         'city' => setting('store_city'),
@@ -85,7 +85,7 @@ class Noviship
                         'attn' => $order->getShippingFullNameAttribute(),
                         'street1' => $order->getShippingAddress1(),
                         'street2' => $order->getShippingAddress2(),
-//                        'orgname' => 'CLIENT',
+                        'orgname' => 'CLIENT',
                         'city' => $order->getShippingCity(),
                         'province' => $order->getShippingStateCode(),
                         'postalcode' => $order->getShippingPostalCode(),
