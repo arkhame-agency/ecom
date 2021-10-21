@@ -3,7 +3,7 @@
 use Mexitek\PHPColors\Color;
 use Modules\Menu\MegaMenu\Menu;
 
-if (! function_exists('resolve_theme_color')) {
+if (!function_exists('resolve_theme_color')) {
     /**
      * Resolve color code by the given theme name.
      *
@@ -31,7 +31,7 @@ if (! function_exists('resolve_theme_color')) {
     }
 }
 
-if (! function_exists('storefront_theme_color')) {
+if (!function_exists('storefront_theme_color')) {
     function storefront_theme_color()
     {
         if (setting('storefront_theme_color') === 'custom_color') {
@@ -42,7 +42,7 @@ if (! function_exists('storefront_theme_color')) {
     }
 }
 
-if (! function_exists('mail_theme_color')) {
+if (!function_exists('mail_theme_color')) {
     function mail_theme_color()
     {
         if (setting('storefront_mail_theme_color') === 'custom_color') {
@@ -53,14 +53,14 @@ if (! function_exists('mail_theme_color')) {
     }
 }
 
-if (! function_exists('color2rgba')) {
+if (!function_exists('color2rgba')) {
     function color2rgba(Color $color, $opacity)
     {
         return sprintf('rgba(%s, %s)', implode(', ', $color->getRgb()), $opacity);
     }
 }
 
-if (! function_exists('mega_menu_classes')) {
+if (!function_exists('mega_menu_classes')) {
     function mega_menu_classes(Menu $menu, $type = 'category_menu')
     {
         $classes = [];
@@ -79,7 +79,7 @@ if (! function_exists('mega_menu_classes')) {
     }
 }
 
-if (! function_exists('products_view_mode')) {
+if (!function_exists('products_view_mode')) {
     /**
      * Get the products view mode.
      *
@@ -91,7 +91,7 @@ if (! function_exists('products_view_mode')) {
     }
 }
 
-if (! function_exists('order_status_badge_class')) {
+if (!function_exists('order_status_badge_class')) {
     /**
      * Get the products view mode.
      *
@@ -112,7 +112,7 @@ if (! function_exists('order_status_badge_class')) {
     }
 }
 
-if (! function_exists('social_links')) {
+if (!function_exists('social_links')) {
     /**
      * Get the social links.
      *
@@ -129,5 +129,23 @@ if (! function_exists('social_links')) {
         ])->reject(function ($link) {
             return is_null($link);
         });
+    }
+}
+
+if (!function_exists('format_phone_number')) {
+    /**
+     *
+     * Format phone number
+     * from +15146994456 to 514 699-4456
+     *
+     * @param $phone_number
+     * @return string
+     */
+    function format_phone_number($phone_number): string
+    {
+        if (preg_match('/^\+\d(\d{3})(\d{3})(\d{4})$/', $phone_number, $matches)) {
+            return $matches[1] . ' ' . $matches[2] . '-' . $matches[3];
+        }
+        return $phone_number;
     }
 }

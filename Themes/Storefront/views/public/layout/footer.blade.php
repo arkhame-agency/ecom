@@ -11,10 +11,10 @@
                                 @if (setting('store_phone') && ! setting('store_phone_hide'))
                                     <li>
                                         <i class="las la-phone"></i>
-                                        <span><a href="tel:{{ setting('store_phone') }}">{{ setting('store_phone') }}</a></span>
+                                        <span><a href="tel:{{ setting('store_phone') }}">{{ format_phone_number(setting('store_phone')) }}</a></span>
                                         @if (setting('store_fax') && ! setting('store_phone_hide'))
                                         <i class="las la-fax"></i>
-                                        <span>{{ setting('store_fax') }}</span>
+                                        <span>{{ format_phone_number(setting('store_fax')) }}</span>
                                         @endif
                                     </li>
                                 @endif
