@@ -22,7 +22,7 @@
                                 @if (setting('store_email') && ! setting('store_email_hide'))
                                     <li>
                                         <i class="las la-envelope"></i>
-                                        <span><a href="mailto:{{ setting('store_email') }}>">{{ setting('store_email') }}</a></span>
+                                        <span><a href="mailto:{{ setting('store_email') }}">{{ setting('store_email') }}</a></span>
                                     </li>
                                 @endif
 
