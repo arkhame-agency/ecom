@@ -66,11 +66,11 @@ if (!function_exists('mega_menu_classes')) {
         $classes = [];
 
         if ($type === 'primary_menu') {
-            array_push($classes, 'nav-item');
+            $classes[] = 'nav-item';
         }
 
         if ($menu->isFluid()) {
-            array_push($classes, 'fluid-menu');
+            $classes[] = 'fluid-menu';
         } elseif ($menu->hasSubMenus()) {
             array_push($classes, 'dropdown', 'multi-level');
         }
@@ -147,5 +147,12 @@ if (!function_exists('format_phone_number')) {
             return $matches[1] . ' ' . $matches[2] . '-' . $matches[3];
         }
         return $phone_number;
+    }
+
+    function get_email_address_for($setting_key) {
+        if(!empty(setting($setting_key))) {
+            return setting($setting_key);
+        }
+        return setting('store_email');
     }
 }

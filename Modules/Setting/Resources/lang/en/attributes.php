@@ -55,7 +55,8 @@ return [
     'mail_password' => 'Mail Password',
     'mail_encryption' => 'Mail Encryption',
     'welcome_email' => 'Welcome Email',
-    'admin_order_email' => 'New Order Admin Email',
+    'enable_disable' => 'Enable/Disable',
+    'recipient' => 'Recipient',
     'invoice_email' => 'Invoice Email',
     'email_order_statuses' => 'Email Order Statuses',
 

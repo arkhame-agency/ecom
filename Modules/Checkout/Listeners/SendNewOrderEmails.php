@@ -2,11 +2,11 @@
 
 namespace Modules\Checkout\Listeners;
 
-use Swift_TransportException;
-use Modules\Checkout\Mail\Invoice;
-use Modules\Checkout\Mail\NewOrder;
 use Illuminate\Support\Facades\Mail;
 use Modules\Checkout\Events\OrderPlaced;
+use Modules\Checkout\Mail\Invoice;
+use Modules\Checkout\Mail\NewOrder;
+use Swift_TransportException;
 
 class SendNewOrderEmails
 {
@@ -19,8 +19,8 @@ class SendNewOrderEmails
     public function handle(OrderPlaced $event)
     {
         try {
-            if (setting('admin_order_email')) {
-                Mail::to(setting('store_email'))
+            if (setting('order_notification')) {
+                Mail::to(get_email_address_for('admin_order_notification_mail_address'))
                     ->send(new NewOrder($event->order));
             }
 

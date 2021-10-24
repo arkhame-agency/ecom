@@ -42,7 +42,7 @@ class PageController
     {
         $sendRequestsPostRequest->validated();
 
-        \Mail::to(setting('store_email'))->send(new SendRequests($sendRequestsPostRequest));
+        \Mail::to(config('mail.email-addresses.email-installation'))->send(new SendRequests($sendRequestsPostRequest));
 
         return redirect()->route('request.quotations')->with('success', trans('storefront::requests_form.your_request_has_been_sent'));
     }
@@ -62,7 +62,7 @@ class PageController
 
         $registerGuaranteePostRequest->validated();
 
-        \Mail::to(setting('store_email'))->send(new RegisterGuarantee($registerGuaranteePostRequest));
+        \Mail::to(config('mail.email-addresses.email-guarantee'))->send(new RegisterGuarantee($registerGuaranteePostRequest));
 
         if ($registerGuaranteePostRequest->subscribe_to_mailchimp) {
             Newsletter::subscribeOrUpdate($registerGuaranteePostRequest->email, ['FNAME' => $registerGuaranteePostRequest->name, 'LNAME' => $registerGuaranteePostRequest->name]);
