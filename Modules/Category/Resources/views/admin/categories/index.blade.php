@@ -77,7 +77,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="hide" id="slug-field">
-                                            {{ Form::text('slug', trans('category::attributes.slug'), $errors) }}
+                                            {{ Form::text('slug', trans('category::attributes.slug'), $errors, null, ['required' => true]) }}
                                         </div>
                                     </div>
                                 </div>

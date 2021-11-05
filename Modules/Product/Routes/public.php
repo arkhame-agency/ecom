@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('products', 'ProductController@index')->name('products.index');
-Route::get('products/{slug}', 'ProductController@show')->name('products.show');
+Route::get(trans('product::routes.products', [], locale()), 'ProductController@index')->name('products.index');
+Route::get(trans('product::routes.products/slug', [], locale()), 'ProductController@show')->name('products.show');
 
 Route::get('promotions', 'ProductController@promotions')->name('products.promotions');
 

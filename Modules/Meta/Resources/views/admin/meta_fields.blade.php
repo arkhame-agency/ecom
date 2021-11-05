@@ -1,6 +1,4 @@
-@if ($entity->slug ?? false)
-    {{ Form::text('slug', trans('page::attributes.slug'), $errors, $entity, ['required' => true]) }}
-@endif
+{{ Form::text('slug', trans('page::attributes.slug'), $errors, $entity, ['required' => true]) }}
 
 <div class="form-group">
     <label for="meta-title" class="col-md-3 control-label text-left">

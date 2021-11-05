@@ -3,8 +3,8 @@
 namespace Modules\Page\Entities;
 
 use Modules\Admin\Ui\AdminTable;
-use Modules\Support\Eloquent\Model;
 use Modules\Meta\Eloquent\HasMetaData;
+use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Sluggable;
 use Modules\Support\Eloquent\Translatable;
 
@@ -40,7 +40,7 @@ class Page extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name', 'body'];
+    protected $translatedAttributes = ['name', 'body', 'slug'];
 
     /**
      * The attribute that will be slugged.
@@ -61,7 +61,10 @@ class Page extends Model
 
     public static function urlForPage($id)
     {
-        return static::select('slug')->firstOrNew(['id' => $id])->url();
+        return static::select('page_translations.*')
+            ->join('page_translations', 'pages.id', '=', 'page_translations.page_id')
+            ->where('page_translations.locale', locale())
+            ->firstOrNew(['pages.id' => $id])->url();
     }
 
     public function url()
@@ -81,5 +84,15 @@ class Page extends Model
     public function table()
     {
         return new AdminTable($this->newQuery()->withoutGlobalScope('active'));
+    }
+
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $slugTranslated = $this->getSlugTranslated($this, PageTranslation::class, $locale);
+            $routeArray[$locale] = $slugTranslated->slug;
+        }
+        return $routeArray;
     }
 }

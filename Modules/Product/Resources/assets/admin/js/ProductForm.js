@@ -8,6 +8,10 @@ export default class {
         ]);
 
         $('#product-create-form, #product-edit-form').on('submit', this.submit);
+
+        $('#name').on('blur', function () {
+            $('#slug').val(window.admin.generateSlug($(this).val()));
+        });
     }
 
     managerStock() {

@@ -20,8 +20,8 @@ abstract class TranslationModel extends Model
      */
     public static function booting()
     {
-        static::addGlobalScope('locale', function ($query) {
-            $query->whereIn('locale', [locale(), config('app.fallback_locale')]);
-        });
+//        static::addGlobalScope('locale', function ($query) {
+//            $query->whereIn('locale', [locale(), config('app.fallback_locale')]);
+//        });
     }
 }

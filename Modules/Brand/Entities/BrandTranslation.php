@@ -11,5 +11,5 @@ class BrandTranslation extends TranslationModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 }

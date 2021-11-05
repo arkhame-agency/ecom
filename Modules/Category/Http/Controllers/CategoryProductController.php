@@ -2,8 +2,8 @@
 
 namespace Modules\Category\Http\Controllers;
 
-use Modules\Product\Entities\Product;
 use Modules\Category\Entities\Category;
+use Modules\Product\Entities\Product;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Http\Controllers\ProductSearch;
 
@@ -32,6 +32,7 @@ class CategoryProductController
         return view('public.products.index', [
             'categoryName' => $category->name,
             'categoryBanner' => $category->banner->path,
+            'routeArray' => $category->getUrls(),
         ]);
     }
 }

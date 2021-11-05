@@ -14,7 +14,6 @@ use Modules\Option\Entities\Option;
 use Modules\Product\Admin\ProductTable;
 use Modules\Review\Entities\Review;
 use Modules\Support\Eloquent\Model;
-use Modules\Support\Eloquent\Sluggable;
 use Modules\Support\Eloquent\Translatable;
 use Modules\Support\Money;
 use Modules\Support\Search\Searchable;
@@ -25,7 +24,6 @@ class Product extends Model
 {
     use Translatable,
         Searchable,
-        Sluggable,
         HasMedia,
         HasMetaData,
         SoftDeletes;
@@ -103,7 +101,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name', 'description', 'short_description'];
+    protected $translatedAttributes = ['name', 'description', 'short_description', 'slug'];
 
     /**
      * The attribute that will be slugged.
@@ -120,7 +118,7 @@ class Product extends Model
     protected static function booted()
     {
         static::saved(function ($product) {
-            if (! empty(request()->all())) {
+            if (!empty(request()->all())) {
                 $product->saveRelations(request()->all());
             }
 
@@ -145,7 +143,7 @@ class Product extends Model
         return static::select('id')
             ->withName()
             ->whereIn('id', $ids)
-            ->when(! empty($ids), function ($query) use ($ids) {
+            ->when(!empty($ids), function ($query) use ($ids) {
                 $idsString = collect($ids)->filter()->implode(',');
 
                 $query->orderByRaw("FIELD(id, {$idsString})");
@@ -165,7 +163,6 @@ class Product extends Model
             ->with('reviews')
             ->addSelect([
                 'products.id',
-                'products.slug',
                 'products.in_stock',
                 'products.manage_stock',
                 'products.qty',
@@ -188,7 +185,7 @@ class Product extends Model
 
     public function scopeWithName($query)
     {
-        $query->with('translations:id,product_id,locale,name');
+        $query->with('translations:id,product_id,locale,name,slug');
     }
 
     public function scopeWithBaseImage($query)
@@ -262,7 +259,7 @@ class Product extends Model
 
     public function getSpecialPriceAttribute($specialPrice)
     {
-        if (! is_null($specialPrice)) {
+        if (!is_null($specialPrice)) {
             return Money::inDefaultCurrency($specialPrice);
         }
     }
@@ -371,6 +368,16 @@ class Product extends Model
         return route('products.show', ['slug' => $this->slug]);
     }
 
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $slugTranslated = $this->getSlugTranslated($this, ProductTranslation::class, $locale);
+            $routeArray[$locale] = trans('product::routes.products', [], $locale).'/'.$slugTranslated->slug;
+        }
+        return $routeArray;
+    }
+
     public function isInStock()
     {
         if (FlashSale::contains($this)) {
@@ -386,7 +393,7 @@ class Product extends Model
 
     public function isOutOfStock()
     {
-        return ! $this->isInStock();
+        return !$this->isInStock();
     }
 
     public function markAsInStock()
@@ -474,12 +481,12 @@ class Product extends Model
 
     private function hasSpecialPriceStartDate()
     {
-        return ! is_null($this->special_price_start);
+        return !is_null($this->special_price_start);
     }
 
     private function hasSpecialPriceEndDate()
     {
-        return ! is_null($this->special_price_end);
+        return !is_null($this->special_price_end);
     }
 
     private function specialPriceStartDateIsValid()
@@ -516,12 +523,12 @@ class Product extends Model
 
     private function hasNewFromDate()
     {
-        return ! is_null($this->new_from);
+        return !is_null($this->new_from);
     }
 
     private function hasNewToDate()
     {
-        return ! is_null($this->new_to);
+        return !is_null($this->new_to);
     }
 
     private function newFromDateIsValid()
@@ -557,12 +564,13 @@ class Product extends Model
 
     public static function findBySlug($slug)
     {
+        $productTranslations = ProductTranslation::where('slug', $slug)->firstOrFail();
         return self::with([
             'categories', 'tags', 'attributes.attribute.attributeSet',
             'options', 'files', 'relatedProducts', 'upSellProducts',
         ])
-        ->where('slug', $slug)
-        ->firstOrFail();
+            ->where('id', $productTranslations->product_id)
+            ->firstOrFail();
     }
 
     public function clean()

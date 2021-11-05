@@ -24,10 +24,13 @@ class PageController
     public function show($slug)
     {
         $logo = File::findOrNew(setting('storefront_header_logo'))->path;
-        $page = Page::where('slug', $slug)->firstOrFail();
+        $page = Page::select('pages.id')
+            ->join('page_translations', 'pages.id', '=', 'page_translations.page_id')
+            ->where('page_translations.slug', $slug)->firstOrFail();
+        $routeArray = $page->getUrls();
         $latestProducts = $this->latestProducts();
 
-        return view('public.pages.show', compact('page', 'logo', 'latestProducts'));
+        return view('public.pages.show', compact('routeArray','page', 'logo', 'latestProducts'));
     }
 
     public function requestQuotations(Request $request)

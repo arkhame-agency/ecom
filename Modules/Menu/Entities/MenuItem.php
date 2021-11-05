@@ -2,13 +2,13 @@
 
 namespace Modules\Menu\Entities;
 
-use TypiCMS\NestableTrait;
-use Modules\Page\Entities\Page;
-use Modules\Media\Entities\File;
-use Modules\Support\Eloquent\Model;
-use Modules\Media\Eloquent\HasMedia;
 use Modules\Category\Entities\Category;
+use Modules\Media\Eloquent\HasMedia;
+use Modules\Media\Entities\File;
+use Modules\Page\Entities\Page;
+use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use TypiCMS\NestableTrait;
 
 class MenuItem extends Model
 {
@@ -32,7 +32,6 @@ class MenuItem extends Model
         'page_id',
         'parent_id',
         'type',
-        'url',
         'icon',
         'target',
         'position',
@@ -64,7 +63,7 @@ class MenuItem extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name'];
+    protected $translatedAttributes = ['name', 'url'];
 
     /**
      * Perform any actions required after the model boots.
@@ -187,15 +186,15 @@ class MenuItem extends Model
             return optional($this->page)->url();
         }
 
-        if ($this->getAttributeFromArray('url') === '#') {
+        if (in_array($this->getAttribute('url'), ['#', ''], true)) {
             return '#';
         }
 
-        if (filter_var($this->getAttributeFromArray('url'), FILTER_VALIDATE_URL)) {
-            return $this->getAttributeFromArray('url');
+        if (filter_var($this->getAttribute('url'), FILTER_VALIDATE_URL)) {
+            return $this->getAttribute('url');
         }
 
-        return localized_url(locale(), $this->getAttributeFromArray('url'));
+        return localized_url(locale(), $this->getAttribute('url'));
     }
 
     /**

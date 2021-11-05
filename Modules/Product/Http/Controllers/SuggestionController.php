@@ -2,8 +2,8 @@
 
 namespace Modules\Product\Http\Controllers;
 
-use Modules\Product\Entities\Product;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Product\Entities\Product;
 use Modules\Product\Http\Response\SuggestionsResponse;
 
 class SuggestionController
@@ -55,7 +55,6 @@ class SuggestionController
             ->withPrice()
             ->addSelect([
                 'products.id',
-                'products.slug',
                 'products.in_stock',
                 'products.manage_stock',
                 'products.qty',
@@ -76,7 +75,8 @@ class SuggestionController
     {
         return function (Builder $query) {
             $query->whereHas('categories', function ($categoryQuery) {
-                $categoryQuery->where('slug', request('category'));
+                $categoryQuery->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
+                ->where('category_translations.slug', request('category'));
             });
         };
     }

@@ -2,11 +2,11 @@
 
 namespace Modules\Product\Filters;
 
-use Modules\Support\Money;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Modules\Attribute\Entities\Attribute;
 use Modules\Attribute\Entities\AttributeValue;
+use Modules\Support\Money;
 
 class QueryStringFilter
 {
@@ -21,7 +21,6 @@ class QueryStringFilter
 
     private $groupColumns = [
         'products.id',
-        'slug',
         'price',
         'selling_price',
         'special_price',
@@ -105,14 +104,18 @@ class QueryStringFilter
     public function brand($query, $slug)
     {
         $query->whereHas('brand', function ($brandQuery) use ($slug) {
-            $brandQuery->where('slug', $slug);
+            $brandQuery->join('brand_translations', function($join) use ($slug) {
+                $join->on('brand_translations.brand_id', '=', 'products.brand_id')
+                    ->where('brand_translations.slug', $slug);
+            });
         });
     }
 
-    public function category($query, $slug)
+    public function category($query, string $slug)
     {
         $query->whereHas('categories', function ($categoryQuery) use ($slug) {
-            $categoryQuery->where('slug', $slug);
+            $categoryQuery->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
+                ->where('category_translations.slug', (string)$slug);
         });
     }
 
