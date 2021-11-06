@@ -3,11 +3,11 @@
 namespace Modules\Product\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Modules\Review\Entities\Review;
 use Modules\Product\Entities\Product;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Http\Middleware\SetProductSortOption;
+use Modules\Review\Entities\Review;
 
 class ProductController extends Controller
 {
@@ -51,6 +51,8 @@ class ProductController extends Controller
          * @var $product Product
          */
         $product = Product::findBySlug($slug);
+
+        $routeArray = $product->getUrls();
         $relatedProducts = $product->relatedProducts()->forCard()->get();
         $upSellProducts = $product->upSellProducts()->forCard()->get();
         $downloadFiles = $product->getDownloadsAttribute();
@@ -58,7 +60,7 @@ class ProductController extends Controller
 
         event(new ProductViewed($product));
 
-        return view('public.products.show', compact('product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
+        return view('public.products.show', compact( 'routeArray', 'product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
     }
 
     private function getReviewData(Product $product)

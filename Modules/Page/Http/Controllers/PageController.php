@@ -24,10 +24,13 @@ class PageController
     public function show($slug)
     {
         $logo = File::findOrNew(setting('storefront_header_logo'))->path;
-        $page = Page::where('slug', $slug)->firstOrFail();
+        $page = Page::select('pages.id')
+            ->join('page_translations', 'pages.id', '=', 'page_translations.page_id')
+            ->where('page_translations.slug', $slug)->firstOrFail();
+        $routeArray = $page->getUrls();
         $latestProducts = $this->latestProducts();
 
-        return view('public.pages.show', compact('page', 'logo', 'latestProducts'));
+        return view('public.pages.show', compact('routeArray','page', 'logo', 'latestProducts'));
     }
 
     public function requestQuotations(Request $request)
@@ -42,7 +45,7 @@ class PageController
     {
         $sendRequestsPostRequest->validated();
 
-        \Mail::to(setting('store_email'))->send(new SendRequests($sendRequestsPostRequest));
+        \Mail::to(config('mail.email-addresses.email-installation'))->send(new SendRequests($sendRequestsPostRequest));
 
         return redirect()->route('request.quotations')->with('success', trans('storefront::requests_form.your_request_has_been_sent'));
     }
@@ -62,7 +65,7 @@ class PageController
 
         $registerGuaranteePostRequest->validated();
 
-        \Mail::to(setting('store_email'))->send(new RegisterGuarantee($registerGuaranteePostRequest));
+        \Mail::to(config('mail.email-addresses.email-guarantee'))->send(new RegisterGuarantee($registerGuaranteePostRequest));
 
         if ($registerGuaranteePostRequest->subscribe_to_mailchimp) {
             Newsletter::subscribeOrUpdate($registerGuaranteePostRequest->email, ['FNAME' => $registerGuaranteePostRequest->name, 'LNAME' => $registerGuaranteePostRequest->name]);

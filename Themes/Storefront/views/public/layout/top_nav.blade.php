@@ -27,7 +27,7 @@
                                 <i class="las la-language"></i>
                                 <select class="custom-select-option arrow-black" onchange="location = this.value">
                                     @foreach (supported_locales() as $locale => $language)
-                                        <option value="{{ localized_url($locale) }}" {{ locale() === $locale ? 'selected' : '' }}>
+                                        <option value="{{ localized_url($locale, $routeArray[$locale] ?? '') }}" {{ locale() === $locale ? 'selected' : '' }}>
                                             {{ $language['name'] }}
                                         </option>
                                     @endforeach

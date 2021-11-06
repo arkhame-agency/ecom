@@ -2,19 +2,18 @@
 
 namespace Modules\Brand\Entities;
 
-use Modules\Media\Entities\File;
-use Modules\Brand\Admin\BrandTable;
-use Modules\Support\Eloquent\Model;
-use Modules\Media\Eloquent\HasMedia;
 use Illuminate\Support\Facades\Cache;
-use Modules\Product\Entities\Product;
+use Modules\Brand\Admin\BrandTable;
+use Modules\Media\Eloquent\HasMedia;
+use Modules\Media\Entities\File;
 use Modules\Meta\Eloquent\HasMetaData;
-use Modules\Support\Eloquent\Sluggable;
+use Modules\Product\Entities\Product;
+use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
 
 class Brand extends Model
 {
-    use Translatable, Sluggable, HasMedia, HasMetaData;
+    use Translatable, HasMedia, HasMetaData;
 
     /**
      * The relations to eager load on every query.
@@ -28,7 +27,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['slug', 'is_active'];
+    protected $fillable = ['is_active'];
 
     /**
      * The attributes that should be cast to native types.
@@ -44,7 +43,7 @@ class Brand extends Model
      *
      * @var array
      */
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name', 'slug'];
 
     /**
      * The attribute that will be slugged.
@@ -73,6 +72,16 @@ class Brand extends Model
         return route('brands.products.index', $this->slug);
     }
 
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $slugTranslated = $this->getSlugTranslated($this, BrandTranslation::class, $locale);
+            $routeArray[$locale] = trans('brand::routes.brands', [], $locale).'/'.$slugTranslated->slug.'/'.trans('brand::routes.products', [], $locale);
+        }
+        return $routeArray;
+    }
+
     /**
      * Find a specific brand by the given slug.
      *
@@ -81,7 +90,9 @@ class Brand extends Model
      */
     public static function findBySlug($slug)
     {
-        return self::where('slug', $slug)->firstOrNew([]);
+        return self::select('brands.*', 'brand_translations.slug', 'brand_translations.name')->join('brand_translations', 'brand_translations.brand_id', '=', 'brands.id')
+            ->where('brand_translations.slug', '=', $slug)
+            ->firstOrNew([]);
     }
 
     /**

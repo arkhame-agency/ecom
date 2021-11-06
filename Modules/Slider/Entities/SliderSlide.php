@@ -22,7 +22,7 @@ class SliderSlide extends Model
      *
      * @var array
      */
-    protected $fillable = ['options', 'call_to_action_url', 'open_in_new_window', 'position'];
+    protected $fillable = ['options', 'open_in_new_window', 'position'];
 
     /**
      * The attributes that should be cast to native types.
@@ -45,6 +45,7 @@ class SliderSlide extends Model
         'caption_2',
         'direction',
         'call_to_action_text',
+        'call_to_action_url',
     ];
 
     public function isAlignedLeft()

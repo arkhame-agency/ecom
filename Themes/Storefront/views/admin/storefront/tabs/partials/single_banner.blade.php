@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label
                             for="{{ $name }}-call-to-action-url">{{ trans("storefront::attributes.call_to_action_url") }}</label>
-                        <input type="text" name="{{ $name }}_call_to_action_url"
+                        <input type="text" name="translatable[{{ $name }}_call_to_action_url]"
                                value="{{ $banner->call_to_action_url }}" class="form-control"
                                id="{{ $name }}-call-to-action-url">
                     </div>

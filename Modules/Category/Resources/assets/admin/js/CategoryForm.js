@@ -97,7 +97,7 @@ export default class {
         $('#id-field').removeClass('hide');
 
         $('#id').val(category.id);
-        $('#name').val(category.name);
+        $('#name').val(category.name).focus();
 
         $('#slug').val(category.slug);
         $('#slug-field').removeClass('hide');

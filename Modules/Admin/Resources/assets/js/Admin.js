@@ -173,4 +173,31 @@ export default class {
         $(document).ajaxStart(() => NProgress.start());
         $(document).ajaxComplete(() => NProgress.done());
     }
+
+    generateSlug(name) {
+        let slug = '';
+        // Change to lower case
+        const nameLower = name.toLowerCase();
+        // Letter "e"
+        slug = nameLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+        // Letter "a"
+        slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+        // Letter "o"
+        slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+        // Letter "u"
+        slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+        // Letter "c"
+        slug = slug.replace(/ć|ĉ|č|ċ|ç/gi, 'c');
+        // Letter "i"
+        slug = slug.replace(/î|ï|í|ī|į|ì/gi, 'i');
+        // Letter (/, ', ")
+        slug = slug.replace(/\/|'|"|′|’|,|\?|\.|;|]|\[|\+|=|\$|%|&|<|>|:/g, ' ');
+        // Letter "d"
+        slug = slug.replace(/đ/gi, 'd');
+        // Trim the last whitespace
+        slug = slug.replace(/\s*$/g, '');
+        // Change whitespace to "-"
+        slug = slug.replace(/\s+/g, '-');
+        return slug;
+    }
 }

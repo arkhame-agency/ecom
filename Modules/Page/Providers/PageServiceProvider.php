@@ -2,15 +2,17 @@
 
 namespace Modules\Page\Providers;
 
-use Modules\Page\Admin\PageTabs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Modules\Admin\Ui\Facades\TabManager;
-use Modules\Page\Http\Controllers\PageController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Admin\Ui\Facades\TabManager;
+use Modules\Page\Admin\PageTabs;
+use Modules\Page\Http\Controllers\PageController;
+use Modules\Support\Traits\AddsAsset;
 
 class PageServiceProvider extends ServiceProvider
 {
+    use AddsAsset;
     /**
      * Bootstrap any application services.
      *
@@ -20,6 +22,9 @@ class PageServiceProvider extends ServiceProvider
     {
         TabManager::register('pages', PageTabs::class);
 
+        $this->addAdminAssets('admin.pages.(create|edit)', [
+            'admin.page.js',
+        ]);
         $this->registerPageRoute();
     }
 

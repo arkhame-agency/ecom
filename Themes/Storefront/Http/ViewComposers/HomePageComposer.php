@@ -2,13 +2,12 @@
 
 namespace Themes\Storefront\Http\ViewComposers;
 
+use Illuminate\Support\Collection;
+use Modules\Brand\Entities\Brand;
+use Modules\Category\Entities\Category;
+use Modules\Slider\Entities\Slider;
 use Themes\Storefront\Banner;
 use Themes\Storefront\Feature;
-use Modules\Brand\Entities\Brand;
-use Illuminate\Support\Collection;
-use Modules\Slider\Entities\Slider;
-use Illuminate\Support\Facades\Cache;
-use Modules\Category\Entities\Category;
 
 class HomePageComposer
 {
@@ -39,7 +38,7 @@ class HomePageComposer
 
     private function featuredCategoriesSection()
     {
-        if (! setting('storefront_featured_categories_section_enabled')) {
+        if (!setting('storefront_featured_categories_section_enabled')) {
             return;
         }
 
@@ -53,7 +52,7 @@ class HomePageComposer
     private function getFeaturedCategories()
     {
         $categoryIds = Collection::times(6, function ($number) {
-            if (! is_null(setting("storefront_featured_categories_section_category_{$number}_product_type"))) {
+            if (!is_null(setting("storefront_featured_categories_section_category_{$number}_product_type"))) {
                 return setting("storefront_featured_categories_section_category_{$number}_category_id");
             }
         })->filter();
@@ -81,12 +80,12 @@ class HomePageComposer
 
     private function productTabsOne()
     {
-        if (! setting('storefront_product_tabs_1_section_enabled')) {
+        if (!setting('storefront_product_tabs_1_section_enabled')) {
             return;
         }
 
         return Collection::times(4, function ($number) {
-            if (! is_null(setting("storefront_product_tabs_1_section_tab_{$number}_product_type"))) {
+            if (!is_null(setting("storefront_product_tabs_1_section_tab_{$number}_product_type"))) {
                 return setting("storefront_product_tabs_1_section_tab_{$number}_title");
             }
         })->filter();
@@ -94,28 +93,26 @@ class HomePageComposer
 
     private function topBrands()
     {
-        if (! setting('storefront_top_brands_section_enabled')) {
+        if (!setting('storefront_top_brands_section_enabled')) {
             return collect();
         }
 
         $topBrandIds = setting('storefront_top_brands', []);
 
-        return Cache::rememberForever(md5('storefront_top_brands:' . serialize($topBrandIds)), function () use ($topBrandIds) {
-            return Brand::with('files')
-                ->whereIn('id', $topBrandIds)
-                ->when(! empty($topBrandIds), function ($query) use ($topBrandIds) {
-                    $topBrandIdsString = collect($topBrandIds)->filter()->implode(',');
+        return Brand::with('files')
+            ->whereIn('id', $topBrandIds)
+            ->when(!empty($topBrandIds), function ($query) use ($topBrandIds) {
+                $topBrandIdsString = collect($topBrandIds)->filter()->implode(',');
 
-                    $query->orderByRaw("FIELD(id, {$topBrandIdsString})");
-                })
-                ->get()
-                ->map(function (Brand $brand) {
-                    return [
-                        'url' => $brand->url(),
-                        'logo' => $brand->getLogoAttribute(),
-                    ];
-                });
-        });
+                $query->orderByRaw("FIELD(id, {$topBrandIdsString})");
+            })
+            ->get()
+            ->map(function (Brand $brand) {
+                return [
+                    'url' => $brand->url(),
+                    'logo' => $brand->getLogoAttribute(),
+                ];
+            });
     }
 
     private function flashSaleAndVerticalProducts()
@@ -137,12 +134,12 @@ class HomePageComposer
 
     private function productGrid()
     {
-        if (! setting('storefront_product_grid_section_enabled')) {
+        if (!setting('storefront_product_grid_section_enabled')) {
             return;
         }
 
         return Collection::times(4, function ($number) {
-            if (! is_null(setting("storefront_product_grid_section_tab_{$number}_product_type"))) {
+            if (!is_null(setting("storefront_product_grid_section_tab_{$number}_product_type"))) {
                 return setting("storefront_product_grid_section_tab_{$number}_title");
             }
         })->filter();
@@ -157,12 +154,12 @@ class HomePageComposer
 
     private function tabProductsTwo()
     {
-        if (! setting('storefront_product_tabs_2_section_enabled')) {
+        if (!setting('storefront_product_tabs_2_section_enabled')) {
             return;
         }
 
         $tabs = Collection::times(4, function ($number) {
-            if (! is_null(setting("storefront_product_tabs_2_section_tab_{$number}_product_type"))) {
+            if (!is_null(setting("storefront_product_tabs_2_section_tab_{$number}_product_type"))) {
                 return setting("storefront_product_tabs_2_section_tab_{$number}_title");
             }
         })->filter();

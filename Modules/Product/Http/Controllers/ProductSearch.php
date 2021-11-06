@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use Modules\Product\Entities\Product;
-use Modules\Category\Entities\Category;
 use Modules\Attribute\Entities\Attribute;
-use Modules\Product\Filters\ProductFilter;
+use Modules\Category\Entities\Category;
+use Modules\Product\Entities\Product;
 use Modules\Product\Events\ShowingProductList;
+use Modules\Product\Filters\ProductFilter;
 
 trait ProductSearch
 {
@@ -77,7 +77,7 @@ trait ProductSearch
 
     private function filteringViaRootCategory()
     {
-        return Category::where('slug', request('category'))
+        return Category::where('id', request('category'))
             ->firstOrNew([])
             ->isRoot();
     }
