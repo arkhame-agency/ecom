@@ -104,10 +104,8 @@ class QueryStringFilter
     public function brand($query, $slug)
     {
         $query->whereHas('brand', function ($brandQuery) use ($slug) {
-            $brandQuery->join('brand_translations', function($join) use ($slug) {
-                $join->on('brand_translations.brand_id', '=', 'products.brand_id')
-                    ->where('brand_translations.slug', $slug);
-            });
+            $brandQuery->join('brand_translations', 'brand_translations.brand_id', '=', 'brands.id')
+                ->where('brand_translations.slug', $slug);
         });
     }
 
