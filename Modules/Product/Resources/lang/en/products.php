@@ -23,6 +23,7 @@ return [
         'up_sells' => 'Up-Sells',
         'cross_sells' => 'Cross-Sells',
         'additional' => 'Additional',
+        'packaging' => 'Packaging'
     ],
     'form' => [
         'the_product_won\'t_be_shipped' => 'The product won\'t be shipped',

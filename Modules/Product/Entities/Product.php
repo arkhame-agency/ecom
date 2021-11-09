@@ -58,6 +58,10 @@ class Product extends Model
         'is_active',
         'new_from',
         'new_to',
+        'weight',
+        'length',
+        'width',
+        'height',
     ];
 
     /**

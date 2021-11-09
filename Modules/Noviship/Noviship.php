@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Modules\Order\Entities\Order;
+use Modules\Order\Entities\OrderProduct;
 
 class Noviship
 {
@@ -58,6 +59,27 @@ class Noviship
         return $queryFilters;
     }
 
+    private function buildPackagesArray(Order $order)
+    {
+        /**
+         * @var $orderProduct OrderProduct
+         */
+
+        $packages = [];
+        foreach ($order->products()->getResults() as $orderProduct) {
+            $packages [] = [
+                "qty" => 1,
+                "description" => "BOX",
+                "weight" => $orderProduct->getWeightAttribute(),
+                "width" => $orderProduct->getWidthAttribute(),
+                "length" => $orderProduct->getLengthAttribute(),
+                "height" => $orderProduct->getHeightAttribute(),
+                "insvalue" => "0"
+            ];
+        }
+        return $packages;
+    }
+
     /**
      * @return string
      */
@@ -97,8 +119,8 @@ class Noviship
                         'ext' => ""
                     ],
                     'shipmentdate' => Carbon::now()->addDays(3)->format('Y-m-d'),
-                    'dimensionunit' => 'IN',
-                    'weightunit' => 'LB',
+                    'dimensionunit' => 'CM',
+                    'weightunit' => 'KG',
                     'currency' => 'CAD',
                     'pkgtype' => 'CUST',
                     'documentsonly' => '0',
@@ -113,7 +135,8 @@ class Noviship
                                 ]
                             ]
                         ],
-                    ]
+                    ],
+                    'packages' => $this->buildPackagesArray($order),
                 ],
             ]
         ];
