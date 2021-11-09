@@ -26,7 +26,8 @@ class ProductTabs extends Tabs
             ->add($this->relatedProducts())
             ->add($this->upSells())
             ->add($this->crossSells())
-            ->add($this->additional());
+            ->add($this->additional())
+            ->add($this->packaging());
     }
 
     private function general()
@@ -82,7 +83,7 @@ class ProductTabs extends Tabs
 
     private function images()
     {
-        if (! auth()->user()->hasAccess('admin.media.index')) {
+        if (!auth()->user()->hasAccess('admin.media.index')) {
             return;
         }
 
@@ -139,6 +140,14 @@ class ProductTabs extends Tabs
             $tab->weight(55);
             $tab->fields(['new_from', 'new_to']);
             $tab->view('product::admin.products.tabs.additional');
+        });
+    }
+
+    private function packaging()
+    {
+        return tap(new Tab('packaging', trans('product::products.tabs.packaging')), function (Tab $tab) {
+            $tab->weight(56);
+            $tab->view('product::admin.products.tabs.packaging');
         });
     }
 }

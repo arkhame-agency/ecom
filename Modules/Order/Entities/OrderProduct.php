@@ -100,6 +100,46 @@ class OrderProduct extends Model
         return $this->product->slug;
     }
 
+    /**
+     * Get the order product package's weight.
+     *
+     * @return integer
+     */
+    public function getWeightAttribute(): int
+    {
+        return $this->product->weight;
+    }
+
+    /**
+     * Get the order product package's length.
+     *
+     * @return integer
+     */
+    public function getLengthAttribute(): int
+    {
+        return $this->product->length;
+    }
+
+    /**
+     * Get the order product package's width.
+     *
+     * @return integer
+     */
+    public function getWidthAttribute(): int
+    {
+        return $this->product->width;
+    }
+
+    /**
+     * Get the order product package's height.
+     *
+     * @return integer
+     */
+    public function getHeightAttribute(): int
+    {
+        return $this->product->height;
+    }
+
     public function getUnitPriceAttribute($unitPrice)
     {
         return Money::inDefaultCurrency($unitPrice);
