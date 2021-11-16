@@ -5,12 +5,11 @@ namespace Modules\Page\Entities;
 use Modules\Admin\Ui\AdminTable;
 use Modules\Meta\Eloquent\HasMetaData;
 use Modules\Support\Eloquent\Model;
-use Modules\Support\Eloquent\Sluggable;
 use Modules\Support\Eloquent\Translatable;
 
 class Page extends Model
 {
-    use Translatable, Sluggable, HasMetaData;
+    use Translatable, HasMetaData;
 
     /**
      * The relations to eager load on every query.
@@ -24,7 +23,7 @@ class Page extends Model
      *
      * @var array
      */
-    protected $fillable = ['slug', 'is_active'];
+    protected $fillable = ['is_active'];
 
     /**
      * The attributes that should be cast to native types.
