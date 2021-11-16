@@ -25,7 +25,7 @@ class CreateProductTranslationsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        DB::statement('ALTER TABLE product_translations ADD FULLTEXT(name)');
+        DB::statement('ALTER TABLE product_translations ADD FULLTEXT(name, description)');
     }
 
     /**
