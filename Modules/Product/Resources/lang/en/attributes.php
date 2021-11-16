@@ -22,8 +22,12 @@ return [
     'in_stock' => 'Stock Availability',
     'new_from' => 'Product New From',
     'new_to' => 'Product New To',
-    'length' => 'Length (cm)',
-    'weight' => 'Weight (kg)',
-    'width' => 'Width (cm)',
-    'height' => 'Height (cm)',
+    'packaging' => [
+        'legend_dimension' => 'Dimension',
+        'legend_weight' => 'Weight',
+        'length' => 'Length (cm)',
+        'weight' => 'Weight (kg)',
+        'width' => 'Width (cm)',
+        'height' => 'Height (cm)',
+    ],
 ];

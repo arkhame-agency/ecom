@@ -25,7 +25,7 @@
                     @include('public.products.index.latest_products')
                 </div>
                 <div class="custom-page-right">
-                    {!! $page->body !!}
+                    {!! nl2br_save_html($page->body) !!}
                 </div>
             </div>
         </div>

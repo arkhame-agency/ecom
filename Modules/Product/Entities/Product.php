@@ -664,6 +664,6 @@ class Product extends Model
 
     public function searchColumns()
     {
-        return ['description'];
+        return ['name', 'description'];
     }
 }
