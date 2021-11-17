@@ -56,6 +56,10 @@ export default {
             return Object.keys(this.gateways).length === 0;
         },
 
+        hasMoreThanOnePaymentMethod() {
+            return Object.keys(this.gateways).length > 1 || ! ['stripe'].includes(this.form.payment_method);
+        },
+
         firstPaymentMethod() {
             return Object.keys(this.gateways)[0];
         },
