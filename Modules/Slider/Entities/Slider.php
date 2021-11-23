@@ -63,7 +63,9 @@ class Slider extends Model
 
         return Cache::tags("sliders.{$id}")
             ->rememberForever(md5("sliders.{$id}:" . locale()), function () use ($id) {
-                return static::with('slides')->find($id);
+                return static::with(['slides' => function($slides){
+                    $slides->where('enable', 1);
+                }])->find($id);
             });
     }
 

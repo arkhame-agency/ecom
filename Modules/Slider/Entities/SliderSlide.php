@@ -22,7 +22,7 @@ class SliderSlide extends Model
      *
      * @var array
      */
-    protected $fillable = ['options', 'open_in_new_window', 'position'];
+    protected $fillable = ['options', 'open_in_new_window', 'position', 'enable'];
 
     /**
      * The attributes that should be cast to native types.
@@ -32,6 +32,7 @@ class SliderSlide extends Model
     protected $casts = [
         'options' => 'array',
         'open_in_new_window' => 'boolean',
+        'enable' => 'boolean'
     ];
 
     /**
