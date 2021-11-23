@@ -13,28 +13,36 @@
 </template>
 
 <script>
-    import ProductCard from './ProductCard.vue';
-    import { slickPrevArrow, slickNextArrow } from '../functions';
+import ProductCard from './ProductCard.vue';
+import { slickPrevArrow, slickNextArrow } from '../functions';
 
-    export default {
-        components: { ProductCard },
+export default {
+    components: { ProductCard },
 
-        props: ['title', 'products'],
-
-        computed: {
-            hasAnyProduct() {
-                return this.products.length !== 0;
-            },
+    props: {
+        title: '',
+        products: {},
+        slides: {
+            default: 6,
+            type: Number,
         },
+    },
 
-        mounted() {
+    computed: {
+        hasAnyProduct() {
+            return this.products.length !== 0;
+        },
+    },
+
+    mounted() {
+        if (this.slides === 6) {
             $(this.$refs.productsPlaceholder).slick({
                 rows: 0,
                 dots: false,
                 arrows: true,
                 infinite: true,
-                slidesToShow: 6,
-                slidesToScroll: 6,
+                slidesToShow: this.slides,
+                slidesToScroll: this.slides,
                 rtl: window.FleetCart.rtl,
                 prevArrow: slickPrevArrow(),
                 nextArrow: slickNextArrow(),
@@ -94,6 +102,19 @@
                     },
                 ],
             });
-        },
-    };
+        } else {
+            $(this.$refs.productsPlaceholder).slick({
+                rows: 0,
+                dots: true,
+                arrows: false,
+                infinite: true,
+                slidesToShow: this.slides,
+                slidesToScroll: this.slides,
+                rtl: window.FleetCart.rtl,
+                prevArrow: slickPrevArrow(),
+                nextArrow: slickNextArrow(),
+            });
+        }
+    },
+};
 </script>

@@ -43,4 +43,5 @@ return [
     'products' => 'Products',
     'storefront_top_brands' => 'Top Brands',
     'storefront_active_flash_sale_campaign' => 'Active Campaign',
+    'enable_disable' => 'Enable/Disable',
 ];

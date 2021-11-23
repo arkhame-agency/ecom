@@ -298,6 +298,14 @@
     }
 }
 
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
 @media screen and (max-width: 510px) {
     .captcha-input {
         display: block;

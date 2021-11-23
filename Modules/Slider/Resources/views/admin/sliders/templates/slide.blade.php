@@ -18,12 +18,28 @@
         <div class="slide-body">
             <input type="hidden" name="slides[<%- slideNumber %>][id]" value="<%- slide.id %>">
 
+            <input type="hidden" name="slides[<%- slideNumber %>][enable]" value="0">
+
+            <div class="checkbox">
+
+                <input type="checkbox"
+                       name="slides[<%- slideNumber %>][enable]"
+                       value="1"
+                       id="slides-<%- slideNumber %>-enable"
+                <%= slide.enable ? 'checked' : '' %>
+                >
+
+                <label for="slides-<%- slideNumber %>-enable">
+                    {{ trans('slider::attributes.enable_slide') }}
+                </label>
+            </div>
+
             <div class="slide-image" data-slide-number="<%- slideNumber %>">
                 <% if (slide.file && slide.file.path) { %>
-                    <img src="<%- slide.file.path %>" alt="slide-image">
-                    <input type="hidden" name="slides[<%- slideNumber %>][file_id]" value="<%- slide.file.id %>">
+                <img src="<%- slide.file.path %>" alt="slide-image">
+                <input type="hidden" name="slides[<%- slideNumber %>][file_id]" value="<%- slide.file.id %>">
                 <% } else { %>
-                    <i class="fa fa-picture-o"></i>
+                <i class="fa fa-picture-o"></i>
                 <% } %>
             </div>
 
@@ -51,10 +67,10 @@
                                     </label>
 
                                     <input type="text"
-                                        name="slides[<%- slideNumber %>][caption_1]"
-                                        class="form-control"
-                                        id="slides-<%- slideNumber %>-caption-1"
-                                        value="<%- slide.caption_1 %>"
+                                           name="slides[<%- slideNumber %>][caption_1]"
+                                           class="form-control"
+                                           id="slides-<%- slideNumber %>-caption-1"
+                                           value="<%- slide.caption_1 %>"
                                     >
                                 </div>
                             </div>
@@ -66,10 +82,10 @@
                                     </label>
 
                                     <input type="text"
-                                        name="slides[<%- slideNumber %>][caption_2]"
-                                        class="form-control"
-                                        id="slides-<%- slideNumber %>-caption-2"
-                                        value="<%- slide.caption_2 %>"
+                                           name="slides[<%- slideNumber %>][caption_2]"
+                                           class="form-control"
+                                           id="slides-<%- slideNumber %>-caption-2"
+                                           value="<%- slide.caption_2 %>"
                                     >
                                 </div>
                             </div>
@@ -86,12 +102,14 @@
                                         id="slides-<%- slideNumber %>-direction"
                                         value="<%- slide.direction %>"
                                     >
-                                        <option value="left" <%= slide.direction === 'left' ? 'selected' : '' %>>
-                                            {{ trans('slider::sliders.slide.form.directions.left') }}
+                                        <option value="left"
+                                        <%= slide.direction === 'left' ? 'selected' : '' %>>
+                                        {{ trans('slider::sliders.slide.form.directions.left') }}
                                         </option>
 
-                                        <option value="right" <%= slide.direction === 'right' ? 'selected' : '' %>>
-                                            {{ trans('slider::sliders.slide.form.directions.right') }}
+                                        <option value="right"
+                                        <%= slide.direction === 'right' ? 'selected' : '' %>>
+                                        {{ trans('slider::sliders.slide.form.directions.right') }}
                                         </option>
                                     </select>
                                 </div>
@@ -106,10 +124,10 @@
                                     </label>
 
                                     <input type="text"
-                                        name="slides[<%- slideNumber %>][call_to_action_text]"
-                                        class="form-control"
-                                        id="slides[<%- slideNumber %>][call-to-action-text]"
-                                        value="<%- slide.call_to_action_text %>"
+                                           name="slides[<%- slideNumber %>][call_to_action_text]"
+                                           class="form-control"
+                                           id="slides[<%- slideNumber %>][call-to-action-text]"
+                                           value="<%- slide.call_to_action_text %>"
                                     >
                                 </div>
                             </div>
@@ -121,23 +139,24 @@
                                     </label>
 
                                     <input type="text"
-                                        name="slides[<%- slideNumber %>][call_to_action_url]"
-                                        class="form-control"
-                                        id="slides-<%- slideNumber %>-call-to-action-url"
-                                        value="<%- slide.call_to_action_url %>"
+                                           name="slides[<%- slideNumber %>][call_to_action_url]"
+                                           class="form-control"
+                                           id="slides-<%- slideNumber %>-call-to-action-url"
+                                           value="<%- slide.call_to_action_url %>"
                                     >
                                 </div>
                             </div>
 
                             <div class="col-lg-4 col-md-12">
                                 <div class="checkbox">
-                                    <input type="hidden" name="slides[<%- slideNumber %>][open_in_new_window]" value="0">
+                                    <input type="hidden" name="slides[<%- slideNumber %>][open_in_new_window]"
+                                           value="0">
 
                                     <input type="checkbox"
-                                        name="slides[<%- slideNumber %>][open_in_new_window]"
-                                        value="1"
-                                        id="slides-<%- slideNumber %>-open-in-new-window"
-                                        <%= slide.open_in_new_window ? 'checked' : '' %>
+                                           name="slides[<%- slideNumber %>][open_in_new_window]"
+                                           value="1"
+                                           id="slides-<%- slideNumber %>-open-in-new-window"
+                                    <%= slide.open_in_new_window ? 'checked' : '' %>
                                     >
 
                                     <label for="slides-<%- slideNumber %>-open-in-new-window">
@@ -150,9 +169,11 @@
 
                     <div id="slider-<%- slideNumber %>-options" class="tab-pane fade in clearfix">
                         <select class="change-option-block custom-select-black pull-right">
-                            <option value="caption-1" selected>{{ trans('slider::sliders.slide.form.caption_1') }}</option>
+                            <option value="caption-1"
+                                    selected>{{ trans('slider::sliders.slide.form.caption_1') }}</option>
                             <option value="caption-2">{{ trans('slider::sliders.slide.form.caption_2') }}</option>
-                            <option value="call-to-action">{{ trans('slider::sliders.slide.form.call_to_action') }}</option>
+                            <option
+                                value="call-to-action">{{ trans('slider::sliders.slide.form.call_to_action') }}</option>
                         </select>
 
                         @include('slider::admin.sliders.templates.partials.slide_caption', ['captionNumber' => 1])
