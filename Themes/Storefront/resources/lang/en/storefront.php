@@ -21,6 +21,7 @@ return [
         'feature_5' => 'Feature 5',
         'enable_features_section' => 'Enable features section',
         'product_page_banner' => 'Product Page Banner',
+        'enable_cross_sell_sidebar_cart' => 'Enable Cross-sells on Sidebar Cart',
         'enable_three_column_full_width_banners_section' => 'Enable three column full width banners section',
         'enable_featured_categories_section' => 'Enable featured categories section',
         'enable_product_tabs_one_section' => 'Enable product tabs one section',

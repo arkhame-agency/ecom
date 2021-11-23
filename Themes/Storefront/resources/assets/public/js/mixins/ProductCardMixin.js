@@ -61,6 +61,7 @@ export default {
 
                 if (document.location.href !== route('cart.index').url()) {
                     $('.header-cart').trigger('click');
+                    this.$root.$refs.sidebarcart.fetchCrossSellProducts();
                 }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);

@@ -24,7 +24,17 @@
                 <h4>{{ trans('storefront::cart.your_cart_is_empty') }}</h4>
             </div>
         </div>
-
+        @if (setting('storefront_cross_sell_sidebar_cart_enabled'))
+            <transition name="fade">
+                <landscape-products
+                    title="{{ trans('storefront::product.you_might_also_like') }}"
+                    :slides="2"
+                    v-if="hasAnyCrossSellProduct && cartIsNotEmpty"
+                    :products="crossSellProducts"
+                >
+                </landscape-products>
+            </transition>
+        @endif
         <div class="sidebar-cart-bottom" v-if="cartIsNotEmpty">
             <h5 class="sidebar-cart-subtotal">
                 {{ trans('storefront::layout.subtotal') }}
