@@ -97,7 +97,14 @@ export default class {
         $('#id-field').removeClass('hide');
 
         $('#id').val(category.id);
-        $('#name').val(category.name).focus();
+
+        $('#name').val(category.name);
+
+        if (category.slug === '') {
+            $('#name').on('blur', function () {
+                $('#slug').val(window.admin.generateSlug($(this).val()));
+            });
+        }
 
         $('#slug').val(category.slug);
         $('#slug-field').removeClass('hide');
