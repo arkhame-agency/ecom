@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', $page->name)
+@section('title', $page->meta->meta_title ?: $page->name)
 
 @push('meta')
     <meta name="title" content="{{ $page->meta->meta_title ?: $page->name }}">

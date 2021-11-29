@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', $product->name)
+@section('title', $product->meta->meta_title ?: $product->name)
 
 @push('meta')
     <meta name="title" content="{{ $product->meta->meta_title ?: $product->name }}">
