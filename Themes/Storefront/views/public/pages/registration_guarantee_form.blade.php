@@ -1,13 +1,13 @@
 @extends('public.layout')
 
-@section('title', trans('guarantee_form.title'))
+@section('title', trans('storefront::guarantee_form.title'))
 
 @push('meta')
-    <meta name="title" content="{{trans('guarantee_form.title')}}">
+    <meta name="title" content="{{trans('storefront::guarantee_form.title')}}">
     <meta name="description" content="">
     <meta name="twitter:card" content="summary">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{trans('guarantee_form.title')}}">
+    <meta property="og:title" content="{{trans('storefront::guarantee_form.title')}}">
     <meta property="og:description" content="">
     <meta property="og:image" content="{{ $logo }}">
     <meta property="og:locale" content="{{ locale() }}">
