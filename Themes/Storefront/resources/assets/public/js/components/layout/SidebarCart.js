@@ -41,7 +41,9 @@ export default {
                 method: 'GET',
                 url: route('cart.cross_sell_products.index'),
             }).then((crossSellProducts) => {
-                this.crossSellProducts = crossSellProducts;
+                this.crossSellProducts = crossSellProducts.filter((product, pos, arr) => {
+                    return arr.map(mapProduct => mapProduct.id).indexOf(product.id) === pos;
+                });
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             });

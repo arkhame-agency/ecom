@@ -56,7 +56,10 @@
     .landscape-products {
         .slick-list {
             margin: 0 0 -50px;
-            padding: 10px 0 35px;
+            padding: 10px 0 45px;
+        }
+        .slick-dots {
+            margin: 17px 0 -16px;
         }
     }
 
@@ -64,8 +67,7 @@
         margin: 0 5px;
 
         .product-card-actions,
-        .product-badge,
-        .btn-add-to-cart {
+        .product-badge {
             display: none;
         }
 
@@ -77,37 +79,10 @@
             border-color: #ebebeb;
             box-shadow: none;
             z-index: 1;
+        }
 
-            .product-name {
-                transform: none;
-            }
-
-            .product-rating {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .product-price {
-                opacity: 1;
-                visibility: visible;
-
-                &:after {
-                    opacity: 1;
-                    visibility: visible;
-                }
-            }
-
-            .product-price-clone {
-                opacity: 0;
-                visibility: hidden;
-                transform: none;
-
-                &:after {
-                    opacity: 0;
-                    visibility: hidden;
-                    transform: none;
-                }
-            }
+        .btn-add-to-cart {
+            font-size: 0.6rem;
         }
     }
 
