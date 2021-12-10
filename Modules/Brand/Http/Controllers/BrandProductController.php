@@ -32,6 +32,8 @@ class BrandProductController
         return view('public.products.index', [
             'brandName' => $brand->name,
             'brandBanner' => $brand->banner->path,
+            'brandLogo' => $brand->logo->path,
+            'brandPresentation' => $brand->presentation,
             'routeArray' => $brand->getUrls(),
         ]);
     }

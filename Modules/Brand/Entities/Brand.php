@@ -43,7 +43,7 @@ class Brand extends Model
      *
      * @var array
      */
-    public $translatedAttributes = ['name', 'slug'];
+    public $translatedAttributes = ['name', 'presentation', 'slug'];
 
     /**
      * The attribute that will be slugged.
@@ -90,7 +90,7 @@ class Brand extends Model
      */
     public static function findBySlug($slug)
     {
-        return self::select('brands.*', 'brand_translations.slug', 'brand_translations.name')->join('brand_translations', 'brand_translations.brand_id', '=', 'brands.id')
+        return self::select('brands.*', 'brand_translations.slug', 'brand_translations.name', 'brand_translations.presentation')->join('brand_translations', 'brand_translations.brand_id', '=', 'brands.id')
             ->where('brand_translations.slug', '=', $slug)
             ->firstOrNew([]);
     }

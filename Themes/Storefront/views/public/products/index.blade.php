@@ -21,6 +21,8 @@
         initial-query="{{ request('query') }}"
         initial-brand-name="{{ $brandName ?? '' }}"
         initial-brand-banner="{{ $brandBanner ?? '' }}"
+        initial-brand-logo="{{ $brandLogo ?? '' }}"
+        initial-brand-presentation="{{ $brandPresentation ?? '' }}"
         initial-brand-slug="{{ request('brand') }}"
         initial-category-name="{{ $categoryName ?? '' }}"
         initial-category-banner="{{ $categoryBanner ?? '' }}"
@@ -58,6 +60,13 @@
                         <div class="d-none d-lg-block categories-banner" v-if="brandBanner">
                             <img :src="brandBanner" alt="Brand banner">
                         </div>
+                        <div class="brand-presentation" v-if="brandPresentation">
+                            <div class="col-md-3 brand-image px-0">
+                                <img :src="brandLogo" alt="Brand logo">
+                            </div>
+                            <div class="col-md-15" v-if="brandPresentation" v-html="brandPresentation">
+                            </div>
+                        </div>
 
                         <div class="d-none d-lg-block categories-banner" v-else-if="categoryBanner">
                             <img :src="categoryBanner" alt="Category banner">
@@ -69,7 +78,7 @@
                                     <h4 v-if="queryParams.query">
                                         {{ trans('storefront::products.search_results_for') }} <span>"@{{ queryParams.query }}"</span>
                                     </h4>
-                                    <h4 v-else-if="queryParams.brand" v-text="initialBrandName"></h4>
+                                    <h4 v-else-if="queryParams.brand && !brandPresentation" v-text="initialBrandName"></h4>
                                     <h4 v-else-if="queryParams.category" v-text="categoryName"></h4>
                                     <h4 v-else-if="queryParams.tag" v-text="initialTagName"></h4>
                                     <h4 v-else>{{ trans('storefront::products.shop') }}</h4>
@@ -141,13 +150,16 @@
                                 </div>
                             </div>
 
-                            <div class="search-result-middle" :class="{ empty: emptyProducts, loading: fetchingProducts }">
+                            <div class="search-result-middle"
+                                 :class="{ empty: emptyProducts, loading: fetchingProducts }">
                                 <div class="grid-view-products" v-if="viewMode === 'grid'">
-                                    <product-card-grid-view v-for="product in products.data" :key="product.id" :product="product"></product-card-grid-view>
+                                    <product-card-grid-view v-for="product in products.data" :key="product.id"
+                                                            :product="product"></product-card-grid-view>
                                 </div>
 
                                 <div class="list-view-products" v-if="viewMode === 'list'">
-                                    <product-card-list-view v-for="product in products.data" :key="product.id" :product="product"></product-card-list-view>
+                                    <product-card-list-view v-for="product in products.data" :key="product.id"
+                                                            :product="product"></product-card-list-view>
                                 </div>
 
                                 <div class="empty-message" v-if="! fetchingProducts && emptyProducts">
