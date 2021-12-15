@@ -68,7 +68,7 @@ class Noviship
         $packages = [];
         foreach ($order->products()->getResults() as $orderProduct) {
             $packages [] = [
-                "qty" => 1,
+                "qty" => "1",
                 "description" => "BOX",
                 "weight" => $orderProduct->getWeightAttribute(),
                 "width" => $orderProduct->getWidthAttribute(),

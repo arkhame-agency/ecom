@@ -2,9 +2,9 @@
 
 namespace Modules\Order\Entities;
 
-use Modules\Support\Money;
-use Modules\Support\Eloquent\Model;
 use Modules\Product\Entities\Product;
+use Modules\Support\Eloquent\Model;
+use Modules\Support\Money;
 
 class OrderProduct extends Model
 {
@@ -102,42 +102,50 @@ class OrderProduct extends Model
 
     /**
      * Get the order product package's weight.
+     * Cast to int to force null to 0
+     * Cast to string for API
      *
      * @return integer
      */
     public function getWeightAttribute(): int
     {
-        return $this->product->weight;
+        return (string)(int)$this->product->weight;
     }
 
     /**
      * Get the order product package's length.
+     * Cast to int to force null to 0
+     * Cast to string for API
      *
      * @return integer
      */
     public function getLengthAttribute(): int
     {
-        return $this->product->length;
+        return (string)(int)$this->product->length;
     }
 
     /**
      * Get the order product package's width.
+     * Cast to int to force null to 0
+     * Cast to string for API
      *
      * @return integer
      */
     public function getWidthAttribute(): int
     {
-        return $this->product->width;
+        return (string)(int)$this->product->width;
     }
 
     /**
      * Get the order product package's height.
+     * Cast to int to force null to 0
+     * Cast to string for API
      *
      * @return integer
      */
     public function getHeightAttribute(): int
     {
-        return $this->product->height;
+        return (string)(int)$this->product->height;
     }
 
     public function getUnitPriceAttribute($unitPrice)
