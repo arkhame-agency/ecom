@@ -59,7 +59,7 @@
                                 <td>
                                     {{ $order->shipping_method }}
                                     @if($order->noviship_id)
-                                        (<a target="_blank" href="https://ship.parcelz.com/{{locale()}}/shipment/{{$order->noviship_id}}">{{ $order->noviship_id }}</a>)
+                                        ({{ $order->noviship_id }})
                                     @endif
                                 </td>
                             </tr>
