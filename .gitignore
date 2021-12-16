@@ -17,3 +17,5 @@ yarn-error.log
 *.map
 .env
 /public/favicon/*
+/storage/framework/
+/storage/logs/laravel.log
