@@ -94,7 +94,6 @@ export default {
         },
 
         updateShippingMethod(shippingMethod) {
-            this.loadingOrderSummary = true;
             if (typeof shippingMethod === 'string') {
                 shippingMethod = { name: shippingMethod };
             } else {
