@@ -38,6 +38,30 @@
     .table-responsive {
         margin-bottom: 0;
     }
+
+    .detail-shipping {
+        border-left: 1px dashed #e5e5e5;
+        margin-left: 5px;
+
+        li {
+            margin-left: 10px;
+            list-style: none;
+            font-size: 0.8em;
+
+            i {
+                display: inline-block;
+                width: 15px;
+            }
+        }
+
+        &:after {
+            content: " ";
+            width: 56%;
+            float: left;
+            height: 4px;
+            border-bottom: 1px dashed #e5e5e5;
+        }
+    }
 }
 
 .order-wrapper {
@@ -89,7 +113,7 @@
                 border-top: 1px solid #f1f1f1 !important;
                 vertical-align: middle;
 
-                &:first-child {
+                &:nth-child(2) {
                     min-width: 250px;
                 }
 

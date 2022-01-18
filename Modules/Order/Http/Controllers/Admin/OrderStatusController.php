@@ -5,9 +5,17 @@ namespace Modules\Order\Http\Controllers\Admin;
 use Modules\Order\Entities\Order;
 use Modules\Order\Entities\OrderProduct;
 use Modules\Order\Events\OrderStatusChanged;
+use Modules\Shipping\Gateway\Shippo;
 
 class OrderStatusController
 {
+
+    public Shippo $shippo;
+
+    public function __construct()
+    {
+        $this->shippo = new Shippo();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -70,5 +78,13 @@ class OrderStatusController
                 $orderProduct->product->markAsOutOfStock();
             }
         });
+    }
+
+    public function createLabelShipment(Order $order) {
+        return $this->shippo->createShipmentLabel($order);
+    }
+
+    public function getLabelShipment(Order $order) {
+        return $this->shippo->getShipmentLabel($order->getShipmentLabelId());
     }
 }

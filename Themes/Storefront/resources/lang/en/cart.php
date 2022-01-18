@@ -21,6 +21,11 @@ return [
     'subtotal' => 'Subtotal',
     'coupon' => 'Coupon',
     'shipping_method' => 'Shipping Method',
+    'shipping_address' => [
+      'country' => 'Country',
+      'state' => 'State',
+      'zip' => 'Zip Code',
+    ],
     'total' => 'Total',
     'proceed_to_checkout' => 'PROCEED TO CHECKOUT',
     'your_cart_is_empty' => 'Your cart is empty',

@@ -28,6 +28,10 @@ export default {
         return Object.keys(this.state.cart.availableShippingMethods).length !== 0;
     },
 
+    selectedShippingMethod() {
+        return this.shippingMethodName;
+    },
+
     wishlistCount() {
         return this.state.wishlist.length;
     },

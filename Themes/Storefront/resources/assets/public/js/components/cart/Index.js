@@ -1,6 +1,7 @@
 import store from '../../store';
 import CartHelpersMixin from '../../mixins/CartHelpersMixin';
 import ProductHelpersMixin from '../../mixins/ProductHelpersMixin';
+import Errors from '../../Errors';
 
 export default {
     mixins: [
@@ -8,16 +9,42 @@ export default {
         ProductHelpersMixin,
     ],
 
+    props: ['countries'],
+
     data() {
         return {
             shippingMethodName: null,
             crossSellProducts: [],
+            form: {
+                shipping: {},
+                cart: {},
+            },
+            states: {
+                shipping: {},
+            },
+            errors: new Errors(),
         };
+    },
+
+
+    watch: {
+        'form.shipping.zip': function (newZip) {
+            if (newZip) {
+                this.loadingOrderSummary = true;
+                this.getRates();
+            }
+        },
     },
 
     computed: {
         hasAnyCrossSellProduct() {
             return this.crossSellProducts.length !== 0;
+        },
+        hasShippingStates() {
+            return Object.keys(this.states.shipping).length !== 0;
+        },
+        firstCountry() {
+            return Object.keys(this.countries)[0];
         },
     },
 
@@ -32,6 +59,37 @@ export default {
     },
 
     methods: {
+
+        hasShippingAddress() {
+            return Object.keys(this.form.shipping).length !== 0;
+        },
+
+        changeShippingState(state) {
+            this.$set(this.form.shipping, 'state', state);
+        },
+
+        changeShippingZip(zip) {
+            this.$set(this.form.shipping, 'zip', zip);
+        },
+
+        changeShippingCountry(country) {
+            this.$set(this.form.shipping, 'country', country);
+
+            this.fetchStates(country, (states) => {
+                this.loadingOrderSummary = false;
+                this.$set(this.states, 'shipping', states);
+                this.$set(this.form.shipping, 'state', '');
+            });
+        },
+
+        fetchStates(country, callback) {
+            this.loadingOrderSummary = true;
+            $.ajax({
+                method: 'GET',
+                url: route('countries.states.index', { code: country }),
+            }).then(callback);
+        },
+
         optionValues(option) {
             let values = [];
 
@@ -61,10 +119,16 @@ export default {
                 data: { qty: qty || 1 },
             }).then((cart) => {
                 store.updateCart(cart);
+                if (this.hasShippingAddress()) {
+                    this.loadingOrderSummary = true;
+                    this.getRates();
+                }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             }).always(() => {
-                this.loadingOrderSummary = false;
+                if (! this.hasShippingAddress()) {
+                    this.loadingOrderSummary = false;
+                }
             });
         },
 
@@ -86,10 +150,12 @@ export default {
                 url: route('cart.items.destroy', { cartItemId: cartItem.id }),
             }).then((cart) => {
                 store.updateCart(cart);
+                if (! store.cartIsEmpty()) {
+                    this.loadingOrderSummary = true;
+                    this.getRates();
+                }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
-            }).always(() => {
-                this.loadingOrderSummary = false;
             });
         },
 
@@ -111,7 +177,7 @@ export default {
         },
 
         changeShippingMethod(shippingMethod) {
-            this.shippingMethodName = shippingMethod.name;
+            this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name].name : this.cart.availableShippingMethods[this.firstShippingMethod].name;
         },
 
         fetchCrossSellProducts() {

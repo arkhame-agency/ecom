@@ -13,6 +13,8 @@ use Modules\Order\OrderCollection;
 use Modules\Payment\Facades\Gateway;
 use Modules\Payment\HasTransactionReference;
 use Modules\Shipping\Facades\ShippingMethod;
+use Modules\Shipping\Gateway\Shippo;
+use Modules\Shipping\Method;
 use Modules\Support\Country;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Money;
@@ -172,10 +174,48 @@ class Order extends Model
      */
     public function getShippingMethodAttribute($shippingMethod)
     {
-        return ShippingMethod::get($shippingMethod)->label ?? null;
+        if (is_null(ShippingMethod::get($shippingMethod))) {
+            $shippo = new Shippo();
+
+            $shipmentLabel = array();
+
+            $shipment = $shippo->getShipmentRate($this->shipment_rate_id);
+
+            if ($shipment) {
+                ShippingMethod::register($shipment['servicelevel']['token'], function () use ($shipment, $shipmentLabel) {
+                    return new Method(
+                        $shipment['servicelevel']['token'],
+                        $shipment['provider'] . " - " . $shipment['servicelevel']['name'],
+                        $shipment['amount'],
+                        $shipment['object_id']
+                    );
+                });
+            }
+        }
+
+        return ShippingMethod::get($shippingMethod)->label;
     }
 
-    public function getOrderId() {
+    public function getShipmentLabel() {
+        if($this->shipment_label_id) {
+            $shippo = new Shippo();
+            return collect($shippo->getShipmentLabel($this->shipment_label_id));
+        }
+        return null;
+    }
+
+    public function getShipmentRateId()
+    {
+        return $this->shipment_rate_id;
+    }
+
+    public function getShipmentLabelId()
+    {
+        return $this->shipment_label_id;
+    }
+
+    public function getOrderId()
+    {
         return $this->id;
     }
 

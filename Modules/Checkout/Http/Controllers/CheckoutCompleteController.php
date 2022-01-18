@@ -26,8 +26,10 @@ class CheckoutCompleteController
 
         try {
             $response = $gateway->complete($order);
-            $noviship = new Noviship();
-            $noviship->CreateShipment($response->order);
+            if (config('services.noviship.key')) {
+                $noviship = new Noviship();
+                $noviship->CreateShipment($response->order);
+            }
         } catch (Exception $e) {
             $orderService->delete($order);
 

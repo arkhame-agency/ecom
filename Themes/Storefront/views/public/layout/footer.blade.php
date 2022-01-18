@@ -51,7 +51,7 @@
                     <div class="col-lg-3 col-md-5">
                         <div class="footer-links">
                             <h4 class="title">{{ trans('storefront::layout.my_account') }}</h4>
-
+                            {{-- My account --}}
                             <ul class="list-inline">
                                 <li>
                                     <a href="{{ route('account.dashboard.index') }}">
@@ -92,7 +92,7 @@
                         <div class="col-lg-3 col-md-5">
                             <div class="footer-links">
                                 <h4 class="title">{{ setting('storefront_footer_menu_one_title') }}</h4>
-
+                                {{-- Categories --}}
                                 <ul class="list-inline">
                                     @foreach ($footerMenuOne as $menuItem)
                                         <li>

@@ -37,6 +37,7 @@ class SettingTabs extends Tabs
         $this->group('shipping_methods', trans('setting::settings.tabs.group.shipping_methods'))
             ->add($this->freeShipping())
             ->add($this->commercialShipping())
+            ->add($this->shippoShipping())
             ->add($this->localPickup())
             ->add($this->flatRate());
 
@@ -262,6 +263,20 @@ class SettingTabs extends Tabs
             ]);
 
             $tab->view('setting::admin.settings.tabs.commercial_shipping');
+        });
+    }
+
+    private function shippoShipping()
+    {
+        return tap(new Tab('shippo_shipping', trans('setting::settings.tabs.shippo_shipping')), function (Tab $tab) {
+            $tab->weight(43);
+
+            $tab->fields([
+                'shippo_shipping_enabled',
+                'shippo_shipping_api',
+            ]);
+
+            $tab->view('setting::admin.settings.tabs.shippo_shipping');
         });
     }
 

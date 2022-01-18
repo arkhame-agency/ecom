@@ -25,6 +25,11 @@ class CartShippingMethod
         return $this->shippingMethodCondition->getAttribute('shipping_method')->label;
     }
 
+    public function shipment_rate_id()
+    {
+        return $this->shippingMethodCondition->getAttribute('shipping_method')->shipment_rate_id;
+    }
+
     public function cost()
     {
         return Money::inDefaultCurrency($this->calculate());
