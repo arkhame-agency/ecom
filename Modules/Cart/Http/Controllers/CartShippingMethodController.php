@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Modules\Shipping\Facades\ShippingMethod;
 use Modules\Shipping\Gateway\Shippo;
 use Modules\Shipping\Method;
+use Modules\Support\Money;
 
 class CartShippingMethodController
 {
@@ -36,7 +37,7 @@ class CartShippingMethodController
 
         foreach ($shippoRates['rates'] as $rate) {
             ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
-                return new Method($rate['servicelevel']['token'], $rate['provider'] . " - " . $rate['servicelevel']['name'] . "(Days to delivery: " . $rate['estimated_days'] . ")", $rate['amount'], $rate['object_id']);
+                return new Method($rate['servicelevel']['token'], $rate['provider'] . " - " . $rate['servicelevel']['name'] . "(Days to delivery: " . $rate['estimated_days'] . ")", $this->getCost($rate['amount']), $rate['object_id']);
             });
         }
 
@@ -48,5 +49,15 @@ class CartShippingMethodController
             Cart::addShippingMethod(ShippingMethod::available()->first());
         }
         return Cart::instance();
+    }
+
+    function getCost($cost) {
+
+        if (setting('shippo_profit_margin_type') === '1') {
+            $costProfit = (setting('shippo_profit_margin') / 100) * $cost;
+            return $cost + $costProfit;
+        }
+
+        return $cost + setting('shippo_profit_margin');
     }
 }

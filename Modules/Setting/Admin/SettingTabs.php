@@ -274,6 +274,8 @@ class SettingTabs extends Tabs
             $tab->fields([
                 'shippo_shipping_enabled',
                 'shippo_shipping_api',
+                'shippo_profit_margin',
+                'shippo_profit_margin_type'
             ]);
 
             $tab->view('setting::admin.settings.tabs.shippo_shipping');

@@ -86,6 +86,12 @@ return [
     'shippo_shipping_enabled' => 'Status',
     'translatable.shippo_shipping_label' => 'Shippo is the best multi-carrier shipping software for e-commerce businesses.',
     'shippo_shipping_api_key' => 'Api Key',
+    'shippo_profit_margin' => 'Profit Marge',
+    'shippo_profit_margin_type' => 'Profit Marge Type',
+    'shippo_profit_margin_types' => [
+        '0' => 'Fixed',
+        '1' => 'Percent',
+    ],
 
     'local_pickup_enabled' => 'Status',
     'translatable.local_pickup_label' => 'Label',
