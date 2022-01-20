@@ -28,7 +28,6 @@ class CustomersOrderReport extends Report
                 $query->where('customer_email', request('customer_email'));
             })
             ->groupBy([
-                'orders.id',
                 'customer_id',
                 'customer_first_name',
                 'customer_last_name',

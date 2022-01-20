@@ -3,6 +3,8 @@
 namespace Modules\Report\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Modules\Report\BrandsPurchaseReport;
+use Modules\Report\CategoriesPurchaseReport;
 use Modules\Report\TaxReport;
 use Modules\Report\SalesReport;
 use Modules\Report\SearchReport;
@@ -27,7 +29,9 @@ class ReportController
     private $reports = [
         'coupons_report' => CouponsReport::class,
         'customers_order_report' => CustomersOrderReport::class,
+        'categories_purchase_report' => CategoriesPurchaseReport::class,
         'products_purchase_report' => ProductsPurchaseReport::class,
+        'brands_purchase_report' => BrandsPurchaseReport::class,
         'products_stock_report' => ProductsStockReport::class,
         'products_view_report' => ProductsViewReport::class,
         'branded_products_report' => BrandedProductsReport::class,

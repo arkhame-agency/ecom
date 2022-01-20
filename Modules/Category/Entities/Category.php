@@ -8,6 +8,7 @@ use Modules\Media\Entities\File;
 use Modules\Product\Entities\Product;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use Modules\Support\Money;
 use TypiCMS\NestableTrait;
 
 class Category extends Model
@@ -51,6 +52,16 @@ class Category extends Model
      * @var array
      */
     protected $translatedAttributes = ['name', 'slug'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
 
     /**
      * The attribute that will be slugged.
@@ -142,6 +153,11 @@ class Category extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories');
+    }
+
+    public function getTotalAttribute($total)
+    {
+        return Money::inDefaultCurrency($total);
     }
 
     public function getLogoAttribute()

@@ -175,29 +175,31 @@ class Order extends Model
     public function getShippingMethodAttribute($shippingMethod)
     {
         if (is_null(ShippingMethod::get($shippingMethod))) {
-            $shippo = new Shippo();
-
-            $shipmentLabel = array();
-
-            $shipment = $shippo->getShipmentRate($this->shipment_rate_id);
-
-            if ($shipment) {
-                ShippingMethod::register($shipment['servicelevel']['token'], function () use ($shipment, $shipmentLabel) {
-                    return new Method(
-                        $shipment['servicelevel']['token'],
-                        $shipment['provider'] . " - " . $shipment['servicelevel']['name'],
-                        $shipment['amount'],
-                        $shipment['object_id']
-                    );
-                });
+            if (!is_null($this->shipment_rate_id)) {
+                $shippo = new Shippo();
+                $shipmentLabel = array();
+                $shipment = $shippo->getShipmentRate($this->shipment_rate_id);
+                if (is_array($shipment)) {
+                    ShippingMethod::register($shipment['servicelevel']['token'], function () use ($shipment, $shipmentLabel) {
+                        return new Method(
+                            $shipment['servicelevel']['token'],
+                            $shipment['provider'] . " - " . $shipment['servicelevel']['name'],
+                            $shipment['amount'],
+                            $shipment['object_id']
+                        );
+                    });
+                }
+            } else {
+                return trans("storefront::shipped.with.{$shippingMethod}");
             }
         }
 
         return ShippingMethod::get($shippingMethod)->label;
     }
 
-    public function getShipmentLabel() {
-        if($this->shipment_label_id) {
+    public function getShipmentLabel()
+    {
+        if ($this->shipment_label_id) {
             $shippo = new Shippo();
             return collect($shippo->getShipmentLabel($this->shipment_label_id));
         }
