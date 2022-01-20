@@ -4,6 +4,8 @@ namespace Modules\Coupon\Http\Controllers;
 
 use Modules\Cart\Facades\Cart;
 use Illuminate\Pipeline\Pipeline;
+use Modules\Coupon\Checkers\ApplicableBrands;
+use Modules\Coupon\Checkers\ExcludedBrands;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Coupon\Checkers\ValidCoupon;
 use Modules\Coupon\Checkers\CouponExists;
@@ -29,6 +31,8 @@ class CartCouponController
         ExcludedProducts::class,
         ApplicableCategories::class,
         ExcludedCategories::class,
+        ApplicableBrands::class,
+        ExcludedBrands::class,
         UsageLimitPerCoupon::class,
         UsageLimitPerCustomer::class,
     ];

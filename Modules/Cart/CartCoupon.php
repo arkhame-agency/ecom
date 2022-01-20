@@ -135,6 +135,24 @@ class CartCoupon implements JsonSerializable
         return $this->coupon->excludeCategories->intersect($cartItem->product->categories)->isNotEmpty();
     }
 
+    private function inApplicableBrands($cartItem)
+    {
+        if ($this->coupon->categories->isEmpty()) {
+            return true;
+        }
+
+        return $this->coupon->brands->intersect($cartItem->product->brands)->isNotEmpty();
+    }
+
+    private function inExcludedBrands($cartItem)
+    {
+        if ($this->coupon->excludeBrands->isEmpty()) {
+            return false;
+        }
+
+        return $this->coupon->excludeBrands->intersect($cartItem->product->brands)->isNotEmpty();
+    }
+
     public function toArray()
     {
         return [

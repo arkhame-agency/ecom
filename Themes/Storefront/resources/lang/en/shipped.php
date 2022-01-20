@@ -5,6 +5,7 @@ return [
     'your_order_is_ready_to_ship_via' => 'Your order is being shipped via <b>:shipping_method</b> to the following address:',
     'you_can_track_your_shipment_here' => 'You can track your shipment here:',
     'your_tracking_number_is' => 'Your tracking number is:',
+    'method_shipping_label' => ':provider - :service_name (Days to delivery :estimated_days)',
     'it_may_take_24_hours_for_your_tracking_number_to_return_correct_information' => 'it may take 24 hours for your tracking number to return the correct information regarding your shipment.',
     'with' => [
         'canada_post_regular_parcel' => 'Canada Post - Regular Parcel',

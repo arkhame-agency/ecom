@@ -37,7 +37,14 @@ class CartShippingMethodController
 
         foreach ($shippoRates['rates'] as $rate) {
             ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
-                return new Method($rate['servicelevel']['token'], $rate['provider'] . " - " . $rate['servicelevel']['name'] . "(Days to delivery: " . $rate['estimated_days'] . ")", $this->getCost($rate['amount']), $rate['object_id']);
+                return new Method(
+                    $rate['servicelevel']['token'],
+                    trans("storefront::shipped.method_shipping_label", [
+                        'provider' => $rate['provider'],
+                        'service_name' => $rate['servicelevel']['name'],
+                        'estimated_days' => $rate['estimated_days']
+                    ]),
+                    $this->getCost($rate['amount']), $rate['object_id']);
             });
         }
 
