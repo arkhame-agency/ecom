@@ -85,6 +85,16 @@ class OrderProduct extends Model
      *
      * @return string
      */
+    public function getSkuAttribute()
+    {
+        return $this->product->sku;
+    }
+
+    /**
+     * Get the order product's name.
+     *
+     * @return string
+     */
     public function getNameAttribute()
     {
         return $this->product->name;

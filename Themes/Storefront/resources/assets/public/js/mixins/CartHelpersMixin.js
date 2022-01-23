@@ -76,6 +76,23 @@ export default {
             });
         },
 
+        getRates() {
+            this.loadingOrderSummary = true;
+            this.form.cartItems = this.cart.items;
+            $.ajax({
+                method: 'POST',
+                url: route('cart.shipping.rates'),
+                data: this.form,
+            }).then((cart) => {
+                store.updateCart(cart);
+                this.updateShippingMethod(this.cart.shippingMethodName);
+            }).catch((xhr) => {
+                this.$notify(xhr.responseJSON.message);
+            }).always(() => {
+                this.loadingOrderSummary = false;
+            });
+        },
+
         updateShippingMethod(shippingMethod) {
             if (typeof shippingMethod === 'string') {
                 shippingMethod = { name: shippingMethod };

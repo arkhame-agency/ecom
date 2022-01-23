@@ -5,6 +5,7 @@ namespace Modules\Cart;
 use Darryldecode\Cart\Cart as DarryldecodeCart;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use JsonSerializable;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Product\Entities\Product;
@@ -74,6 +75,9 @@ class Cart extends DarryldecodeCart implements JsonSerializable
         ]);
     }
 
+    /**
+     * @return \Darryldecode\Cart\CartCollection
+     */
     public function items()
     {
         return $this->getContent()->sortBy('attributes.created_at')->map(function ($item) {
@@ -146,16 +150,27 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function availableShippingMethods()
     {
-        if ($this->isCommercialCategory()) {
-            return collect(array('commercial_shipping' => ShippingMethod::available()->get('commercial_shipping')));
-        }
-
         if ($this->allItemsAreVirtual()) {
             return collect();
         }
 
+        if (($this->isLessThenFeeShippingMinAmount() && setting('shippo_shipping_enabled')) || setting('shippo_shipping_enabled')) {
+            if (Cache::get('shippo_shipping_rates')) {
+                return collect(
+                    Cache::get('shippo_shipping_rates')->toArray()
+                );
+            }
+            return collect();
+        }
+
         if ($this->isLessThenFeeShippingMinAmount()) {
-            return collect(array('flat_rate' => ShippingMethod::available()->get('flat_rate')));
+            return collect(
+                ShippingMethod::available()->toArray()
+            );
+        }
+
+        if ($this->isCommercialCategory()) {
+            return collect(array('commercial_shipping' => ShippingMethod::available()->get('commercial_shipping')));
         }
 
         return ShippingMethod::available()->forget(['commercial_shipping', 'flat_rate']);
@@ -170,12 +185,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
     public function isCommercialCategory()
     {
         return $this->items()->every(function (CartItem $cartItem) {
-            foreach ($cartItem->product->categories as $category) {
-                if (str_contains($category->slug, 'commercial')) {
-                    return true;
-                }
-            }
-            return false;
+            return $cartItem->isCommercialCategory();
         });
     }
 
@@ -417,6 +427,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             'availableShippingMethods' => $this->availableShippingMethods(),
             'subTotal' => $this->subTotalWithoutConditions(),
             'shippingMethodName' => $this->shippingMethod()->name(),
+            'shippingMethodName' => $this->shippingCost()->name(),
             'shippingCost' => $this->shippingCost(),
             'coupon' => $this->coupon(),
             'taxes' => $this->taxes(),

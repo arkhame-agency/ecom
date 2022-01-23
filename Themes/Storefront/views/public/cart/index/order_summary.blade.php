@@ -46,10 +46,10 @@
                 </li>
             </ul>
 
-            <div class="shipping-methods" v-if="hasShippingMethod" v-cloak>
+            <div class="shipping-methods">
                 <h6>{{ trans('storefront::cart.shipping_method') }}</h6>
 
-                <div class="form-group">
+                <div class="form-group" v-if="hasShippingMethod" v-cloak>
                     <div class="form-radio" v-for="shippingMethod in cart.availableShippingMethods">
                         <input
                             type="radio"
@@ -69,6 +69,98 @@
                         </span>
                     </div>
                 </div>
+                <form id="address-to-ship-wrap" v-else v-cloak>
+                    {{-- Country --}}
+                    <div class="form-group">
+                        <label for="billing-country">
+                            {{ trans('storefront::cart.shipping_address.country') }}<span>*</span>
+                        </label>
+
+                        <select
+                            name="shipping[country]"
+                            :value="form.shipping.country"
+                            id="shipping-country"
+                            class="form-control arrow-black"
+                            @change="changeShippingCountry($event.target.value)"
+                        >
+                            <option
+                                v-for="(name, code) in countries"
+                                :value="code"
+                                v-text="name"
+                            >
+                            </option>
+                        </select>
+
+                        <span
+                            class="error-message"
+                            v-if="errors.has('shipping.country')"
+                            v-text="errors.get('shipping.country')"
+                        >
+                        </span>
+                    </div>
+                    {{-- State --}}
+                    <div class="form-group">
+                        <label for="shipping-state">
+                            {{ trans('storefront::cart.shipping_address.state') }}<span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="shipping[state]"
+                            :value="form.shipping.state"
+                            id="shipping-state"
+                            class="form-control"
+                            v-if="! hasShippingStates"
+                            @change="changeShippingState($event.target.value)"
+                        >
+
+                        <select
+                            name="shipping[state]"
+                            v-model="form.shipping.state"
+                            id="shipping-state"
+                            class="form-control arrow-black"
+                            v-else
+                        >
+                            <option value="">{{ trans('storefront::checkout.please_select') }}</option>
+
+                            <option
+                                v-for="(name, code) in states.shipping"
+                                :value="code"
+                                v-text="name"
+                            >
+                            </option>
+                        </select>
+
+                        <span
+                            class="error-message"
+                            v-if="errors.has('shipping.state')"
+                            v-text="errors.get('shipping.state')"
+                        >
+                        </span>
+                    </div>
+                    {{-- Zip code--}}
+                    <div class="form-group">
+                        <label for="billing-zip">
+                            {{ trans('storefront::cart.shipping_address.zip') }}<span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="shipping[zip]"
+                            :value="form.shipping.zip"
+                            id="shipping-zip"
+                            class="form-control"
+                            @change="changeShippingZip($event.target.value)"
+                        >
+
+                        <span
+                            class="error-message"
+                            v-if="errors.has('shipping.zip')"
+                            v-text="errors.get('shipping.zip')"
+                        >
+                        </span>
+                    </div>
+                </form>
             </div>
 
             <div class="order-summary-total">

@@ -52,15 +52,58 @@
                                 </div>
                             </td>
                         </tr>
-
-                        @if ($order->shipping_method)
+                        @if ($order->hasShippingMethod())
                             <tr>
                                 <td>{{ trans('order::orders.shipping_method') }}</td>
                                 <td>
-                                    {{ $order->shipping_method }}
-                                    @if($order->noviship_id)
-                                        ({{ $order->noviship_id }})
-                                    @endif
+                                    <div class="flex-nowrap">
+                                        <div>
+                                            {{ $order->shipping_method }}
+                                        </div>
+                                        <div>
+                                            @if($order->shipment_rate_id)
+                                                @if (config('services.noviship.key'))
+                                                    ({{ $order->shipment_rate_id }})
+                                                @else
+                                                    @if($order->getShipmentLabel())
+                                                        <ul id="detail-shipping-label" class="detail-shipping show">
+                                                            <li>
+                                                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                                                <a href="{{$order->getShipmentLabel()->get('label_url')}}" target="_blank" id="url-shipping-label">
+                                                                    Print Shipping Label (PDF)
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                <a href="{{$order->getShipmentLabel()->get('tracking_url_provider')}}" target="_blank" id="tracking-url">
+                                                                    URL for Tracking (<span id="tracking-id">{{$order->getShipmentLabel()->get('tracking_number')}}</span>)
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    @else
+                                                        <button class="btn btn-primary btn-sm" id="create-shipping-label"
+                                                                data-id="{{ $order->id }}">Create
+                                                            shipping label
+                                                        </button>
+                                                        <ul id="detail-shipping-label" class="detail-shipping">
+                                                            <li>
+                                                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                                                <a href="" target="_blank" id="url-shipping-label">
+                                                                    Print Shipping Label (PDF)
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                <a href="" target="_blank" id="tracking-url">
+                                                                    URL for Tracking (<span id="tracking-id"></span>)
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        @endif
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endif

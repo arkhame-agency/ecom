@@ -10,6 +10,7 @@ use Modules\Meta\Eloquent\HasMetaData;
 use Modules\Product\Entities\Product;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use Modules\Support\Money;
 
 class Brand extends Model
 {
@@ -44,6 +45,16 @@ class Brand extends Model
      * @var array
      */
     public $translatedAttributes = ['name', 'presentation', 'slug'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
 
     /**
      * The attribute that will be slugged.
@@ -125,6 +136,11 @@ class Brand extends Model
     public function getBannerAttribute()
     {
         return $this->files->where('pivot.zone', 'banner')->first() ?: new File;
+    }
+
+    public function getTotalAttribute($total)
+    {
+        return Money::inDefaultCurrency($total);
     }
 
     /**

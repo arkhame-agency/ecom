@@ -11,5 +11,6 @@ Route::delete('cart/items/{cartItemId}', 'CartItemController@destroy')->name('ca
 Route::post('cart/clear', 'CartClearController@store')->name('cart.clear.store');
 
 Route::post('cart/shipping-method', 'CartShippingMethodController@store')->name('cart.shipping_method.store');
+Route::post('cart/shipping-rates', 'CartShippingMethodController@rates')->name('cart.shipping.rates');
 
 Route::get('cart/cross-sell-products', 'CartCrossSellProductsController@index')->name('cart.cross_sell_products.index');

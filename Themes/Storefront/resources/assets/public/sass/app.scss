@@ -70,7 +70,9 @@ $grid-columns: 18;
     'pages/_all-categories',
     'pages/_order-details',
     'pages/_404',
-    'pages/_custom-page';
+    'pages/_custom-page',
+// This file is to override CSS Core.
+    'custom/_custom';
 
 [v-cloak] {
     display: none !important;

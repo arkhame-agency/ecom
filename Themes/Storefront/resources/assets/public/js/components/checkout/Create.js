@@ -98,13 +98,13 @@ export default {
 
         'form.billing.zip': function (newZip) {
             if (newZip) {
-                this.addTaxes();
+                this.addTaxes(true);
             }
         },
 
         'form.shipping.zip': function (newZip) {
             if (newZip) {
-                this.addTaxes();
+                this.addTaxes(true);
             }
         },
 
@@ -158,7 +158,9 @@ export default {
                 this.changePaymentMethod(this.firstPaymentMethod);
             }
 
-            if (this.firstShippingMethod) {
+            if (this.cart.shippingMethodName) {
+                this.updateShippingMethod(this.cart.shippingMethodName);
+            } else if (this.firstShippingMethod) {
                 this.updateShippingMethod(this.firstShippingMethod);
             }
 
@@ -253,10 +255,11 @@ export default {
         },
 
         changeShippingMethod(shippingMethod) {
-            this.$set(this.form, 'shipping_method', shippingMethod.name);
+            this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name] : this.cart.availableShippingMethods[this.firstShippingMethod];
+            this.$set(this.form, 'shipping_method', this.shippingMethodName.name);
         },
 
-        addTaxes() {
+        addTaxes(RefreshShippingRates) {
             this.loadingOrderSummary = true;
 
             $.ajax({
@@ -265,10 +268,15 @@ export default {
                 data: this.form,
             }).then((cart) => {
                 store.updateCart(cart);
+                if (RefreshShippingRates) {
+                    this.getRates();
+                }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             }).always(() => {
-                this.loadingOrderSummary = false;
+                if (! RefreshShippingRates) {
+                    this.loadingOrderSummary = false;
+                }
             });
         },
 

@@ -4,6 +4,7 @@ namespace Modules\Coupon\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
+use Modules\Brand\Entities\Brand;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Category\Entities\Category;
 
@@ -51,6 +52,7 @@ class CouponTabs extends Tabs
                 'products' => $coupon->productList(),
                 'excludeProducts' => $coupon->excludeProductList(),
                 'categories' => Category::treeList(),
+                'brands' => Brand::list(),
             ]);
         });
     }

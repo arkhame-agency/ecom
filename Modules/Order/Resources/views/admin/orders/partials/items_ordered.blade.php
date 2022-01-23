@@ -8,6 +8,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>{{ trans('order::orders.sku') }}</th>
                                 <th>{{ trans('order::orders.product') }}</th>
                                 <th>{{ trans('order::orders.unit_price') }}</th>
                                 <th>{{ trans('order::orders.quantity') }}</th>
@@ -18,6 +19,10 @@
                         <tbody>
                             @foreach ($order->products as $product)
                                 <tr>
+                                    <td>
+                                        {{ $product->getSkuAttribute() }}
+                                    </td>
+
                                     <td>
                                         @if ($product->trashed())
                                             {{ $product->name }}
