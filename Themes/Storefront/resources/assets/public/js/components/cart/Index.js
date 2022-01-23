@@ -150,12 +150,16 @@ export default {
                 url: route('cart.items.destroy', { cartItemId: cartItem.id }),
             }).then((cart) => {
                 store.updateCart(cart);
-                if (! store.cartIsEmpty()) {
+                if (! store.cartIsEmpty() && this.hasShippingStates) {
                     this.loadingOrderSummary = true;
                     this.getRates();
                 }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
+            }).always(() => {
+                if (! this.hasShippingStates) {
+                    this.loadingOrderSummary = false;
+                }
             });
         },
 

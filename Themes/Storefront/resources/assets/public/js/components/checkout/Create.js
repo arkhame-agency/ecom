@@ -83,30 +83,30 @@ export default {
         'form.shippingAddressId': function () {
             this.mergeSavedAddresses();
         },
-
-        'form.billing.city': function (newCity) {
-            if (newCity) {
-                this.addTaxes();
-            }
-        },
-
-        'form.shipping.city': function (newCity) {
-            if (newCity) {
-                this.addTaxes();
-            }
-        },
-
-        'form.billing.zip': function (newZip) {
-            if (newZip) {
-                this.addTaxes(true);
-            }
-        },
-
-        'form.shipping.zip': function (newZip) {
-            if (newZip) {
-                this.addTaxes(true);
-            }
-        },
+        //
+        // 'form.billing.city': function (newCity) {
+        //     if (newCity) {
+        //         this.addTaxes();
+        //     }
+        // },
+        //
+        // 'form.shipping.city': function (newCity) {
+        //     if (newCity) {
+        //         this.addTaxes();
+        //     }
+        // },
+        //
+        // 'form.billing.zip': function (newZip) {
+        //     if (newZip) {
+        //         this.addTaxes(true);
+        //     }
+        // },
+        //
+        // 'form.shipping.zip': function (newZip) {
+        //     if (newZip) {
+        //         this.addTaxes(true);
+        //     }
+        // },
 
         'form.billing.state': function (newState) {
             if (newState) {
@@ -268,15 +268,9 @@ export default {
                 data: this.form,
             }).then((cart) => {
                 store.updateCart(cart);
-                if (RefreshShippingRates) {
-                    this.getRates();
-                }
+                this.getRates();
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
-            }).always(() => {
-                if (! RefreshShippingRates) {
-                    this.loadingOrderSummary = false;
-                }
             });
         },
 

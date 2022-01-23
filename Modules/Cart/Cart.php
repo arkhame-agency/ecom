@@ -427,7 +427,6 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             'availableShippingMethods' => $this->availableShippingMethods(),
             'subTotal' => $this->subTotalWithoutConditions(),
             'shippingMethodName' => $this->shippingMethod()->name(),
-            'shippingMethodName' => $this->shippingCost()->name(),
             'shippingCost' => $this->shippingCost(),
             'coupon' => $this->coupon(),
             'taxes' => $this->taxes(),

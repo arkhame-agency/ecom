@@ -105,9 +105,9 @@ class Shippo implements GatewayInterface
             'street1' => $request->shipping['address_1'] ?? "",
             'street2' => $request->shipping['address_2'] ?? "",
             'city' => $request->shipping['city'] ?? "",
-            'zip' => $request->shipping['zip'],
-            'state' => $request->shipping['state'],
-            'country' => $request->shipping['country'],
+            'zip' => $request->shipping['zip'] ?? "",
+            'state' => $request->shipping['state'] ?? "",
+            'country' => $request->shipping['country'] ?? "",
             'phone' => $request->customer_phone ?? "",
             'email' => $request->customer_email ?? "",
         ]);
@@ -215,5 +215,10 @@ class Shippo implements GatewayInterface
         $request->merge([
             'shipping' => $request->ship_to_a_different_address || !$request->billing ? $request->shipping : $request->billing,
         ]);
+    }
+
+    private function isValidToAddress()
+    {
+        return in_array($this->toAddress, ['zip', 'state', 'country']);
     }
 }

@@ -14,7 +14,7 @@ class MaximumSpend
      * @return mixed
      * @throws MaximumSpendException
      */
-    public function handle(Coupon $coupon, Closure $next)
+    public function handle($coupon, Closure $next)
     {
         if ($coupon->spentMoreThanMaximumAmount()) {
             throw new MaximumSpendException($coupon->maximum_spend);
