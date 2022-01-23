@@ -158,7 +158,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             return collect(array('flat_rate' => ShippingMethod::available()->get('flat_rate')));
         }
 
-        return ShippingMethod::available()->forget(['commercial_shipping','flat_rate']);
+        return ShippingMethod::available()->forget(['commercial_shipping', 'flat_rate']);
     }
 
     public function isLessThenFeeShippingMinAmount()
@@ -277,7 +277,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
         $this->condition(new CartCondition([
             'name' => $coupon->code,
             'type' => 'coupon',
-            'target' => 'total',
+            'target' => 'subtotal',
             'value' => $this->getCouponValue($coupon),
             'order' => 2,
             'attributes' => [
@@ -375,7 +375,13 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             ->map(function (CartItem $cartItem) use ($request) {
                 return $cartItem->findTax($request->only(['billing', 'shipping']));
             })
-            ->filter();
+            ->filter()->first();
+    }
+
+    public function subTotalWithoutConditions()
+    {
+        return Money::inDefaultCurrency($this->getSubTotalWithoutConditions())
+            ->add($this->optionsPrice());
     }
 
     public function subTotal()
@@ -400,7 +406,6 @@ class Cart extends DarryldecodeCart implements JsonSerializable
     {
         return $this->subTotal()
             ->add($this->shippingMethod()->cost())
-            ->subtract($this->coupon()->value())
             ->add($this->tax());
     }
 
@@ -410,8 +415,9 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             'items' => $this->items(),
             'quantity' => $this->quantity(),
             'availableShippingMethods' => $this->availableShippingMethods(),
-            'subTotal' => $this->subTotal(),
-            'shippingCost' => $this->shippingMethod(),
+            'subTotal' => $this->subTotalWithoutConditions(),
+            'shippingMethodName' => $this->shippingMethod()->name(),
+            'shippingCost' => $this->shippingCost(),
             'coupon' => $this->coupon(),
             'taxes' => $this->taxes(),
             'total' => $this->total(),

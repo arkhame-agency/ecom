@@ -3,11 +3,18 @@
 namespace Modules\Coupon\Checkers;
 
 use Closure;
+use Modules\Coupon\Entities\Coupon;
 use Modules\Coupon\Exceptions\MaximumSpendException;
 
 class MaximumSpend
 {
-    public function handle($coupon, Closure $next)
+    /**
+     * @param Coupon $coupon
+     * @param Closure $next
+     * @return mixed
+     * @throws MaximumSpendException
+     */
+    public function handle(Coupon $coupon, Closure $next)
     {
         if ($coupon->spentMoreThanMaximumAmount()) {
             throw new MaximumSpendException($coupon->maximum_spend);
