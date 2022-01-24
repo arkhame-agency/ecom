@@ -61,6 +61,7 @@ return [
     'email_order_statuses' => 'Email Order Statuses',
 
     'newsletter_enabled' => 'Newsletter',
+    'newsletter_last_name_enabled' => 'Name and Last name',
     'mailchimp_api_key' => 'Mailchimp API Key',
     'mailchimp_list_id' => 'Mailchimp List ID',
 

@@ -2,6 +2,8 @@ export default {
     data() {
         return {
             email: '',
+            name: '',
+            lname: '',
             subscribed: false,
             subscribing: false,
             error: '',
@@ -54,7 +56,7 @@ export default {
             $.ajax({
                 method: 'POST',
                 url: route('subscribers.store'),
-                data: { email: this.email },
+                data: { email: this.email, name: this.name, lname: this.lname },
             }).then(() => {
                 this.email = '';
                 this.subscribed = true;
