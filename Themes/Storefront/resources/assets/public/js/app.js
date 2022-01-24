@@ -96,3 +96,24 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': FleetCart.csrfToken,
     },
 });
+
+$(function () {
+    $('#validate-email').on('change', function (e) {
+        if ($(this).val() !== $('#email').val()) {
+            $('#email').addClass('is-invalid');
+            $(this).addClass('is-invalid');
+        } else {
+            $('#email').removeClass('is-invalid');
+            $(this).removeClass('is-invalid');
+        }
+    });
+    $('#confirm-password').on('change', function() {
+        if ($(this).val() !== $('#password')) {
+            $('#password').addClass('is-invalid');
+            $(this).addClass('is-invalid');
+        } else {
+            $('#password').removeClass('is-invalid');
+            $(this).removeClass('is-invalid');
+        }
+    })
+});
