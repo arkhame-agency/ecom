@@ -112,7 +112,8 @@
 
         <script src="{{ v(Theme::url('public/js/app.js')) }}"></script>
         <script src="/background-check.min.js" type="text/javascript"></script>
-
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ee48e99659408c"></script>
         @stack('scripts')
 
         {!! setting('custom_footer_assets') !!}
