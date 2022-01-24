@@ -20,6 +20,7 @@ return [
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'confirm_password' => 'Confirm Password',
+    'valida_email' => 'Validate your email address',
     'i_agree_to_the' => 'I agree to the',
     'privacy_policy' => 'Privacy Policy',
     'reset_password' => 'Reset Password',

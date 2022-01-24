@@ -2,7 +2,7 @@
 
 namespace Modules\Newsletter\Http\Controllers;
 
-use Spatie\Newsletter\Newsletter;
+use Newsletter;
 use Modules\Newsletter\Http\Requests\StoreSubscriberRequest;
 
 class SubscriberController
