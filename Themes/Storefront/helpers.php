@@ -178,6 +178,48 @@ function nl2br_save_html($string)
     return $output;
 }
 
+if (! function_exists('words')) {
+    /**
+     * Limit the number of words in a string.
+     *
+     * @param  string  $value
+     * @param  int     $words
+     * @param  string  $end
+     * @return string
+     */
+    function words($value, $words = 100, $end = '...')
+    {
+        return \Illuminate\Support\Str::words($value, $words, $end);
+    }
+}
+
+if (! function_exists('stateName')) {
+    /**
+     * Return State name
+     *
+     * @param string $countryCode
+     * @param string $stateCode
+     * @return string
+     */
+    function stateName(string $countryCode, string $stateCode): string
+    {
+        return \Modules\Support\State::name($countryCode, $stateCode);
+    }
+}
+
+if (! function_exists('countryName')) {
+    /**
+     * Return Country name
+     *
+     * @param string $countryCode
+     * @return string
+     */
+    function countryName(string $countryCode): string
+    {
+        return \Modules\Support\Country::name($countryCode);
+    }
+}
+
 function getSqlQueryBindings($query): string
 {
     return str_replace_array('?', $query->getBindings(), $query->toSql());
