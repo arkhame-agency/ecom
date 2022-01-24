@@ -188,7 +188,7 @@ class SettingTabs extends Tabs
     {
         return tap(new Tab('newsletter', trans('setting::settings.tabs.newsletter')), function (Tab $tab) {
             $tab->weight(32);
-            $tab->fields(['newsletter_enabled', 'mailchimp_api_key', 'mailchimp_list_id']);
+            $tab->fields(['newsletter_enabled', 'newsletter_last_name_enabled', 'mailchimp_api_key', 'mailchimp_list_id']);
             $tab->view('setting::admin.settings.tabs.newsletter');
         });
     }

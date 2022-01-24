@@ -2,7 +2,7 @@
 
 namespace Modules\Newsletter\Http\Controllers;
 
-use Newsletter;
+use Spatie\Newsletter\Newsletter;
 use Modules\Newsletter\Http\Requests\StoreSubscriberRequest;
 
 class SubscriberController
@@ -14,9 +14,13 @@ class SubscriberController
      */
     public function store(StoreSubscriberRequest $request)
     {
-        Newsletter::subscribeOrUpdate($request->email);
+        if (setting('newsletter_last_name_enabled')) {
+            Newsletter::subscribeOrUpdate($request->email, ['FNAME' => $request->name, 'LNAME' => $request->lname]);
+        } else {
+            Newsletter::subscribeOrUpdate($request->email);
+        }
 
-        if (! Newsletter::lastActionSucceeded()) {
+        if (!Newsletter::lastActionSucceeded()) {
             return response()->json([
                 'message' => str_after(Newsletter::getLastError(), '400: '),
             ], 403);
