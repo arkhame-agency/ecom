@@ -54,6 +54,24 @@
                         </div>
                     </div>
 
+                    @if ($footerMenuOne->isNotEmpty())
+                        <div class="col-lg-3 col-md-5">
+                            <div class="footer-links">
+                                <h4 class="title">{{ setting('storefront_footer_menu_one_title') }}</h4>
+                                {{-- Categories --}}
+                                <ul class="list-inline">
+                                    @foreach ($footerMenuOne as $menuItem)
+                                        <li>
+                                            <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
+                                                {{ $menuItem->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="col-lg-3 col-md-5">
                         <div class="footer-links">
                             <h4 class="title">{{ trans('storefront::layout.my_account') }}</h4>
@@ -93,24 +111,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    @if ($footerMenuOne->isNotEmpty())
-                        <div class="col-lg-3 col-md-5">
-                            <div class="footer-links">
-                                <h4 class="title">{{ setting('storefront_footer_menu_one_title') }}</h4>
-                                {{-- Categories --}}
-                                <ul class="list-inline">
-                                    @foreach ($footerMenuOne as $menuItem)
-                                        <li>
-                                            <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
-                                                {{ $menuItem->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
 
                     @if ($footerMenuTwo->isNotEmpty())
                         <div class="col-lg-3 col-md-5">
