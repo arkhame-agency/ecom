@@ -81,3 +81,11 @@
 .header-logo {
     height: 90px;
 }
+
+.nice-select {
+    &.open {
+        .list {
+            background: #efefef;
+        }
+    }
+}

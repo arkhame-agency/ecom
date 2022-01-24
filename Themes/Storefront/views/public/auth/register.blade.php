@@ -45,6 +45,9 @@
                         @error('email')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
+
+                        <input type="text" name="validate_mail" value="{{ old('email') }}" id="validate-email" class="form-control mt-3" placeholder="Validate your email address">
+
                     </div>
 
                     <div class="form-group">
