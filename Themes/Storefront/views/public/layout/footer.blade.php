@@ -3,7 +3,7 @@
         <div class="footer">
             <div class="footer-top">
                 <div class="row">
-                    <div class="col-lg-5 col-md-8">
+                    <div class="col-lg-4 col-md-8">
                         <div class="contact-us">
                             <h4 class="title">{{ trans('storefront::layout.contact_us') }}</h4>
 
@@ -34,7 +34,7 @@
                                         <i class="las la-map"></i>
                                         <span>
                                             <a href="https://www.google.com/maps/search/{{ setting('storefront_address') }}"
-                                               target="_blank">{{ setting('store_address_1') }}<br/>{{ stateName(setting('store_country'), setting('store_state'))}}, {{ setting('store_zip') }}<br/>{{ countryName(setting('store_country')) }}</a>
+                                               target="_blank">{{ setting('store_address_1') }}<br/>{{ setting('store_city') }}, {{ stateName(setting('store_country'), setting('store_state'))}}, {{ setting('store_zip') }}, {{ countryName(setting('store_country')) }}</a>
                                         </span>
                                     </li>
                                 @endif
@@ -55,13 +55,14 @@
                     </div>
 
                     @if ($footerMenuOne->isNotEmpty())
-                        <div class="col-lg-3 col-md-5">
+                        <div class="col-lg-4 col-md-5">
                             <div class="footer-links">
                                 <h4 class="title">{{ setting('storefront_footer_menu_one_title') }}</h4>
                                 {{-- Categories --}}
                                 <ul class="list-inline">
                                     @foreach ($footerMenuOne as $menuItem)
                                         <li>
+                                            <i class="las la-check" aria-hidden="true"></i>
                                             <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
                                                 {{ $menuItem->name }}
                                             </a>
@@ -78,24 +79,28 @@
                             {{-- My account --}}
                             <ul class="list-inline">
                                 <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
                                     <a href="{{ route('account.dashboard.index') }}">
                                         {{ trans('storefront::account.pages.dashboard') }}
                                     </a>
                                 </li>
 
                                 <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
                                     <a href="{{ route('account.orders.index') }}">
                                         {{ trans('storefront::account.pages.my_orders') }}
                                     </a>
                                 </li>
 
                                 <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
                                     <a href="{{ route('account.reviews.index') }}">
                                         {{ trans('storefront::account.pages.my_reviews') }}
                                     </a>
                                 </li>
 
                                 <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
                                     <a href="{{ route('account.profile.edit') }}">
                                         {{ trans('storefront::account.pages.my_profile') }}
                                     </a>
@@ -103,6 +108,7 @@
 
                                 @auth
                                     <li>
+                                        <i class="las la-check" aria-hidden="true"></i>
                                         <a href="{{ route('logout') }}">
                                             {{ trans('storefront::account.pages.logout') }}
                                         </a>
@@ -120,6 +126,7 @@
                                 <ul class="list-inline">
                                     @foreach ($footerMenuTwo as $menuItem)
                                         <li>
+                                            <i class="las la-check" aria-hidden="true"></i>
                                             <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
                                                 {{ $menuItem->name }}
                                             </a>

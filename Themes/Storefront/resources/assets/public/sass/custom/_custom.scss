@@ -89,3 +89,15 @@
         }
     }
 }
+
+.footer-links {
+    .list-inline {
+        i.la-check {
+            font-size: .7rem;
+            margin-top: 5px;
+            color: var(--color-primary);
+            float: left;
+            margin-right: 6px;
+        }
+    }
+}

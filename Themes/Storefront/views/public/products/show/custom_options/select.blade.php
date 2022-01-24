@@ -33,10 +33,7 @@
 
                     @foreach ($option->values as $value)
                         <option value="{{ $value->id }}">
-                            {!!
-                                "{$value->label} " .
-                                $value->formattedPriceForProduct($product, FOR_SELECT_OPTION)
-                            !!}
+                            {!! $value->label !!}
                         </option>
                     @endforeach
                 </select>
