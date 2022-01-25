@@ -41,8 +41,7 @@ class StorefrontTabs extends Tabs
             ->add($this->featuredCategories())
             ->add($this->productTabsOne())
             ->add($this->topBrands())
-            /* TODO Disabled for Aspirateur */
-//            ->add($this->flashSaleAndVerticalProducts())
+            ->add($this->flashSaleAndVerticalProducts())
             ->add($this->twoColumnBanners())
             ->add($this->productGrid())
             ->add($this->threeColumnBanners())

@@ -107,7 +107,7 @@ $(function () {
             $(this).removeClass('is-invalid');
         }
     });
-    $('#confirm-password').on('change', function() {
+    $('#confirm-password').on('change', function () {
         if ($(this).val() !== $('#password')) {
             $('#password').addClass('is-invalid');
             $(this).addClass('is-invalid');
@@ -115,5 +115,20 @@ $(function () {
             $('#password').removeClass('is-invalid');
             $(this).removeClass('is-invalid');
         }
-    })
+    });
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-top').fadeIn();
+        } else {
+            $('.back-top').fadeOut();
+        }
+    });
+
+    // scroll body to 0px on click
+    $('.back-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0,
+        }, 1600);
+        return false;
+    });
 });
