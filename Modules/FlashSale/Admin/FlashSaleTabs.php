@@ -22,11 +22,20 @@ class FlashSaleTabs extends Tabs
             ->add($this->settings());
     }
 
+    private function settings()
+    {
+        return tap(new Tab('settings', trans('flashsale::flash_sales.tabs.settings')), function (Tab $tab) {
+            $tab->weight(5);
+            $tab->active();
+            $tab->fields(['campaign_name']);
+            $tab->view('flashsale::admin.flash_sales.tabs.settings');
+        });
+    }
+
     private function products()
     {
         return tap(new Tab('products', trans('flashsale::flash_sales.tabs.products')), function (Tab $tab) {
-            $tab->active();
-            $tab->weight(5);
+            $tab->weight(10);
 
             $tab->fields([
                 'products.*.product_id',
@@ -36,15 +45,6 @@ class FlashSaleTabs extends Tabs
             ]);
 
             $tab->view('flashsale::admin.flash_sales.tabs.products');
-        });
-    }
-
-    private function settings()
-    {
-        return tap(new Tab('settings', trans('flashsale::flash_sales.tabs.settings')), function (Tab $tab) {
-            $tab->weight(10);
-            $tab->fields(['campaign_name']);
-            $tab->view('flashsale::admin.flash_sales.tabs.settings');
         });
     }
 }

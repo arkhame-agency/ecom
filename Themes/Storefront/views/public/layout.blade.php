@@ -116,5 +116,6 @@
         @stack('scripts')
 
         {!! setting('custom_footer_assets') !!}
+        <div class="back-top" title="Top of Page"><i class="las la-arrow-circle-up"></i></div>
     </body>
 </html>
