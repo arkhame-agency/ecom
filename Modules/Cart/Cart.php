@@ -302,11 +302,35 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             return "-{$this->shippingMethod()->cost()->amount()}";
         }
 
+        if (!is_null($coupon->maximum_rebate) && $coupon->is_percent) {
+            $this->applyCouponForCalcul($coupon);
+            if ($this->coupon()->value()->greaterThan($coupon->maximum_rebate)) {
+                $this->removeCoupon();
+                return "-{$coupon->maximum_rebate->amount()}";
+            }
+        }
+
         if ($coupon->is_percent) {
             return "-{$coupon->value}%";
         }
 
         return "-{$coupon->value->amount()}";
+    }
+
+    private function applyCouponForCalcul($coupon)
+    {
+        $this->removeCoupon();
+
+        $this->condition(new CartCondition([
+            'name' => $coupon->code,
+            'type' => 'coupon',
+            'target' => 'subtotal',
+            'value' => $coupon->is_percent ? "-{$coupon->value}%" : "-{$coupon->value->amount()}",
+            'order' => 2,
+            'attributes' => [
+                'coupon_id' => $coupon->id,
+            ],
+        ]));
     }
 
     public function removeCoupon()
