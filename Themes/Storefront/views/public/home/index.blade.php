@@ -2,6 +2,11 @@
 
 @section('title', setting('store_tagline'))
 
+@push('meta')
+    <meta name="title" content="{{ setting('storefront_meta_title') }}">
+    <meta name="description" content="{{ setting('storefront_meta_description') }}">
+@endpush
+
 @section('content')
     @includeUnless(is_null($slider), 'public.home.sections.slider')
 
