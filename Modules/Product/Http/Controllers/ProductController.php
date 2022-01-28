@@ -3,6 +3,8 @@
 namespace Modules\Product\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
+use Modules\Media\Entities\File;
 use Modules\Product\Entities\Product;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
@@ -60,7 +62,7 @@ class ProductController extends Controller
 
         event(new ProductViewed($product));
 
-        return view('public.products.show', compact( 'routeArray', 'product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
+        return view('public.products.show', compact('routeArray', 'product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
     }
 
     private function getReviewData(Product $product)
@@ -88,6 +90,20 @@ class ProductController extends Controller
             return $this->searchProducts($model, $productFilter);
         }
 
-        return view('public.products.index');
+        return view('public.products.index', [
+            'logo' => $this->getHeaderLogo(),
+        ]);
+    }
+
+    private function getHeaderLogo()
+    {
+        return $this->getMedia(setting('storefront_header_logo'))->path;
+    }
+
+    private function getMedia($fileId)
+    {
+        return Cache::rememberForever(md5("files.{$fileId}"), function () use ($fileId) {
+            return File::findOrNew($fileId);
+        });
     }
 }

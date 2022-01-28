@@ -10,6 +10,8 @@ return [
     'storefront_terms_page' => 'Terms & Conditions Page',
     'storefront_privacy_page' => 'Privacy Policy Page',
     'storefront_address' => 'Address',
+    'storefront_meta_title' => 'Meta Title',
+    'storefront_meta_description' => 'Meta Description',
     'storefront_navbar_text' => 'Navbar Text',
     'storefront_primary_menu' => 'Primary Menu',
     'storefront_category_menu' => 'Category Menu',
