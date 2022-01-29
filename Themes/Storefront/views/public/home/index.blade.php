@@ -3,8 +3,18 @@
 @section('title', setting('store_tagline'))
 
 @push('meta')
-    <meta name="title" content="{{ setting('storefront_meta_title') }}">
+    <meta name="title" content="{{ setting('storefront_meta_title') ?? env('APP_NAME')  }}">
     <meta name="description" content="{{ setting('storefront_meta_description') }}">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ setting('storefront_meta_title') ?? env('APP_NAME')  }}">
+    <meta property="og:description" content="{{ setting('storefront_meta_description') }}">
+    <meta property="og:image" content="{{ $logo }}">
+    <meta property="og:locale" content="{{ locale() }}">
+
+    @foreach (supported_locale_keys() as $code)
+        <meta property="og:locale:alternate" content="{{ $code }}">
+    @endforeach
 @endpush
 
 @section('content')

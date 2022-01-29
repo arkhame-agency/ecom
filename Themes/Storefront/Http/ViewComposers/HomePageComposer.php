@@ -3,8 +3,10 @@
 namespace Themes\Storefront\Http\ViewComposers;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Modules\Brand\Entities\Brand;
 use Modules\Category\Entities\Category;
+use Modules\Media\Entities\File;
 use Modules\Slider\Entities\Slider;
 use Themes\Storefront\Banner;
 use Themes\Storefront\Feature;
@@ -33,6 +35,7 @@ class HomePageComposer
             'threeColumnBanners' => $this->threeColumnBanners(),
             'tabProductsTwo' => $this->tabProductsTwo(),
             'oneColumnBanner' => $this->oneColumnBanner(),
+            'logo' => $this->getHeaderLogo(),
         ]);
     }
 
@@ -175,5 +178,17 @@ class HomePageComposer
         if (setting('storefront_one_column_banner_enabled')) {
             return Banner::getOneColumnBanner();
         }
+    }
+
+    private function getHeaderLogo()
+    {
+        return $this->getMedia(setting('storefront_header_logo'))->path;
+    }
+
+    private function getMedia($fileId)
+    {
+        return Cache::rememberForever(md5("files.{$fileId}"), function () use ($fileId) {
+            return File::findOrNew($fileId);
+        });
     }
 }
