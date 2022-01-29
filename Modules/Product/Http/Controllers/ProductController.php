@@ -38,7 +38,9 @@ class ProductController extends Controller
             return $this->searchProducts($model, $productFilter);
         }
 
-        return view('public.products.index');
+        return view('public.products.index', [
+            'logo' => $this->getHeaderLogo(),
+        ]);
     }
 
     /**
