@@ -13,6 +13,12 @@ export default class {
 
         $('#category-form').on('submit', this.submit);
 
+        if ($('#slug').val() === '') {
+            $('#name').on('blur', function () {
+                $('#slug').val(window.admin.generateSlug($(this).val()));
+            });
+        }
+
         window.admin.removeSubmitButtonOffsetOn('#image', '.category-details-tab li > a');
     }
 
