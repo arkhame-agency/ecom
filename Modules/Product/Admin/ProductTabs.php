@@ -138,7 +138,7 @@ class ProductTabs extends Tabs
     {
         return tap(new Tab('additional', trans('product::products.tabs.additional')), function (Tab $tab) {
             $tab->weight(55);
-            $tab->fields(['new_from', 'new_to']);
+            $tab->fields(['capacitance_uf', 'capacitance_vdc_vac', 'new_from', 'new_to']);
             $tab->view('product::admin.products.tabs.additional');
         });
     }

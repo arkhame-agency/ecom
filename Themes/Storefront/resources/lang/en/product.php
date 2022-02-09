@@ -6,6 +6,7 @@ return [
     'out_of_stock' => 'Out of stock',
     'wishlist' => 'Wishlist',
     'compare' => 'Compare',
+    'capacitance' => 'Capacitance',
     'options' => [
         'choose_an_option' => 'Choose an option',
     ],

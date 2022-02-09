@@ -58,6 +58,8 @@ class Product extends Model
         'is_active',
         'new_from',
         'new_to',
+        'capacitance_uf',
+        'capacitance_vdc_vac',
         'weight',
         'length',
         'width',
@@ -205,6 +207,11 @@ class Product extends Model
     }
 
     public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_categories');
+    }
+
+    public function allCategories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');
     }
@@ -377,7 +384,7 @@ class Product extends Model
         $routeArray = [];
         foreach (supported_locales() as $locale => $language) {
             $slugTranslated = $this->getSlugTranslated($this, ProductTranslation::class, $locale);
-            $routeArray[$locale] = trans('product::routes.products', [], $locale).'/'.$slugTranslated->slug;
+            $routeArray[$locale] = trans('product::routes.products', [], $locale) . '/' . $slugTranslated->slug;
         }
         return $routeArray;
     }
@@ -665,5 +672,10 @@ class Product extends Model
     public function searchColumns()
     {
         return ['name', 'description'];
+    }
+
+    public function getCapacitance()
+    {
+        return $this->capacitance_uf && $this->capacitance_uf ? '(' . $this->capacitance_uf . " " . $this->capacitance_vdc_vac . ')' : null;
     }
 }

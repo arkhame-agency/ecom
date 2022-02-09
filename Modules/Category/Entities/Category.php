@@ -27,7 +27,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['parent_id', 'position', 'is_searchable', 'is_active'];
+    protected $fillable = ['parent_id', 'position', 'is_searchable', 'is_active',  'show_same_products'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,6 +44,7 @@ class Category extends Model
     protected $casts = [
         'is_searchable' => 'boolean',
         'is_active' => 'boolean',
+        'show_same_products' => 'boolean',
     ];
 
     /**

@@ -85,6 +85,9 @@
 .nice-select {
     &.open {
         .list {
+            overflow: auto;
+            height: auto;
+            max-height: 20em;
             background: #efefef;
         }
     }

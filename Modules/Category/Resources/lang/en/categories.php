@@ -19,5 +19,6 @@ return [
         'enable_the_category' => 'Enable the category',
         'logo' => 'Logo',
         'banner' => 'Banner',
+        'show_same_products' => 'Show same products related to this category on product page'
     ],
 ];
