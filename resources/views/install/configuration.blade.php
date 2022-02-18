@@ -163,6 +163,16 @@
                     </div>
                 </div>
 
+                <div class="form-group {{ $errors->has('store.store_fax') ? 'has-error': '' }}">
+                    <label class="control-label col-sm-3" for="store_fax">Store Phone <span>*</span></label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="store[store_fax]" value="{{ old('store.store_fax') }}" id="store_fax" class="form-control">
+
+                        {!! $errors->first('store.store_fax', '<span class="help-block">:message</span>') !!}
+                    </div>
+                </div>
+
                 <div class="form-group {{ $errors->has('store.search_engine') ? 'has-error': '' }}">
                     <label class="control-label col-sm-3" for="store-search-engine">Search Engine <span>*</span></label>
 
