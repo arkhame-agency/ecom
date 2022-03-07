@@ -52,11 +52,6 @@ commander@^2.15.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-contrast-js@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/contrast-js/-/contrast-js-0.0.3.tgz#4cf03b63288cba9e4c036ac268d3c068b0246d52"
-  integrity sha512-2zTwpiRdKUTRnrwp4+B/S0NyoIexJuKGByyxHufk5aVNflOkWF9ONYZ9cqvN1MB4HcOJVuBb1RP1l4DRpzFbOg==
-
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
