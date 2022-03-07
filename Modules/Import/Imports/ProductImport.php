@@ -88,25 +88,25 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeFiles(array $data)
     {
-        if (!is_array($data)) {
-            return null;
+        if (!is_null($data['base_image'])) {
+            return [
+                'base_image' => $data['base_image'],
+                'additional_images' => $this->explode($data['additional_images'] ?? null),
+            ];
         }
-
-        return [
-            'base_image' => $data['base_image'],
-            'additional_images' => $this->explode($data['additional_images']),
-        ];
+        return false;
     }
 
     private function normalizeMetaData($data)
     {
-        if (!is_array($data)) {
-            return null;
+        if (!is_null($data['meta_title'])) {
+            return [
+                'meta_title' => $data['meta_title'],
+                'meta_description' => $data['meta_description'] ?? null,
+            ];
         }
-        return [
-            'meta_title' => $data['meta_title'],
-            'meta_description' => $data['meta_description'],
-        ];
+        return false;
+
     }
 
     private function normalizeAttributes(array $data)
