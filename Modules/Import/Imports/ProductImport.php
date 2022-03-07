@@ -2,6 +2,7 @@
 
 namespace Modules\Import\Imports;
 
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Row;
 use Illuminate\Support\Collection;
 use Modules\Product\Entities\Product;
@@ -20,6 +21,17 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     public function onRow(Row $row)
     {
+        $product = $row->toArray();
+
+        try {
+            Product::where('sku', $product['sku'])->update($this->normalize($product));
+        } catch (QueryException | ValidationException $e) {
+            session()->push('importer_errors', $row->getIndex());
+        }
+    }
+
+    public function onRow2(Row $row)
+    {
         $data = $this->normalize($row->toArray());
 
         request()->merge($data);
@@ -34,32 +46,32 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
     private function normalize(array $data)
     {
         return array_filter([
-            'name' => $data['name'],
-            'sku' => $data['sku'],
-            'description' => $data['description'],
-            'short_description' => $data['short_description'],
-            'is_active' => $data['active'],
-            'brand_id' => $data['brand'],
-            'categories' => $this->explode($data['categories']),
-            'tax_class_id' => $data['tax_class'],
-            'tags' => $this->explode($data['tags']),
-            'price' => $data['price'],
-            'special_price' => $data['special_price'],
-            'special_price_type' => $data['special_price_type'],
-            'special_price_start' => $data['special_price_start'],
-            'special_price_end' => $data['special_price_end'],
-            'manage_stock' => $data['manage_stock'],
-            'qty' => $data['quantity'],
-            'in_stock' => $data['in_stock'],
-            'new_from' => $data['new_from'],
-            'new_to' => $data['new_to'],
-            'up_sells' => $this->explode($data['up_sells']),
-            'cross_sells' => $this->explode($data['cross_sells']),
-            'related_products' => $this->explode($data['related_products']),
-            'files' => $this->normalizeFiles($data),
-            'meta' => $this->normalizeMetaData($data),
-            'attributes' => $this->normalizeAttributes($data),
-            'options' => $this->normalizeOptions($data),
+//            'name' => $data['name'] ?? null,
+            'sku' => $data['sku'] ?? null,
+            'description' => $data['description'] ?? null,
+            'short_description' => $data['short_description'] ?? null,
+            'is_active' => $data['active'] ?? null,
+            'brand_id' => $data['brand'] ?? null,
+            'categories' => $this->explode($data['categories'] ?? null),
+            'tax_class_id' => $data['tax_class'] ?? null,
+            'tags' => $this->explode($data['tags'] ?? null),
+            'price' => $data['price'] ?? null,
+            'special_price' => $data['special_price'] ?? null,
+            'special_price_type' => $data['special_price_type'] ?? null,
+            'special_price_start' => $data['special_price_start'] ?? null,
+            'special_price_end' => $data['special_price_end'] ?? null,
+            'manage_stock' => $data['manage_stock'] ?? null,
+            'qty' => $data['quantity'] ?? null,
+            'in_stock' => $data['in_stock'] ?? null,
+            'new_from' => $data['new_from'] ?? null,
+            'new_to' => $data['new_to'] ?? null,
+            'up_sells' => $this->explode($data['up_sells'] ?? null),
+            'cross_sells' => $this->explode($data['cross_sells'] ?? null),
+            'related_products' => $this->explode($data['related_products'] ?? null),
+            'files' => $this->normalizeFiles($data ?? null),
+            'meta' => $this->normalizeMetaData($data ?? null),
+            'attributes' => $this->normalizeAttributes($data ?? null),
+            'options' => $this->normalizeOptions($data ?? null),
         ], function ($value) {
             return $value || is_numeric($value);
         });
@@ -76,6 +88,10 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeFiles(array $data)
     {
+        if (!is_array($data)) {
+            return null;
+        }
+
         return [
             'base_image' => $data['base_image'],
             'additional_images' => $this->explode($data['additional_images']),
@@ -84,6 +100,9 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeMetaData($data)
     {
+        if (!is_array($data)) {
+            return null;
+        }
         return [
             'meta_title' => $data['meta_title'],
             'meta_description' => $data['meta_description'],
@@ -109,7 +128,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) {
             preg_match('/^attribute_\d$/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->filter();
     }
 
@@ -149,7 +168,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) {
             preg_match('/^option_\d_name$/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->keys()->map(function ($column) {
             return str_replace('_name', '', $column);
         });
@@ -160,7 +179,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) use ($optionPrefix) {
             preg_match("/{$optionPrefix}_.*/", $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->mapWithKeys(function ($value, $column) use ($optionPrefix) {
             $column = str_replace("{$optionPrefix}_", '', $column);
 
@@ -194,7 +213,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return $option->filter(function ($value, $column) {
             preg_match('/value_\d_.+/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->keys()->map(function ($column) {
             preg_match('/value_\d/', $column, $matches);
 
@@ -207,7 +226,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return $option->filter(function ($value, $column) use ($valuePrefix) {
             preg_match("/{$valuePrefix}_.*/", $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->mapWithKeys(function ($value, $column) use ($valuePrefix) {
             $column = str_replace("{$valuePrefix}_", '', $column);
 
