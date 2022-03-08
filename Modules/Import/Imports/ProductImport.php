@@ -26,7 +26,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         try {
             Product::where('sku', $product['sku'])->update($this->normalize($product));
         } catch (QueryException | ValidationException $e) {
-            session()->push('importer_errors', $row->getIndex());
+            session()->push('importer_errors', $product['sku']);
         }
     }
 
@@ -46,7 +46,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
     private function normalize(array $data)
     {
         return array_filter([
-//            'name' => $data['name'] ?? null,
+            'name' => $data['name'] ?? null,
             'sku' => $data['sku'] ?? null,
             'description' => $data['description'] ?? null,
             'short_description' => $data['short_description'] ?? null,
@@ -62,7 +62,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'special_price_end' => $data['special_price_end'] ?? null,
             'manage_stock' => $data['manage_stock'] ?? null,
             'qty' => $data['quantity'] ?? null,
-            'in_stock' => $data['in_stock'] ?? null,
+            'in_stock' => $data['quantity'] ? 1 : 0,
             'new_from' => $data['new_from'] ?? null,
             'new_to' => $data['new_to'] ?? null,
             'up_sells' => $this->explode($data['up_sells'] ?? null),
