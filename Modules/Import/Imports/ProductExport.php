@@ -29,7 +29,6 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
     {
         return [
             'SKU',
-            'Name',
             'Quantity',
             'Price',
         ];
