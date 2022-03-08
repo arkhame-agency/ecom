@@ -68,10 +68,10 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'up_sells' => $this->explode($data['up_sells'] ?? null),
             'cross_sells' => $this->explode($data['cross_sells'] ?? null),
             'related_products' => $this->explode($data['related_products'] ?? null),
-            'files' => $this->normalizeFiles($data ?? null),
-            'meta' => $this->normalizeMetaData($data ?? null),
-            'attributes' => $this->normalizeAttributes($data ?? null),
-            'options' => $this->normalizeOptions($data ?? null),
+            'files' => $this->normalizeFiles($data),
+            'meta' => $this->normalizeMetaData($data),
+            'attributes' => $this->normalizeAttributes($data),
+            'options' => $this->normalizeOptions($data),
         ], function ($value) {
             return $value || is_numeric($value);
         });
@@ -88,7 +88,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeFiles(array $data)
     {
-        if (is_null($data['base_image'])) {
+        if (is_null($data['base_image'] ?? null)) {
             return false;
         }
 
@@ -100,7 +100,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeMetaData($data)
     {
-        if (is_null($data['meta_title'])) {
+        if (is_null($data['meta_title'] ?? null)) {
             return false;
         }
 
