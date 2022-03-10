@@ -18,4 +18,8 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect all old url to new with 301
+    RedirectMatch 301 ^/products/speakers/home-speakers/tweeters/(.*)$ /en/products/$1
+    RedirectMatch 301 ^/product/accessories/solen-aluminum-heatsinks/(.*)$ /en/products/$1
 </IfModule>
