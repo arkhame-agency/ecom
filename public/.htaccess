@@ -20,6 +20,15 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Redirect all old url to new with 301
-    RedirectMatch 301 ^/products/speakers/home-speakers/tweeters/(.*)$ /en/products/$1
-    RedirectMatch 301 ^/product/accessories/solen-aluminum-heatsinks/(.*)$ /en/products/$1
+    RedirectMatch 301 ^/products/speakers/home-speakers/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/speakers/industrial-speakers/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/speakers/marine-speakers/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/speakers/musical-instruments-speakers/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/speakers/pro-speakers/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/product/accessories/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/product/accessories/ac-products/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/product/accessories/interconnect-connectors-plugs/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/product/the-tube-shack/tubes/(.*)/(.*)$ /en/products/$2
 </IfModule>
