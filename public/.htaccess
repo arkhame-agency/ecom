@@ -25,7 +25,7 @@
     RedirectMatch 301 ^/products/speakers/marine-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/musical-instruments-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/pro-speakers/(.*)/(.*)$ /en/products/$2
-=
+
     RedirectMatch 301 ^/products/accessories/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/accessories/ac-products/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/accessories/interconnect-connectors-plugs/(.*)/(.*)$ /en/products/$2
