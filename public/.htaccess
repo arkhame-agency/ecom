@@ -25,10 +25,42 @@
     RedirectMatch 301 ^/products/speakers/marine-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/musical-instruments-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/pro-speakers/(.*)/(.*)$ /en/products/$2
+=
+    RedirectMatch 301 ^/products/accessories/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/ac-products/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/interconnect-connectors-plugs/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/plugs-connectors/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/ports-and-more/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/solen-screws-nuts-inserts/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/spikes-stands/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/accessories/wire-bulk/(.*)/(.*)$ /en/products/$2
 
-    RedirectMatch 301 ^/product/accessories/(.*)/(.*)$ /en/products/$2
-    RedirectMatch 301 ^/product/accessories/ac-products/(.*)/(.*)$ /en/products/$2
-    RedirectMatch 301 ^/product/accessories/interconnect-connectors-plugs/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/books/(.*)$ /en/products/$1
 
-    RedirectMatch 301 ^/product/the-tube-shack/tubes/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/cables/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/capacitors/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/car-audio/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/crossover-parts/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/electronics/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/empty-cabinets/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/headphones/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/inductors/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/kits/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/multi-room-home-theater/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/resistors/(.*)/(.*)$ /en/products/$2
+
+    RedirectMatch 301 ^/products/the-tube-shack/(.*)/(.*)$ /en/products/$2
+    RedirectMatch 301 ^/products/the-tube-shack/tubes/(.*)/(.*)$ /en/products/$2
+
+>>>>>>> 048ee8394d26cb62e48c700de221fa650c93c6b9
 </IfModule>
