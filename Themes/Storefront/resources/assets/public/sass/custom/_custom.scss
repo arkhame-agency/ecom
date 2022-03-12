@@ -55,10 +55,12 @@
     }
 }
 
-.social-links {
-    li {
-        a {
-            font-size: 40px;
+.contact-us {
+    .social-links {
+        li {
+            a {
+                font-size: 40px;
+            }
         }
     }
 }
@@ -82,13 +84,15 @@
     height: 90px;
 }
 
-.nice-select {
-    &.open {
-        .list {
-            overflow: auto;
-            height: auto;
-            max-height: 20em;
-            background: #efefef;
+.product-variants {
+    .nice-select {
+        &.open {
+            .list {
+                overflow: auto;
+                height: auto;
+                max-height: 20em;
+                background: #efefef;
+            }
         }
     }
 }
