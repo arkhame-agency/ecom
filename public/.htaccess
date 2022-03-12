@@ -19,7 +19,7 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect all old url to new with 301
+    # Redirect all old url to new with 301 ENGLISH
     RedirectMatch 301 ^/products/speakers/home-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/industrial-speakers/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/speakers/marine-speakers/(.*)/(.*)$ /en/products/$2
@@ -61,4 +61,43 @@
 
     RedirectMatch 301 ^/products/the-tube-shack/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/the-tube-shack/tubes/(.*)/(.*)$ /en/products/$2
+
+    # URL Redirect to products (FRENCH)
+    RedirectMatch 301 ^/fr/produits/accessoires/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/commutateurs-volume/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/connecteurs-prises-interconnexions/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/events-et-plus/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/fils-vrac/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/pointes-et-supports/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/prises-et-connecteurs/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/produits-ac/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/accessoires/solen-screws-nuts-and-inserts/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/separateurs-de-frequences/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/electroniques/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/cabinets-vides/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/kits-fr/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/cables-fr/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/casques-decoute/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/cinema-maison-multi-pieces/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/condensateurs/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/haut-parleurs/haut-parleurs-industriels/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/haut-parleurs/haut-parleurs-instruments-de-musique/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/haut-parleurs/haut-parleurs-marin/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/haut-parleurs/haut-parleurs-professionnels/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/haut-parleurs/haut-parleurs-residentiels/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/haut-parleurs-automobile/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/inducteurs/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/kits-fr/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/la-cabane-a-tubes/(.*)/(.*)$ /fr/produits/$2
+    RedirectMatch 301 ^/fr/produits/la-cabane-a-tubes/tubes-fr/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/livres/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/resistances/(.*)/(.*)$ /fr/produits/$2
+
+    RedirectMatch 301 ^/fr/produits/separateurs-de-frequences/(.*)/(.*)$ /fr/produits/$2
 </IfModule>
