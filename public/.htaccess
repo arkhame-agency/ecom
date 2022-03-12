@@ -61,6 +61,4 @@
 
     RedirectMatch 301 ^/products/the-tube-shack/(.*)/(.*)$ /en/products/$2
     RedirectMatch 301 ^/products/the-tube-shack/tubes/(.*)/(.*)$ /en/products/$2
-
->>>>>>> 048ee8394d26cb62e48c700de221fa650c93c6b9
 </IfModule>
