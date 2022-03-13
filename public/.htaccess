@@ -104,13 +104,12 @@
     RedirectMatch 301 ^/product-category/(.*)$ /en/categories/$1/products
     RedirectMatch 301 ^/fr/categorie-produit/(.*)$ /fr/categories/$1/produits
 
-    RedirectMatch 301 ^/fr/a-propos/(.*)$ /fr/$1
-    RedirectMatch 301 ^/about/(.*)$ /en/$1
-
-    Redirect 301 /fr/a-propos/manufacturers /fr/marques
-    Redirect 301 /about/brands/ /en/brands
+    Redirect 301 /fr/a-propos/manufacturers/ /fr/marques
 
     Redirect 301 /products/on-sale/ /en/promotions
     Redirect 301 /fr/produits/speciaux/ /fr/promotions
+
+    RedirectMatch 301 ^/fr/a-propos/(.*)$ /fr/$1
+    RedirectMatch 301 ^/about/(.*)$ /en/$1
 
 </IfModule>
