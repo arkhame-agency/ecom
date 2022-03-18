@@ -170,7 +170,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
                                     <label for="slides-<%- slideNumber %>-start-date">
-                                        {{ trans('slider::attributes.slide_start_date') }}
+                                        {{ trans('slider::attributes.start_date') }}
                                     </label>
 
                                     <input type="text"
@@ -185,7 +185,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
                                     <label for="slides-<%- slideNumber %>-end-date">
-                                        {{ trans('slider::attributes.slide_end_date') }}
+                                        {{ trans('slider::attributes.end_date') }}
                                     </label>
 
                                     <input type="text"
