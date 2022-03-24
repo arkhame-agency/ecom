@@ -5,7 +5,9 @@ return [
     'in_stock' => 'In stock',
     'out_of_stock' => 'Out of stock',
     'wishlist' => 'Wishlist',
+    'add_to_wishlist' => 'Add to wishlist',
     'compare' => 'Compare',
+    'add_to_compare' => 'Add to compare',
     'options' => [
         'choose_an_option' => 'Choose an option',
     ],
@@ -26,10 +28,12 @@ return [
     'reviews' => 'Reviews (:count)',
     'add_a_review' => 'Add a review',
     'review_form' => [
+        'customer_review' => 'Customer Reviews',
         'your_rating' => 'Your Rating',
         'name' => 'Name',
         'comment' => 'Comment',
         'submit' => 'SUBMIT',
+        'based_on_reviews' => 'Based on (:count) reviews',
     ],
     'be_the_first_one_to_review_this_product' => 'Be the first one to review this product.',
     'related_products' => 'Related Products',

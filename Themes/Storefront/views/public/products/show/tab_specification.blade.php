@@ -1,5 +1,5 @@
 @if ($product->hasAnyAttribute())
-    <div id="specification" class="tab-pane specification" :class="{ active: activeTab === 'specification' }">
+    <div id="specification" class="tab_pane specification" :class="{ show: activeTab === 'specification', active: activeTab === 'specification' }">
         <div class="specification-inner">
             @foreach ($product->attributeSets as $attributeSet => $attributes)
                 <div class="specification-row">
@@ -10,7 +10,7 @@
                     <ul class="list-inline specification-list">
                         @foreach ($attributes as $attribute)
                             <li>
-                                <label>{{ $attribute->name }}</label>
+                                <label>{{ $attribute->name }} :</label>
                                 <span>{{ $attribute->values->implode('value', ', ') }}</span>
                             </li>
                         @endforeach

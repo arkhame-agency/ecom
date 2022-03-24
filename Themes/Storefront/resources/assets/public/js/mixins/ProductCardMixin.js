@@ -32,6 +32,18 @@ export default {
             return `${window.FleetCart.baseUrl}/themes/storefront/public/images/image-placeholder.png`;
         },
 
+        hasAdditionalImages() {
+            return this.product.files.length > 1;
+        },
+
+        additionalImages() {
+            if (this.hasAdditionalImages) {
+                return this.product.files[1].path;
+            }
+
+            return `${window.FleetCart.baseUrl}/themes/storefront/public/images/image-placeholder.png`;
+        },
+
         inWishlist() {
             return store.inWishlist(this.product.id);
         },

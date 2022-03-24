@@ -20,7 +20,7 @@ export default {
     methods: {
         classes(tab) {
             return {
-                'tab-item': true,
+                'product__tab--btn__list': true,
                 loading: this.activeTab === tab && this.loading,
                 active: this.activeTab === tab && ! this.loading,
             };

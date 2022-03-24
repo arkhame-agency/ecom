@@ -1,14 +1,7 @@
-<li class="{{ mega_menu_classes($menu, $type) }}">
-    <a href="{{ $menu->url() }}" class="nav-link menu-item" target="{{ $menu->target() }}" data-text="{{ $menu->name() }}">
-        @if ($type === 'category_menu' && $menu->hasIcon())
-            <span class="menu-item-icon">
-                <i class="{{ $menu->icon() }}"></i>
-            </span>
-        @endif
-
-        {{ $menu->name() }}
+<li class="header__menu--items {{ $menu->isFluid() ? 'mega__menu--items' : '' }}">
+    <a class="header__menu--link" href="{{ $menu->url() }}" target="{{ $menu->target() }}">
+        {{ $menu->name() }} @if ($menu->subMenus()->count())<span class="menu__plus--icon">+</span>@endif
     </a>
-
     @if ($menu->isFluid())
         @include('public.layout.navigation.fluid', ['subMenus' => $menu->subMenus()])
     @else

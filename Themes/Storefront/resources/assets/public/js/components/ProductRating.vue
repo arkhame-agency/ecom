@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <span class="rating-count" v-if="hasReviewCount">({{ this.reviewCount }})</span>
+        <span class="rating-count rating__list--text" v-if="hasReviewCount">({{ this.reviewCount }})</span>
     </div>
 </template>
 

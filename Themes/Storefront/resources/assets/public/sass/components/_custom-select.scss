@@ -10,8 +10,9 @@
 
     &.form-control {
         color: $color-black;
-        padding: 12px 30px 12px 20px;
+        padding: 7px 10px;
         border: 1px solid $color-gray-lite;
+        line-height: normal;
 
         &.arrow-black {
             background-position: right 10px center;
@@ -25,7 +26,7 @@
     .list {
         min-width: 190px;
         margin-top: 1px;
-        padding: 19px 0 16px;
+        padding: 10px 0;
         border-radius: $radius-default;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
         transform: scale(0.8);
@@ -34,12 +35,12 @@
     }
 
     .option {
-        line-height: 36px;
-        padding: 0 30px;
+        line-height: normal;
+        padding: 5px 10px;
+        min-height: 0;
 
         &:hover {
-            color: $color-default;
-            color: var(--color-primary);
+            color: var(--secondary-color);
             background: $color-white;
         }
 
@@ -49,8 +50,7 @@
 
         &.selected {
             font-weight: 400;
-            color: $color-default;
-            color: var(--color-primary);
+            color: var(--secondary-color);
 
             &.focus {
                 background: $color-white;

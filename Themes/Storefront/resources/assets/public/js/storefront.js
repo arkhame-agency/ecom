@@ -81,30 +81,30 @@ $(() => {
         headerWrapInnerHeight = headerWrapInner.outerHeight();
     });
 
-    _window.on('load scroll resize', () => {
-        let headerWrapHeight = headerWrap.outerHeight(),
-            headerWrapOffsetTop = headerWrap.offset().top + headerWrapHeight;
-
-        function stickyHeader() {
-            let scrollTop = _window.scrollTop();
-
-            if (scrollTop > headerWrapOffsetTop) {
-                headerWrap.css('padding-top', `${headerWrapInnerHeight}px`);
-                headerWrapInner.addClass('sticky');
-
-                setTimeout(() => {
-                    headerWrapInner.addClass('show');
-                });
-
-                return;
-            }
-
-            headerWrap.css('padding-top', 0);
-            headerWrapInner.removeClass('sticky show');
-        }
-
-        stickyHeader();
-    });
+    // _window.on('load scroll resize', () => {
+    //     let headerWrapHeight = headerWrap.outerHeight(),
+    //         headerWrapOffsetTop = headerWrap.offset().top + headerWrapHeight;
+    //
+    //     function stickyHeader() {
+    //         let scrollTop = _window.scrollTop();
+    //
+    //         if (scrollTop > headerWrapOffsetTop) {
+    //             headerWrap.css('padding-top', `${headerWrapInnerHeight}px`);
+    //             headerWrapInner.addClass('sticky');
+    //
+    //             setTimeout(() => {
+    //                 headerWrapInner.addClass('show');
+    //             });
+    //
+    //             return;
+    //         }
+    //
+    //         headerWrap.css('padding-top', 0);
+    //         headerWrapInner.removeClass('sticky show');
+    //     }
+    //
+    //     stickyHeader();
+    // });
 
     /*      menu dropdown arrow
     /*----------------------------------------*/
@@ -145,29 +145,29 @@ $(() => {
         categoryDropdownWrap.toggleClass('show');
     });
 
-    _window.on('load resize', () => {
-        let verticalMegaMenuListHeight = 0,
-            homeSliderHeight = homeSlider.height(),
-            categoryDropdownHeight = homeSliderHeight;
-
-        categoryDropdown.css('height', `${categoryDropdownHeight}px`);
-
-        verticalMegaMenuList.each(function () {
-            let self = $(this);
-
-            verticalMegaMenuListHeight += self.height();
-
-            if (verticalMegaMenuListHeight + 78 > categoryDropdownHeight) {
-                self.addClass('hide');
-                moreCategories.removeClass('hide');
-
-                return;
-            }
-
-            self.removeClass('hide');
-            moreCategories.addClass('hide');
-        });
-    });
+    // _window.on('load resize', () => {
+    //     let verticalMegaMenuListHeight = 0,
+    //         homeSliderHeight = homeSlider.height(),
+    //         categoryDropdownHeight = homeSliderHeight;
+    //
+    //     categoryDropdown.css('height', `${categoryDropdownHeight}px`);
+    //
+    //     verticalMegaMenuList.each(function () {
+    //         let self = $(this);
+    //
+    //         verticalMegaMenuListHeight += self.height();
+    //
+    //         if (verticalMegaMenuListHeight + 78 > categoryDropdownHeight) {
+    //             self.addClass('hide');
+    //             moreCategories.removeClass('hide');
+    //
+    //             return;
+    //         }
+    //
+    //         self.removeClass('hide');
+    //         moreCategories.addClass('hide');
+    //     });
+    // });
 
     /*      sidebar menu
     /*----------------------------------------*/
@@ -271,49 +271,49 @@ $(() => {
     /*      slider
     /*----------------------------------------*/
 
-    let homeSlider = $('.home-slider');
-
-    if (homeSlider.length !== 0) {
-
-        homeSlider.on('init', function () {
-            BackgroundCheck.init({
-                targets: '.caption-1, .caption-2',
-                images: '.slider-image',
-            });
-        });
-
-        homeSlider.on('beforeChange', function () {
-            BackgroundCheck.refresh();
-        });
-
-        homeSlider.on('afterChange', function () {
-            BackgroundCheck.refresh();
-        });
-
-        homeSlider.on('lazyLoaded', function () {
-            BackgroundCheck.refresh();
-        });
-
-        homeSlider.slick({
-            rows: 0,
-            rtl: window.FleetCart.rtl,
-            cssEase: 'ease',
-            speed: Number(homeSlider.data('speed')),
-            fade: !! JSON.parse(homeSlider.data('fade')),
-            dots: !! JSON.parse(homeSlider.data('dots')),
-            arrows: !! JSON.parse(homeSlider.data('arrows')),
-            autoplay: !! JSON.parse(homeSlider.data('autoplay')),
-            autoplaySpeed: Number(homeSlider.data('autoplay-speed')),
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        dots: false,
-                    },
-                },
-            ],
-        }).slickAnimation();
-    }
+    // let homeSlider = $('.home-slider');
+    //
+    // if (homeSlider.length !== 0) {
+    //
+    //     homeSlider.on('init', function () {
+    //         BackgroundCheck.init({
+    //             targets: '.caption-1, .caption-2',
+    //             images: '.slider-image',
+    //         });
+    //     });
+    //
+    //     homeSlider.on('beforeChange', function () {
+    //         BackgroundCheck.refresh();
+    //     });
+    //
+    //     homeSlider.on('afterChange', function () {
+    //         BackgroundCheck.refresh();
+    //     });
+    //
+    //     homeSlider.on('lazyLoaded', function () {
+    //         BackgroundCheck.refresh();
+    //     });
+    //
+    //     homeSlider.slick({
+    //         rows: 0,
+    //         rtl: window.FleetCart.rtl,
+    //         cssEase: 'ease',
+    //         speed: Number(homeSlider.data('speed')),
+    //         fade: !! JSON.parse(homeSlider.data('fade')),
+    //         dots: !! JSON.parse(homeSlider.data('dots')),
+    //         arrows: !! JSON.parse(homeSlider.data('arrows')),
+    //         autoplay: !! JSON.parse(homeSlider.data('autoplay')),
+    //         autoplaySpeed: Number(homeSlider.data('autoplay-speed')),
+    //         responsive: [
+    //             {
+    //                 breakpoint: 768,
+    //                 settings: {
+    //                     dots: false,
+    //                 },
+    //             },
+    //         ],
+    //     }).slickAnimation();
+    // }
 
     /*      tooltip
     /*----------------------------------------*/
@@ -490,11 +490,12 @@ $(() => {
     /*      number picker
     /*----------------------------------------*/
 
-    $('.btn-number').on('click', function (e) {
+    // $('.btn-number').on('click', function (e) {
+    $('.quantity__value').on('click', function (e) {
         e.preventDefault();
 
         let type = $(this).attr('data-type');
-        let input = $(this).closest('.input-group-quantity').find('input.input-quantity');
+        let input = $(this).closest('.quantity__box').find('input.quantity__number');
         let minValue = input.attr('min');
         let maxValue = input.attr('max');
         let currentValue = parseInt(input.val());
@@ -508,7 +509,7 @@ $(() => {
             if (currentValue > minValue) {
                 input.val(currentValue - 1);
                 input[0].dispatchEvent(new Event('input'), { bubbles: true });
-                $('.btn-number.btn-plus').removeAttr('disabled');
+                $('.quantity__value.increase').removeAttr('disabled');
             }
 
             if (input.val() === minValue) {
@@ -518,7 +519,7 @@ $(() => {
             if (! maxValue || currentValue < maxValue) {
                 input.val(currentValue + 1);
                 input[0].dispatchEvent(new Event('input'), { bubbles: true });
-                $('.btn-number.btn-minus').removeAttr('disabled');
+                $('.quantity__value.decrease').removeAttr('disabled');
             }
 
             if (input.val() === maxValue) {
@@ -527,7 +528,8 @@ $(() => {
         }
     });
 
-    $('.input-number').on('input', function () {
+    // $('.input-number').on('input', function () {
+    $('.quantity__number').on('input', function () {
         let self = $(this);
         let minValue = parseInt(self.attr('min'));
         let maxValue = parseInt(self.attr('max'));
@@ -535,17 +537,17 @@ $(() => {
 
         if (! $.isNumeric(self.val())) {
             self.val(minValue);
-            $('.btn-number.btn-minus').attr('disabled', true);
+            $('.quantity__value.decrease').attr('disabled', true);
         }
 
         if (currentValue < minValue) {
             self.val(minValue);
-            $('.btn-number.btn-minus').attr('disabled', true);
+            $('.quantity__value.decrease').attr('disabled', true);
         }
 
         if (maxValue && currentValue > maxValue) {
             self.val(maxValue);
-            $('.btn-number.btn-plus').attr('disabled', true);
+            $('.quantity__value.increase').attr('disabled', true);
         }
     });
 });

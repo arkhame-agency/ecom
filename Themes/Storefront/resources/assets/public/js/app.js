@@ -31,6 +31,7 @@ import ProductCardGridView from './components/products/index/ProductCardGridView
 import ProductCardListView from './components/products/index/ProductCardListView.vue';
 import ProductCardVertical from './components/ProductCardVertical.vue';
 import ProductShow from './components/products/Show';
+import RelatedProducts from './components/products/show/RelatedProducts.vue';
 import CartIndex from './components/cart/Index';
 import CheckoutCreate from './components/checkout/Create';
 import CompareIndex from './components/compare/Index';
@@ -71,6 +72,7 @@ Vue.component('product-card-grid-view', ProductCardGridView);
 Vue.component('product-card-list-view', ProductCardListView);
 Vue.component('product-card-vertical', ProductCardVertical);
 Vue.component('product-show', ProductShow);
+Vue.component('related-products', RelatedProducts);
 Vue.component('cart-index', CartIndex);
 Vue.component('checkout-create', CheckoutCreate);
 Vue.component('compare-index', CompareIndex);
@@ -115,20 +117,5 @@ $(function () {
             $('#password').removeClass('is-invalid');
             $(this).removeClass('is-invalid');
         }
-    });
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.back-top').fadeIn();
-        } else {
-            $('.back-top').fadeOut();
-        }
-    });
-
-    // scroll body to 0px on click
-    $('.back-top').click(function () {
-        $('body,html').animate({
-            scrollTop: 0,
-        }, 1600);
-        return false;
     });
 });

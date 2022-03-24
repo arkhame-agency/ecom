@@ -7,7 +7,7 @@
         </div>
 
         <a :href="productUrl" class="product-name">
-            <h6>{{ product.name }}</h6>
+            <h4>{{ product.name }}</h4>
         </a>
 
         <div class="product-info">

@@ -195,7 +195,7 @@ class Product extends Model
     public function scopeWithBaseImage($query)
     {
         $query->with(['files' => function ($q) {
-            $q->wherePivot('zone', 'base_image');
+            $q->wherePivot('zone', '=', 'base_image')->orWherePivot('zone', '=', 'additional_images');
         }]);
     }
 

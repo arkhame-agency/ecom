@@ -1,6 +1,6 @@
 <div class="form-group variant-custom-selection">
     <div class="row">
-        <div class="col-xl-4 col-lg-6">
+        <div class="col-xl-3 col-lg-6">
             <label>
                 {!!
                     $option->name .
@@ -9,7 +9,7 @@
             </label>
         </div>
 
-        <div class="col-xl-10 col-lg-12">
+        <div class="col-xl-6 col-lg-12">
             <ul class="list-inline form-custom-radio custom-selection">
                 @foreach ($option->values as $value)
                     <li

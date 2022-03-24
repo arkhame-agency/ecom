@@ -49,7 +49,7 @@ class ProductIndexController
     {
         return collect($this->recentlyViewed->products())
             ->reverse()
-            ->when(! is_null($limit), function (Collection $products) use ($limit) {
+            ->when(!is_null($limit), function (Collection $products) use ($limit) {
                 return $products->take($limit);
             })
             ->values();
@@ -59,7 +59,7 @@ class ProductIndexController
     {
         return function ($query) use ($limit) {
             $query->latest()
-                ->when(! is_null($limit), function ($q) use ($limit) {
+                ->when(!is_null($limit), function ($q) use ($limit) {
                     $q->limit($limit);
                 });
         };
@@ -71,7 +71,7 @@ class ProductIndexController
             $productIds = setting("{$settingPrefix}_products", []);
 
             $query->whereIn('id', $productIds)
-                ->when(! empty($productIds), function ($q) use ($productIds) {
+                ->when(!empty($productIds), function ($q) use ($productIds) {
                     $productIdsString = collect($productIds)->filter()->implode(',');
 
                     $q->orderByRaw("FIELD(id, {$productIdsString})");

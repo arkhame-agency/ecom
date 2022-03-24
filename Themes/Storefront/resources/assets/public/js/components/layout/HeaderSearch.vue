@@ -1,7 +1,7 @@
 <template>
     <div class="header-search-wrap" v-click-outside="hideSuggestions">
         <div class="header-search">
-            <form class="search-form" @submit.prevent="search">
+            <form class="predictive__search--form" @submit.prevent="search">
                 <div class="header-search-lg">
                     <input
                         type="text"
@@ -62,7 +62,7 @@
         </div>
 
         <div class="header-search-sm-form">
-            <form class="search-form" @submit.prevent="search">
+            <form class="predictive__search--form" @submit.prevent="search">
                 <div class="btn-close">
                     <i class="las la-arrow-left"></i>
                 </div>

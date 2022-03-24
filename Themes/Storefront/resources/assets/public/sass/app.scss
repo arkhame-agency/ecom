@@ -1,77 +1,52 @@
-$grid-columns: 18;
+@import
+'utils/_variables',
+'utils/_utilities',
+'~animate.css/animate',
+'~slick-carousel/slick/slick',
+'~slick-carousel/slick/slick-theme',
+'~slick-lightbox/src/styles/slick-lightbox',
+'components/_countdown',
+'~jquery-nice-select/scss/nice-select',
+'~line-awesome/dist/line-awesome/scss/line-awesome';
+//'utils/_common';
 
 @import
-    '~bootstrap/scss/bootstrap',
-    '~line-awesome/dist/line-awesome/scss/line-awesome',
-    '~jquery-nice-select/scss/nice-select',
-    '~animate.css/animate',
-    '~slick-carousel/slick/slick',
-    '~slick-carousel/slick/slick-theme',
-    '~slick-lightbox/src/styles/slick-lightbox',
-    '~kbw-countdown/src/css/jquery.countdown',
-    '~nouislider/distribute/nouislider',
-    '~flatpickr/dist/flatpickr';
+    'base/_carousel',
+    'global';
 
 @import
-    'utils/_variables',
-    'utils/_utilities',
-    'utils/_common';
-
-@import
-    'base/_reset',
-    'base/_typography',
-    'base/_carousel';
-
-@import
-    'components/_custom-select',
-    'components/_mega-menu',
-    'components/_tabs',
-    'components/_buttons',
-    'components/_scrollbar',
-    'components/_countdown',
-    'components/_breadcrumb',
-    'components/_form',
-    'components/_alert',
-    'components/_table',
-    'components/_badge',
-    'components/_panel',
-    'components/_pagination',
-    'components/_loader',
-    'components/_modal',
-    'components/_toast';
-
-@import
-    'layout/_top-nav',
-    'layout/_header',
-    'layout/_sidebar-menu',
-    'layout/_sidebar-cart',
-    'layout/_navigation',
-    'layout/_landscape-products',
-    'layout/_steps',
-    'layout/_order-summary',
-    'layout/_subscribe',
-    'layout/_newsletter',
-    'layout/_cookie-bar',
-    'layout/_footer';
-
-@import
+    'elements/header',
+    'elements/slider',
+    'elements/product',
+    'elements/banner',
+    'elements/blog',
+    'elements/testimonial',
+    'elements/newsletter',
+    'elements/shipping',
+    'elements/instagram',
+    'elements/footer',
+    'elements/quickview',
+    'elements/accordion',
+    'elements/portfolio',
+    'elements/brand-logo',
+    'elements/breadcrumb',
+    'elements/about',
+    'elements/shop',
+    'elements/product-details',
+    'elements/blog-details',
+    'elements/contact',
+    'elements/cart-page',
+    'elements/checkout',
+    'elements/my-account',
+    'elements/404',
+    'elements/login',
+    'elements/compare',
+    'elements/faq',
+    'elements/preloader',
+    'elements/privacy-policy',
     'pages/_home',
-    'pages/_login',
-    'pages/_register',
-    'pages/_account',
-    'pages/_contact',
-    'pages/_compare',
-    'pages/_product-search',
-    'pages/_product-details',
-    'pages/_cart',
-    'pages/_checkout',
-    'pages/_order-complete',
-    'pages/_all-brands',
-    'pages/_all-categories',
-    'pages/_order-details',
-    'pages/_404',
-    'pages/_custom-page',
-// This file is to override CSS Core.
+    'components/_custom-select',
+    // Override the CSS core
     'custom/_custom';
 
 [v-cloak] {

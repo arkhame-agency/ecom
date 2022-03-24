@@ -1,5 +1,5 @@
 @if ($product->hasDownloadsAttribute())
-    <div id="download" class="tab-pane download" :class="{ active: activeTab === 'download' }">
+    <div id="download" class="tab_pane download" :class="{ show: activeTab === 'specification', active: activeTab === 'specification' }">
         {{--        <div class="download-inner">--}}
         {{--            <div class="download-row">--}}
         {{--                <div class="title">--}}

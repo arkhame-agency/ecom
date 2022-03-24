@@ -32,7 +32,7 @@ class ProductPriceController
                 return $variantPrice;
             }
 
-            return "{$variantPrice} <span class='previous-price'>{$price}</span>";
+            return "{$variantPrice} <span class='old__price'>{$price}</span>";
         });
     }
 

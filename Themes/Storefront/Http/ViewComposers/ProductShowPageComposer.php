@@ -69,7 +69,7 @@ class ProductShowPageComposer
         $breadcrumb = '';
 
         foreach ($categories as $category) {
-            $breadcrumb .= "<li><a href='{$category->url()}'>{$category->name}</a></li>";
+            $breadcrumb .= "<li class='breadcrumb__content--menu__items'><a class='text-white' href='{$category->url()}'>{$category->name}</a></li>";
 
             if ($category->items->isNotEmpty()) {
                 $breadcrumb .= $this->getCategoryBreadCrumb($category->items);

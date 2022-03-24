@@ -37,16 +37,16 @@ class StorefrontTabs extends Tabs
 
         $this->group('home_page_sections', trans('storefront::storefront.tabs.group.home_page_sections'))
             ->add($this->sliderBanners())
-            ->add($this->threeColumnFullWidthBanners())
+//            ->add($this->threeColumnFullWidthBanners())
             ->add($this->featuredCategories())
-            ->add($this->productTabsOne())
+//            ->add($this->productTabsOne())
             ->add($this->topBrands())
             ->add($this->flashSaleAndVerticalProducts())
-            ->add($this->twoColumnBanners())
-            ->add($this->productGrid())
-            ->add($this->threeColumnBanners())
-            ->add($this->productTabsTwo())
-            ->add($this->oneColumnBanner());
+//            ->add($this->twoColumnBanners())
+//            ->add($this->productGrid())
+            ->add($this->threeColumnBanners());
+//            ->add($this->productTabsTwo())
+//            ->add($this->oneColumnBanner());
     }
 
     private function general()

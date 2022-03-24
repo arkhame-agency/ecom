@@ -1,31 +1,28 @@
 <ul
-    class="list-inline fluid-menu-wrap"
+    class="header__mega--menu d-flex"
 
     @if ($menu->hasBackgroundImage())
-        style="background-image: url({{ $menu->backgroundImage() }});"
+    style="background-image: url({{ $menu->backgroundImage() }});"
     @endif
 >
-    <li>
-        <div class="fluid-menu-content">
-            @foreach ($subMenus as $subMenu)
-                <div class="fluid-menu-list">
-                    <h5 class="fluid-menu-title">
-                        <a href="{{ $subMenu->url() }}" target="{{ $subMenu->target() }}">
-                            {{ $subMenu->name() }}
-                        </a>
-                    </h5>
+    @foreach ($subMenus as $subMenu)
+        <li class="header__mega--menu__li">
+            <span class="header__mega--subtitle">
+                <a href="{{ $subMenu->url() }}" target="{{ $subMenu->target() }}">
+                    {{ $subMenu->name() }}
+                </a>
+            </span>
 
-                    <ul class="list-inline fluid-sub-menu-list">
-                        @foreach ($subMenu->items() as $item)
-                            <li>
-                                <a href="{{ $item->url() }}" target="{{ $subMenu->target() }}">
-                                    {{ $item->name() }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-        </div>
-    </li>
+            <ul class="header__mega--sub__menu">
+                @foreach ($subMenu->items() as $item)
+                    <li class="header__mega--sub__menu_li">
+                        <a href="{{ $item->url() }}" class="header__mega--sub__menu--title"
+                           target="{{ $subMenu->target() }}">
+                            {{ $item->name() }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </li>
+    @endforeach
 </ul>
