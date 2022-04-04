@@ -216,9 +216,9 @@
                         <a class="offcanvas__menu_item" href="{{ route('products.index') }}">
                             {{ trans('storefront::layout.all_categories') }}
                         </a>
-                        <ul class="offcanvas__sub_menu">
+                        <ul class="offcanvas__sub_menu ml-3">
                             @foreach ($categoryMenu->menus() as $menu)
-                                @include('public.layout.navigation.offcanvas_menu', ['type' => 'primary_menu'])
+                                @include('public.layout.navigation.offcanvas_menu', ['extraCss' => 'revert-text-transform'])
                             @endforeach
                         </ul>
                     </li>
@@ -257,7 +257,7 @@
                     {{--                        </li>--}}
                     {{--                    @endif--}}
                     @foreach ($primaryMenu->menus() as $menu)
-                        @include('public.layout.navigation.offcanvas_menu', ['type' => 'primary_menu'])
+                        @include('public.layout.navigation.offcanvas_menu')
                     @endforeach
                 </ul>
                 <div class="offcanvas__account--items">

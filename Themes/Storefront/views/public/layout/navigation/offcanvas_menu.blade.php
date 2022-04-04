@@ -1,5 +1,5 @@
 <li class="offcanvas__menu_li">
-    <a class="offcanvas__menu_item" href="{{ $menu->url() }}" target="{{ $menu->target() }}">
+    <a class="offcanvas__menu_item {{ $extraCss ?? '' }}" href="{{ $menu->url() }}" target="{{ $menu->target() }}">
         {{ $menu->name() }}
     </a>
     @if ($menu->subMenus()->isNotEmpty())

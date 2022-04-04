@@ -1383,6 +1383,9 @@ select {
 .capitalize {
   text-transform: capitalize;
 }
+.revert-text-transform {
+    text-transform: revert;
+}
 .text-white {
   color: var(--white-color) !important;
 }
