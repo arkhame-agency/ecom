@@ -8,12 +8,12 @@
 
 	.panel-header {
 		display: flex;
-		padding: 20px 30px;
-		background: $color-white-lite;
+		//padding: 20px 30px;
+		//background: $color-white-lite;
 		align-items: center;
 		justify-content: space-between;
-		border: 1px solid $color-gray-lite;
-		border-radius: $radius-default $radius-default 0 0;
+		//border: 1px solid $color-gray-lite;
+		//border-radius: $radius-default $radius-default 0 0;
 
 		> a {
 			color: $color-gray-dark;
@@ -23,11 +23,5 @@
                 color: var(--color-primary);
 			}
 		}
-	}
-
-	.panel-body {
-		border: 1px solid $color-gray-lite;
-		border-top: none;
-		border-radius: 0 0 $radius-default $radius-default;
 	}
 }

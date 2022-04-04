@@ -1,15 +1,21 @@
 <template>
-    <section class="landscape-products-wrap" v-if="hasAnyProduct">
-        <div class="container">
-            <div class="products-header">
-                <h5 class="section-title">{{ title }}</h5>
+    <!-- Start product section -->
+    <section class="product__section section--padding pt-0">
+        <div class="container-fluid">
+            <div class="section__heading text-center mb-40">
+                <h2 class="section__heading--maintitle">{{ title }}</h2>
             </div>
-
-            <div class="landscape-products" ref="productsPlaceholder">
-                <ProductCard v-for="(product, index) in products" :key="index" :product="product"></ProductCard>
+            <div class="product__section--inner product__swiper--column5 swiper">
+                <div class="swiper-wrapper">
+                    <ProductCard v-for="(product, index) in products" :key="index" :product="product"
+                                 css-class="swiper-slide"></ProductCard>
+                </div>
+                <div class="swiper__nav--btn swiper-button-next"></div>
+                <div class="swiper__nav--btn swiper-button-prev"></div>
             </div>
         </div>
     </section>
+    <!-- End product section -->
 </template>
 
 <script>
@@ -35,86 +41,35 @@ export default {
     },
 
     mounted() {
-        if (this.slides === 6) {
-            $(this.$refs.productsPlaceholder).slick({
-                rows: 0,
-                dots: false,
-                arrows: true,
-                infinite: true,
-                slidesToShow: this.slides,
-                slidesToScroll: this.slides,
-                rtl: window.FleetCart.rtl,
-                prevArrow: slickPrevArrow(),
-                nextArrow: slickNextArrow(),
-                responsive: [
-                    {
-                        breakpoint: 1761,
-                        settings: {
-                            slidesToShow: 5,
-                            slidesToScroll: 5,
-                        },
-                    },
-                    {
-                        breakpoint: 1301,
-                        settings: {
-                            slidesToShow: 4,
-                            slidesToScroll: 4,
-                        },
-                    },
-                    {
-                        breakpoint: 1051,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                        },
-                    },
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            slidesToShow: 4,
-                            slidesToScroll: 4,
-                        },
-                    },
-                    {
-                        breakpoint: 881,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                        },
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            dots: true,
-                            arrows: false,
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                        },
-                    },
-                    {
-                        breakpoint: 641,
-                        settings: {
-                            dots: true,
-                            arrows: false,
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                        },
-                    },
-                ],
-            });
-        } else {
-            $(this.$refs.productsPlaceholder).slick({
-                rows: 0,
-                dots: true,
-                arrows: false,
-                infinite: true,
-                slidesToShow: this.slides,
-                slidesToScroll: this.slides,
-                rtl: window.FleetCart.rtl,
-                prevArrow: slickPrevArrow(),
-                nextArrow: slickNextArrow(),
-            });
-        }
+        var swiper = new Swiper('.product__swiper--column5', {
+            slidesPerView: 5,
+            clickable: true,
+            loop: true,
+            spaceBetween: 30,
+            breakpoints: {
+                1200: {
+                    slidesPerView: 5,
+                },
+                992: {
+                    slidesPerView: 4,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                280: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                0: {
+                    slidesPerView: 1,
+                },
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
     },
 };
 </script>

@@ -1,6 +1,15 @@
 //Cart Pages Css Here
 
 .cart__table{
+    .product__thumbnail {
+        height: 105px;
+        width: 100px;
+        img {
+            height: 105px;
+            width: 100px;
+            max-width: 100px;
+        }
+    }
     &--inner{
         width: 100%;
         border-spacing: 0;

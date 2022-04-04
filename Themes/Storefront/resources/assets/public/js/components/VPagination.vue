@@ -1,64 +1,75 @@
 <template>
-    <ul class="pagination">
-        <li class="page-item" :class="{ disabled: hasFirst }">
-            <button class="page-link" :disabled="hasFirst" @click="prev">
-                <i class="las la-angle-left"></i>
-            </button>
+    <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+        <li class="pagination__list" :class="{ disabled: hasFirst }">
+            <a class="pagination__item--arrow  link" :disabled="hasFirst" @click="prev">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22.51"
+                   height="20.443"
+                   viewBox="0 0 512 512">
+                <path fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="48"
+                      d="M244 400L100 256l144-144M120 256h292"/>
+              </svg>
+            </a>
         </li>
 
-        <li v-show="rangeFirstPage !== 1" class="page-item">
-            <button class="page-link" @click="goto(1)">
+        <li v-show="rangeFirstPage !== 1" class="pagination__list">
+            <button class="pagination__item" @click="goto(1)">
                 1
             </button>
         </li>
 
-        <li v-show="rangeFirstPage === 3" class="page-item">
-            <button class="page-link" @click="goto(2)">
+        <li v-show="rangeFirstPage === 3" class="pagination__list">
+            <button class="pagination__item" @click="goto(2)">
                 2
             </button>
         </li>
 
         <li
             v-show="rangeFirstPage !== 1 && rangeFirstPage !== 2 && rangeFirstPage !== 3"
-            class="page-item disabled"
+            class="pagination__list disabled"
         >
-            <span class="page-link">...</span>
+            <span class="pagination__item">...</span>
         </li>
 
         <li
             v-for="page in range"
             :key="page"
-            class="page-item"
-            :class="{ active: hasActive(page) }"
+            class="pagination__list"
         >
-            <button class="page-link" @click="goto(page)">
+            <button class="pagination__item" @click="goto(page)" :class="{ 'pagination__item--current': hasActive(page) }">
                 {{ page }}
             </button>
         </li>
 
         <li
             v-show="rangeLastPage !== totalPage && rangeLastPage !== (totalPage - 1) && rangeLastPage !== (totalPage - 2)"
-            class="page-item disabled"
+            class="pagination__list disabled"
         >
-            <span class="page-link">...</span>
+            <span class="pagination__item">...</span>
         </li>
 
-        <li v-show="rangeLastPage === (totalPage - 2)" class="page-item">
-            <button class="page-link" @click="goto(totalPage - 1)">
+        <li v-show="rangeLastPage === (totalPage - 2)" class="pagination__list">
+            <button class="pagination__item" @click="goto(totalPage - 1)">
                 {{ totalPage - 1 }}
             </button>
         </li>
 
-        <li v-if="rangeLastPage !== totalPage" class="page-item">
-            <button class="page-link" @click="goto(totalPage)">
+        <li v-if="rangeLastPage !== totalPage" class="pagination__list">
+            <button class="pagination__item" @click="goto(totalPage)">
                 {{ totalPage }}
             </button>
         </li>
 
-        <li class="page-item" :class="{ disabled: hasLast }">
-            <button class="page-link" :class="{ disabled: hasLast }" @click="next">
-                <i class="las la-angle-right"></i>
-            </button>
+        <li class="pagination__list" :class="{ disabled: hasLast }">
+            <a class="pagination__item--arrow link" :class="{ disabled: hasLast }" @click="next">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22.51"
+                   height="20.443"
+                   viewBox="0 0 512 512">
+                <path fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="48"
+                      d="M268 112l144 144-144 144M392 256H100"/>
+              </svg>
+            </a>
         </li>
     </ul>
 </template>

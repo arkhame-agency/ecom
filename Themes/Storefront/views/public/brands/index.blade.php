@@ -3,13 +3,35 @@
 @section('title', trans('storefront::brands.brands'))
 
 @section('content')
+
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg5">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content">
+                        <h1 class="breadcrumb__content--title text-white mb-10">{{ trans('storefront::brands.brands') }}</h1>
+                        <ul class="breadcrumb__content--menu d-flex">
+                            <li class="breadcrumb__content--menu__items">
+                                <a class="text-white" href="{{ route('home') }}">
+                                    {{ trans('storefront::layout.home') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
     <section class="all-brands-wrap">
         <div class="container">
             <div class="all-brands">
                 @if ($brands->isNotEmpty())
                     <div class="all-brands-inner">
                         @foreach ($brands as $brand)
-                            <div class="col-lg-3 col-md-6 col-9">
+                            <div class="col-lg-2 col-md-1 col-6 mx-15">
                                 <a href="{{ $brand->url() }}" class="brand-image">
                                     @if ($brand->logo->exists)
                                         <img src="{{ $brand->logo->path }}" alt="brand image">

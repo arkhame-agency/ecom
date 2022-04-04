@@ -12,39 +12,62 @@
         :countries="{{ json_encode($countries) }}"
         inline-template
     >
-        <section class="checkout-wrap">
+        <!-- Start checkout page area -->
+        <div class="checkout__page--area section--padding">
             <div class="container">
-                @include('public.cart.index.steps')
-
                 <form @submit.prevent="placeOrder" @input="errors.clear($event.target.name)">
-                    <div class="checkout">
-                        <div class="checkout-inner">
-                            <div class="checkout-left">
-                                <div class="checkout-form">
-                                    @include('public.checkout.create.form.account_details')
-                                    @include('public.checkout.create.form.billing_details')
-                                    @include('public.checkout.create.form.shipping_details')
-                                    @include('public.checkout.create.form.order_note')
+                    <div class="row">
+                        <div class="col-lg-7 col-md-6">
+                            <div class="main checkout__mian checkout-form">
+                                @include('public.checkout.create.form.account_details')
+                                @include('public.checkout.create.form.billing_details')
+                                @include('public.checkout.create.form.order_note')
+                                <div class="checkout__content--step__footer d-flex align-items-center">
+                                    <a class="previous__link--content" href="{{route('cart.index')}}">Return to cart</a>
                                 </div>
                             </div>
-
-                            <div class="checkout-right">
-                                @include('public.checkout.create.payment')
-                                @include('public.checkout.create.coupon')
-                            </div>
                         </div>
-
                         @include('public.checkout.create.order_summary')
                     </div>
                 </form>
             </div>
-        </section>
+        </div>
+        <!-- End checkout page area -->
+
+        {{--        <section class="checkout-wrap">--}}
+        {{--            <div class="container">--}}
+        {{--                @include('public.cart.index.steps')--}}
+
+        {{--                --}}
+        {{--                    <div class="checkout">--}}
+        {{--                        <div class="checkout-inner">--}}
+        {{--                            <div class="checkout-left">--}}
+        {{--                                <div class="checkout-form">--}}
+        {{--                                    --}}
+        {{--                                    --}}
+        {{--                                    --}}
+        {{--                                    --}}
+        {{--                                </div>--}}
+        {{--                            </div>--}}
+
+        {{--                            <div class="checkout-right">--}}
+        {{--                                @include('public.checkout.create.payment')--}}
+        {{--                                @include('public.checkout.create.coupon')--}}
+        {{--                            </div>--}}
+        {{--                        </div>--}}
+
+        {{--                        --}}
+        {{--                    </div>--}}
+        {{--                </form>--}}
+        {{--            </div>--}}
+        {{--        </section>--}}
     </checkout-create>
 @endsection
 
 @push('pre-scripts')
     @if (setting('paypal_enabled'))
-        <script src="https://www.paypal.com/sdk/js?client-id={{ setting('paypal_client_id') }}&currency={{ setting('default_currency') }}&disable-funding=credit,card,venmo,sepa,bancontact,eps,giropay,ideal,mybank,p24,p24"></script>
+        <script
+            src="https://www.paypal.com/sdk/js?client-id={{ setting('paypal_client_id') }}&currency={{ setting('default_currency') }}&disable-funding=credit,card,venmo,sepa,bancontact,eps,giropay,ideal,mybank,p24,p24"></script>
     @endif
 
     @if (setting('stripe_enabled'))
@@ -53,9 +76,11 @@
 
     @if (setting('paytm_enabled'))
         @if (setting('paytm_test_mode'))
-            <script src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/{{ setting('paytm_merchant_id') }}.js"></script>
+            <script
+                src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/{{ setting('paytm_merchant_id') }}.js"></script>
         @else
-            <script src="https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/{{ setting('paytm_merchant_id') }}.js"></script>
+            <script
+                src="https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/{{ setting('paytm_merchant_id') }}.js"></script>
         @endif
     @endif
 

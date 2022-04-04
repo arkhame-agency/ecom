@@ -3,25 +3,25 @@
 @section('title', trans('storefront::cart.cart'))
 
 @section('content')
+    <!-- cart section end -->
     <cart-index inline-template v-cloak :countries="{{ json_encode($countries) }}">
         <div>
-            <section class="shopping-cart-wrap">
-                <div class="container">
-                    @include('public.cart.index.steps')
-
-                    <div class="shopping-cart">
-                        <div class="shopping-cart-inner" v-if="cartIsNotEmpty">
-                            @include('public.cart.index.cart_items')
-                            @include('public.cart.index.coupon')
+            <section class="cart__section section--padding">
+                <div class="container-fluid">
+                    <div class="cart__section--inner">
+                        <h2 class="cart__title mb-40">{{ trans('storefront::cart.shopping_cart') }}</h2>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                @include('public.cart.index.cart_items')
+                            </div>
+                            <div class="col-lg-4">
+                                @include('public.cart.index.order_summary')
+                            </div>
+                            @include('public.cart.index.empty_cart')
                         </div>
-
-                        @include('public.cart.index.order_summary')
                     </div>
-
-                    @include('public.cart.index.empty_cart')
                 </div>
             </section>
-
             <landscape-products
                 title="{{ trans('storefront::product.you_might_also_like') }}"
                 v-if="hasAnyCrossSellProduct"

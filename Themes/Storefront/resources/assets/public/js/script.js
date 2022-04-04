@@ -208,35 +208,35 @@ var swiper = new Swiper('.product__swiper--column4', {
 });
 
 // product swiper column5 activation
-var swiper = new Swiper('.product__swiper--column5', {
-    slidesPerView: 5,
-    clickable: true,
-    loop: true,
-    spaceBetween: 30,
-    breakpoints: {
-        1200: {
-            slidesPerView: 5,
-        },
-        992: {
-            slidesPerView: 4,
-        },
-        768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-        },
-        280: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-        },
-        0: {
-            slidesPerView: 1,
-        },
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-});
+// var swiper = new Swiper('.product__swiper--column5', {
+//     slidesPerView: 5,
+//     clickable: true,
+//     loop: true,
+//     spaceBetween: 30,
+//     breakpoints: {
+//         1200: {
+//             slidesPerView: 5,
+//         },
+//         992: {
+//             slidesPerView: 4,
+//         },
+//         768: {
+//             slidesPerView: 3,
+//             spaceBetween: 30,
+//         },
+//         280: {
+//             slidesPerView: 2,
+//             spaceBetween: 20,
+//         },
+//         0: {
+//             slidesPerView: 1,
+//         },
+//     },
+//     navigation: {
+//         nextEl: '.swiper-button-next',
+//         prevEl: '.swiper-button-prev',
+//     },
+// });
 
 // product list column3 activation
 var swiper = new Swiper('.product__list--column3', {
@@ -671,7 +671,10 @@ function offcanvsSidebar(openTrigger, closeTrigger, wrapper) {
                 document
                     .querySelector('body')
                     .classList.add(`${wrapperOverlay}_active`);
-                // document.body.addEventListener('click', handleBodyClass.bind(this));
+                document.body.addEventListener('click', handleBodyClass.bind(this));
+                if (openTrigger === '.widget__filter--btn') {
+                    document.querySelector('.header-search-sm-form').classList.add('active');
+                }
             });
         });
     }
@@ -682,7 +685,10 @@ function offcanvsSidebar(openTrigger, closeTrigger, wrapper) {
             document
                 .querySelector('body')
                 .classList.remove(`${wrapperOverlay}_active`);
-            // document.body.removeEventListener('click', handleBodyClass.bind(this));
+            document.body.removeEventListener('click', handleBodyClass.bind(this));
+            if (closeTrigger === '.offcanvas__filter--close') {
+                document.querySelector('.header-search-sm-form').classList.remove('active');
+            }
         });
     }
 }
@@ -714,7 +720,7 @@ const offcanvasHeader = function () {
             '.offcanvas__header--menu__open--btn',
         ),
         offcanvasClose = document.querySelector('.offcanvas__close--btn'),
-        offcanvasHeader = document.querySelector('.offcanvas-header'),
+        offcanvasHeaderEl = document.querySelector('.offcanvas-header'),
         offcanvasMenu = document.querySelector('.offcanvas__menu'),
         body = document.querySelector('body');
     /* Offcanvas SubMenu Toggle */
@@ -731,14 +737,14 @@ const offcanvasHeader = function () {
     if (offcanvasOpen) {
         offcanvasOpen.addEventListener('click', function (e) {
             e.preventDefault();
-            offcanvasHeader.classList.add('open');
+            offcanvasHeaderEl.classList.add('open');
             body.classList.add('mobile_menu_open');
         });
     }
     if (offcanvasClose) {
         offcanvasClose.addEventListener('click', function (e) {
             e.preventDefault();
-            offcanvasHeader.classList.remove('open');
+            offcanvasHeaderEl.classList.remove('open');
             body.classList.remove('mobile_menu_open');
         });
     }
@@ -789,7 +795,7 @@ const offcanvasHeader = function () {
                 ! event.target.closest('.offcanvas-header') &&
                 ! event.target.classList.contains('.offcanvas-header'.replace(/\./, ''))
             ) {
-                offcanvasHeader.classList.remove('open');
+                offcanvasHeaderEl.classList.remove('open');
                 body.classList.remove('mobile_menu_open');
             }
         }
@@ -797,7 +803,7 @@ const offcanvasHeader = function () {
     /* Remove Mobile Menu Open Class & Hide Mobile Menu When Window Width in More Than 991 */
     window.addEventListener('resize', function () {
         if (window.outerWidth >= 992) {
-            offcanvasHeader.classList.remove('open');
+            offcanvasHeaderEl.classList.remove('open');
             body.classList.remove('mobile_menu_open');
         }
     });
@@ -891,6 +897,12 @@ customAccordion(
     '.widget__categories--menu__label',
     '.widget__categories--sub__menu',
 );
+
+// customAccordion(
+//     '.widget__categories--sub__menu--list',
+//     '.widget__categories--sub__menu--link',
+//     '.widget__categories--sub__menu',
+// );
 
 // footer widget js
 let accordion = true;

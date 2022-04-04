@@ -26,6 +26,10 @@ export default {
     },
 
     mounted() {
+        if (document.getElementById('modal1')) {
+            const isVisible = 'is-visible';
+            document.getElementById('modal1').classList.add(isVisible);
+        }
         setTimeout(() => {
             $('.newsletter-wrap').modal('show');
         }, 1000);

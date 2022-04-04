@@ -19,7 +19,7 @@
             <div class="panel-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h4>{{ trans('storefront::account.pages.my_addresses') }}</h4>
+                        <h3 class="section-title h3 mb-15">{{ trans('storefront::account.pages.my_addresses') }}</h3>
                     </div>
 
                     <div class="panel-body" v-cloak>
@@ -64,7 +64,7 @@
                                     <div class="col-md-18">
                                         <button
                                             type="button"
-                                            class="btn btn-lg btn-default btn-add-new-address"
+                                            class="btn btn-lg btn-primary btn-add-new-address"
                                             @click="formOpen = true"
                                         >
                                             {{ trans('storefront::account.addresses.add_new_address') }}
@@ -75,12 +75,12 @@
 
                             <form @submit.prevent="save" @input="errors.clear($event.target.name)" v-else>
                                 <div class="add-new-address-form">
-                                    <h4 class="section-title">
+                                    <h4 class="section-title h4">
                                         {{ trans('storefront::account.addresses.new_address') }}
                                     </h4>
 
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name">
                                                     {{ trans('storefront::account.addresses.first_name') }}<span>*</span>
@@ -91,7 +91,7 @@
                                                     name="first_name"
                                                     type="text"
                                                     id="first-name"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
 
                                                 <span
@@ -103,7 +103,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="last-name">
                                                     {{ trans('storefront::account.addresses.last_name') }}<span>*</span>
@@ -114,7 +114,7 @@
                                                     name="last_name"
                                                     type="text"
                                                     id="last-name"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
 
                                                 <span
@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-18">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="address-1">
                                                     {{ trans('storefront::account.addresses.street_address') }}<span>*</span>
@@ -138,7 +138,7 @@
                                                     type="text"
                                                     id="address-1"
                                                     placeholder="{{ trans('storefront::account.addresses.address_line_1') }}"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
 
                                                 <span
@@ -156,12 +156,12 @@
                                                     type="text"
                                                     id="address-2"
                                                     placeholder="{{ trans('storefront::account.addresses.address_line_2') }}"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="city">
                                                     {{ trans('storefront::account.addresses.city') }}<span>*</span>
@@ -172,7 +172,7 @@
                                                     name="city"
                                                     type="text"
                                                     id="city"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
 
                                                 <span
@@ -184,7 +184,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="zip">
                                                     {{ trans('storefront::account.addresses.zip') }}<span>*</span>
@@ -195,7 +195,7 @@
                                                     name="zip"
                                                     type="text"
                                                     id="zip"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                 >
 
                                                 <span
@@ -207,7 +207,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country">
                                                     {{ trans('storefront::account.addresses.country') }}<span>*</span>
@@ -217,7 +217,7 @@
                                                     :value="form.country"
                                                     name="country"
                                                     id="country"
-                                                    class="form-control arrow-black"
+                                                    class="checkout__input--field border-radius-5 arrow-black"
                                                     @change="changeCountry($event.target.value)"
                                                 >
                                                     <option
@@ -237,7 +237,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="state">
                                                     {{ trans('storefront::account.addresses.state') }}<span>*</span>
@@ -248,7 +248,7 @@
                                                     name="state"
                                                     type="text"
                                                     id="state"
-                                                    class="form-control"
+                                                    class="checkout__input--field border-radius-5"
                                                     v-if="hasNoStates"
                                                 >
 
@@ -256,7 +256,7 @@
                                                     v-model="form.state"
                                                     name="state"
                                                     id="state"
-                                                    class="form-control arrow-black"
+                                                    class="checkout__input--field border-radius-5"
                                                     v-else
                                                 >
                                                     <option value="">
@@ -280,7 +280,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-18">
+                                        <div class="col-md-12">
                                             <button
                                                 type="button"
                                                 class="btn btn-lg btn-default btn-cancel"

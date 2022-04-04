@@ -40,6 +40,7 @@ class AuthController extends BaseAuthController
     {
         return view('public.auth.login', [
             'providers' => LoginProvider::enabled(),
+            'privacyPageUrl' => $this->getPrivacyPageUrl(),
         ]);
     }
 

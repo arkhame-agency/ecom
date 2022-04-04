@@ -18,15 +18,32 @@
 @endpush
 
 @section('content')
-    <section class="custom-page-wrap">
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg6">
         <div class="container">
-            <div class="custom-page-content">
-                <div class="custom-page-left">
-                    @include('public.products.index.latest_products')
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content">
+                        <h1 class="breadcrumb__content--title text-white mb-10">{{ $page->name }}</h1>
+                        <ul class="breadcrumb__content--menu d-flex">
+                            <li class="breadcrumb__content--menu__items">
+                                <a class="text-white" href="{{ route('home') }}">
+                                    {{ trans('storefront::layout.home') }}
+                                </a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items"><span class="text-white">{{ $page->name }}</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="custom-page-right">
-                    {!! nl2br_save_html($page->body) !!}
-                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
+    <section class="custom-page-wrap clearfix">
+        <div class="container">
+            <div class="custom-page-content clearfix">
+                {!! $page->body !!}
             </div>
         </div>
     </section>

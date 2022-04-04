@@ -48,7 +48,8 @@
                         {{ cartItem.qty }} x <span class="current__price" v-html="cartItem.unitPrice.inCurrentCurrency.formatted"></span>
                     </div>
                 </div>
-                <button class="minicart__product--remove" aria-label="minicart remove btn" @click="remove">Remove
+                <button class="minicart__product--remove" aria-label="minicart remove btn" @click="remove">
+                    {{ $trans('storefront::layout.remove') }}
                 </button>
             </div>
         </div>

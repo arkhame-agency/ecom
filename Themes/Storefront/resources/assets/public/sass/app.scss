@@ -1,18 +1,32 @@
 @import
+//'~bootstrap/scss/bootstrap',
 'utils/_variables',
 'utils/_utilities',
 '~animate.css/animate',
 '~slick-carousel/slick/slick',
 '~slick-carousel/slick/slick-theme',
 '~slick-lightbox/src/styles/slick-lightbox',
-'components/_countdown',
+'layout/_newsletter',
+'layout/_cookie-bar',
 '~jquery-nice-select/scss/nice-select',
+'~nouislider/distribute/nouislider',
 '~line-awesome/dist/line-awesome/scss/line-awesome';
 //'utils/_common';
 
 @import
-    'base/_carousel',
-    'global';
+    'components/_countdown',
+    'components/_loader',
+    'components/_buttons',
+    'components/_form',
+    'components/_badge',
+    'components/_panel',
+    'components/_table',
+    'components/_custom-select',
+    'components/_modal';
+
+@import
+    'base/_carousel';
+
 
 @import
     'elements/header',
@@ -21,7 +35,6 @@
     'elements/banner',
     'elements/blog',
     'elements/testimonial',
-    'elements/newsletter',
     'elements/shipping',
     'elements/instagram',
     'elements/footer',
@@ -44,11 +57,31 @@
     'elements/faq',
     'elements/preloader',
     'elements/privacy-policy',
+    'elements/newsletter',
     'pages/_home',
-    'components/_custom-select',
+    'pages/_custom-page',
+    'pages/_all-brands',
+    'pages/_checkout',
+    'pages/_order-details',
+    'pages/_account',
+    'pages/_order-complete',
     // Override the CSS core
-    'custom/_custom';
+    'custom/_custom',
+    'global';
 
 [v-cloak] {
     display: none !important;
+}
+
+.error-message {
+    line-height: 20px;
+    display: block;
+    margin: 4px 0 -5px;
+    color: $color-red;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0
 }

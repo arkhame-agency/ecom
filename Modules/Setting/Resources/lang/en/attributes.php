@@ -19,7 +19,7 @@ return [
     'store_fax' => 'Store Fax',
     'store_email' => 'Store Email',
     'store_address_1' => 'Store Address 1',
-    'store_address_2' => 'Store Address 2',
+    'store_address_2' => 'Apartment, suite, etc. (optional)',
     'store_city' => 'Store City',
     'store_country' => 'Store Country',
     'store_state' => 'Store State',

@@ -50,7 +50,7 @@ return [
         'tab_4' => 'Tab 4',
         'storefront_top_brands' => 'Top Brands',
         'flash_sale' => 'Flash Sale',
-        'vertical_products_1' => 'Vertical Products 1',
+        'vertical_products_1' => 'Vertical Products',
         'vertical_products_2' => 'Vertical Products 2',
         'vertical_products_3' => 'Vertical Products 3',
     ],

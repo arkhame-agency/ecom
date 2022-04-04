@@ -4,7 +4,7 @@
 
 @section('panel')
     @if ($recentOrders->isNotEmpty())
-        <div class="panel">
+        <div class="panel mb-30">
             <div class="panel-header">
                 <h4>{{ trans('storefront::account.dashboard.recent_orders') }}</h4>
 

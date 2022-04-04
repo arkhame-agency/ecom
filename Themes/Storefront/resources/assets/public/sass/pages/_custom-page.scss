@@ -3,10 +3,11 @@
 
     .custom-page-content {
         display: flex;
-
+        font-family: var(--open-sans);
         p {
             text-align: justify;
         }
+
     }
 }
 

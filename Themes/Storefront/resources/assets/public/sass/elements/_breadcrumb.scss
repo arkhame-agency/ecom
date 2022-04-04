@@ -1,6 +1,30 @@
 // Start breadcrumb css here
-.breadcrumb__bg {
+.breadcrumb__bg1 {
     background: url(../images/breadcrumb-1.jpg);
+}
+
+.breadcrumb__bg2 {
+    background: url(../images/breadcrumb-2.jpg);
+}
+
+.breadcrumb__bg3 {
+    background: url(../images/breadcrumb-3.jpg);
+}
+
+.breadcrumb__bg4 {
+    background: url(../images/breadcrumb-4.jpg);
+}
+
+.breadcrumb__bg5 {
+    background: url(../images/breadcrumb-5.jpg);
+}
+
+.breadcrumb__bg6 {
+    background: url(../images/breadcrumb-6.jpg);
+}
+
+
+.breadcrumb__bg {
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -76,6 +100,58 @@
                 text-shadow: 1px 1px 0 #000000;
                 top: 50%;
                 transform: translatey(-50%);
+            }
+        }
+    }
+}
+
+.breadcrumb {
+    margin: 23px 0 0;
+    padding: 0;
+    background: $color-white;
+
+    ul {
+        margin-left: -11px;
+
+        > li {
+            font-size: 15px;
+            line-height: 26px;
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+
+            &:after {
+                position: absolute;
+                content: '\f105';
+                font-family: 'Line Awesome Free';
+                font-weight: 900;
+                font-size: 12px;
+                right: -7px;
+                top: 1px;
+                color: $color-black;
+            }
+
+            &:last-child {
+                &:after {
+                    content: '';
+                }
+            }
+
+            &.active {
+                color: $color-gray-dark;
+
+                &:after {
+                    color: $color-gray-dark;
+                }
+            }
+
+            > a {
+                color: $color-black;
+
+                &:hover {
+                    color: $color-default;
+                    color: var(--color-primary);
+                }
             }
         }
     }

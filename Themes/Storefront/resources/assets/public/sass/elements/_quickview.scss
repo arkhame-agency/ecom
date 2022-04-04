@@ -25,6 +25,11 @@
       transform: translateY(0);
     }
   }
+  .quickview__inner {
+      position: relative;
+      display: -webkit-box;
+      display: flex;
+  }
   .quickview__main--wrapper{
     position: relative;
     max-width: 880px;
@@ -33,7 +38,7 @@
     background: #fff;
     overflow: auto;
     cursor: default;
-    padding: 25px;
+    //padding: 25px;
     transform: translateY(-50px);
     transition: var(--transition);
     @media only screen and (max-width: 767px) {

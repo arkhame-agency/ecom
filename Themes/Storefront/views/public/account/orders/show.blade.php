@@ -1,5 +1,23 @@
 @extends('public.layout')
 
+@push('styles')
+    <style media="print">
+        @media print {
+            header, footer {
+                display: none;
+            }
+
+            .order-details-top .row div:first-child {
+                flex: 2;
+            }
+            .order-details-top .row div {
+                 flex: 1;
+                font-size: 1rem;
+             }
+        }
+    </style>
+@endpush
+
 @section('title', trans('storefront::account.view_order.view_order'))
 
 @section('breadcrumb')

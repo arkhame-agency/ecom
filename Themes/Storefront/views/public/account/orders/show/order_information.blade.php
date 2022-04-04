@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-sm-18">
+<div class="col-lg-4 col-sm-12">
     <div class="order-information">
         <h4>{{ trans('storefront::account.view_order.order_information') }}</h4>
 

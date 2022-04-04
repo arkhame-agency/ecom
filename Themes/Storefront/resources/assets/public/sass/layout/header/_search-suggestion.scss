@@ -8,6 +8,7 @@
     border-bottom: 2px solid var(--color-primary);
     border-radius: 0 0 $radius-default $radius-default;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    overflow: auto;
 
     .search-suggestions-inner {
         max-height: 425px;
@@ -185,7 +186,25 @@
         &.active {
             + .search-suggestions {
                 display: block;
+                top: 128px;
+                left: 0;
+                right: 0;
             }
+        }
+    }
+    .offcanvas__filter--sidebar__inner {
+        .header-search-sm-form {
+            &.active {
+                + .search-suggestions {
+                    display: block;
+                    top: 228px;
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+        .search-suggestions {
+            z-index: 1;
         }
     }
 }

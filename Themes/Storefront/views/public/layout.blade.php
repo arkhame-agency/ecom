@@ -54,9 +54,7 @@
                 'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                 'storefront::layout.all_categories': '{{ trans("storefront::layout.all_categories") }}',
                 'storefront::layout.most_searched': '{{ trans("storefront::layout.most_searched") }}',
-                'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                 'storefront::layout.category_suggestions': '{{ trans("storefront::layout.category_suggestions") }}',
-                'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                 'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                 'storefront::layout.more_results': '{{ trans("storefront::layout.more_results") }}',
                 'storefront::product_card.out_of_stock': '{{ trans("storefront::product_card.out_of_stock") }}',
@@ -75,6 +73,7 @@
                 'storefront::product_card.minutes': '{{ trans("storefront::product_card.minutes") }}',
                 'storefront::product_card.seconds': '{{ trans("storefront::product_card.seconds") }}',
                 'storefront::brands.brands': '{{ trans("storefront::brands.brands") }}',
+                'storefront::layout.remove': '{{ trans("storefront::layout.remove") }}',
             },
         };
     </script>
@@ -90,11 +89,12 @@
     class="page-template {{ is_rtl() ? 'rtl' : 'ltr' }}"
     data-theme-color="#{{ $themeColor->getHex() }}"
     style="--color-primary: #{{ $themeColor->getHex() }};
-        --color-primary-hover: #{{ $themeColor->darken(8) }};
+        --color-primary-hover: #{{ $themeColor->darken(100) }};
         --color-primary-transparent: {{ color2rgba($themeColor, 0.8) }};
         --color-primary-transparent-lite: {{ color2rgba($themeColor, 0.3) }};"
 >
 <div id="app">
+    @yield('before_header')
     @include('public.layout.header')
     <main class="main__content_wrapper">
         @include('public.layout.breadcrumb')
@@ -107,9 +107,9 @@
     <div class="overlay"></div>
 
 {{--@include('public.layout.sidebar_menu')--}}
-{{--@include('public.layout.alert')--}}
-{{--@include('public.layout.newsletter_popup')--}}
-{{--@include('public.layout.cookie_bar')--}}
+@include('public.layout.alert')
+@include('public.layout.newsletter_popup')
+@include('public.layout.cookie_bar')
 
 <!-- Scroll top bar -->
     <button aria-label="scroll top btn" id="scroll__top">

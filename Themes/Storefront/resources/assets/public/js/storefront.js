@@ -62,19 +62,22 @@ $(() => {
         headerWrapInnerHeight = headerWrapInner.outerHeight(),
         headerSearchSm = $('.header-search-sm'),
         searchInputSm = $('.search-input-sm'),
-        headerSearchSmClose = $('.header-search-sm-form .btn-close');
+        // headerSearchSmClose = $('.header-search-sm-form .btn-close');
+        headerSearchSmClose = $('.predictive__search--box .predictive__search--close__btn');
+
 
     headerSearchSm.on('click', (e) => {
         let target = $(e.currentTarget);
 
-        target.parents('.header-search').next().toggleClass('active');
+        // target.parents('.header-search').next().toggleClass('active');
+        $('.header-search').next().toggleClass('active');
         searchInputSm.focus();
     });
 
     headerSearchSmClose.on('click', (e) => {
         let target = $(e.currentTarget);
 
-        target.parents('.header-search-sm-form').removeClass('active');
+        $('.header-search-sm-form').removeClass('active');
     });
 
     _window.on('resize', () => {

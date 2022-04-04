@@ -11,3 +11,52 @@
         border-bottom: 1px solid $border-color-lite;
     }
 }
+
+.order-summary-list {
+    li {
+        display: flex !important;
+        justify-content: space-between;
+        margin-bottom: 9px !important;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    label {
+        margin-bottom: 0;
+        padding-right: 20px;
+    }
+
+    .coupon-code {
+        color: $color-gray;
+        white-space: nowrap;
+    }
+
+    .btn-remove-coupon {
+        font-size: 14px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            color: $color-default;
+            color: var(--color-primary);
+        }
+    }
+}
+
+.order-summary-total {
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    margin-top: 21px;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-top: 1px solid $color-gray-lite;
+
+    label {
+        margin-bottom: 0;
+    }
+}

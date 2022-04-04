@@ -477,5 +477,14 @@ export default {
                 },
             }).open();
         },
+        optionValues(option) {
+            let values = [];
+
+            for (let value of option.values) {
+                values.push(value.label);
+            }
+
+            return values.join(', ');
+        },
     },
 };

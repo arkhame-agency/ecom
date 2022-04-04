@@ -124,6 +124,11 @@
         & .product__items--action__cart--btn {
             opacity: 1;
             visibility: visible;
+            &.disabled,
+            &[disabled] {
+                cursor: default;
+                opacity: .5;
+            }
         }
 
         & .product__cart--btn__style2 {

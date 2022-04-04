@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 {{-- $footerMenuOne --}}
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     @if ($footerMenuOne->isNotEmpty())
                         <div class="footer__widget">
                             <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_one_title') }}
@@ -81,32 +81,32 @@
                     @endif
                 </div>
                 {{-- $footerMenuTwo --}}
-                <div class="col-lg-2 col-md-6">
-                    @if ($footerMenuTwo->isNotEmpty())
-                        <div class="footer__widget">
-                            <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_two_title') }}
-                                <button class="footer__widget--button" aria-label="footer widget button"></button>
-                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                          transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                </svg>
-                            </h2>
-                            <ul class="footer__widget--menu footer__widget--inner">
-                                @foreach ($footerMenuTwo as $menuItem)
-                                    <li class="footer__widget--menu__list">
-                                        <a class="footer__widget--menu__text" target="{{ $menuItem->target }}"
-                                           href="{{ $menuItem->url() }}">
-                                            {{ $menuItem->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </div>
+{{--                <div class="col-lg-2 col-md-6">--}}
+{{--                    @if ($footerMenuTwo->isNotEmpty())--}}
+{{--                        <div class="footer__widget">--}}
+{{--                            <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_two_title') }}--}}
+{{--                                <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
+{{--                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
+{{--                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
+{{--                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
+{{--                                          transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
+{{--                                </svg>--}}
+{{--                            </h2>--}}
+{{--                            <ul class="footer__widget--menu footer__widget--inner">--}}
+{{--                                @foreach ($footerMenuTwo as $menuItem)--}}
+{{--                                    <li class="footer__widget--menu__list">--}}
+{{--                                        <a class="footer__widget--menu__text" target="{{ $menuItem->target }}"--}}
+{{--                                           href="{{ $menuItem->url() }}">--}}
+{{--                                            {{ $menuItem->name }}--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
                 {{-- Account section --}}
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">{{ trans('storefront::layout.my_account') }}
                             <button class="footer__widget--button" aria-label="footer widget button"></button>
@@ -148,56 +148,55 @@
                         </ul>
                     </div>
                 </div>
-                {{-- Newsletter section--}}
+                {{-- Tags section--}}
                 <div class="col-lg-3 col-md-6">
                     <div class="footer__widget">
-                        <h2 class="footer__widget--title ">{{ trans('storefront::layout.subscribe_to_our_newsletter') }}
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
+                        <h2 class="footer__widget--title ">
+                            {{ trans('storefront::layout.tags') }}
                         </h2>
                         <div class="footer__newsletter footer__widget--inner">
-                            <p class="footer__newsletter--desc">
-                                {{ trans('storefront::layout.subscribe_to_our_newsletter_subtitle') }}
-                            </p>
-{{--                            <form @submit.prevent="subscribe" class="newsletter__subscribe--form__style position__relative">--}}
-{{--                                <label>--}}
-{{--                                    <input--}}
-{{--                                        v-model="email"--}}
-{{--                                        class="footer__newsletter--input newsletter__subscribe--input"--}}
-{{--                                        placeholder="{{ trans('storefront::layout.enter_your_email_address') }}"--}}
-{{--                                        type="email"--}}
-{{--                                    >--}}
-{{--                                </label>--}}
-{{--                                <button--}}
-{{--                                    type="submit"--}}
-{{--                                    class="footer__newsletter--button newsletter__subscribe--button primary__btn"--}}
-{{--                                    v-if="subscribed"--}}
-{{--                                    v-cloak--}}
-{{--                                >--}}
-{{--                                    <i class="las la-check"></i>--}}
-{{--                                    {{ trans('storefront::layout.subscribed') }}--}}
-{{--                                </button>--}}
+                            @if ($footerTags->isNotEmpty())
+                                @foreach ($footerTags as $footerTag)
+                                    <a class="footer__widget--menu__text" href="{{ $footerTag->url() }}">
+                                        {{ $footerTag->name }}
+                                    </a>,
+                                @endforeach
+                            @endif
+                            {{--                            <form @submit.prevent="subscribe" class="newsletter__subscribe--form__style position__relative">--}}
+                            {{--                                <label>--}}
+                            {{--                                    <input--}}
+                            {{--                                        v-model="email"--}}
+                            {{--                                        class="footer__newsletter--input newsletter__subscribe--input"--}}
+                            {{--                                        placeholder="{{ trans('storefront::layout.enter_your_email_address') }}"--}}
+                            {{--                                        type="email"--}}
+                            {{--                                    >--}}
+                            {{--                                </label>--}}
+                            {{--                                <button--}}
+                            {{--                                    type="submit"--}}
+                            {{--                                    class="footer__newsletter--button newsletter__subscribe--button primary__btn"--}}
+                            {{--                                    v-if="subscribed"--}}
+                            {{--                                    v-cloak--}}
+                            {{--                                >--}}
+                            {{--                                    <i class="las la-check"></i>--}}
+                            {{--                                    {{ trans('storefront::layout.subscribed') }}--}}
+                            {{--                                </button>--}}
 
-{{--                                <button--}}
-{{--                                    type="submit"--}}
-{{--                                    class="footer__newsletter--button newsletter__subscribe--button primary__btn"--}}
-{{--                                    :class="{ 'btn-loading': subscribing }"--}}
-{{--                                    v-else--}}
-{{--                                    v-cloak--}}
-{{--                                >--}}
-{{--                                    {{ trans('storefront::layout.subscribe') }}--}}
-{{--                                    <svg class="newsletter__subscribe--button__icon" xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                         width="9.159" height="7.85" viewBox="0 0 9.159 7.85">--}}
-{{--                                        <path data-name="Icon material-send"--}}
-{{--                                              d="M3,12.35l9.154-3.925L3,4.5,3,7.553l6.542.872L3,9.3Z"--}}
-{{--                                              transform="translate(-3 -4.5)" fill="currentColor"/>--}}
-{{--                                    </svg>--}}
-{{--                                </button>--}}
-{{--                            </form>--}}
+                            {{--                                <button--}}
+                            {{--                                    type="submit"--}}
+                            {{--                                    class="footer__newsletter--button newsletter__subscribe--button primary__btn"--}}
+                            {{--                                    :class="{ 'btn-loading': subscribing }"--}}
+                            {{--                                    v-else--}}
+                            {{--                                    v-cloak--}}
+                            {{--                                >--}}
+                            {{--                                    {{ trans('storefront::layout.subscribe') }}--}}
+                            {{--                                    <svg class="newsletter__subscribe--button__icon" xmlns="http://www.w3.org/2000/svg"--}}
+                            {{--                                         width="9.159" height="7.85" viewBox="0 0 9.159 7.85">--}}
+                            {{--                                        <path data-name="Icon material-send"--}}
+                            {{--                                              d="M3,12.35l9.154-3.925L3,4.5,3,7.553l6.542.872L3,9.3Z"--}}
+                            {{--                                              transform="translate(-3 -4.5)" fill="currentColor"/>--}}
+                            {{--                                    </svg>--}}
+                            {{--                                </button>--}}
+                            {{--                            </form>--}}
                         </div>
                     </div>
                 </div>
@@ -246,23 +245,7 @@
 {{--                        </div>--}}
 {{--                    @endif--}}
 
-{{--                    @if ($footerTags->isNotEmpty())--}}
-{{--                        <div class="col-lg-4 col-md-7">--}}
-{{--                            <div class="footer-links footer-tags">--}}
-{{--                                <h4 class="title">{{ trans('storefront::layout.tags') }}</h4>--}}
 
-{{--                                <ul class="list-inline">--}}
-{{--                                    @foreach ($footerTags as $footerTag)--}}
-{{--                                        <li>--}}
-{{--                                            <a href="{{ $footerTag->url() }}">--}}
-{{--                                                {{ $footerTag->name }}--}}
-{{--                                            </a>--}}
-{{--                                        </li>--}}
-{{--                                    @endforeach--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
 {{--                </div>--}}
 {{--            </div>--}}
 

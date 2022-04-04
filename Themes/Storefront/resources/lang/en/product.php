@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'details' => 'Product Details',
     'left_in_stock' => ':count left in stock',
     'in_stock' => 'In stock',
     'out_of_stock' => 'Out of stock',
@@ -12,7 +13,7 @@ return [
         'choose_an_option' => 'Choose an option',
     ],
     'quantity' => 'Quantity',
-    'add_to_cart' => 'ADD TO CART',
+    'add_to_cart' => 'Add to Cart',
     'sku' => 'SKU:',
     'categories' => 'Categories:',
     'tags' => 'Tags:',
@@ -37,4 +38,5 @@ return [
     ],
     'be_the_first_one_to_review_this_product' => 'Be the first one to review this product.',
     'related_products' => 'Related Products',
+    'guaranteed_safe_checkout' => 'Guaranteed Safe Checkout',
 ];

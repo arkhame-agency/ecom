@@ -44,12 +44,12 @@
 @section('content')
 
     <!-- Start breadcrumb section -->
-    <section class="breadcrumb__section breadcrumb__bg">
+    <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg1">
         <div class="container">
             <div class="row row-cols-1">
                 <div class="col">
                     <div class="breadcrumb__content">
-                        <h1 class="breadcrumb__content--title text-white mb-10">Product Details</h1>
+                        <h1 class="breadcrumb__content--title text-white mb-10">{{ trans('storefront::product.details') }}</h1>
                         <ul class="breadcrumb__content--menu d-flex">
                             @if (! $categoryBreadcrumb)
                                 <li class="breadcrumb__content--menu__items">
@@ -175,9 +175,6 @@
                                         <i class="la-heart" :class="inCompareList ? 'las' : 'lar'"></i>
                                         {{ trans('storefront::product.add_to_compare') }}
                                     </a>
-                                    {{--                                            <button class="variant__buy--now__btn primary__btn" type="submit">Buy it--}}
-                                    {{--                                                now--}}
-                                    {{--                                            </button>--}}
                                 </div>
                                 <hr/>
                                 <div class="product__variant--list mb-15">
@@ -209,11 +206,11 @@
                                 </div>
                             </div>
                             <div class="quickview__social d-flex align-items-center mb-15">
-                                <label class="quickview__social--title">Social Share:</label>
+                                <label class="quickview__social--title">{{ trans('storefront::product.share') }}</label>
                                 @include('public.products.show.social_share')
                             </div>
                             <div class="guarantee__safe--checkout">
-                                <h5 class="guarantee__safe--checkout__title">Guaranteed Safe Checkout</h5>
+                                <h5 class="guarantee__safe--checkout__title">{{ trans('storefront::product.guaranteed_safe_checkout') }}</h5>
                                 <img class="guarantee__safe--checkout__img"
                                      src="{{ asset('themes/storefront/public/img/other/safe-checkout.webp') }}"
                                      alt="Payment Image">

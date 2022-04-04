@@ -1615,6 +1615,24 @@ body.overlay__active::before,
 .mt-0 {
   margin-top: 0;
 }
+.mt-3 {
+    margin-top: 1rem;
+}
+.mt-30 {
+    margin-top: 3rem;
+}
+.mt-15 {
+    margin-top: 1rem;
+    @media only screen and (min-width: 768px) {
+        margin-top: 1.5rem;
+    }
+}
+.mx-15 {
+    margin: 0 1rem;
+    @media only screen and (min-width: 768px) {
+        margin: 0 1.5rem;
+    }
+}
 .mb-0 {
   margin-bottom: 0;
 }
@@ -1741,4 +1759,22 @@ body.overlay__active::before,
 }
 .mr-30 {
   margin-right: 3rem;
+}
+
+.mr-3 {
+   margin-right: 1rem;
+}
+
+.in-stock {
+    margin-top: 1rem;
+    color: $color-green;
+}
+
+.out-of-stock {
+    margin-top: 1rem;
+    color: $color-red;
+}
+
+footer {
+    margin-top: 50px;
 }

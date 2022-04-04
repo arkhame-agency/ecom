@@ -19,86 +19,97 @@
                     @method('put')
 
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">
                                     {{ trans('storefront::account.profile.email') }}<span>*</span>
                                 </label>
 
-                                <input type="text" name="email" value="{{ old('email', $account->email) }}" id="email" class="form-control">
+                                <input
+                                    type="text"
+                                    name="email"
+                                    value="{{ old('email', $account->email) }}" id="email"
+                                    class="checkout__input--field border-radius-5">
 
                                 @error('email')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">
                                     {{ trans('storefront::account.profile.phone') }}<span>*</span>
                                 </label>
 
-                                <input type="text" name="phone" value="{{ old('phone', $account->phone) }}" id="phone" class="form-control">
+                                <input type="text" name="phone" value="{{ old('phone', $account->phone) }}" id="phone"
+                                       class="checkout__input--field border-radius-5">
 
                                 @error('phone')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name">
                                     {{ trans('storefront::account.profile.first_name') }}<span>*</span>
                                 </label>
 
-                                <input type="text" name="first_name" value="{{ old('first_name', $account->first_name) }}" id="first-name" class="form-control">
+                                <input type="text" name="first_name"
+                                       value="{{ old('first_name', $account->first_name) }}" id="first-name"
+                                       class="checkout__input--field border-radius-5">
 
                                 @error('first_name')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="last-name">
                                     {{ trans('storefront::account.profile.last_name') }}<span>*</span>
                                 </label>
 
-                                <input type="text" name="last_name" value="{{ old('last_name', $account->last_name) }}" id="last-name" class="form-control">
+                                <input type="text" name="last_name" value="{{ old('last_name', $account->last_name) }}"
+                                       id="last-name"
+                                       class="checkout__input--field border-radius-5">
 
                                 @error('last_name')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password">
                                     {{ trans('storefront::account.profile.password') }}
                                 </label>
 
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password"
+                                       class="checkout__input--field border-radius-5">
 
                                 @error('password')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="confirm-password">
                                     {{ trans('storefront::account.profile.confirm_password') }}
                                 </label>
 
-                                <input type="password" name="password_confirmation" id="confirm-password" class="form-control">
+                                <input type="password" name="password_confirmation" id="confirm-password"
+                                       class="checkout__input--field border-radius-5">
 
                                 @error('password_confirmation')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>

@@ -1,3 +1,26 @@
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: transparent; // Reset for nesting within parents with `background-color`.
+
+    th,
+    td {
+        padding: 0.25rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    thead th {
+        vertical-align: bottom;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    tbody + tbody {
+        border-top: 1px solid #dee2e6;
+    }
+}
+
 .table-bordered {
 	td {
 		border-color: $color-gray-lite;
@@ -16,6 +39,7 @@
             &:first-child {
                 td {
                     padding-top: 30px;
+                    border: none;
                 }
             }
         }
@@ -28,7 +52,7 @@
 	}
 
 	td {
-        padding: 20px 30px;
+        padding: 20px 20px;
 		border-color: $color-gray-lite;
 	}
 }

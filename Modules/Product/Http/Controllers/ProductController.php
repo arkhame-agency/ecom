@@ -40,6 +40,7 @@ class ProductController extends Controller
 
         return view('public.products.index', [
             'logo' => $this->getHeaderLogo(),
+            'routeArray' => $this->getUrl(),
         ]);
     }
 
@@ -107,5 +108,14 @@ class ProductController extends Controller
         return Cache::rememberForever(md5("files.{$fileId}"), function () use ($fileId) {
             return File::findOrNew($fileId);
         });
+    }
+
+    public function getUrl()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $routeArray[$locale] = trans('brand::routes.products', [], $locale);
+        }
+        return $routeArray;
     }
 }

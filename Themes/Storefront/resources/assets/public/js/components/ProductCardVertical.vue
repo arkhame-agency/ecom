@@ -65,11 +65,11 @@
                     <span class="current__price style2" v-html="product.formatted_price">$-.--</span>
                     <!--                    <span class="old__price style2">$200.00</span>-->
                 </div>
-                <a class="product__cart--btn__style2 primary__btn"
+                <button class="product__cart--btn__style2 primary__btn"
                    v-if="hasNoOption || product.is_out_of_stock"
                    :class="{ 'btn-loading': addingToCart }"
                    :disabled="product.is_out_of_stock"
-                   @click="addToCart">{{ $trans('storefront::product_card.add_to_cart') }}</a>
+                   @click="addToCart">{{ $trans('storefront::product_card.add_to_cart') }}</button>
                 <a
                     v-else
                     :href="productUrl"

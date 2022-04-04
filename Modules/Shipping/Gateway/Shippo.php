@@ -114,11 +114,11 @@ class Shippo implements GatewayInterface
 
         foreach ($request->cartItems as $cartItem) {
             $this->parcels[] = [
-                "length" => $cartItem['product']['length'],
-                "width" => $cartItem['product']['width'],
-                "height" => $cartItem['product']['height'],
+                "length" => $cartItem['product']['length'] ?? "1",
+                "width" => $cartItem['product']['width'] ?? "1",
+                "height" => $cartItem['product']['height'] ?? "1",
                 'distance_unit' => 'cm',
-                "weight" => $cartItem['product']['weight'] * $cartItem['qty'],
+                "weight" => $cartItem['product']['weight'] ?? "1" * $cartItem['qty'],
                 'mass_unit' => 'kg',
             ];
         }

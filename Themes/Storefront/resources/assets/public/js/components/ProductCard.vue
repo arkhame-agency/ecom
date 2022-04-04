@@ -4,7 +4,8 @@
             <div class="product__items--thumbnail">
                 <a class="product__items--link" :href="productUrl">
                     <img :src="baseImage"
-                         :class="{ 'image-placeholder': ! hasBaseImage, 'product__items--img product__primary--img' : true }"
+                         class="product__items--img product__primary--img"
+                         :class="{ 'image-placeholder': ! hasBaseImage }"
                          alt="product image">
 
                     <img class="product__items--img product__secondary--img"
@@ -70,7 +71,7 @@
                     $-.--
                 </span>
                 </div>
-                <a class="product__items--action__cart--btn primary__btn"
+                <button class="product__items--action__cart--btn primary__btn"
                    v-if="hasNoOption || product.is_out_of_stock"
                    :class="{ 'btn-loading': addingToCart }"
                    :disabled="product.is_out_of_stock"
@@ -83,7 +84,7 @@
                             transform="translate(-2.667 -1.366)" fill="currentColor"></path>
                     </svg>
                     <span class="add__to--cart__text">{{ $trans('storefront::product_card.add_to_cart') }}</span>
-                </a>
+                </button>
                 <a
                     v-else
                     :href="productUrl"
