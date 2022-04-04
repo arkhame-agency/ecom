@@ -109,9 +109,9 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="contact__info--items">
-                                <h3 class="contact__info--content__title text-white mb-15">{{ trans('storefront::contact.follow_us') }}</h3>
-                                @if (social_links()->isNotEmpty())
+                            @if (social_links()->isNotEmpty())
+                                <div class="contact__info--items">
+                                    <h3 class="contact__info--content__title text-white mb-15">{{ trans('storefront::contact.follow_us') }}</h3>
                                     <ul class="contact__info--social d-flex">
                                         @foreach (social_links() as $icon => $socialLink)
                                             <li class="contact__info--social__list">
@@ -122,8 +122,8 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -183,7 +183,7 @@
                                             <label class="contact__form--label" for="input3">
                                                 {{ trans('contact::attributes.captcha') }}
                                                 <span class="contact__form--label__star">*</span>
-                                                <br />
+                                                <br/>
                                                 @captcha
                                             </label>
                                             <input type="text" name="captcha" class="contact__form--input"
