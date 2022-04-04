@@ -7,6 +7,7 @@ return [
         'from' => 'From',
         'to' => 'To',
     ],
+    'filter' => 'Filter',
     'filters' => 'Filters',
     'latest_products' => 'Latest Products',
     'search_results_for' => 'Search results for:',

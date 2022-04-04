@@ -45,12 +45,14 @@
     }
 
     ul, ol {
-        padding-left: 40px;
-        margin-bottom: revert;
-        overflow: hidden;
+        margin: revert;
+        overflow: revert;
+        padding: revert;
 
         li {
-            margin-bottom: 9px;
+            margin: revert;
+            list-style: revert;
+            line-height: revert;
             color: $color-gray;
         }
     }

@@ -17,7 +17,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb__content--menu__items">
-                                <span class="text-white">Contact Us</span>
+                                <span class="text-white">{{ trans('storefront::contact.contact_us') }}</span>
                             </li>
                         </ul>
                     </div>

@@ -35,7 +35,7 @@
             </div>
         </div>
         <div ref="priceRange" @change="fetchProducts" class="mb-15"></div>
-        <button class="price__filter--btn primary__btn" @click="fetchProducts">Filter</button>
+        <button class="price__filter--btn primary__btn" @click="fetchProducts">{{ trans('storefront::products.filter') }}</button>
     </form>
 </div>
 
