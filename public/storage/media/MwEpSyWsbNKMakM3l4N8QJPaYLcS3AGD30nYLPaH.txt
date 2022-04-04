@@ -1,0 +1,5 @@
+SELECT pcat.product_id, '7' as category_id  FROM products as product
+INNER JOIN product_categories as pcat
+	ON product.id = pcat.product_id
+WHERE pcat.category_id in (8, 9, 10, 13, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 149, 1254, 14, 150, 151, 1501, 31, 152, 1409, 1411, 32, 155, 156, 157, 158, 159, 160, 161, 162, 1530, 1532, 1533)
+GROUP BY product.id
