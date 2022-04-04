@@ -32,7 +32,7 @@ class StorefrontTabs extends Tabs
             ->add($this->footer())
             ->add($this->newsletter())
             ->add($this->features())
-            ->add($this->productPage())
+//            ->add($this->productPage())
             ->add($this->socialLinks());
 
         $this->group('home_page_sections', trans('storefront::storefront.tabs.group.home_page_sections'))
