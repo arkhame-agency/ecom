@@ -1,7 +1,7 @@
 <ul class="quickview__social--wrapper mt-0 d-flex">
     <li class="quickview__social--list">
         <a class="quickview__social--icon" target="_blank"
-           href="https://twitter.com/share?url={{ url()->current() }}&text={{ $product->name }}" title="{{ trans('storefront::product.twitter') }}">
+           href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" title="{{ trans('storefront::product.twitter') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="7.667"
                  height="16.524" viewBox="0 0 7.667 16.524">
                 <path data-name="Path 237"
