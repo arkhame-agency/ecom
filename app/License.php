@@ -100,19 +100,19 @@ class License
 
     public function shouldCreateLicense()
     {
-        if ($this->valid()) {
-            return false;
-        }
+//        if ($this->valid()) {
+//            return false;
+//        }
+//
+//        if ($this->runningInLocal()) {
+//            return false;
+//        }
+//
+//        if ($this->inFrontend()) {
+//            return false;
+//        }
 
-        if ($this->runningInLocal()) {
-            return false;
-        }
-
-        if ($this->inFrontend()) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     private function runningInLocal()
