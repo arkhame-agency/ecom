@@ -27,6 +27,16 @@ class Role extends EloquentRole
     protected $translatedAttributes = ['name'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'global_marge',
+        'increase_or_decrease',
+    ];
+
+    /**
      * Get a list of all roles.
      *
      * @return array
@@ -55,6 +65,18 @@ class Role extends EloquentRole
     public function setPermissionsAttribute(array $permissions)
     {
         $this->attributes['permissions'] = Permission::prepare($permissions);
+    }
+
+    public function hasMargePrice() {
+        return $this->global_marge > 0;
+    }
+
+    public function isMargeIncrease() {
+        return $this->increase_or_decrease === "1";
+    }
+
+    public function getMargeInterest() {
+        return $this->global_marge;
     }
 
     /**

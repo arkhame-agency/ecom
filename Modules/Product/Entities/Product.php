@@ -3,6 +3,7 @@
 namespace Modules\Product\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Admin\Traits\CanSaveQuietly;
 use Modules\Attribute\Entities\ProductAttribute;
 use Modules\Brand\Entities\Brand;
 use Modules\Category\Entities\Category;
@@ -26,7 +27,8 @@ class Product extends Model
         Searchable,
         HasMedia,
         HasMetaData,
-        SoftDeletes;
+        SoftDeletes,
+        CanSaveQuietly;
 
     /**
      * The relations to eager load on every query.
@@ -256,9 +258,20 @@ class Product extends Model
         return $filter->apply($this);
     }
 
+    private function finalPrice($price)
+    {
+        if (auth()->user() !== null && auth()->user()->isReseller()) {
+            if (auth()->user()->isMargeIncrease()) {
+                return ((auth()->user()->getMargeInterest() / 100) * $price) + $price;
+            }
+            return ($price - (auth()->user()->getMargeInterest() / 100) * $price);
+        }
+        return $price;
+    }
+
     public function getPriceAttribute($price)
     {
-        return Money::inDefaultCurrency($price);
+        return Money::inDefaultCurrency($this->finalPrice($price));
     }
 
     public function getSpecialPriceAttribute($specialPrice)
@@ -274,7 +287,7 @@ class Product extends Model
             $sellingPrice = FlashSale::pivot($this)->price->amount();
         }
 
-        return Money::inDefaultCurrency($sellingPrice);
+        return Money::inDefaultCurrency($this->finalPrice($sellingPrice));
     }
 
     public function getTotalAttribute($total)
@@ -377,7 +390,7 @@ class Product extends Model
         $routeArray = [];
         foreach (supported_locales() as $locale => $language) {
             $slugTranslated = $this->getSlugTranslated($this, ProductTranslation::class, $locale);
-            $routeArray[$locale] = trans('product::routes.products', [], $locale).'/'.$slugTranslated->slug;
+            $routeArray[$locale] = trans('product::routes.products', [], $locale) . '/' . $slugTranslated->slug;
         }
         return $routeArray;
     }
@@ -447,7 +460,7 @@ class Product extends Model
             $specialPrice = 0;
         }
 
-        return Money::inDefaultCurrency($specialPrice);
+        return Money::inDefaultCurrency($this->finalPrice($specialPrice));
     }
 
     public function hasPercentageSpecialPrice()

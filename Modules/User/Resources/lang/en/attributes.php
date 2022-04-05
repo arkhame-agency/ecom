@@ -22,4 +22,11 @@ return [
     'roles' => [
         'name' => 'Name',
     ],
+
+    'global_marge' => 'Global marge',
+    'increase_or_decrease' => 'Increase or Decrease',
+    'select_increase_or_decrease' => [
+        '0' => 'Decrease',
+        '1' => 'Increase',
+    ],
 ];

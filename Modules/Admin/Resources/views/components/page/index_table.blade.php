@@ -3,7 +3,8 @@
         <div class="btn-group pull-right">
             @if (isset($buttons, $name))
                 @foreach ($buttons as $view)
-                    <a href="{{ route("admin.{$resource}.{$view}") }}" class="btn btn-primary btn-actions btn-{{ $view }}">
+                    <a href="{{ route("admin.{$resource}.{$view}") }}"
+                       class="btn btn-primary btn-actions btn-{{ $view }}">
                         {{ trans("admin::resource.{$view}", ['resource' => $name]) }}
                     </a>
                 @endforeach
@@ -42,9 +43,9 @@
     @push('scripts')
         <script>
             @if (isset($buttons) && in_array('create', $buttons))
-                keypressAction([
-                    { key: 'c', route: '{{ route("admin.{$resource}.create") }}'}
-                ]);
+            keypressAction([
+                { key: 'c', route: '{{ route("admin.{$resource}.create") }}' },
+            ]);
             @endif
 
             Mousetrap.bind('del', function () {
@@ -56,11 +57,11 @@
             });
 
             @isset($resource)
-                DataTable.setRoutes('#{{ $resource }}-table .table', {
-                    index: '{{ "admin.{$resource}.index" }}',
-                    edit: '{{ "admin.{$resource}.edit" }}',
-                    destroy: '{{ "admin.{$resource}.destroy" }}',
-                });
+            DataTable.setRoutes('#{{ $resource }}-table .table', {
+                index: '{{ "admin.{$resource}.index" }}',
+                edit: '{{ "admin.{$resource}.edit" }}',
+                destroy: '{{ "admin.{$resource}.destroy" }}',
+            });
             @endisset
         </script>
     @endpush

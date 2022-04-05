@@ -26,7 +26,7 @@ class AddShipmentLabelIdToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropColumn('shipment_label_id');
         });
     }
 }

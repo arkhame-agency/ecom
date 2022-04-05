@@ -79,6 +79,25 @@ class User extends EloquentUser implements AuthenticatableContract
         return $this->hasRoleId(setting('customer_role'));
     }
 
+
+    /**
+     * Determine if the user is a reseller.
+     *
+     * @return bool
+     */
+    public function isReseller()
+    {
+        return $this->hasRoleName('revendeur');
+    }
+
+    public function getMargeInterest() {
+        return $this->roles()->first()->global_marge;
+    }
+
+    public function isMargeIncrease() {
+        return $this->roles()->first()->increase_or_decrease === '1';
+    }
+
     /**
      * Checks if a user belongs to the given Role ID.
      *

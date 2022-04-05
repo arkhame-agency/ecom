@@ -20,6 +20,13 @@ class SidebarExtender extends BaseSidebarExtender
                         $this->auth->hasAccess('admin.importer.index')
                     );
                 });
+                $item->item(trans('import::sidebar.update_prices'), function (Item $item) {
+                    $item->weight(6);
+                    $item->route('admin.update_prices.index');
+                    $item->authorize(
+                        $this->auth->hasAccess('admin.importer.index')
+                    );
+                });
             });
         });
     }

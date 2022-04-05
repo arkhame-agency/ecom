@@ -6,6 +6,7 @@ use Maatwebsite\Excel\Excel;
 use Modules\Import\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel as ExcelFacade;
 use Modules\Import\Http\Requests\StoreImporterRequest;
+use Modules\Product\Entities\Product;
 
 class ImporterController
 {
@@ -40,5 +41,38 @@ class ImporterController
         }
 
         return back()->with('success', trans('import::messages.the_importer_has_been_run_successfully'));
+    }
+
+    public function updatePrices()
+    {
+        foreach (Product::query()->get() as $product) {
+            $product->updateQuietly([
+                'price' => $this->finalPrice($product->price->amount()),
+                'selling_price' => $this->finalPrice($product->selling_price->amount()),
+            ]);
+        }
+        return back()->with('success', trans('import::messages.update_prices_has_been_run_successfully'));
+    }
+
+    public function indexUpdatePrices()
+    {
+        return view('import::admin.importer.updatePrices');
+    }
+
+    private function finalPrice($price)
+    {
+        if (request()->increase_or_decrease === '1') {
+            return ((request()->marge / 100) * $price) + $price;
+        }
+        return $price - ((request()->marge / 100) * $price);
+    }
+
+    private function explode($values)
+    {
+        if (trim($values) == '') {
+            return false;
+        }
+
+        return array_map('trim', explode(',', $values));
     }
 }
