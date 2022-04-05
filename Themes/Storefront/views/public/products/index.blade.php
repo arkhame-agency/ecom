@@ -31,47 +31,6 @@
     </script>
 @endpush
 
-@section('before_header')
-    <product-index
-        initial-query="{{ request('query') }}"
-        initial-category-slug="{{ request('category') }}"
-        :initial-attribute="{{ json_encode(request('attribute', [])) }}"
-        :max-price="{{ $maxPrice }}"
-        inline-template
-    >
-        <!-- Start offcanvas filter sidebar -->
-        <div class="offcanvas__filter--sidebar widget__area">
-            <button type="button" class="offcanvas__filter--close">
-                <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                          stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                </svg>
-                <span class="offcanvas__filter--close__text">{{ trans('storefront::products.close') }}</span>
-            </button>
-            <div class="offcanvas__filter--sidebar__inner">
-                <div class="single__widget widget__bg">
-                    <h2 class="widget__title position__relative h3">{{ trans('storefront::products.search') }}</h2>
-                    <header-search
-                        :categories="{{ $categories }}"
-                        :most-searched-keywords="{{ $mostSearchedKeywords }}"
-                        initial-query="{{ request('query') }}"
-                        initial-category="{{ request('category') }}"
-                    >
-                    </header-search>
-                </div>
-                <div class="single__widget widget__bg">
-                    <h2 class="widget__title position__relative h3">{{ trans('storefront::products.browse_categories') }}</h2>
-                    @if ($categories->isNotEmpty())
-                        @include('public.products.index.browse_categories')
-                    @endif
-                </div>
-                @include('public.products.index.filter')
-            </div>
-        </div>
-    </product-index>
-    <!-- End offcanvas filter sidebar -->
-@endsection
-
 @section('content')
     <product-index
         initial-query="{{ request('query') }}"
@@ -149,9 +108,12 @@
                                 </h4>
                                 <h2 class="widget__title h2" v-else-if="queryParams.brand && !brandPresentation"
                                     v-text="initialBrandName" v-cloak></h2>
-                                <h2 class="widget__title h2" v-else-if="queryParams.category" v-text="categoryName" v-cloak></h2>
-                                <h2 class="widget__title h2" v-else-if="queryParams.tag" v-text="initialTagName" v-cloak></h2>
-                                <h2 class="widget__title h2" v-else v-cloak>{{ trans('storefront::products.shop') }}</h2>
+                                <h2 class="widget__title h2" v-else-if="queryParams.category" v-text="categoryName"
+                                    v-cloak></h2>
+                                <h2 class="widget__title h2" v-else-if="queryParams.tag" v-text="initialTagName"
+                                    v-cloak></h2>
+                                <h2 class="widget__title h2" v-else
+                                    v-cloak>{{ trans('storefront::products.shop') }}</h2>
                             </div>
                             <div class="shop__header bg__gray--color d-flex align-items-center justify-content-between
                             mb-30">
@@ -168,12 +130,14 @@
                                         <circle cx="336" cy="384" r="28" fill="none" stroke="currentColor"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="28"/>
                                     </svg>
-                                    <span class="widget__filter--btn__text">{{ trans('storefront::products.filters') }}</span>
+                                    <span
+                                        class="widget__filter--btn__text">{{ trans('storefront::products.filters') }}</span>
                                 </button>
                                 <div class="product__view--mode d-flex align-items-center">
                                     <div
                                         class="product__view--mode__list product__short--by align-items-center d-none d-lg-flex">
-                                        <label class="product__view--label">{{ trans('storefront::products.per_page') }} :</label>
+                                        <label class="product__view--label">{{ trans('storefront::products.per_page') }}
+                                            :</label>
                                         <div class="select shop__header--select">
                                             <select
                                                 class="product__view--select"
@@ -348,6 +312,37 @@
                 </div>
             </section>
             <!-- End shop section -->
+
+            <!-- Start offcanvas filter sidebar -->
+            <div class="offcanvas__filter--sidebar widget__area">
+                <button type="button" class="offcanvas__filter--close">
+                    <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
+                    </svg>
+                    <span class="offcanvas__filter--close__text">{{ trans('storefront::products.close') }}</span>
+                </button>
+                <div class="offcanvas__filter--sidebar__inner">
+                    <div class="single__widget widget__bg">
+                        <h2 class="widget__title position__relative h3">{{ trans('storefront::products.search') }}</h2>
+                        <header-search
+                            :categories="{{ $categories }}"
+                            :most-searched-keywords="{{ $mostSearchedKeywords }}"
+                            initial-query="{{ request('query') }}"
+                            initial-category="{{ request('category') }}"
+                        >
+                        </header-search>
+                    </div>
+                    <div class="single__widget widget__bg">
+                        <h2 class="widget__title position__relative h3">{{ trans('storefront::products.browse_categories') }}</h2>
+                        @if ($categories->isNotEmpty())
+                            @include('public.products.index.browse_categories', ['type'=>'filter'])
+                        @endif
+                    </div>
+                    @include('public.products.index.filter')
+                </div>
+            </div>
+            <!-- End offcanvas filter sidebar -->
         </div>
     </product-index>
 @endsection

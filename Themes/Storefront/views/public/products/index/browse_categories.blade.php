@@ -1,4 +1,4 @@
-<ul class="widget__categories--menu">
+<ul class="widget__categories--menu {{$type ?? ''}}">
     @foreach ($categories as $category)
         <li class="widget__categories--menu__list"
             :class="{ active: queryParams.category === '{{ $category->slug }}' }">

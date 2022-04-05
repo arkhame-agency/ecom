@@ -1,6 +1,11 @@
 import { trans } from '../../../functions';
 
 export function collapseFilters() {
+    let $offCanvasFiler = $('.offcanvas__filter--sidebar');
+    if ($offCanvasFiler.length !== 0) {
+        $offCanvasFiler.removeClass('active');
+        $('body').removeClass('offcanvas__filter--sidebar_active');
+    }
     $('.filter-checkbox').each(function () {
         let self = $(this);
         let filterCollapseCheckbox = self.children().eq(4).nextAll('.form-check');
