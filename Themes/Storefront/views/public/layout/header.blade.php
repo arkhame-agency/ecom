@@ -222,40 +222,6 @@
                             @endforeach
                         </ul>
                     </li>
-                    {{--                    @if ($categoryMenu->menus()->isNotEmpty())--}}
-                    {{--                        <li class="header__menu--items mega__menu--items">--}}
-                    {{--                            <a class="header__menu--link" href="{{ route('products.index') }}">--}}
-                    {{--                                {{ trans('storefront::layout.all_categories') }}--}}
-                    {{--                                @if ($categoryMenu->menus()->count())--}}
-                    {{--                                    <span class="menu__plus--icon">+</span>--}}
-                    {{--                                @endif--}}
-                    {{--                            </a>--}}
-                    {{--                            <ul class="header__mega--menu d-flex">--}}
-                    {{--                                @foreach ($categoryMenu->menus() as $menu)--}}
-                    {{--                                    <li class="header__mega--menu__li">--}}
-                    {{--                                                <span class="header__mega--subtitle">--}}
-                    {{--                                                    <a href="{{ $menu->url() }}" target="{{ $menu->target() }}">--}}
-                    {{--                                                        {{ $menu->name() }}--}}
-                    {{--                                                    </a>--}}
-                    {{--                                                </span>--}}
-                    {{--                                        <ul class="header__mega--sub__menu">--}}
-                    {{--                                            @foreach ($menu->subMenus() as $subMenu)--}}
-                    {{--                                                <li class="header__mega--sub__menu_li">--}}
-                    {{--                                                    <a class="header__mega--sub__menu--title" href="{{ $subMenu->url() }}"--}}
-                    {{--                                                       target="{{ $subMenu->target() }}">--}}
-                    {{--                                                        {{ $subMenu->name() }}--}}
-                    {{--                                                    </a>--}}
-                    {{--                                                    @foreach($subMenu->items() as $item)--}}
-                    {{--                                                        $subMenu -> {{ $item->name() }}<br/>--}}
-                    {{--                                                    @endforeach--}}
-                    {{--                                                </li>--}}
-                    {{--                                            @endforeach--}}
-                    {{--                                        </ul>--}}
-                    {{--                                    </li>--}}
-                    {{--                                @endforeach--}}
-                    {{--                            </ul>--}}
-                    {{--                        </li>--}}
-                    {{--                    @endif--}}
                     @foreach ($primaryMenu->menus() as $menu)
                         @include('public.layout.navigation.offcanvas_menu')
                     @endforeach

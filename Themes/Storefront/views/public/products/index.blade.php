@@ -34,6 +34,8 @@
 @section('before_header')
     <product-index
         initial-query="{{ request('query') }}"
+        initial-category-slug="{{ request('category') }}"
+        :initial-attribute="{{ json_encode(request('attribute', [])) }}"
         :max-price="{{ $maxPrice }}"
         inline-template
     >
@@ -99,7 +101,9 @@
                     <div class="row row-cols-1">
                         <div class="col">
                             <div class="breadcrumb__content">
-                                <h1 class="breadcrumb__content--title text-white mb-10">{{ trans('storefront::products.our_products') }}</h1>
+                                <h1 class="breadcrumb__content--title text-white mb-10">
+                                    {{ trans('storefront::products.our_products') }}
+                                </h1>
                                 <ul class="breadcrumb__content--menu d-flex">
                                     <li class="breadcrumb__content--menu__items">
                                         <a class="text-white" href="{{ route('home') }}">
