@@ -1,5 +1,5 @@
 <!-- Start header area -->
-<header class="header__section header__transparent">
+<header class="header__section header__others header__transparent {{ ! request()->routeIs('home') ? 'border-bottom mb-30' : '' }}">
 
     <!-- Start Header topbar -->
     <div class="header__topbar bg__primary">
