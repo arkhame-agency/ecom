@@ -641,7 +641,7 @@ class Product extends Model
     {
         $this->categories()->sync(array_get($attributes, 'categories', []));
         $this->tags()->sync(array_get($attributes, 'tags', []));
-        $this->upSellProducts()->sync(array_get($attributes, 'up_sells', []));
+//        $this->upSellProducts()->sync(array_get($attributes, 'up_sells', []));
         $this->crossSellProducts()->sync(array_get($attributes, 'cross_sells', []));
         $this->relatedProducts()->sync(array_get($attributes, 'related_products', []));
     }
