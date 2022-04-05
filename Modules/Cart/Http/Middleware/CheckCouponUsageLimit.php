@@ -5,7 +5,6 @@ namespace Modules\Cart\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Modules\Cart\Facades\Cart;
-use Modules\Coupon\Exceptions\CouponUsageLimitReachedException;
 
 class CheckCouponUsageLimit
 {
@@ -19,7 +18,8 @@ class CheckCouponUsageLimit
     public function handle(Request $request, Closure $next)
     {
         if (Cart::coupon()->usageLimitReached($request->customer_email)) {
-            throw new CouponUsageLimitReachedException;
+            Cart::removeCoupon();
+            return redirect()->route('cart.index')->with('error', trans('coupon::messages.usage_limit_reached'));
         }
 
         return $next($request);
