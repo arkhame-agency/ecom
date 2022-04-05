@@ -3,8 +3,8 @@
         <div class="section__header checkout__section--header d-flex align-items-center justify-content-between mb-25">
             <h2 class="section__header--title h3">{{ trans('storefront::checkout.account_details') }}</h2>
             <p class="layout__flex--item">
-                Already have an account?
-                <a class="layout__flex--item__link" href="login.html">Log in</a>
+                {{ trans('user::auth.already_have_an_account') }}
+                <a class="layout__flex--item__link" href="{{ route('login') }}">{{ trans('user::auth.login') }}</a>
             </p>
         </div>
         <div class="customer__information">
