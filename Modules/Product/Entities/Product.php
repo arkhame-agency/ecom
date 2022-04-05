@@ -260,7 +260,7 @@ class Product extends Model
 
     private function finalPrice($price)
     {
-        if (auth()->user() !== null && auth()->user()->isReseller()) {
+        if (auth()->user() !== null && ! auth()->user()->isCustomer()) {
             if (auth()->user()->isMargeIncrease()) {
                 return ((auth()->user()->getMargeInterest() / 100) * $price) + $price;
             }

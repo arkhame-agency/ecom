@@ -13,6 +13,8 @@
 '~line-awesome/dist/line-awesome/scss/line-awesome';
 //'utils/_common';
 
+@import "global";
+
 @import
     'components/_countdown',
     'components/_loader',
@@ -66,8 +68,7 @@
     'pages/_account',
     'pages/_order-complete',
     // Override the CSS core
-    'custom/_custom',
-    'global';
+    'custom/_custom';
 
 [v-cloak] {
     display: none !important;
