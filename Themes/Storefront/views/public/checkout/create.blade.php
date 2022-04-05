@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', trans('storefront::checkout.checkout'))
+{{--@section('title', trans('storefront::checkout.checkout'))--}}
 
 @section('content')
     <checkout-create
@@ -12,55 +12,52 @@
         :countries="{{ json_encode($countries) }}"
         inline-template
     >
-        <!-- Start checkout page area -->
-        <div class="checkout__page--area section--padding">
-            <div class="container">
-                <form @submit.prevent="placeOrder" @input="errors.clear($event.target.name)">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-6">
-                            <div class="main checkout__mian checkout-form">
-                                @include('public.checkout.create.form.account_details')
-                                @include('public.checkout.create.form.billing_details')
-                                @include('public.checkout.create.form.order_note')
-                                <div class="checkout__content--step__footer d-flex align-items-center">
-                                    <a class="previous__link--content" href="{{route('cart.index')}}">Return to cart</a>
-                                </div>
+        <div>
+            <!-- Start breadcrumb section -->
+            <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg1">
+                <div class="container">
+                    <div class="row row-cols-1">
+                        <div class="col">
+                            <div class="breadcrumb__content">
+                                <h1 class="breadcrumb__content--title text-white mb-10">{{ trans('storefront::checkout.checkout') }}</h1>
+                                <ul class="breadcrumb__content--menu d-flex">
+                                    <li class="breadcrumb__content--menu__items">
+                                        <a class="text-white" href="{{ route('home') }}">
+                                            {{ trans('storefront::layout.home') }}
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb__content--menu__items"><span class="text-white">{{ trans('storefront::checkout.checkout') }}</span></li>
+                                </ul>
                             </div>
                         </div>
-                        @include('public.checkout.create.order_summary')
                     </div>
-                </form>
+                </div>
+            </section>
+            <!-- End breadcrumb section -->
+
+            <!-- Start checkout page area -->
+            <div class="checkout__page--area section--padding">
+                <div class="container">
+                    <form @submit.prevent="placeOrder" @input="errors.clear($event.target.name)">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-6">
+                                <div class="main checkout__mian checkout-form">
+                                    @include('public.checkout.create.form.account_details')
+                                    @include('public.checkout.create.form.billing_details')
+                                    @include('public.checkout.create.form.order_note')
+                                    <div class="checkout__content--step__footer d-flex align-items-center">
+                                        <a class="previous__link--content" href="{{route('cart.index')}}">Return to
+                                            cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @include('public.checkout.create.order_summary')
+                        </div>
+                    </form>
+                </div>
             </div>
+            <!-- End checkout page area -->
         </div>
-        <!-- End checkout page area -->
-
-        {{--        <section class="checkout-wrap">--}}
-        {{--            <div class="container">--}}
-        {{--                @include('public.cart.index.steps')--}}
-
-        {{--                --}}
-        {{--                    <div class="checkout">--}}
-        {{--                        <div class="checkout-inner">--}}
-        {{--                            <div class="checkout-left">--}}
-        {{--                                <div class="checkout-form">--}}
-        {{--                                    --}}
-        {{--                                    --}}
-        {{--                                    --}}
-        {{--                                    --}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-
-        {{--                            <div class="checkout-right">--}}
-        {{--                                @include('public.checkout.create.payment')--}}
-        {{--                                @include('public.checkout.create.coupon')--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-
-        {{--                        --}}
-        {{--                    </div>--}}
-        {{--                </form>--}}
-        {{--            </div>--}}
-        {{--        </section>--}}
     </checkout-create>
 @endsection
 
