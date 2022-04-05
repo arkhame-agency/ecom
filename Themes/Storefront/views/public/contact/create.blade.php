@@ -214,15 +214,17 @@
     </section>
     <!-- End contact section -->
 
-    <!-- Start contact map area -->
-    <div class="contact__map--area section--padding pt-0">
-        <iframe
-            class="contact__map--iframe"
-            src="https://maps.google.com/maps?q={{ setting('storefront_address') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy">
-        </iframe>
-    </div>
+    @if(setting('storefront_address'))
+        <!-- Start contact map area -->
+        <div class="contact__map--area section--padding pt-0">
+            <iframe
+                class="contact__map--iframe"
+                src="https://maps.google.com/maps?q={{ setting('storefront_address') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+    @endif
     <!-- End contact map area -->
 @endsection
