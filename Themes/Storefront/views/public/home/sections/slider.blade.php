@@ -4,10 +4,8 @@
         <div class="hero__slider--wrapper swiper-wrapper"
              data-speed="{{ $slider->speed ?? '1000' }}"
              data-autoplay="{{ $slider->autoplay ?? 'false' }}"
-             data-autoplay-speed="{{ $slider->autoplay_speed ?? '5000' }}"
              data-fade="{{ $slider->fade ?? 'false' }}"
-             data-dots="{{ $slider->dots ?? 'true' }}"
-             data-arrows="{{ $slider->arrows ?? 'true' }}"
+             data-swiper-autoplay="{{ $slider->autoplay_speed ?? '5000' }}"
         >
             @foreach ($slider->slides as $slide)
                 @if($slide->hasDateToShow())
@@ -54,7 +52,7 @@
             <div class="swiper__nav--btn swiper-button-prev"></div>
             <div class="swiper__nav--btn swiper-button-next"></div>
         @endif
-        @if( $slider->dots ?? 'true' )
+        @if( $slider->dots )
             <div class="swiper-pagination"></div>
         @endif
     </div>

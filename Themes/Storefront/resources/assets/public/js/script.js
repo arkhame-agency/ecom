@@ -118,9 +118,10 @@ if (heroSlider.length !== 0) {
         effect: heroSlider.data('fade') ? 'fade' : 'slide',
         speed: heroSlider.data('speed'),
         spaceBetween: 30,
-        autoplay: {
-            delay: heroSlider.data('autoplay-speed'),
-            disableOnInteraction: false,
+        autoplay: !! JSON.parse(heroSlider.data('autoplay')),
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
         },
         navigation: {
             nextEl: '.swiper-button-next',
