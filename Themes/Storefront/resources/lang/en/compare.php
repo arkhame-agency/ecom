@@ -7,6 +7,7 @@ return [
     'description' => 'Description',
     'rating' => 'Rating',
     'availability' => 'Availability',
+    'specification' => 'Specification',
     'in_stock' => 'In Stock',
     'out_of_stock' => 'Out of Stock',
     'price' => 'Price',

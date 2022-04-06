@@ -53,6 +53,10 @@ export default {
             }
         },
 
+        hasNoOption(product) {
+            return ! product.options_count > 0;
+        },
+
         attributeValues(product, attribute) {
             for (let productAttribute of product.attributes) {
                 if (productAttribute.name === attribute.name) {

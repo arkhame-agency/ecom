@@ -1,3 +1,16 @@
+.alert-dismissible {
+    padding-right: 4rem
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: .75rem 1.25rem;
+    color: inherit
+}
+
 .alert {
 	font-size: 16px;
 	position: fixed;

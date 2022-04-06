@@ -13,8 +13,8 @@
                         @{{ $trans('storefront::product.review_form.based_on_reviews', { count: totalReviews }) }}
                     </span>
                 </div>
-                <a class="actions__newreviews--btn primary__btn"
-                   href="#writereview">{{ trans('storefront::product.add_a_review') }}</a>
+                <button class="actions__newreviews--btn primary__btn"
+                    @click="$refs.writereview.scrollIntoView()">{{ trans('storefront::product.add_a_review') }}</button>
             </div>
             <div class="reviews__comment--area">
                 <div class="empty-message" v-if="emptyReviews">
@@ -58,7 +58,7 @@
                     </v-pagination>
                 </div>
             </div>
-            <div id="writereview" class="reviews__comment--reply__area">
+            <div ref="writereview" id="writereview" class="reviews__comment--reply__area">
                 <form @submit.prevent="addNewReview" @input="errors.clear($event.target.name)">
                     <h3 class="reviews__comment--reply__title mb-15">{{ trans('storefront::product.add_a_review') }}</h3>
                     <div class="reviews__ratting d-flex align-items-center mb-20">

@@ -1,4 +1,25 @@
 // Comapre page css here
+.compare__section {
+    .empty-message {
+        display: flex;
+        padding: 40px 0;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+        svg {
+            height: 80px;
+            width: 80px;
+            margin-bottom: 22px;
+
+            g {
+                fill: $color-default;
+                fill: var(--color-primary);
+            }
+        }
+    }
+}
 .compare__heading--maintitle{
     font-size: 2rem;
     @media only screen and (min-width: 992px) {
@@ -78,13 +99,16 @@
 .compare__cart--btn{
     border-radius: 0.5rem;
     text-transform: uppercase;
-    padding: 0 2rem;
-    height: 4rem;
-    line-height: 4rem;
+    //padding: 0 2rem;
+    //height: 4rem;
+    //line-height: 4rem;
     font-size: 1.3rem;
+    height: auto;
+    line-height: initial;
+    padding: 1rem 2.5rem;
     @media only screen and (min-width: 992px) {
-        height: 4.2rem;
-        line-height: 4.2rem;
-        padding: 0 2.5rem;
+        //height: 4.2rem;
+        //line-height: 4.2rem;
+        //padding: 0 2.5rem;
     }
 }

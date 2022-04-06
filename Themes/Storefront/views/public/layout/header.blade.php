@@ -140,7 +140,7 @@
                 </div>
                 <div class="header__account">
                     <ul class="d-flex">
-                        <li class="header__account--items  header__account--search__items d-md-none d-lg-block">
+                        <li class="header__account--items header__account--search__items d-md-none d-lg-block">
                             <a class="header__account--btn search__open--btn" href="javascript:void(0)">
                                 <svg class="header__search--button__svg" xmlns="http://www.w3.org/2000/svg"
                                      width="26.51" height="23.443" viewBox="0 0 512 512">
@@ -177,6 +177,11 @@
                                 </svg>
 
                                 <span class="items__count wishlist" v-text="wishlistCount" v-if="wishlistCount"></span>
+                            </a>
+                        </li>
+                        <li class="header__account--items">
+                            <a class="header__account--btn header__account--compare" href="{{ route('compare.index') }}">
+                                <i class="las la-exchange-alt"></i>
                             </a>
                         </li>
                         <li class="header__account--items">
