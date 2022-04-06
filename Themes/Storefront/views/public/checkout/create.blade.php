@@ -41,7 +41,7 @@
                     <form @submit.prevent="placeOrder" @input="errors.clear($event.target.name)">
                         <div class="row">
                             <div class="col-lg-7 col-md-6">
-                                <div class="main checkout__mian checkout-form">
+                                <div class="main checkout__mian">
                                     @include('public.checkout.create.form.account_details')
                                     @include('public.checkout.create.form.billing_details')
                                     @include('public.checkout.create.form.order_note')

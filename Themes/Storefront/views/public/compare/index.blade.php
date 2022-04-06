@@ -123,7 +123,7 @@
                                                     v-if="hasNoOption(product) || product.is_out_of_stock"
                                                     :disabled="product.is_out_of_stock"
                                                     @click="addToCart(product)">
-                                                <span class="add__to--cart__text">{{ trans('storefront::compare.add_to_cart') }}</span>
+                                                {{ trans('storefront::compare.add_to_cart') }}
                                             </button>
                                             <a v-else :href="productUrl(product)"
                                                 class="compare__cart--btn primary__btn"
