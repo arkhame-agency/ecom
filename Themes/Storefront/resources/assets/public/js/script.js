@@ -658,10 +658,12 @@ function offcanvsSidebar(openTrigger, closeTrigger, wrapper) {
     function handleBodyClass(evt) {
         let eventTarget = evt.target;
         if (! eventTarget.closest(wrapper) && ! eventTarget.closest(openTrigger)) {
-            WrapperSidebar.classList.remove('active');
-            document
-                .querySelector('body')
-                .classList.remove(`${wrapperOverlay}_active`);
+            if (eventTarget.classList[0] !== 'minicart__product--remove') {
+                WrapperSidebar.classList.remove('active');
+                document
+                    .querySelector('body')
+                    .classList.remove(`${wrapperOverlay}_active`);
+            }
         }
     }
 

@@ -99,7 +99,7 @@ export default {
             }).then((cart) => {
                 store.updateCart(cart);
 
-                $('.header-cart').trigger('click');
+                document.querySelector('.header__account--btn.minicart__open--btn').click();
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             });

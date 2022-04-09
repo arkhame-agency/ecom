@@ -13,43 +13,42 @@
             </div>
             {{--            <p class="minicart__header--desc">The organic foods products are limited</p>--}}
         </div>
-        <div class="empty" v-if="cartIsEmpty">
-            <div class="empty-message">
-                @include('public.layout.sidebar_cart.empty_logo')
-
-                <h4>{{ trans('storefront::cart.your_cart_is_empty') }}</h4>
-            </div>
-        </div>
-        <div class="minicart__product" :class="{ empty: cartIsEmpty }">
+        <div class="minicart__product" :class="{ 'custom-scrollbar': cartIsNotEmpty, empty: cartIsEmpty }">
             <sidebar-cart-item
                 v-for="cartItem in cart.items"
                 :key="cartItem.id"
                 :cart-item="cartItem"
             >
             </sidebar-cart-item>
+            <div class="empty-message" v-if="cartIsEmpty">
+                @include('public.layout.sidebar_cart.empty_logo')
+                <h4>{{ trans('storefront::cart.your_cart_is_empty') }}</h4>
+            </div>
         </div>
-        <div class="minicart__amount" v-if="cartIsNotEmpty">
-            <div class="minicart__amount_list d-flex justify-content-between">
+        <div class="sidebar-cart-bottom">
+            <div class="minicart__amount" v-if="cartIsNotEmpty">
+                <div class="minicart__amount_list d-flex justify-content-between">
                 <span>
                 {{ trans('storefront::layout.subtotal') }}
                 </span>
-                <span><b v-html="cart.subTotal.inCurrentCurrency.formatted"></b></span>
+                    <span><b v-html="cart.subTotal.inCurrentCurrency.formatted"></b></span>
+                </div>
+                {{--            <div class="minicart__amount_list d-flex justify-content-between">--}}
+                {{--                <span>Total:</span>--}}
+                {{--                <span><b>$240.00</b></span>--}}
+                {{--            </div>--}}
             </div>
-            {{--            <div class="minicart__amount_list d-flex justify-content-between">--}}
-            {{--                <span>Total:</span>--}}
-            {{--                <span><b>$240.00</b></span>--}}
-            {{--            </div>--}}
-        </div>
-        <div class="minicart__conditions text-center">
-            {{--            <input class="minicart__conditions--input" id="accept" type="checkbox">--}}
-            {{--            <label class="minicart__conditions--label" for="accept">I agree with the <a--}}
-            {{--                    class="minicart__conditions--link" href="privacy-policy.html">Privacy And Policy</a></label>--}}
-        </div>
-        <div class="minicart__button d-flex justify-content-center" v-if="cartIsNotEmpty">
-            <a class="primary__btn minicart__button--link"
-               href="{{ route('cart.index') }}">{{ trans('storefront::layout.view_cart') }}</a>
-            <a class="primary__btn minicart__button--link"
-               href="{{ route('checkout.create') }}">{{ trans('storefront::layout.checkout') }}</a>
+            <div class="minicart__conditions text-center">
+                {{--            <input class="minicart__conditions--input" id="accept" type="checkbox">--}}
+                {{--            <label class="minicart__conditions--label" for="accept">I agree with the <a--}}
+                {{--                    class="minicart__conditions--link" href="privacy-policy.html">Privacy And Policy</a></label>--}}
+            </div>
+            <div class="minicart__button d-flex justify-content-center" v-if="cartIsNotEmpty">
+                <a class="primary__btn btn__style3 minicart__button--link"
+                   href="{{ route('cart.index') }}">{{ trans('storefront::layout.view_cart') }}</a>
+                <a class="primary__btn minicart__button--link"
+                   href="{{ route('checkout.create') }}">{{ trans('storefront::layout.checkout') }}</a>
+            </div>
         </div>
     </div>
     <!-- End offCanvas minicart -->

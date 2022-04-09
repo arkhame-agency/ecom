@@ -220,7 +220,7 @@ export default {
                 store.updateCart(cart);
 
                 this.$root.$refs.sidebarcart.fetchCrossSellProducts();
-                $('.header-cart').trigger('click');
+                document.querySelector('.header__account--btn.minicart__open--btn').click();
             }).catch((xhr) => {
                 if (xhr.status === 422) {
                     this.errors.record(xhr.responseJSON.errors);

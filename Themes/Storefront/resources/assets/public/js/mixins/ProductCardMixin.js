@@ -72,7 +72,7 @@ export default {
                 store.updateCart(cart);
 
                 if (document.location.href !== route('cart.index').url()) {
-                    $('.header-cart').trigger('click');
+                    document.querySelector('.header__account--btn.minicart__open--btn').click();
                     this.$root.$refs.sidebarcart.fetchCrossSellProducts();
                 }
             }).catch((xhr) => {

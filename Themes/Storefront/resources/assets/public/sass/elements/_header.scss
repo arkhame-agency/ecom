@@ -902,6 +902,8 @@
     overflow-y: auto;
     box-shadow: 0 0 15px rgba(5, 0, 0, 0.1);
     visibility: hidden;
+    display: flex;
+    flex-direction: column;
 
     .empty {
         position: absolute;
@@ -987,7 +989,7 @@
 
 .minicart__product {
     margin-bottom: 17px;
-
+    flex: 1;
     &--items {
         margin-top: 18px;
         padding-top: 18px;
@@ -1173,6 +1175,8 @@ input[type="number"]::-webkit-outer-spin-button {
         line-height: 4.5rem;
         height: 4.5rem;
         margin-right: 14px;
+        flex: 1;
+        text-align: center;
 
         &:last-child {
             margin-right: 0;
