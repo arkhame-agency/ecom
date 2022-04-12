@@ -89,7 +89,7 @@
     }
 
     &--title {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         font-weight: 400;
         position: relative;
         color: var(--primary-color);
@@ -164,9 +164,9 @@
 }
 
 .footer__widget--inner {
-    @media only screen and (max-width: 767px) {
-        display: none;
-    }
+    //@media only screen and (max-width: 767px) {
+    //    display: none;
+    //}
 }
 
 .footer__bottom {

@@ -43,4 +43,6 @@ return [
     'my_account' => 'My Account',
     'remove' => 'Remove',
     'tags' => 'Tags',
+    'companies' => 'Companies?',
+    'companies_text' => 'We offer various solutions for companies who wish to obtain uniforms or work clothing for their employees. Reach us by phone at <a href="tel:+15149036673">1-514 903-6673</a> for more information. You can also write to us at <a href="">info@uniformesdelest.com</a>.'
 ];

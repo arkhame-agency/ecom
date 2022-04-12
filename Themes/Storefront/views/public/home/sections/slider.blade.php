@@ -10,8 +10,8 @@
             @foreach ($slider->slides as $slide)
                 @if($slide->hasDateToShow())
                     <div class="swiper-slide ">
-                        <div class="hero__slider--items hero__slider--bg"
-                             style="background-image: url('{{ $slide->file->path }}')">
+                        <div class="hero__slider--items hero__slider--bg">
+                            <img src="{{ $slide->file->path }}" data-animation-in="zoomInImage" class="hero__slider--img" style="position: absolute">
                             <div class="container-fluid">
                                 <div class="hero__slider--items__inner">
                                     <div class="row row-cols-1">

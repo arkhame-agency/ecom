@@ -109,6 +109,7 @@
 {{--@include('public.layout.sidebar_menu')--}}
 @include('public.layout.alert')
 @include('public.layout.newsletter_popup')
+@include('public.layout.entreprise_popup')
 @include('public.layout.cookie_bar')
 
 <!-- Scroll top bar -->

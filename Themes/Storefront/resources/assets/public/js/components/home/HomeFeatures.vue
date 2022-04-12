@@ -9,7 +9,7 @@
                     </div>
                     <div class="shipping__items--content">
                         <h3 class="shipping__items--content__title">{{ feature.title }}</h3>
-                        <span>{{ feature.subtitle }}</span>
+                        <span v-html="feature.subtitle"></span>
                     </div>
                 </div>
             </div>

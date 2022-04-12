@@ -1,12 +1,18 @@
 <!-- Start header area -->
-<header class="header__section header__others header__transparent {{ ! request()->routeIs('home') ? 'border-bottom mb-30' : '' }}">
+<header
+    class="header__section header__others header__transparent {{ ! request()->routeIs('home') ? 'border-bottom mb-30' : '' }}">
 
     <!-- Start Header topbar -->
     <div class="header__topbar bg__primary">
         <div class="container-fluid">
             <div class="header__topbar--inner d-flex align-items-center justify-content-between">
                 <div class="header__shipping">
-                    <p class="header__shipping--text text-white">{!! setting('storefront_welcome_text') !!}</p>
+                    <p class="header__shipping--text text-white">
+                        {!! setting('storefront_welcome_text') !!}
+                        <a data-open="entreprise" href="javascript:void(0)" class="ml-3 primary__btn btn__small">
+                            {{ trans('storefront::layout.companies') }}
+                        </a>
+                    </p>
                 </div>
                 <div class="language__currency d-none d-lg-block">
                     <ul class="d-flex align-items-center">
@@ -180,7 +186,8 @@
                             </a>
                         </li>
                         <li class="header__account--items">
-                            <a class="header__account--btn header__account--compare" href="{{ route('compare.index') }}">
+                            <a class="header__account--btn header__account--compare"
+                               href="{{ route('compare.index') }}">
                                 <i class="las la-exchange-alt"></i>
                             </a>
                         </li>

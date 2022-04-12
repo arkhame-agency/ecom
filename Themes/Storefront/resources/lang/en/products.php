@@ -14,6 +14,7 @@ return [
     'shop' => 'Shop',
     'grid_view' => 'Grid View',
     'list_view' => 'List View',
+    'sort_by' => 'Sort by',
     'sort_options' => [
         'relevance' => 'Relevance',
         'alphabetic' => 'Alphabetic',

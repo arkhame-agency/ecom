@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="main__footer">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-30">
                     <div class="footer__widget">
                         <div class="footer__widget--inner">
                             <h2 class="footer__widget--title ">{{ trans('storefront::layout.contact_us') }}</h2>
@@ -38,8 +38,8 @@
                                 @endif
                             </ul>
                             {{-- Footer social --}}
-                            <div class="footer__social">
-                                @if (social_links()->isNotEmpty())
+                            @if (social_links()->isNotEmpty())
+                                <div class="footer__social">
                                     <ul class="social__share d-flex">
                                         @foreach (social_links() as $icon => $socialLink)
                                             <li class="social__share--list">
@@ -50,22 +50,22 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
                 {{-- $footerMenuOne --}}
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-30">
                     @if ($footerMenuOne->isNotEmpty())
                         <div class="footer__widget">
                             <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_one_title') }}
-                                <button class="footer__widget--button" aria-label="footer widget button"></button>
-                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                          transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                </svg>
+                                {{--                                <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
+                                {{--                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
+                                {{--                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
+                                {{--                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
+                                {{--                                          transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
+                                {{--                                </svg>--}}
                             </h2>
                             <ul class="footer__widget--menu footer__widget--inner">
                                 @foreach ($footerMenuOne as $menuItem)
@@ -81,40 +81,40 @@
                     @endif
                 </div>
                 {{-- $footerMenuTwo --}}
-{{--                <div class="col-lg-2 col-md-6">--}}
-{{--                    @if ($footerMenuTwo->isNotEmpty())--}}
-{{--                        <div class="footer__widget">--}}
-{{--                            <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_two_title') }}--}}
-{{--                                <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
-{{--                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
-{{--                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
-{{--                                          transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
-{{--                                </svg>--}}
-{{--                            </h2>--}}
-{{--                            <ul class="footer__widget--menu footer__widget--inner">--}}
-{{--                                @foreach ($footerMenuTwo as $menuItem)--}}
-{{--                                    <li class="footer__widget--menu__list">--}}
-{{--                                        <a class="footer__widget--menu__text" target="{{ $menuItem->target }}"--}}
-{{--                                           href="{{ $menuItem->url() }}">--}}
-{{--                                            {{ $menuItem->name }}--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                @endforeach--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-{{--                </div>--}}
+                {{--                <div class="col-lg-2 col-md-6">--}}
+                {{--                    @if ($footerMenuTwo->isNotEmpty())--}}
+                {{--                        <div class="footer__widget">--}}
+                {{--                            <h2 class="footer__widget--title ">{{ setting('storefront_footer_menu_two_title') }}--}}
+                {{--                                <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
+                {{--                                <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
+                {{--                                     width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
+                {{--                                    <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
+                {{--                                          transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
+                {{--                                </svg>--}}
+                {{--                            </h2>--}}
+                {{--                            <ul class="footer__widget--menu footer__widget--inner">--}}
+                {{--                                @foreach ($footerMenuTwo as $menuItem)--}}
+                {{--                                    <li class="footer__widget--menu__list">--}}
+                {{--                                        <a class="footer__widget--menu__text" target="{{ $menuItem->target }}"--}}
+                {{--                                           href="{{ $menuItem->url() }}">--}}
+                {{--                                            {{ $menuItem->name }}--}}
+                {{--                                        </a>--}}
+                {{--                                    </li>--}}
+                {{--                                @endforeach--}}
+                {{--                            </ul>--}}
+                {{--                        </div>--}}
+                {{--                    @endif--}}
+                {{--                </div>--}}
                 {{-- Account section --}}
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-30">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">{{ trans('storefront::layout.my_account') }}
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
+                            {{--                            <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
+                            {{--                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
+                            {{--                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
+                            {{--                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
+                            {{--                                      transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
+                            {{--                            </svg>--}}
                         </h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list">
@@ -153,12 +153,12 @@
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">
                             {{ trans('storefront::layout.tags') }}
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
+                            {{--                            <button class="footer__widget--button" aria-label="footer widget button"></button>--}}
+                            {{--                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"--}}
+                            {{--                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">--}}
+                            {{--                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"--}}
+                            {{--                                      transform="translate(-6 -8.59)" fill="currentColor"></path>--}}
+                            {{--                            </svg>--}}
                         </h2>
                         <div class="footer__newsletter footer__widget--inner">
                             @if ($footerTags->isNotEmpty())

@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Start breadcrumb section -->
-    <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg1">
+    <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg7">
         <div class="container">
             <div class="row row-cols-1">
                 <div class="col">
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="contact__info--content">
                                             <p class="contact__info--content__desc text-white">
-                                                {!! trans('storefront::contact.contact_us_txt', ['phone_number'=> setting('store_phone'), 'phone_number_formatted'=> format_phone_number(setting('store_phone'))]) !!}
+                                                <a href="tel:{{ setting('store_phone') }}">{{ format_phone_number(setting('store_phone')) }}</a>
                                                 @if (setting('store_fax') && ! setting('store_phone_hide'))
                                                     <br/>Fax : {{ format_phone_number(setting('store_fax')) }}
                                                 @endif

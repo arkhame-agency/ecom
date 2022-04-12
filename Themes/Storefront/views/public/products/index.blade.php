@@ -55,7 +55,9 @@
     >
         <div>
             <!-- Start breadcrumb section -->
-            <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg2">
+            <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg2" @isset($categoryBanner)
+            style="background: url('{{ $categoryBanner }}') center / cover"
+                @endisset>
                 <div class="container-fluid">
                     <div class="row row-cols-1">
                         <div class="col">
@@ -136,8 +138,9 @@
                                 <div class="product__view--mode d-flex align-items-center">
                                     <div
                                         class="product__view--mode__list product__short--by align-items-center d-none d-lg-flex">
-                                        <label class="product__view--label">{{ trans('storefront::products.per_page') }}
-                                            :</label>
+                                        <label class="product__view--label">
+                                            {{ trans('storefront::products.per_page') }}:
+                                        </label>
                                         <div class="select shop__header--select">
                                             <select
                                                 class="product__view--select"
@@ -157,8 +160,9 @@
                                     </div>
                                     <div
                                         class="product__view--mode__list product__short--by align-items-center d-none d-lg-flex">
-                                        <label class="product__view--label" for="product__view--select">Sort By
-                                            :</label>
+                                        <label class="product__view--label" for="product__view--select">
+                                            {{ trans('storefront::products.sort_by') }}
+                                        </label>
                                         <div class="select shop__header--select">
                                             <select
                                                 id="product__view--select"

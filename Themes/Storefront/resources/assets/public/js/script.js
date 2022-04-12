@@ -111,6 +111,11 @@ window.addEventListener('scroll', function () {
 let heroSlider = $('.hero__slider--wrapper');
 if (heroSlider.length !== 0) {
 
+    BackgroundCheck.init({
+        targets: '.slider__content--maintitle, .slider__content--desc',
+        images: '.hero__slider--img',
+    });
+
     var swiper = new Swiper('.hero__slider--activation', {
         slidesPerView: 1,
         loop: true,
@@ -128,13 +133,6 @@ if (heroSlider.length !== 0) {
             prevEl: '.swiper-button-prev',
         },
         on: {
-            afterInit: function () {
-                $('.slider__content').css('visibility', 'visible');
-                BackgroundCheck.init({
-                    targets: '.slider__content--maintitle, .slider__content--desc',
-                    images: '.hero__slider--items',
-                });
-            },
             transitionStart: function () {
                 BackgroundCheck.refresh();
             },
