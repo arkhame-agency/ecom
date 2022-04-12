@@ -165,6 +165,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="slides-<%- slideNumber %>-start-date">
+                                        {{ trans('slider::attributes.start_date') }}
+                                    </label>
+
+                                    <input type="text"
+                                           name="slides[<%- slideNumber %>][start_date]"
+                                           class="form-control datetime-picker"
+                                           id="slides-<%- slideNumber %>-start-date"
+                                           value="<%- slide.start_date %>"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="slides-<%- slideNumber %>-end-date">
+                                        {{ trans('slider::attributes.end_date') }}
+                                    </label>
+
+                                    <input type="text"
+                                           name="slides[<%- slideNumber %>][end_date]"
+                                           class="form-control datetime-picker"
+                                           id="slides-<%- slideNumber %>-end-date"
+                                           value="<%- slide.end_date %>"
+                                    >
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="slider-<%- slideNumber %>-options" class="tab-pane fade in clearfix">

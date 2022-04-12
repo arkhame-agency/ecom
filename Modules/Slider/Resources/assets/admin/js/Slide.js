@@ -19,6 +19,8 @@ export default class {
         this.attachEventListeners();
         this.showSelectedOptionBlock();
 
+        window.admin.dateTimePicker(this.slidePanelHtml.find('.datetime-picker'));
+
         return this.slidePanelHtml;
     }
 
