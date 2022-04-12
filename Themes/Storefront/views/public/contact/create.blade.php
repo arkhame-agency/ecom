@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', trans('storefront::contact.contact'))
+@section('title', trans('storefront::contact.contact_us'))
 
 @section('content')
     <!-- Start breadcrumb section -->
