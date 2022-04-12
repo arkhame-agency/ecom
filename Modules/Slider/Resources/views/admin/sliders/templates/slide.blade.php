@@ -50,87 +50,87 @@
                             {{ trans('slider::sliders.slide.form.tabs.general') }}
                         </a>
                     </li>
-                    <li>
-                        <a href="#slider-<%- slideNumber %>-options" data-toggle="tab">
-                            {{ trans('slider::sliders.slide.form.tabs.options') }}
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="#slider-<%- slideNumber %>-options" data-toggle="tab">--}}
+{{--                            {{ trans('slider::sliders.slide.form.tabs.options') }}--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
 
                 <div class="tab-content">
                     <div id="slides-<%- slideNumber %>-general" class="general tab-pane fade in active">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="form-group">
-                                    <label for="slides-<%- slideNumber %>-caption-1">
-                                        {{ trans('slider::attributes.caption_1') }}
-                                    </label>
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-4 col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="slides-<%- slideNumber %>-caption-1">--}}
+{{--                                        {{ trans('slider::attributes.caption_1') }}--}}
+{{--                                    </label>--}}
 
-                                    <input type="text"
-                                           name="slides[<%- slideNumber %>][caption_1]"
-                                           class="form-control"
-                                           id="slides-<%- slideNumber %>-caption-1"
-                                           value="<%- slide.caption_1 %>"
-                                    >
-                                </div>
-                            </div>
+{{--                                    <input type="text"--}}
+{{--                                           name="slides[<%- slideNumber %>][caption_1]"--}}
+{{--                                           class="form-control"--}}
+{{--                                           id="slides-<%- slideNumber %>-caption-1"--}}
+{{--                                           value="<%- slide.caption_1 %>"--}}
+{{--                                    >--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="col-lg-4 col-md-6">
-                                <div class="form-group">
-                                    <label for="slides-<%- slideNumber %>-caption-2">
-                                        {{ trans('slider::attributes.caption_2') }}
-                                    </label>
+{{--                            <div class="col-lg-4 col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="slides-<%- slideNumber %>-caption-2">--}}
+{{--                                        {{ trans('slider::attributes.caption_2') }}--}}
+{{--                                    </label>--}}
 
-                                    <input type="text"
-                                           name="slides[<%- slideNumber %>][caption_2]"
-                                           class="form-control"
-                                           id="slides-<%- slideNumber %>-caption-2"
-                                           value="<%- slide.caption_2 %>"
-                                    >
-                                </div>
-                            </div>
+{{--                                    <input type="text"--}}
+{{--                                           name="slides[<%- slideNumber %>][caption_2]"--}}
+{{--                                           class="form-control"--}}
+{{--                                           id="slides-<%- slideNumber %>-caption-2"--}}
+{{--                                           value="<%- slide.caption_2 %>"--}}
+{{--                                    >--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="col-lg-4 col-md-6">
-                                <div class="form-group">
-                                    <label for="slides-<%- slideNumber %>-direction">
-                                        {{ trans('slider::attributes.direction') }}
-                                    </label>
+{{--                            <div class="col-lg-4 col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="slides-<%- slideNumber %>-direction">--}}
+{{--                                        {{ trans('slider::attributes.direction') }}--}}
+{{--                                    </label>--}}
 
-                                    <select
-                                        name="slides[<%- slideNumber %>][direction]"
-                                        class="form-control"
-                                        id="slides-<%- slideNumber %>-direction"
-                                        value="<%- slide.direction %>"
-                                    >
-                                        <option value="left"
-                                        <%= slide.direction === 'left' ? 'selected' : '' %>>
-                                        {{ trans('slider::sliders.slide.form.directions.left') }}
-                                        </option>
+{{--                                    <select--}}
+{{--                                        name="slides[<%- slideNumber %>][direction]"--}}
+{{--                                        class="form-control"--}}
+{{--                                        id="slides-<%- slideNumber %>-direction"--}}
+{{--                                        value="<%- slide.direction %>"--}}
+{{--                                    >--}}
+{{--                                        <option value="left"--}}
+{{--                                        <%= slide.direction === 'left' ? 'selected' : '' %>>--}}
+{{--                                        {{ trans('slider::sliders.slide.form.directions.left') }}--}}
+{{--                                        </option>--}}
 
-                                        <option value="right"
-                                        <%= slide.direction === 'right' ? 'selected' : '' %>>
-                                        {{ trans('slider::sliders.slide.form.directions.right') }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+{{--                                        <option value="right"--}}
+{{--                                        <%= slide.direction === 'right' ? 'selected' : '' %>>--}}
+{{--                                        {{ trans('slider::sliders.slide.form.directions.right') }}--}}
+{{--                                        </option>--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="form-group">
-                                    <label for="slides[<%- slideNumber %>][call-to-action-text]">
-                                        {{ trans('slider::attributes.call_to_action_text') }}
-                                    </label>
+                        <div class="row m-b-30">
+{{--                            <div class="col-lg-4 col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="slides[<%- slideNumber %>][call-to-action-text]">--}}
+{{--                                        {{ trans('slider::attributes.call_to_action_text') }}--}}
+{{--                                    </label>--}}
 
-                                    <input type="text"
-                                           name="slides[<%- slideNumber %>][call_to_action_text]"
-                                           class="form-control"
-                                           id="slides[<%- slideNumber %>][call-to-action-text]"
-                                           value="<%- slide.call_to_action_text %>"
-                                    >
-                                </div>
-                            </div>
+{{--                                    <input type="text"--}}
+{{--                                           name="slides[<%- slideNumber %>][call_to_action_text]"--}}
+{{--                                           class="form-control"--}}
+{{--                                           id="slides[<%- slideNumber %>][call-to-action-text]"--}}
+{{--                                           value="<%- slide.call_to_action_text %>"--}}
+{{--                                    >--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
@@ -167,19 +167,19 @@
                         </div>
                     </div>
 
-                    <div id="slider-<%- slideNumber %>-options" class="tab-pane fade in clearfix">
-                        <select class="change-option-block custom-select-black pull-right">
-                            <option value="caption-1"
-                                    selected>{{ trans('slider::sliders.slide.form.caption_1') }}</option>
-                            <option value="caption-2">{{ trans('slider::sliders.slide.form.caption_2') }}</option>
-                            <option
-                                value="call-to-action">{{ trans('slider::sliders.slide.form.call_to_action') }}</option>
-                        </select>
+{{--                    <div id="slider-<%- slideNumber %>-options" class="tab-pane fade in clearfix">--}}
+{{--                        <select class="change-option-block custom-select-black pull-right">--}}
+{{--                            <option value="caption-1"--}}
+{{--                                    selected>{{ trans('slider::sliders.slide.form.caption_1') }}</option>--}}
+{{--                            <option value="caption-2">{{ trans('slider::sliders.slide.form.caption_2') }}</option>--}}
+{{--                            <option--}}
+{{--                                value="call-to-action">{{ trans('slider::sliders.slide.form.call_to_action') }}</option>--}}
+{{--                        </select>--}}
 
-                        @include('slider::admin.sliders.templates.partials.slide_caption', ['captionNumber' => 1])
-                        @include('slider::admin.sliders.templates.partials.slide_caption', ['captionNumber' => 2])
-                        @include('slider::admin.sliders.templates.partials.slide_call_to_action')
-                    </div>
+{{--                        @include('slider::admin.sliders.templates.partials.slide_caption', ['captionNumber' => 1])--}}
+{{--                        @include('slider::admin.sliders.templates.partials.slide_caption', ['captionNumber' => 2])--}}
+{{--                        @include('slider::admin.sliders.templates.partials.slide_call_to_action')--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
