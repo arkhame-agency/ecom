@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="section__heading text-center mb-30">
                 <h2 class="section__heading--maintitle">{{ data.title }}</h2>
-                <span class="excerpt">{{ data.subtitle }}</span>
+                <span class="excerpt" v-html="data.subtitle"></span>
             </div>
             <ul class="product__tab--btn d-flex justify-content-center mb-50">
                 <li
