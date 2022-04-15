@@ -9,7 +9,7 @@
         <div class="panel-wrap">
             @include('media::admin.image_picker.single', [
                 'title' => trans('storefront::storefront.form.background'),
-                'inputName' => 'storefront_three_column_full_width_banners_background_file_id',
+                'inputName' => 'translatable[storefront_three_column_full_width_banners_background_file_id]',
                 'file' => $banners['background']->image,
             ])
 
