@@ -67,6 +67,7 @@ return [
         'enable_facebook_login' => 'Enable Facebook Login',
         'enable_google_login' => 'Enable Google Login',
         'enable_free_shipping' => 'Enable Free Shipping',
+        'enable_free_shipping_radius' => 'Enable Free Shipping on a Radius',
         'enable_commercial_shipping' => 'Enable Commercial Shipping',
         'enable_shippo_shipping' => 'Enable Shippo Multi-carrier Shipping',
         'enable_local_pickup' => 'Enable Local Pickup',

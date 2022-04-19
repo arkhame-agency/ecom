@@ -25,6 +25,7 @@
         "shippo/shippo-php": "^2.0",
         "swayok/alternative-laravel-cache": "^5.4",
         "symfony/intl": "^5.0",
+        "toin0u/geocoder-laravel": "^4.4",
         "wikimedia/composer-merge-plugin": "^2.0"
     },
     "require-dev": {
@@ -50,6 +51,12 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan cache:clear"
+        ],
+        "post-install-cmd": [
+            "@php artisan cache:clear"
         ]
     },
     "config": {
