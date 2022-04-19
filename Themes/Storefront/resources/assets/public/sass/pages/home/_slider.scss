@@ -1,6 +1,7 @@
 .home-slider {
     border-radius: $radius-default;
     overflow: hidden;
+    border: 1px solid $border-color;
 
     &.slick-initialized {
         .slide {

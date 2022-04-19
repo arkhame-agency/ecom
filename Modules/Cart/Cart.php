@@ -154,13 +154,16 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             return collect();
         }
 
-        if (($this->isLessThenFeeShippingMinAmount() && setting('shippo_shipping_enabled')) || setting('shippo_shipping_enabled')) {
-            if (Cache::get('shippo_shipping_rates')) {
-                return collect(
-                    Cache::get('shippo_shipping_rates')->toArray()
-                );
-            }
-            return collect();
+        if (($this->isLessThenFeeShippingMinAmount() || $this->isFreeShippingRadiusEnabled()) && Cache::get('free_shipping')) {
+            return collect(
+                Cache::get('free_shipping')->toArray()
+            );
+        }
+
+        if (($this->isLessThenFeeShippingMinAmount() || setting('shippo_shipping_enabled')) && Cache::get('shippo_shipping_rates')) {
+            return collect(
+                Cache::get('shippo_shipping_rates')->toArray()
+            );
         }
 
         if ($this->isLessThenFeeShippingMinAmount()) {
@@ -174,6 +177,11 @@ class Cart extends DarryldecodeCart implements JsonSerializable
         }
 
         return ShippingMethod::available()->forget(['commercial_shipping', 'flat_rate']);
+    }
+
+    public function isFreeShippingRadiusEnabled(): bool
+    {
+        return setting('free_shipping_radius_enabled') && setting('free_shipping_radius_value') > 0;
     }
 
     public function isLessThenFeeShippingMinAmount()
