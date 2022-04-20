@@ -9,7 +9,7 @@ return [
     'CO' => 'Colorado',
     'CT' => 'Connecticut',
     'DE' => 'Delaware',
-    'DC' => 'District de Colombie',
+    'DC' => 'District de Columbia',
     'FL' => 'Floride',
     'GA' => 'Géorgie',
     'HI' => 'Hawaï',
