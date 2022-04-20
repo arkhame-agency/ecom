@@ -49,6 +49,9 @@ export default {
     },
 
     created() {
+        //Select first country on select field.
+        this.changeShippingCountry(this.firstCountry);
+
         this.$nextTick(() => {
             if (this.firstShippingMethod) {
                 this.updateShippingMethod(this.firstShippingMethod);
