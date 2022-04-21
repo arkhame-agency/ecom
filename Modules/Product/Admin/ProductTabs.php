@@ -147,6 +147,7 @@ class ProductTabs extends Tabs
     {
         return tap(new Tab('packaging', trans('product::products.tabs.packaging')), function (Tab $tab) {
             $tab->weight(56);
+            $tab->fields(['length', 'width', 'height', 'weight']);
             $tab->view('product::admin.products.tabs.packaging');
         });
     }

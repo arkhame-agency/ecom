@@ -39,6 +39,11 @@ class SaveProductRequest extends Request
             'in_stock' => 'required|boolean',
             'new_from' => 'nullable|date',
             'new_to' => 'nullable|date',
+            'length' => 'required|numeric|min:0|max:99999999999999',
+            'width' => 'required|numeric|min:0|max:99999999999999',
+            'height' => 'required|numeric|min:0|max:99999999999999',
+            'weight' => 'required|numeric|min:0|max:99999999999999',
+
         ];
     }
 }
