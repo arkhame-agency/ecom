@@ -53,7 +53,7 @@
         initial-promotions="{{request('promotions', false)}}"
         inline-template
     >
-        <section class="product-search-wrap">
+        <section class="product-search-wrap" id="product-search-wrap" ref="productsearchwrap">
             <div class="container">
                 <div class="product-search">
                     <div class="product-search-left">
