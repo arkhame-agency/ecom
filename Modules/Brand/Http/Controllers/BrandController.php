@@ -16,6 +16,16 @@ class BrandController
     {
         return view('public.brands.index', [
             'brands' => Brand::all()->SortBy('name'),
+            'routeArray' => $this->getUrls(),
         ]);
+    }
+
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $routeArray[$locale] = trans('brand::routes.brands', [], $locale);
+        }
+        return $routeArray;
     }
 }
