@@ -133,14 +133,19 @@
 
         methods: {
             prev() {
+                this.scrollTopSearch(this.$parent.$refs.productsearchwrap);
                 this.$emit('page-changed', this.currentPage - 1);
             },
 
             next() {
+                this.scrollTopSearch(this.$parent.$refs.productsearchwrap);
+                // this.$parent.$refs.productSearchWrap.scrollIntoView();
                 this.$emit('page-changed', this.currentPage + 1);
             },
 
             goto(page) {
+                this.scrollTopSearch(this.$parent.$refs.productsearchwrap);
+                // this.$parent.$refs.productSearchWrap.scrollIntoView();
                 if (this.currentPage !== page) {
                     this.$emit('page-changed', page);
                 }
@@ -148,6 +153,16 @@
 
             hasActive(page) {
                 return page === this.currentPage;
+            },
+
+            scrollTopSearch(element) {
+                let headerOffset = 110;
+                let elementPosition = element.getBoundingClientRect().top;
+                let offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth',
+                });
             },
         },
     };

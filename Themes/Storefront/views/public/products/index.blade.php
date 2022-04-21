@@ -55,7 +55,7 @@
     >
         <div>
             <!-- Start breadcrumb section -->
-            <section class="breadcrumb__section breadcrumb__bg breadcrumb__bg2" @isset($categoryBanner)
+            <section id="product-search-wrap" ref="productsearchwrap" class="breadcrumb__section breadcrumb__bg breadcrumb__bg2" @isset($categoryBanner)
             style="background: url('{{ $categoryBanner }}') center / cover"
                 @endisset>
                 <div class="container-fluid">
