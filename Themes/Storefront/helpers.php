@@ -148,13 +148,16 @@ if (!function_exists('format_phone_number')) {
         }
         return $phone_number;
     }
+}
 
-    function get_email_address_for($setting_key)
+
+if (!function_exists('get_email_address_for')) {
+    function get_email_address_for($setting_key): array
     {
         if (!empty(setting($setting_key))) {
-            return setting($setting_key);
+            return array_map('trim', preg_split('/;|,/', setting($setting_key)));
         }
-        return setting('store_email');
+        return array_map('trim', preg_split('/;|,/', setting($setting_key)));
     }
 }
 
