@@ -45,6 +45,8 @@
 
             <a :href="productUrl" class="product-name">
                 <h6>{{ product.name }}</h6>
+                <span class="product-short-description" v-html="product.short_description">
+                </span>
             </a>
 
             <div class="product-price product-price-clone" v-html="product.formatted_price"></div>
@@ -77,16 +79,16 @@
 </template>
 
 <script>
-    import ProductRating from './ProductRating.vue';
-    import ProductCardMixin from '../mixins/ProductCardMixin';
+import ProductRating from './ProductRating.vue';
+import ProductCardMixin from '../mixins/ProductCardMixin';
 
-    export default {
-        components: { ProductRating },
+export default {
+    components: { ProductRating },
 
-        mixins: [
-            ProductCardMixin,
-        ],
+    mixins: [
+        ProductCardMixin,
+    ],
 
-        props: ['product'],
-    };
+    props: ['product'],
+};
 </script>
