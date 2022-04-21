@@ -34,7 +34,9 @@ class CartShippingMethodController
     {
         if (setting('shippo_shipping_enabled')) {
             $shippo = new Shippo();
-            $shippoRates = $shippo->getRates($request);
+            $shippoRates = $shippo->getRates($request);           
+            
+            dd($shippoRates);
 
             foreach ($shippoRates['rates'] as $rate) {
                 ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
