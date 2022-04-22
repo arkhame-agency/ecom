@@ -11,6 +11,7 @@ use Modules\Order\Entities\Order;
 use Modules\Order\Mail\OrderShipmentLabelCreated;
 use Modules\Shipping\GatewayInterface;
 use Illuminate\Support\Facades\Cache;
+use Shippo_CustomsDeclaration;
 use Shippo_Object;
 use Shippo_Shipment;
 use Shippo_Transaction;
@@ -18,10 +19,12 @@ use Shippo_Transaction;
 class Shippo implements GatewayInterface
 {
     public string $shippo_api_url = 'https://api.goshippo.com';
-    public array $fromAddress;
-    public array $toAddress;
-    public array $parcels;
     public Client $client;
+    public array $from_address;
+    public array $to_address;
+    public array $parcels;
+    public Shippo_Object $customs_declaration;
+    public array $customs_items;
 
     /**
      *
@@ -33,94 +36,36 @@ class Shippo implements GatewayInterface
     }
 
     /**
-     * @return array
+     * @param Request $request
+     * @return Shippo_CustomsDeclaration
      */
-    public function getFromAddress(): array
+    public function createCustomsDeclaration(Request $request)
     {
-        return $this->fromAddress;
-    }
+        $this->setCustomsItems($request);
 
-    /**
-     * @param array $fromAddress
-     */
-    public function setFromAddress(array $fromAddress): void
-    {
-        $this->fromAddress = $fromAddress;
-    }
-
-    /**
-     * @return array
-     */
-    public function getToAddress(): array
-    {
-        return $this->toAddress;
-    }
-
-    /**
-     * @param array $toAddress
-     */
-    public function setToAddress(array $toAddress): void
-    {
-        $this->toAddress = $toAddress;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParcels(): array
-    {
-        return $this->parcels;
-    }
-
-    /**
-     * @param array $parcels
-     */
-    public function setParcels(array $parcels): void
-    {
-        $this->parcels = $parcels;
+        return Shippo_CustomsDeclaration::create(
+            array(
+                'contents_type' => 'MERCHANDISE',
+                'contents_explanation' => 'Electronic components or speakers or capacitors or inductors or resistors',
+                'non_delivery_option' => 'RETURN',
+                'certify_signer' => config('app.name'),
+                'certify' => 'true',
+                'items' => $this->customs_items
+            ));
     }
 
     public function getRates(Request $request): Shippo_Object
     {
+        //Clear cache key shippo_shipping_rates
         Cache::forget('shippo_shipping_rates');
 
-        $this->mergeShippingAddress($request);
+        $this->setToAddress($request);
 
-        $this->setFromAddress([
-            'name' => config('app.name'),
-            'company' => config('app.name'),
-            'street1' => setting('store_address_1'),
-            'street2' => setting('store_address_2') ?? "",
-            'city' => setting('store_city'),
-            'zip' => setting('store_zip'),
-            'state' => setting('store_state'),
-            'country' => setting('store_country'),
-            'phone' => setting('store_phone'),
-            'email' => setting('store_email'),
-            'is_residential' => false,
-        ]);
+        $this->setParcels($request);
 
-        $this->setToAddress([
-            'name' => $this->getFirstNLastName($request),
-            'street1' => $request->shipping['address_1'] ?? "",
-            'street2' => $request->shipping['address_2'] ?? "",
-            'city' => $request->shipping['city'] ?? "",
-            'zip' => $request->shipping['zip'] ?? "",
-            'state' => $request->shipping['state'] ?? "",
-            'country' => $request->shipping['country'] ?? "",
-            'phone' => $request->customer_phone ?? "",
-            'email' => $request->customer_email ?? "",
-        ]);
-
-        foreach ($request->cartItems as $cartItem) {
-            $this->parcels[] = [
-                "length" => $cartItem['product']['length'],
-                "width" => $cartItem['product']['width'],
-                "height" => $cartItem['product']['height'],
-                'distance_unit' => 'cm',
-                "weight" => $cartItem['product']['weight'] * $cartItem['qty'],
-                'mass_unit' => 'kg',
-            ];
+        // If outside of Canada, create a Customs declaration.
+        if (!in_array(setting('store_country'), $this->getToAddress(), true)) {
+           $this->customs_declaration = $this->createCustomsDeclaration($request);
         }
 
         return Shippo_Shipment::create(
@@ -128,6 +73,7 @@ class Shippo implements GatewayInterface
                 'address_from' => $this->getFromAddress(),
                 'address_to' => $this->getToAddress(),
                 'parcels' => $this->getParcels(),
+                'customs_declaration' => $this->customs_declaration->object_id ?? null,
                 'async' => false,
             ));
     }
@@ -139,17 +85,17 @@ class Shippo implements GatewayInterface
     {
         $transaction = Shippo_Transaction::create(array(
             'rate' => $order->getShipmentRateId(),
-            'label_file_type' => "PDF",
+            'label_file_type' => 'PDF',
             'async' => false));
 
-        if ($transaction["status"] === "SUCCESS") {
+        if ($transaction['status'] === 'SUCCESS') {
             Mail::to($order->customer_email)->send(new OrderShipmentLabelCreated($order, $transaction));
             $order->update(['shipment_label_id' => $transaction['object_id'], 'status' => 'processing']);
 //            event(new OrderStatusChanged($order));
             return $transaction;
         }
 
-        return response()->json(['message' => $transaction["messages"][0]->text], 500);
+        return response()->json(['message' => $transaction['messages'][0]->text], 500);
     }
 
     public function getShipmentRate($shipment_rate_id)
@@ -190,11 +136,6 @@ class Shippo implements GatewayInterface
         }
     }
 
-    public function available()
-    {
-        return true;
-    }
-
     public static function reset_shipping_rates()
     {
         if (setting('shippo_shipping_enabled') && Cache::get('shippo_shipping_rates')) {
@@ -205,20 +146,102 @@ class Shippo implements GatewayInterface
     private function getFirstNLastName($request)
     {
         if (isset($request->shipping['first_name'], $request->shipping['last_name'])) {
-            return $request->shipping['first_name'] . " " . $request->shipping['last_name'];
+            return $request->shipping['first_name'] . ' ' . $request->shipping['last_name'];
         }
         return "";
     }
 
-    private function mergeShippingAddress($request)
-    {
-        $request->merge([
-            'shipping' => $request->ship_to_a_different_address || !$request->billing ? $request->shipping : $request->billing,
-        ]);
-    }
-
     private function isValidToAddress()
     {
-        return in_array($this->toAddress, ['zip', 'state', 'country']);
+        return in_array($this->to_address, ['zip', 'state', 'country']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getFromAddress(): array
+    {
+        return [
+            'name' => config('app.name'),
+            'company' => config('app.name'),
+            'street1' => setting('store_address_1'),
+            'street2' => setting('store_address_2') ?? "",
+            'city' => setting('store_city'),
+            'zip' => setting('store_zip'),
+            'state' => setting('store_state'),
+            'country' => setting('store_country'),
+            'phone' => setting('store_phone'),
+            'email' => setting('store_email'),
+            'is_residential' => false,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getToAddress(): array
+    {
+        return $this->to_address;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function setToAddress(Request $request): void
+    {
+        $this->to_address = [
+            'name' => $this->getFirstNLastName($request),
+            'street1' => $request->shipping['address_1'] ?? "",
+            'street2' => $request->shipping['address_2'] ?? "",
+            'city' => $request->shipping['city'] ?? "",
+            'zip' => $request->shipping['zip'] ?? "",
+            'state' => $request->shipping['state'] ?? "",
+            'country' => $request->shipping['country'] ?? "",
+            'phone' => $request->customer_phone ?? "",
+            'email' => $request->customer_email ?? "",
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getParcels(): array
+    {
+        return $this->parcels;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function setParcels(Request $request): void
+    {
+        foreach ($request->cartItems as $cartItem) {
+            $this->parcels[] = [
+                'length' => $cartItem['product']['length'],
+                'width' => $cartItem['product']['width'],
+                'height' => $cartItem['product']['height'],
+                'distance_unit' => 'cm',
+                'weight' => $cartItem['product']['weight'] * $cartItem['qty'],
+                'mass_unit' => 'kg',
+            ];
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function setCustomsItems(Request $request)
+    {
+        foreach ($request->cartItems as $cartItem) {
+            $this->customs_items[] = [
+                'description' => $cartItem['product']['name'],
+                'quantity' => $cartItem['qty'],
+                'net_weight' => $cartItem['product']['weight'] * $cartItem['qty'],
+                'mass_unit' => 'kg',
+                'value_amount' => number_format($cartItem['product']['selling_price']['amount'] * $cartItem['qty'], 2, '.', ''),
+                'value_currency' => $cartItem['product']['selling_price']['currency'],
+                'origin_country' => setting('store_country'),
+            ];
+        }
     }
 }
