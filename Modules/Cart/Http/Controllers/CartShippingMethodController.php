@@ -65,36 +65,43 @@ class CartShippingMethodController
     {
         $this->mergeShippingAddress($request);
 
-        if ($this->isInRadiusFreeShipping($request)) {
-            ShippingMethod::register('free_shipping', function () {
-                return new Method('free_shipping', setting('free_shipping_label'), 0, null, true);
-            });
-            Cache::remember('free_shipping', now()->addHour(), function () {
-                return ShippingMethod::available();
-            });
-        } else if (setting('shippo_shipping_enabled')) {
-            $shippo = new Shippo();
-            $shippoRates = $shippo->getRates($request);
+        // If ZIP Code provided
+        if (isset($request->shipping['zip'])) {
+            if ($this->isInRadiusFreeShipping($request)) {
+                ShippingMethod::register('free_shipping', function () {
+                    return new Method('free_shipping', setting('free_shipping_label'), 0, null, true);
+                });
+                Cache::remember('free_shipping', now()->addHour(), function () {
+                    return ShippingMethod::available();
+                });
+            } else if (setting('shippo_shipping_enabled')) {
+                $shippo = new Shippo();
+                $shippoRates = $shippo->getRates($request);
 
-            foreach ($shippoRates['rates'] as $rate) {
-                ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
-                    return new Method(
-                        $rate['servicelevel']['token'],
-                        trans("storefront::shipped.method_shipping_label", [
-                            'provider' => $rate['provider'],
-                            'service_name' => $rate['servicelevel']['name'],
-                            'estimated_days' => $rate['estimated_days']
-                        ]),
-                        $this->getCost($rate['amount']), $rate['object_id']);
+                if (!empty($shippoRates['rates'])) {
+                    foreach ($shippoRates['rates'] as $rate) {
+                        ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
+                            return new Method(
+                                $rate['servicelevel']['token'],
+                                trans("storefront::shipped.method_shipping_label", [
+                                    'provider' => $rate['provider'],
+                                    'service_name' => $rate['servicelevel']['name'],
+                                    'estimated_days' => $rate['estimated_days']
+                                ]),
+                                $this->getCost($rate['amount']), $rate['object_id']);
+                        });
+                    }
+                } else {
+                    return response()->json(['message' => $shippoRates['messages'][0]->text], 500);
+                }
+
+                Cache::remember('shippo_shipping_rates', now()->addHour(), function () {
+                    return ShippingMethod::available();
                 });
             }
-
-            Cache::remember('shippo_shipping_rates', now()->addHour(), function () {
-                return ShippingMethod::available();
-            });
         }
 
-        if (!Cart::hasShippingMethod()) {
+        if (!Cart::hasShippingMethod() && ShippingMethod::available()->count() > 0) {
             Cart::addShippingMethod(ShippingMethod::available()->first());
         }
 
