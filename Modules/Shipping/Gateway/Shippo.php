@@ -59,7 +59,7 @@ class Shippo implements GatewayInterface
         //Clear cache key shippo_shipping_rates
         Cache::forget('shippo_shipping_rates');
 
-        $this->mergeShippingAddress($request);
+        $this->setToAddress($request);
 
         $this->setToAddress($request);
 
@@ -151,13 +151,6 @@ class Shippo implements GatewayInterface
             return $request->shipping['first_name'] . ' ' . $request->shipping['last_name'];
         }
         return "";
-    }
-
-    private function mergeShippingAddress($request)
-    {
-        $request->merge([
-            'shipping' => $request->ship_to_a_different_address || !$request->billing ? $request->shipping : $request->billing,
-        ]);
     }
 
     private function isValidToAddress()
