@@ -475,15 +475,15 @@ class Product extends Model
             return false;
         }
 
-        if ($this->hasSpecialPriceStartDate() && $this->hasSpecialPriceEndDate()) {
+        if ($this->special_price && ($this->hasSpecialPriceStartDate() && $this->hasSpecialPriceEndDate())) {
             return $this->specialPriceStartDateIsValid() && $this->specialPriceEndDateIsValid();
         }
 
-        if ($this->hasSpecialPriceStartDate()) {
+        if ($this->special_price && $this->hasSpecialPriceStartDate()) {
             return $this->specialPriceStartDateIsValid();
         }
 
-        if ($this->hasSpecialPriceEndDate()) {
+        if ($this->special_price && $this->hasSpecialPriceEndDate()) {
             return $this->specialPriceEndDateIsValid();
         }
 
