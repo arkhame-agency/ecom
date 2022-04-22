@@ -32,9 +32,7 @@ class ProductIndexController
         return Product::forCard()
             ->when($type === 'latest_products', $this->latestProductsCallback($limit))
             ->when($type === 'custom_products', $this->customProductsCallback($settingPrefix))
-            ->get()
-            ->map
-            ->clean();
+            ->get();
     }
 
     private function categoryProducts($settingPrefix)
