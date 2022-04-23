@@ -43,6 +43,9 @@ export default {
         hasShippingStates() {
             return Object.keys(this.states.shipping).length !== 0;
         },
+        hasShippingAddress() {
+            return Object.keys(this.form.shipping).length === 3;
+        },
         firstCountry() {
             return Object.keys(this.countries)[0];
         },
@@ -62,11 +65,6 @@ export default {
     },
 
     methods: {
-
-        hasShippingAddress() {
-            return Object.keys(this.form.shipping).length !== 0;
-        },
-
         changeShippingState(state) {
             this.$set(this.form.shipping, 'state', state);
         },
@@ -122,14 +120,14 @@ export default {
                 data: { qty: qty || 1 },
             }).then((cart) => {
                 store.updateCart(cart);
-                if (this.hasShippingAddress()) {
+                if (this.hasShippingAddress) {
                     this.loadingOrderSummary = true;
                     this.getRates();
                 }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             }).always(() => {
-                if (! this.hasShippingAddress()) {
+                if (! this.hasShippingAddress) {
                     this.loadingOrderSummary = false;
                 }
             });
@@ -153,14 +151,14 @@ export default {
                 url: route('cart.items.destroy', { cartItemId: cartItem.id }),
             }).then((cart) => {
                 store.updateCart(cart);
-                if (! store.cartIsEmpty() && this.hasShippingStates) {
+                if (! store.cartIsEmpty() && this.hasShippingAddress) {
                     this.loadingOrderSummary = true;
                     this.getRates();
                 }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             }).always(() => {
-                if (! this.hasShippingStates) {
+                if (! this.hasShippingAddress) {
                     this.loadingOrderSummary = false;
                 }
             });
