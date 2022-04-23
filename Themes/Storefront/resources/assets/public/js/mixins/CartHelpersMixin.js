@@ -88,6 +88,7 @@ export default {
                 this.updateShippingMethod(this.cart.shippingMethodName);
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
+                this.cart.availableShippingMethods = {};
             }).always(() => {
                 this.loadingOrderSummary = false;
             });

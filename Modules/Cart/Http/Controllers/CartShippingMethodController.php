@@ -35,7 +35,7 @@ class CartShippingMethodController
 
         $this->mergeShippingAddress($request);
 
-        if (setting('shippo_shipping_enabled') && isset($request->shipping['zip'])) {
+        if (setting('shippo_shipping_enabled')) {
             $shippo = new Shippo();
             $shippoRates = $shippo->getRates($request);
 
@@ -62,16 +62,26 @@ class CartShippingMethodController
                 }
 
             } else {
-                return response()->json(['message' => $shippoRates['messages'][0]->text], 500);
+                return response()->json(['message' => $this->getMessages($shippoRates['messages'])], 500);
             }
         }
 
         return Cart::instance();
     }
 
-    function getCost($cost)
+    public function getMessages($messages)
+    {
+        $msg = null;
+        foreach ($messages as $message) {
+            $msg .= $message['text'] . '. ';
+        }
+        return $msg;
+    }
+
+    public function getCost($cost)
     {
 
+        // 1 = Percent, 0 = Fixed
         if (setting('shippo_profit_margin_type') === '1') {
             $costProfit = (setting('shippo_profit_margin') / 100) * $cost;
             return $cost + $costProfit;

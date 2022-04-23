@@ -259,7 +259,7 @@ export default {
             this.$set(this.form, 'shipping_method', this.shippingMethodName.name);
         },
 
-        addTaxes(RefreshShippingRates) {
+        addTaxes() {
             this.loadingOrderSummary = true;
 
             $.ajax({
