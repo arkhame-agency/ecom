@@ -30,11 +30,11 @@ class ProductTable extends AdminTable
             ->editColumn('price', function (Product $product) {
                 return product_price_formatted($product, function ($price, $specialPrice) use ($product) {
                     if ($product->hasSpecialPrice()) {
-                        return "<span class='m-r-5'>{$specialPrice}</span>
+                        return "<span class='m-r-5'>{$specialPrice} {$product->getUnit()}</span>
                             <del class='text-red'>{$price}</del>";
                     }
 
-                    return "<span class='m-r-5'>{$price}</span>";
+                    return "<span class='m-r-5'>{$price} {$product->getUnit()}</span>";
                 });
             });
     }

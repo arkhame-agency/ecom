@@ -40,6 +40,13 @@ return [
             '1' => 'In Stock',
             '0' => 'Out of Stock',
         ],
+        'units' => [
+            'none' => 'Choose',
+            'each' => 'Each',
+            'pair' => 'Pair',
+            'set' => 'Set',
+            'feet' => 'Feet',
+        ],
         'base_image' => 'Base Image',
         'additional_images' => 'Additional Images',
         'downloadable_files' => 'Downloadable Files',

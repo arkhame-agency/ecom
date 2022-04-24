@@ -617,3 +617,10 @@ fieldset[disabled] .btn-info {
 .custom-select-black:focus {
     outline: 0;
 }
+
+/** Unit el **/
+.unit {
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 0.7em;
+}
