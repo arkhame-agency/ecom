@@ -33,12 +33,7 @@
         new DataTable('#transactions-table .table', {
             columns: [
                 { data: 'order_id' },
-                {
-                    data: 'transaction_id',
-                    render: function (data, type) {
-                        return '<a href="https://dashboard.stripe.com/payments/' + data + '">' + data + '</a>';
-                    },
-                },
+                { data: 'transaction_id' },
                 { data: 'payment_method' },
                 { data: 'created', name: 'created_at' },
             ],
