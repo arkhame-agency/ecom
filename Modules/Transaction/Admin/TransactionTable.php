@@ -27,7 +27,7 @@ class TransactionTable extends AdminTable
                 return "<a href='{$orderUrl}'>{$transaction->order_id}</a>";
             })
             ->addColumn('transaction_id', function ($transaction) {
-                return "<a href='{$this->getUrl($transaction)}'>{$transaction->transaction_id}</a>";
+                return "<a href='{$this->getUrl($transaction)}' target='_blank'>{$transaction->transaction_id}</a>";
             });
     }
 
