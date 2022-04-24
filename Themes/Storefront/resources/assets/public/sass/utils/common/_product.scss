@@ -63,6 +63,13 @@
     color: $color-default;
     color: var(--color-primary);
 
+    .unit {
+        text-transform: capitalize;
+        margin-top: -1px;
+        display: inline-block;
+        font-size: 0.7em;
+    }
+
     .previous-price {
         position: relative;
         font-size: 12px;

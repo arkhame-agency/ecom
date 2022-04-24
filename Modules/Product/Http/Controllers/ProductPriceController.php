@@ -13,7 +13,7 @@ class ProductPriceController
      * Show the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function show($id)
     {
@@ -29,10 +29,10 @@ class ProductPriceController
 
         return product_price_formatted($product, function ($price) use ($product, $variantPrice) {
             if (! $product->hasSpecialPrice()) {
-                return $variantPrice;
+                return $variantPrice . $product->getUnit();
             }
 
-            return "{$variantPrice} <span class='old__price'>{$price}</span>";
+            return "{$variantPrice} {$product->getUnit()} <span class='old__price'>{$price}</span>";
         });
     }
 

@@ -20,7 +20,7 @@ if (! function_exists('product_price_formatted')) {
                 return $callback($flashSalePrice, $previousPrice);
             }
 
-            return "{$flashSalePrice} <span class='old__price'>{$previousPrice}</span>";
+            return "{$flashSalePrice} {$product->getUnit()} <span class='old__price'>{$previousPrice}</span>";
         }
 
         $price = $product->price->convertToCurrentCurrency()->format();
@@ -31,9 +31,9 @@ if (! function_exists('product_price_formatted')) {
         }
 
         if (! $product->hasSpecialPrice()) {
-            return $price;
+            return $price . $product->getUnit();
         }
 
-        return "{$specialPrice} <span class='old__price'>{$price}</span>";
+        return "{$specialPrice} {$product->getUnit()} <span class='old__price'>{$price}</span>";
     }
 }

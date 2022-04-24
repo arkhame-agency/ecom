@@ -47,6 +47,7 @@ class Product extends Model
         'tax_class_id',
         'slug',
         'sku',
+        'unit',
         'price',
         'special_price',
         'special_price_type',
@@ -186,6 +187,7 @@ class Product extends Model
             'products.selling_price',
             'products.special_price_start',
             'products.special_price_end',
+            'products.unit',
         ]);
     }
 
@@ -473,6 +475,17 @@ class Product extends Model
         if ($this->hasPercentageSpecialPrice()) {
             return round($this->special_price->amount(), 2);
         }
+    }
+
+    public function hasUnit() {
+        return $this->unit !== trans('product::products.form.units.none');
+    }
+
+    public function getUnit() {
+        if ($this->hasUnit()) {
+            return "<span class='unit'>$this->unit</span>";
+        }
+        return null;
     }
 
     public function hasSpecialPrice()
