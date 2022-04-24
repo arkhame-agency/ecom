@@ -16,6 +16,7 @@ return [
     'special_price_type' => 'Special Price Type',
     'special_price_start' => 'Special Price Start',
     'special_price_end' => 'Special Price End',
+    'unit' => 'Unit',
     'sku' => 'SKU',
     'manage_stock' => 'Inventory Management',
     'qty' => 'Qty',
