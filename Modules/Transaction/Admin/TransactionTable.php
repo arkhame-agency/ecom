@@ -39,7 +39,7 @@ class TransactionTable extends AdminTable
     {
         switch ($transaction->payment_method) {
             case setting('paypal_label'):
-                $url_payment_method = 'https://www.paypal.com/myaccount/activities/details/'.$transaction->transaction_id;
+                $url_payment_method = 'https://www.paypal.com/activity/payment/'.$transaction->transaction_id;
                 break;
             case setting('stripe_label'):
                 $url_payment_method = 'https://dashboard.stripe.com/payments/'.$transaction->transaction_id;
