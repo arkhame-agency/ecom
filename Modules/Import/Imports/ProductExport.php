@@ -29,7 +29,6 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
     {
         return [
             'SKU',
-            'Name',
             'Quantity',
             'Price',
         ];
@@ -43,7 +42,6 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
     {
         return [
             $product->sku,
-            $product->name,
             $product->qty,
             $product->price,
         ];
