@@ -55,7 +55,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'categories' => $this->explode($data['categories'] ?? null),
             'tax_class_id' => $data['tax_class'] ?? null,
             'tags' => $this->explode($data['tags'] ?? null),
-            'price' => $data['price'] ?? null,
+            'price' => $data['price'] ? (int)$data['price'] : null,
             'special_price' => $data['special_price'] ?? null,
             'special_price_type' => $data['special_price_type'] ?? null,
             'special_price_start' => $data['special_price_start'] ?? null,

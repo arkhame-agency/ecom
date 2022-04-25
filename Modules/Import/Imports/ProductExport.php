@@ -50,7 +50,7 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
     public function columnFormats(): array
     {
         return [
-            'D' => NumberFormat::FORMAT_NUMBER_00,
+            'C' => NumberFormat::FORMAT_NUMBER_00,
         ];
     }
 }
