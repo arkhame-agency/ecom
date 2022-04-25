@@ -653,10 +653,11 @@ class Product extends Model
      */
     public function toSearchableArray()
     {
-        // MySQL Full-Text search handles indexing automatically.
-        if (config('scout.driver') === 'mysql') {
-            return [];
-        }
+//        dd(config('scout.driver'));
+//        // MySQL Full-Text search handles indexing automatically.
+//        if (config('scout.driver') === 'mysql') {
+//            return [];
+//        }
 
         $translations = $this->translations()
             ->withoutGlobalScope('locale')

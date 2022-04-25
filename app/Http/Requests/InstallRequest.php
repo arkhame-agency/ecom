@@ -2,27 +2,17 @@
 
 namespace FleetCart\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Core\Http\Requests\Request;
 
-class InstallRequest extends FormRequest
+class InstallRequest extends Request
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'db.host' => 'required',
@@ -39,26 +29,11 @@ class InstallRequest extends FormRequest
             'store.store_email' => 'required|email',
             'store.store_phone' => 'required',
             'store.store_fax' => 'nullable',
-            'store.search_engine' => ['required', Rule::in(['mysql', 'algolia'])],
+            'store.search_engine' => ['required', Rule::in(['mysql', 'algolia', 'meilisearch'])],
             'store.algolia_app_id' => 'required_if:store.search_engine,algolia',
             'store.algolia_secret' => 'required_if:store.search_engine,algolia',
-        ];
-    }
-
-    /**
-     * Get custom messages for validator errors.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            '*.required' => 'The :attribute field is required.',
-            '*.required_if' => 'The :attribute field is required when :other is :value.',
-            '*.email' => 'The :attribute must be a valid email address.',
-            '*.unique' => 'The :attribute has already been taken.',
-            '*.confirmed' => 'The :attribute confirmation does not match.',
-            '*.min' => 'The :attribute must be at least :min characters.',
+            'store.meilisearch_host' => 'required_if:store.search_engine,meilisearch',
+            'store.meilisearch_key' => 'required_if:store.search_engine,meilisearch',
         ];
     }
 
@@ -67,7 +42,7 @@ class InstallRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'db.host' => 'host',
@@ -78,12 +53,33 @@ class InstallRequest extends FormRequest
             'admin.first_name' => 'first name',
             'admin.last_name' => 'last name',
             'admin.email' => 'email',
+            'admin.phone' => 'phone',
             'admin.password' => 'password',
             'store.store_name' => 'store name',
             'store.store_email' => 'store email',
+            'store.store_phone' => 'store phone',
             'store.search_engine' => 'search engine',
-            'store.algolia_app_id' => 'algolia app id',
-            'store.algolia_secret' => 'algolia secret',
+            'store.algolia_app_id' => 'algolia application id',
+            'store.algolia_secret' => 'algolia admin api key',
+            'store.meilisearch_host' => 'meilisearch host',
+            'store.meilisearch_key' => 'meilisearch key',
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            '*.required' => 'The :attribute field is required.',
+            '*.required_if' => 'The :attribute field is required when :other is :value.',
+            '*.email' => 'The :attribute must be a valid email address.',
+            '*.unique' => 'The :attribute has already been taken.',
+            '*.confirmed' => 'The :attribute confirmation does not match.',
+            '*.min' => 'The :attribute must be at least :min characters.',
         ];
     }
 }

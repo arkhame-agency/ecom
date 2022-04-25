@@ -24,6 +24,10 @@ class SearchEngineServiceProvider extends ServiceProvider
                     'id' => setting('algolia_app_id'),
                     'secret' => setting('algolia_secret'),
                 ],
+                'meilisearch' => [
+                    'host' => setting('meilisearch_host'),
+                    'key' => setting('meilisearch_key'),
+                ],
             ],
         ]);
     }

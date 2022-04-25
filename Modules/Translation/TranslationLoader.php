@@ -48,7 +48,11 @@ class TranslationLoader extends FileLoader
      */
     private function getTranslations($locale, $group, $namespace)
     {
+        $databaseTranslations = [];
+
+        if (config('app.installed')) {
         $databaseTranslations = $this->databaseTranslations($locale, $group, $namespace);
+        }
 
         return array_replace_recursive(
             $this->fileTranslations($locale, $group, $namespace),
