@@ -46,6 +46,7 @@ return [
             'pair' => 'Pair',
             'set' => 'Set',
             'feet' => 'Feet',
+            'inch' => 'Inch',
         ],
         'base_image' => 'Base Image',
         'additional_images' => 'Additional Images',
