@@ -2,7 +2,6 @@
 
 namespace Modules\Import\Imports;
 
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Row;
 use Illuminate\Support\Collection;
 use Modules\Product\Entities\Product;
@@ -21,10 +20,10 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     public function onRow(Row $row)
     {
-        $product = $row->toArray();
+        $product = $this->normalize($row->toArray());
 
         try {
-            Product::where('sku', $product['sku'])->update($this->normalize($product));
+            Product::where('sku', $product['sku'])->withoutGlobalScope('active')->update($product);
         } catch (QueryException | ValidationException $e) {
             session()->push('importer_errors', $product['sku']);
         }
@@ -43,6 +42,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         }
     }
 
+    // @TODO optimisation des conditions dans cette function
     private function normalize(array $data)
     {
         return array_filter([
@@ -50,18 +50,18 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'sku' => $data['sku'] ?? null,
             'description' => $data['description'] ?? null,
             'short_description' => $data['short_description'] ?? null,
-            'is_active' => $data['active'] ?? null,
+            'is_active' => isset($data['price']) && (float)$data['price'] <= 0 ? 0 : $data['active'] ?? null,
             'brand_id' => $data['brand'] ?? null,
             'categories' => $this->explode($data['categories'] ?? null),
             'tax_class_id' => $data['tax_class'] ?? null,
             'tags' => $this->explode($data['tags'] ?? null),
-            'price' => $data['price'] ? (int)$data['price'] : null,
+            'price' => $data['price'] ?? null,
             'special_price' => $data['special_price'] ?? null,
             'special_price_type' => $data['special_price_type'] ?? null,
             'special_price_start' => $data['special_price_start'] ?? null,
             'special_price_end' => $data['special_price_end'] ?? null,
             'manage_stock' => $data['manage_stock'] ?? null,
-            'qty' => $data['quantity'] ?? null,
+            'qty' => isset($data['quantity']) ? (int)$data['quantity'] : null,
             'in_stock' => $data['in_stock'] ?? $data['quantity'] ? 1 : 0,
             'new_from' => $data['new_from'] ?? null,
             'new_to' => $data['new_to'] ?? null,

@@ -38,6 +38,7 @@
                 loggedIn: {{ auth()->check() ? 'true' : 'false' }},
                 csrfToken: '{{ csrf_token() }}',
                 stripePublishableKey: '{{ setting("stripe_publishable_key") }}',
+                defaultCountry: '{{ setting("default_country") }}',
                 locale: '{{ locale() }}',
                 razorpayKeyId: '{{ setting("razorpay_key_id") }}',
                 cart: {!! $cart !!},
