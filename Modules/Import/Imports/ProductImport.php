@@ -50,7 +50,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'sku' => $data['sku'] ?? null,
             'description' => $data['description'] ?? null,
             'short_description' => $data['short_description'] ?? null,
-            'is_active' => isset($data['price']) && (float)$data['price'] <= 0 ? 0 : $data['active'] ?? null,
+            'is_active' => $data['active'] ?? isset($data['price']) && (float)$data['price'] > 0 ? 1 : 0,
             'brand_id' => $data['brand'] ?? null,
             'categories' => $this->explode($data['categories'] ?? null),
             'tax_class_id' => $data['tax_class'] ?? null,
