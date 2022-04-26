@@ -20,6 +20,17 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     public function onRow(Row $row)
     {
+        $product = $this->normalize($row->toArray());
+
+        try {
+            Product::where('sku', $product['sku'])->withoutGlobalScope('active')->update($product);
+        } catch (QueryException | ValidationException $e) {
+            session()->push('importer_errors', $product['sku']);
+        }
+    }
+
+    public function onRow2(Row $row)
+    {
         $data = $this->normalize($row->toArray());
 
         request()->merge($data);
@@ -31,31 +42,32 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         }
     }
 
+    // @TODO optimisation des conditions dans cette function
     private function normalize(array $data)
     {
         return array_filter([
-            'name' => $data['name'],
-            'sku' => $data['sku'],
-            'description' => $data['description'],
-            'short_description' => $data['short_description'],
-            'is_active' => $data['active'],
-            'brand_id' => $data['brand'],
-            'categories' => $this->explode($data['categories']),
-            'tax_class_id' => $data['tax_class'],
-            'tags' => $this->explode($data['tags']),
-            'price' => $data['price'],
-            'special_price' => $data['special_price'],
-            'special_price_type' => $data['special_price_type'],
-            'special_price_start' => $data['special_price_start'],
-            'special_price_end' => $data['special_price_end'],
-            'manage_stock' => $data['manage_stock'],
-            'qty' => $data['quantity'],
-            'in_stock' => $data['in_stock'],
-            'new_from' => $data['new_from'],
-            'new_to' => $data['new_to'],
-            'up_sells' => $this->explode($data['up_sells']),
-            'cross_sells' => $this->explode($data['cross_sells']),
-            'related_products' => $this->explode($data['related_products']),
+            'name' => $data['name'] ?? null,
+            'sku' => $data['sku'] ?? null,
+            'description' => $data['description'] ?? null,
+            'short_description' => $data['short_description'] ?? null,
+            'is_active' => isset($data['price']) && (float)$data['price'] <= 0 ? 0 : $data['active'] ?? null,
+            'brand_id' => $data['brand'] ?? null,
+            'categories' => $this->explode($data['categories'] ?? null),
+            'tax_class_id' => $data['tax_class'] ?? null,
+            'tags' => $this->explode($data['tags'] ?? null),
+            'price' => $data['price'] ?? null,
+            'special_price' => $data['special_price'] ?? null,
+            'special_price_type' => $data['special_price_type'] ?? null,
+            'special_price_start' => $data['special_price_start'] ?? null,
+            'special_price_end' => $data['special_price_end'] ?? null,
+            'manage_stock' => $data['manage_stock'] ?? null,
+            'qty' => isset($data['quantity']) ? (int)$data['quantity'] : null,
+            'in_stock' => $data['in_stock'] ?? $data['quantity'] ? 1 : 0,
+            'new_from' => $data['new_from'] ?? null,
+            'new_to' => $data['new_to'] ?? null,
+            'up_sells' => $this->explode($data['up_sells'] ?? null),
+            'cross_sells' => $this->explode($data['cross_sells'] ?? null),
+            'related_products' => $this->explode($data['related_products'] ?? null),
             'files' => $this->normalizeFiles($data),
             'meta' => $this->normalizeMetaData($data),
             'attributes' => $this->normalizeAttributes($data),

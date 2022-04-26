@@ -41,7 +41,7 @@ export default {
         },
 
         firstCountry() {
-            return Object.keys(this.countries)[0];
+            return FleetCart.defaultCountry;
         },
 
         hasBillingStates() {

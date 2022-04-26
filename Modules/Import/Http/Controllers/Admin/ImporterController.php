@@ -2,6 +2,8 @@
 
 namespace Modules\Import\Http\Controllers\Admin;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Maatwebsite\Excel\Excel;
 use Modules\Import\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel as ExcelFacade;
@@ -13,9 +15,9 @@ class ImporterController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('import::admin.importer.index');
     }
@@ -23,10 +25,10 @@ class ImporterController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Modules\Import\Http\Requests\StoreImporterRequest $request
-     * @return \Illuminate\Http\Response
+     * @param StoreImporterRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreImporterRequest $request)
+    public function store(StoreImporterRequest $request): RedirectResponse
     {
         @set_time_limit(0);
 

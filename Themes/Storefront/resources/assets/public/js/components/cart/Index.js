@@ -44,7 +44,7 @@ export default {
             return Object.keys(this.states.shipping).length !== 0;
         },
         firstCountry() {
-            return Object.keys(this.countries)[0];
+            return FleetCart.defaultCountry;
         },
     },
 
