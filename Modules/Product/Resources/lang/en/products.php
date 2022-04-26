@@ -41,7 +41,7 @@ return [
             '0' => 'Out of Stock',
         ],
         'units' => [
-            'none' => 'Choose',
+            '0' => 'Choose',
             'each' => 'Each',
             'pair' => 'Pair',
             'set' => 'Set',
