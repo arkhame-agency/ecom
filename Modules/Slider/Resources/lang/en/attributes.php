@@ -6,6 +6,8 @@ return [
     'direction' => 'Direction',
     'call_to_action_text' => 'Call to Action Text',
     'call_to_action_url' => 'Call to Action URL',
+    'start_date' => 'Start date',
+    'end_date' => 'End date',
     'open_in_new_window' => 'Open in new window',
     'enable_slide' => 'Enable slide',
     'caption_1_delay' => 'Delay',

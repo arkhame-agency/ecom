@@ -2,13 +2,13 @@
 
 namespace Modules\Cart\Http\Controllers;
 
+use Geocoder\Provider\GoogleMaps\Model\GoogleAddress;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Modules\Cart\Facades\Cart;
-use Illuminate\Http\Request;
 use Modules\Shipping\Facades\ShippingMethod;
 use Modules\Shipping\Gateway\Shippo;
 use Modules\Shipping\Method;
-use Modules\Support\Money;
 
 class CartShippingMethodController
 {
@@ -21,6 +21,8 @@ class CartShippingMethodController
     {
         if (Cache::get('shippo_shipping_rates')) {
             $shippingMethod = Cache::get('shippo_shipping_rates')->get(request('shipping_method'));
+        } else if (Cache::get('free_shipping')) {
+            $shippingMethod = Cache::get('free_shipping')->get(request('shipping_method'));
         } else {
             $shippingMethod = ShippingMethod::get(request('shipping_method'));
         }
@@ -30,12 +32,52 @@ class CartShippingMethodController
         return Cart::instance();
     }
 
+    private function getAddressShipping($request)
+    {
+        return $request->shipping['state'] . ', ' . $request->shipping['zip'];
+    }
+
+    public function isInRadiusFreeShipping($request)
+    {
+        if ($this->isFreeShippingRadiusEnabled()) {
+            /**
+             * @var $google GoogleAddress
+             */
+            $google = app('geocoder')->geocode($this->getAddressShipping($request))->get()->first();
+            if ($google->getCoordinates()) {
+                $lat2 = $google->getCoordinates()->getLatitude();
+                $lng2 = $google->getCoordinates()->getLongitude();
+                $distance = $this->getDistanceBetweenPointsNew(
+                    config('geocoder.starting_point.lat'),
+                    config('geocoder.starting_point.lng'),
+                    $lat2,
+                    $lng2,
+                    'Km'
+                );
+                return $distance < setting('free_shipping_radius_value');
+            }
+        }
+        return false;
+    }
+
     public function rates(Request $request)
     {
 
         $this->mergeShippingAddress($request);
 
-        if (setting('shippo_shipping_enabled')) {
+        if ($this->isInRadiusFreeShipping($request)) {
+            ShippingMethod::register('free_shipping', function () {
+                return new Method('free_shipping', setting('free_shipping_label'), 0, null, true);
+            });
+            Cache::remember('free_shipping', now()->addHour(), function () {
+                return ShippingMethod::available();
+            });
+
+            if (!Cart::hasShippingMethod()) {
+                Cart::addShippingMethod(ShippingMethod::available()->first());
+            }
+
+        } else if (setting('shippo_shipping_enabled')) {
             $shippo = new Shippo();
             $shippoRates = $shippo->getRates($request);
 
@@ -90,10 +132,45 @@ class CartShippingMethodController
         return $cost + setting('shippo_profit_margin');
     }
 
+    public function isFreeShippingRadiusEnabled(): bool
+    {
+        return setting('free_shipping_radius_enabled') && setting('free_shipping_radius_value') > 0;
+    }
+
+    /**
+     * Method to find the distance between 2 locations from its coordinates.
+     *
+     * @param float latitude1 LAT from point A
+     * @param float longitude1 LNG from point A
+     * @param float latitude2 LAT from point B
+     * @param float longitude2 LNG from point B
+     *
+     * @return Float Distance in Kilometers.
+     */
+    function getDistanceBetweenPointsNew($latitude1, $longitude1, $latitude2, $longitude2, $unit = 'Mi')
+    {
+        $theta = $longitude1 - $longitude2;
+        $distance = sin(deg2rad($latitude1)) * sin(deg2rad($latitude2)) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta));
+
+        $distance = acos($distance);
+        $distance = rad2deg($distance);
+        $distance *= 60 * 1.1515;
+
+        switch ($unit) {
+            case 'Mi':
+                break;
+            case 'Km' :
+                $distance *= 1.609344;
+        }
+
+        return (round($distance, 2));
+    }
+
     private function mergeShippingAddress($request)
     {
         $request->merge([
             'shipping' => $request->ship_to_a_different_address || !$request->billing ? $request->shipping : $request->billing,
         ]);
     }
+
 }

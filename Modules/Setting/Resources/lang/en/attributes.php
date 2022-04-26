@@ -80,6 +80,9 @@ return [
     'translatable.free_shipping_label' => 'Label',
     'free_shipping_min_amount' => 'Minimum Amount',
 
+    'free_shipping_radius_enabled' => 'Status',
+    'free_shipping_radius' => 'Radius',
+
     'commercial_shipping_enabled' => 'Status',
     'translatable.commercial_shipping_label' => 'Label',
     'commercial_shipping_cost' => 'Cost',

@@ -61,6 +61,8 @@ class Shippo implements GatewayInterface
 
         $this->setToAddress($request);
 
+        $this->setToAddress($request);
+
         $this->setParcels($request);
 
         // If outside of Canada, create a Customs declaration.
