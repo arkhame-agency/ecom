@@ -1737,27 +1737,35 @@ body.overlay__active::before,
 .p-0 {
     padding: 0;
 }
+
 .p-1 {
     padding: 1rem;
 }
+
 .p-15 {
     padding: 1.5rem;
 }
+
 .p-2 {
     padding: 2rem;
 }
+
 .p-25 {
     padding: 2.5rem;
 }
+
 .p-3 {
     padding: 3rem;
 }
+
 .p-35 {
     padding: 3.5rem;
 }
+
 .p-4 {
     padding: 4rem;
 }
+
 .pt-0 {
     padding-top: 0;
 }
@@ -1967,4 +1975,9 @@ body.overlay__active::before,
 
 footer {
     margin-top: 50px;
+}
+
+.flex-fill {
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important
 }

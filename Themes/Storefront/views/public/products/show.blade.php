@@ -163,16 +163,16 @@
 
                                 <!-- Wish and Compare -->
                                 <div class="product__variant--list d-flex mb-15">
-                                    <a class="variant__wishlist--icon" :class="{ 'added': inWishlist }"
+                                    <a class="variant__wishlist--icon flex-fill" :class="{ 'added': inWishlist }"
                                        @click="syncWishlist"
                                        title="{{ trans('storefront::product.add_to_wishlist') }}">
                                         <i class="la-heart" :class="inWishlist ? 'las' : 'lar'"></i>
                                         {{ trans('storefront::product.wishlist') }}
                                     </a>
-                                    <a class="variant__wishlist--icon" :class="{ 'added': inCompareList }"
+                                    <a class="variant__wishlist--icon flex-fill" :class="{ 'added': inCompareList }"
                                        @click="syncCompareList"
                                        title="{{ trans('storefront::product.add_to_compare') }}">
-                                        <i class="la-heart" :class="inCompareList ? 'las' : 'lar'"></i>
+                                        <i class="la-exchange-alt las"></i>
                                         {{ trans('storefront::product.add_to_compare') }}
                                     </a>
                                 </div>

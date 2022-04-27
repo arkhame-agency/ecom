@@ -136,7 +136,7 @@
                             </li>
                             <li class="footer__widget--menu__list">
                                 <a class="footer__widget--menu__text"
-                                   href="{{ trans('storefront::account.pages.my_reviews') }}">
+                                   href="{{ route('account.reviews.index') }}">
                                     {{ trans('storefront::account.pages.my_reviews') }}
                                 </a>
                             </li>
