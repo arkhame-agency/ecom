@@ -103,6 +103,11 @@
                 <div class="header__menu d-none d-lg-block">
                     <nav class="header__menu--navigation">
                         <ul class="d-flex">
+                            <li class="header__menu--items mega__menu--items">
+                                <a class="header__menu--link" href="{{ route('home') }}">
+                                    {{ trans('storefront::layout.home') }}
+                                </a>
+                            </li>
                             @if ($categoryMenu->menus()->isNotEmpty())
                                 <li class="header__menu--items mega__menu--items">
                                     <a class="header__menu--link" href="{{ route('products.index') }}">
