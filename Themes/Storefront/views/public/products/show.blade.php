@@ -212,7 +212,7 @@
                             <div class="guarantee__safe--checkout">
                                 <h5 class="guarantee__safe--checkout__title">{{ trans('storefront::product.guaranteed_safe_checkout') }}</h5>
                                 <img class="guarantee__safe--checkout__img"
-                                     src="{{ asset('themes/storefront/public/img/other/safe-checkout.webp') }}"
+                                     src="{{ $acceptedPaymentMethodsImage->path }}"
                                      alt="Payment Image">
                             </div>
                         </div>
@@ -270,6 +270,24 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;"><p>Vous avez besoin de v&ecirc;tements de travail ou d&rsquo;uniformes
+                    pour vous-m&ecirc;me ou pour vos employ&eacute;s? UNIFORMES DE L&rsquo;EST vous facilite la t&acirc;che
+                    gr&acirc;ce &agrave; sa boutique en ligne.</p>
+                <p>Vous trouverez toutes les grandes marques de v&ecirc;tements de travail, de v&ecirc;tements ignifuges
+                    (Nomex) et de v&ecirc;tements haute-visibilit&eacute; : <b>BigBill</b>, <b>Bulwark</b>,
+                    <b>Viking</b>, <b>Rasco FR</b>, <b>Gatts</b>, <b>Jackfield</b>, <b>Holmes</b>, <b>Blaklader</b>, <b>Natpro</b>,
+                    etc.</p>
+                <p>Nous vendons &eacute;galement des uniformes pour diff&eacute;rents domaines professionnels (secteur h&ocirc;telier,
+                    p&eacute;trolier, restauration, garages, etc.).</p>
+                <p>Si vous cherchez la qualit&eacute; et la durabilit&eacute; des grandes marques de v&ecirc;tements,
+                    vous trouverez ce que vous cherchez sur notre site!</p>
+                <div style="padding-top: 20px; border-bottom: 1px solid #e1e1e1; text-align: center;"><h2>
+                        Contactez-nous!</h2>
+                    <p style="padding-bottom: 30px;">Pour toute question, vous pouvez nous contacter au <a
+                            style="font-weight: bold;" href="tel:+15149036673">514 903-6673</a> ou nous &eacute;crire
+                        &agrave; <a style="font-weight: bold;" href="mailto:info@uniformesdelest.com">info@uniformesdelest.com</a>.
+                    </p></div>
             </div>
         </section>
 

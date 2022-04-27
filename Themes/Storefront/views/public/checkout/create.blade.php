@@ -46,8 +46,9 @@
                                     @include('public.checkout.create.form.billing_details')
                                     @include('public.checkout.create.form.order_note')
                                     <div class="checkout__content--step__footer d-flex align-items-center">
-                                        <a class="previous__link--content" href="{{route('cart.index')}}">Return to
-                                            cart</a>
+                                        <a class="previous__link--content" href="{{route('cart.index')}}">
+                                            {{ trans('storefront::cart.return_to_cart') }}
+                                        </a>
                                     </div>
                                 </div>
                             </div>

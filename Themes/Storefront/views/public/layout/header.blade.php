@@ -89,7 +89,7 @@
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title">
+                    <div class="main__logo--title">
                         <a class="main__logo--link" href="{{ route('home') }}">
                             @if (is_null($logo))
                                 <h3>{{ setting('store_name') }}</h3>
@@ -97,7 +97,7 @@
                                 <img class="main__logo--img" src="{{ $logo }}" alt="{{ setting('store_name') }}">
                             @endif
                         </a>
-                    </h1>
+                    </div>
                 </div>
 
                 <div class="header__menu d-none d-lg-block">
@@ -213,7 +213,7 @@
     <div class="offcanvas-header" tabindex="-1">
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
-                <a class="offcanvas__logo_link" href="index.html">
+                <a class="offcanvas__logo_link" href="{{ route('home') }}">
                     @if (is_null($logo))
                         <h3>{{ setting('store_name') }}</h3>
                     @else

@@ -2,7 +2,9 @@
 
 namespace Themes\Storefront\Http\ViewComposers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
+use Modules\Media\Entities\File;
 use Spatie\SchemaOrg\Schema;
 use Themes\Storefront\Banner;
 use Themes\Storefront\Feature;
@@ -27,6 +29,7 @@ class ProductShowPageComposer
             'banner' => Banner::getProductPageBanner(),
             'productSchemaMarkup' => $this->schemaMarkup($product),
             'categoryBreadcrumb' => $this->getCategoryBreadCrumb($product->categories->nest()),
+            'acceptedPaymentMethodsImage' => $this->getAcceptedPaymentMethodsImage(),
         ]);
     }
 
@@ -77,5 +80,17 @@ class ProductShowPageComposer
         }
 
         return $breadcrumb;
+    }
+
+    private function getAcceptedPaymentMethodsImage()
+    {
+        return $this->getMedia(setting('storefront_accepted_payment_methods_image'));
+    }
+
+    private function getMedia($fileId)
+    {
+        return Cache::rememberForever(md5("files.{$fileId}"), function () use ($fileId) {
+            return File::findOrNew($fileId);
+        });
     }
 }

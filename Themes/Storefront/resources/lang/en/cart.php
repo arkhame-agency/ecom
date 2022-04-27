@@ -5,6 +5,7 @@ return [
     'clear_cart' => 'Clear Cart',
     'continue_shopping' => 'Continue Shopping',
     'shopping_cart' => 'Shopping Cart',
+    'return_to_cart' => 'Return to Cart',
     'checkout' => 'Checkout',
     'order_complete' => 'Order complete',
     'table' => [

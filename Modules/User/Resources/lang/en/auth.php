@@ -14,6 +14,8 @@ return [
     'facebook' => 'Facebook',
     'google' => 'Google',
     'dont_have_an_account' => 'Don\'t Have an Account?',
+    'login_if_you_are_a_returning_customer' => 'Login if you area a returning customer.',
+    'Register_here_if_you_are_a_new_customer' => 'Register here if you are a new customer.',
     'create_account' => 'CREATE ACCOUNT',
     'register' => 'Register',
     'already_have_an_account' => 'Already Have an Account?',

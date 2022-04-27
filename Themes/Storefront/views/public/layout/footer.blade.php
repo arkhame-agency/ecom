@@ -29,11 +29,18 @@
 
                                 @if (setting('storefront_address'))
                                     <li>
-                                        <a href="https://www.google.com/maps/search/{{ setting('storefront_address') }}"
+                                        <a class="mb-20" href="https://www.google.com/maps/search/{{ setting('storefront_address') }}"
                                            target="_blank">{{ setting('store_address_1') }}
-                                            <br/>{{ stateName(setting('store_country'), setting('store_state'))}}
+                                            <br/>{{ setting('store_city') }}
+                                            , {{ stateName(setting('store_country'), setting('store_state'))}}
                                             , {{ setting('store_zip') }}<br/>{{ countryName(setting('store_country')) }}
                                         </a>
+                                        <br/>
+                                        @if(locale() === 'fr')
+                                            <i class="fa fa-calendar"></i> Lundi au vendredi: 6h à 14h.
+                                        @else
+                                            <i class="fa fa-calendar"></i> Monday to Friday: 6 am to 2 pm
+                                        @endif
                                     </li>
                                 @endif
                             </ul>

@@ -66,7 +66,7 @@
                         name="billing[last_name]"
                         v-model="form.billing.last_name"
                         id="billing-last-name"
-                        class="checkout__input--field border-radius-5" placeholder="Last name"
+                        class="checkout__input--field border-radius-5" placeholder="{{ trans('checkout::attributes.billing.last_name') }}"
                     >
                     <span
                         class="error-message"

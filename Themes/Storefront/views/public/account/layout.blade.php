@@ -34,9 +34,6 @@
     <!-- my account section start -->
     <section class="my__account--section section--padding">
         <div class="container">
-            <p class="account__welcome--text">
-                {{ trans('storefront::account.hello_user', ['user'=> $currentUser->first_name]) }}
-            </p>
             <div class="my__account--section__inner border-radius-10 d-flex">
                 <div class="account__left--sidebar">
                     <h3 class="account__content--title mb-20">{{trans('storefront::account.pages.my_profile')}}</h3>

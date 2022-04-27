@@ -138,42 +138,42 @@ if (heroSlider.length !== 0) {
             },
         },
     });
-
-    // product swiper column3 activation
-    var swiper = new Swiper('.product__swiper--column3', {
-        slidesPerView: 3,
-        clickable: true,
-        loop: true,
-        spaceBetween: 30,
-        breakpoints: {
-            1200: {
-                slidesPerView: 3,
-            },
-            992: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-            280: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            0: {
-                slidesPerView: 1,
-            },
-        },
-        grid: {
-            fill: 'row',
-            rows: 2,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
 }
+
+// product swiper column3 activation
+var swiper = new Swiper('.product__swiper--column3', {
+    slidesPerView: 3,
+    clickable: true,
+    loop: true,
+    spaceBetween: 30,
+    breakpoints: {
+        1200: {
+            slidesPerView: 3,
+        },
+        992: {
+            slidesPerView: 2,
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        280: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+        },
+        0: {
+            slidesPerView: 1,
+        },
+    },
+    grid: {
+        fill: 'row',
+        rows: 2,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
 
 // product swiper column4 activation
 var swiper = new Swiper('.product__swiper--column4', {
