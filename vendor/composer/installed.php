@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0876c5de9b644d3aef71d9e28eaee4876053266e',
+        'reference' => 'c594b67d425903be56cb1a8181acb942e41634b7',
         'name' => 'envaysoft/fleetcart',
         'dev' => true,
     ),
@@ -268,7 +268,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0876c5de9b644d3aef71d9e28eaee4876053266e',
+            'reference' => 'c594b67d425903be56cb1a8181acb942e41634b7',
             'dev_requirement' => false,
         ),
         'ezyang/htmlpurifier' => array(

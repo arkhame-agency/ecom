@@ -203,7 +203,7 @@ final class Versions
   'nunomaduro/collision' => 'v5.10.0@3004cfa49c022183395eabc6d0e5207dfe498d00',
   'roave/security-advisories' => 'dev-latest@b9421ed9de7b2a5f54f637a064dcd31922a82405',
   'symfony/debug' => 'v4.4.31@43ede438d4cb52cd589ae5dc070e9323866ba8e0',
-  'envaysoft/fleetcart' => 'dev-main@0876c5de9b644d3aef71d9e28eaee4876053266e',
+  'envaysoft/fleetcart' => 'dev-main@c594b67d425903be56cb1a8181acb942e41634b7',
 );
 
     private function __construct()
