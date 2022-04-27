@@ -143,6 +143,9 @@ export default {
         if (this.defaultAddress.address_id) {
             this.form.billingAddressId = this.defaultAddress.address_id;
             this.form.shippingAddressId = this.defaultAddress.address_id;
+        } else {
+            this.form.billingAddressId = Object.keys(this.addresses)[0];
+            this.form.shippingAddressId = Object.keys(this.addresses)[0];
         }
 
         if (! this.hasAddress) {
@@ -255,6 +258,11 @@ export default {
         },
 
         changeShippingMethod(shippingMethod) {
+
+            if (typeof shippingMethod === 'string') {
+                shippingMethod = { name: shippingMethod };
+            }
+
             this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name] : this.cart.availableShippingMethods[this.firstShippingMethod];
             this.$set(this.form, 'shipping_method', this.shippingMethodName.name);
         },
@@ -268,7 +276,7 @@ export default {
                 data: this.form,
             }).then((cart) => {
                 store.updateCart(cart);
-                this.getRates();
+                this.getRates('taxAdded');
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             });
