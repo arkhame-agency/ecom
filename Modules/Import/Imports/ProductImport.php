@@ -50,7 +50,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'sku' => $data['sku'] ?? null,
             'description' => $data['description'] ?? null,
             'short_description' => $data['short_description'] ?? null,
-            'is_active' => $data['active'] ?? isset($data['price']) && (float)$data['price'] > 0 ? 1 : 0,
+            'is_active' => $this->isActive($data),
             'brand_id' => $data['brand'] ?? null,
             'categories' => $this->explode($data['categories'] ?? null),
             'tax_class_id' => $data['tax_class'] ?? null,
@@ -60,9 +60,10 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'special_price_type' => $data['special_price_type'] ?? null,
             'special_price_start' => $data['special_price_start'] ?? null,
             'special_price_end' => $data['special_price_end'] ?? null,
+            'selling_price' => $this->getSellingPrice($data),
             'manage_stock' => $data['manage_stock'] ?? null,
             'qty' => isset($data['quantity']) ? (int)$data['quantity'] : null,
-            'in_stock' => $data['in_stock'] ?? $data['in_stock'] ?? $data['quantity'] ? 1 : 0,
+            'in_stock' => $data['in_stock'] ?? $data['in_stock'] ?? isset($data['quantity']) && $data['quantity'] > 0 ? 1 : 0,
             'new_from' => $data['new_from'] ?? null,
             'new_to' => $data['new_to'] ?? null,
             'up_sells' => $this->explode($data['up_sells'] ?? null),
@@ -72,9 +73,43 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'meta' => $this->normalizeMetaData($data),
             'attributes' => $this->normalizeAttributes($data),
             'options' => $this->normalizeOptions($data),
-        ], function ($value) {
+        ], static function ($value, $key) use ($data) {
+            if ($key === 'special_price' && isset($data['price']) && !isset($data['special_price'])) {
+                return true;
+            }
             return $value || is_numeric($value);
-        });
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    private function getSellingPrice($data): ?float
+    {
+        if (isset($data['price']) && !isset($data['special_price'])) {
+            return (float)$data['price'];
+        }
+
+        if (isset($data['special_price'])) {
+            return (float)$data['special_price'];
+        }
+
+        return null;
+
+    }
+
+    private function isActive($data): ?int
+    {
+        if (isset($data['active'])) {
+            return $data['active'];
+        }
+
+        if (isset($data['price']) && (float)$data['price'] > 0) {
+            return 1;
+        }
+
+        if (isset($data['price']) && (float)$data['price'] <= 0) {
+            return 0;
+        }
+
+        return null;
     }
 
     private function explode($values)
