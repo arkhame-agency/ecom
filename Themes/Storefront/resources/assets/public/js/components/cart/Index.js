@@ -182,7 +182,11 @@ export default {
         },
 
         changeShippingMethod(shippingMethod) {
-            this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name].name : this.cart.availableShippingMethods[this.firstShippingMethod].name;
+            if (typeof shippingMethod === 'string') {
+                shippingMethod = { name: shippingMethod };
+            }
+
+            this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name] : this.cart.availableShippingMethods[this.firstShippingMethod];
         },
 
         fetchCrossSellProducts() {

@@ -47,12 +47,10 @@
                 langs: {
                     'storefront::layout.next': '{{ trans("storefront::layout.next") }}',
                     'storefront::layout.prev': '{{ trans("storefront::layout.prev") }}',
-                    'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                     'storefront::layout.all_categories': '{{ trans("storefront::layout.all_categories") }}',
                     'storefront::layout.most_searched': '{{ trans("storefront::layout.most_searched") }}',
                     'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                     'storefront::layout.category_suggestions': '{{ trans("storefront::layout.category_suggestions") }}',
-                    'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                     'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                     'storefront::layout.more_results': '{{ trans("storefront::layout.more_results") }}',
                     'storefront::product_card.out_of_stock': '{{ trans("storefront::product_card.out_of_stock") }}',
@@ -70,6 +68,8 @@
                     'storefront::product_card.hours': '{{ trans("storefront::product_card.hours") }}',
                     'storefront::product_card.minutes': '{{ trans("storefront::product_card.minutes") }}',
                     'storefront::product_card.seconds': '{{ trans("storefront::product_card.seconds") }}',
+                    'auth::validation.confirmed': '{{ trans("user::auth.validation.confirmed") }}',
+                    'auth::validation.email': '{{ trans("user::auth.validation.email") }}',
                 },
             };
         </script>

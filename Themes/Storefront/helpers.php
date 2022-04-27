@@ -157,7 +157,7 @@ if (!function_exists('get_email_address_for')) {
         if (!empty(setting($setting_key))) {
             return array_map('trim', preg_split('/;|,/', setting($setting_key)));
         }
-        return array_map('trim', preg_split('/;|,/', setting($setting_key)));
+        return array_map('trim', preg_split('/;|,/', setting('store_email')));
     }
 }
 
