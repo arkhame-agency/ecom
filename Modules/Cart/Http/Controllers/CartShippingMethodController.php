@@ -3,13 +3,12 @@
 namespace Modules\Cart\Http\Controllers;
 
 use Geocoder\Provider\GoogleMaps\Model\GoogleAddress;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Modules\Cart\Facades\Cart;
-use Illuminate\Http\Request;
 use Modules\Shipping\Facades\ShippingMethod;
 use Modules\Shipping\Gateway\Shippo;
 use Modules\Shipping\Method;
-use Modules\Support\Money;
 
 class CartShippingMethodController
 {
@@ -63,57 +62,65 @@ class CartShippingMethodController
 
     public function rates(Request $request)
     {
+
         $this->mergeShippingAddress($request);
 
-        // If ZIP Code provided
-        if (isset($request->shipping['zip'])) {
-            if ($this->isInRadiusFreeShipping($request)) {
-                ShippingMethod::register('free_shipping', function () {
-                    return new Method('free_shipping', setting('free_shipping_label'), 0, null, true);
-                });
-                Cache::remember('free_shipping', now()->addHour(), function () {
-                    return ShippingMethod::available();
-                });
-            } else if (setting('shippo_shipping_enabled')) {
-                $shippo = new Shippo();
-                $shippoRates = $shippo->getRates($request);
+        if ($this->isInRadiusFreeShipping($request)) {
+            ShippingMethod::register('free_shipping', function () {
+                return new Method('free_shipping', setting('free_shipping_label'), 0, null, true);
+            });
+            Cache::remember('free_shipping', now()->addHour(), function () {
+                return ShippingMethod::available();
+            });
 
-                if (!empty($shippoRates['rates'])) {
-                    foreach ($shippoRates['rates'] as $rate) {
-                        ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
-                            return new Method(
-                                $rate['servicelevel']['token'],
-                                trans("storefront::shipped.method_shipping_label", [
-                                    'provider' => $rate['provider'],
-                                    'service_name' => $rate['servicelevel']['name'],
-                                    'estimated_days' => $rate['estimated_days']
-                                ]),
-                                $this->getCost($rate['amount']), $rate['object_id']);
-                        });
-                    }
-                } else {
-                    return response()->json(['message' => $shippoRates['messages'][0]->text], 500);
+            if (!Cart::hasShippingMethod()) {
+                Cart::addShippingMethod(ShippingMethod::available()->first());
+            }
+
+        } else if (setting('shippo_shipping_enabled')) {
+            $shippo = new Shippo();
+            $shippoRates = $shippo->getRates($request);
+
+            if (!empty($shippoRates['rates'])) {
+                foreach ($shippoRates['rates'] as $rate) {
+                    ShippingMethod::register($rate['servicelevel']['token'], function () use ($rate) {
+                        return new Method(
+                            $rate['servicelevel']['token'],
+                            trans("storefront::shipped.method_shipping_label", [
+                                'provider' => $rate['provider'],
+                                'service_name' => $rate['servicelevel']['name'],
+                                'estimated_days' => $rate['estimated_days']
+                            ]),
+                            $this->getCost($rate['amount']), $rate['object_id']);
+                    });
                 }
 
                 Cache::remember('shippo_shipping_rates', now()->addHour(), function () {
                     return ShippingMethod::available();
                 });
-            }
-        }
 
-        if (!Cart::hasShippingMethod() && ShippingMethod::available()->count() > 0) {
-            Cart::addShippingMethod(ShippingMethod::available()->first());
+                if (!Cart::hasShippingMethod()) {
+                    Cart::addShippingMethod(ShippingMethod::available()->first());
+                }
+
+            } else {
+                return response()->json(['message' => $this->getMessages($shippoRates['messages'])], 500);
+            }
         }
 
         return Cart::instance();
     }
 
-    public function isFreeShippingRadiusEnabled(): bool
+    public function getMessages($messages)
     {
-        return setting('free_shipping_radius_enabled') && setting('free_shipping_radius_value') > 0;
+        $msg = null;
+        foreach ($messages as $message) {
+            $msg .= $message['text'] . '. ';
+        }
+        return $msg;
     }
 
-    function getCost($cost)
+    public function getCost($cost)
     {
 
         // 1 = Percent, 0 = Fixed
@@ -125,6 +132,10 @@ class CartShippingMethodController
         return $cost + setting('shippo_profit_margin');
     }
 
+    public function isFreeShippingRadiusEnabled(): bool
+    {
+        return setting('free_shipping_radius_enabled') && setting('free_shipping_radius_value') > 0;
+    }
 
     /**
      * Method to find the distance between 2 locations from its coordinates.
