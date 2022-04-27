@@ -6,8 +6,6 @@
 node_modules/
 /vendor/
 /public/storage/
-/public/modules/
-/public/themes/
 /Modules/*/Assets/
 /Themes/*/assets/
 /tags
