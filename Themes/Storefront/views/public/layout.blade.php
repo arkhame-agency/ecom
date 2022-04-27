@@ -75,6 +75,8 @@
                 'storefront::product_card.seconds': '{{ trans("storefront::product_card.seconds") }}',
                 'storefront::brands.brands': '{{ trans("storefront::brands.brands") }}',
                 'storefront::layout.remove': '{{ trans("storefront::layout.remove") }}',
+                'auth::validation.confirmed': '{{ trans("user::auth.validation.confirmed") }}',
+                'auth::validation.email': '{{ trans("user::auth.validation.email") }}',
             },
         };
     </script>

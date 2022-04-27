@@ -8,7 +8,7 @@
             <div class="form-wrap-inner register-wrap-inner">
                 <h2></h2>
 
-                <form method="POST" action="{{ route('register.post') }}">
+                <form method="POST" action="{{ route('register.post') }}" id="register-form">
                     @csrf
 
                     <div class="form-group">

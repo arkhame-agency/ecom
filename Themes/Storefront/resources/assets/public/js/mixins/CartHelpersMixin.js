@@ -76,7 +76,7 @@ export default {
             });
         },
 
-        getRates() {
+        getRates(trigger) {
             this.loadingOrderSummary = true;
             this.form.cartItems = this.cart.items;
             $.ajax({
@@ -85,7 +85,11 @@ export default {
                 data: this.form,
             }).then((cart) => {
                 store.updateCart(cart);
-                this.updateShippingMethod(this.cart.shippingMethodName);
+                if (trigger === 'taxAdded') {
+                    this.changeShippingMethod(this.cart.shippingMethodName);
+                } else {
+                    this.updateShippingMethod(this.cart.shippingMethodName);
+                }
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
             }).always(() => {

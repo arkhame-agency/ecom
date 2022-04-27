@@ -100,22 +100,30 @@ $.ajaxSetup({
 });
 
 $(function () {
-    $('#validate-email').on('change', function (e) {
-        if ($(this).val() !== $('#email').val()) {
-            $('#email').addClass('is-invalid');
-            $(this).addClass('is-invalid');
-        } else {
-            $('#email').removeClass('is-invalid');
-            $(this).removeClass('is-invalid');
+    $('#register-form #validate-email, #register-form #email').on('change', function (e) {
+        $('#email, #validate-email').siblings('.error-message').remove();
+        $('#email, #validate-email').removeClass('is-invalid');
+        if ($('#validate-email').val() !== '') {
+            if ($(this).val() !== $('#email').val() || $(this).val() !== $('#validate-email').val()) {
+                $('#email, #validate-email').addClass('is-invalid');
+                $('#email, #validate-email').after('<span class="error-message">' + trans('auth::validation.email') + '</span>');
+            } else {
+                $('#email, #validate-email').removeClass('is-invalid');
+                $('#email, #validate-email').siblings('.error-message').remove();
+            }
         }
     });
-    $('#confirm-password').on('change', function () {
-        if ($(this).val() !== $('#password')) {
-            $('#password').addClass('is-invalid');
-            $(this).addClass('is-invalid');
-        } else {
-            $('#password').removeClass('is-invalid');
-            $(this).removeClass('is-invalid');
+    $('#register-form #confirm-password, #register-form #password').on('change', function () {
+        $('#password, #confirm-password').siblings('.error-message').remove();
+        $('#password, #confirm-password').removeClass('is-invalid');
+        if ($('#confirm-password').val() !== '') {
+            if ($(this).val() !== $('#password').val() || $(this).val() !== $('#confirm-password').val()) {
+                $('#password, #confirm-password').addClass('is-invalid');
+                $('#password, #confirm-password').after('<span class="error-message">' + trans('auth::validation.confirmed') + '</span>');
+            } else {
+                $('#password, #confirm-password').removeClass('is-invalid');
+                $('#password, #confirm-password').siblings('.error-message').remove();
+            }
         }
     });
 });

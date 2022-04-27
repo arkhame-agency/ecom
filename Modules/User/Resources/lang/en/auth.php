@@ -29,4 +29,8 @@ return [
     'enter_email' => 'Enter your account email to receive a link allowing you to reset your password.',
     'i_remembered_my_password' => 'I remembered my password',
     'submit' => 'SUBMIT',
+    'validation' => [
+        'confirmed' => 'The passwords does not match.',
+        'email' => 'The emails does not match.',
+    ]
 ];
