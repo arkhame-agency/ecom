@@ -103,7 +103,12 @@
                                             <p class="contact__info--content__desc text-white">
                                                 <a
                                                     href="https://www.google.com/maps/search/{{ setting('storefront_address') }}"
-                                                    target="_blank">{{ setting('storefront_address') }}</a>
+                                                    target="_blank" class="mb-20">{{ setting('storefront_address') }}</a>
+                                                @if(locale() === 'fr')
+                                                    <i class="fa fa-calendar"></i> Lundi au vendredi: 6h à 14h.
+                                                @else
+                                                    <i class="fa fa-calendar"></i> Monday to Friday: 6 am to 2 pm
+                                                @endif
                                             </p>
                                         </div>
                                     </div>

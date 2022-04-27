@@ -37,7 +37,7 @@
                                     {{ trans('user::auth.login') }}
                                 </h3>
                                 <p class="account__login--header__desc">
-                                    {{ trans('user::auth.message_login') }}
+                                    {{ trans('user::auth.login_if_you_are_a_returning_customer') }}
                                 </p>
                             </div>
                             <form method="POST" action="{{ route('login.post') }}">
@@ -101,7 +101,7 @@
                             <div class="account__login--header mb-25">
                                 <h3 class="account__login--header__title mb-10">{{ trans('user::auth.register') }}</h3>
                                 <p class="account__login--header__desc">
-                                    {{ trans('user::auth.register_message') }}
+                                    {{ trans('user::auth.Register_here_if_you_are_a_new_customer') }}
                                 </p>
                             </div>
                             <form method="POST" action="{{ route('register.post') }}">

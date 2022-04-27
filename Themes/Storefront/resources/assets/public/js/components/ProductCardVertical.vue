@@ -2,7 +2,7 @@
     <div class="col mb-25">
         <div class="product__items">
             <div class="product__items--thumbnail">
-                <a class="product__items--link" href="product-details.html">
+                <a class="product__items--link" :href="productUrl">
                     <img class="product__items--img product__primary--img" :src="baseImage"
                          :class="{ 'image-placeholder': ! hasBaseImage }"
                          alt="product-img">

@@ -65,7 +65,7 @@
 
                         <p class="info-text">
                             {{ trans('storefront::layout.by_subscribing') }} <a
-                                href="{{ $privacyPageUrl }}">{{ trans('storefront::layout.privacy_policy') }}</a>
+                                href="{{ $privacyPageUrl }}" target="_blank">{{ trans('storefront::layout.privacy_policy') }}</a>
                         </p>
 
                         <div class="form-group newsletter-checkbox">
