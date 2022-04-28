@@ -63,7 +63,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'selling_price' => $this->getSellingPrice($data),
             'manage_stock' => $data['manage_stock'] ?? null,
             'qty' => isset($data['quantity']) ? (int)$data['quantity'] : null,
-            'in_stock' => $data['in_stock'] ?? isset($data['quantity']) && $data['quantity'] > 0 ? 1 : 0,
+            'in_stock' => $this->inStock($data),
             'new_from' => $data['new_from'] ?? null,
             'new_to' => $data['new_to'] ?? null,
             'up_sells' => $this->explode($data['up_sells'] ?? null),
@@ -79,6 +79,20 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             }
             return $value || is_numeric($value);
         }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    private function inStock($data)
+    {
+        if (isset($data['in_stock'])) {
+            return $data['in_stock'];
+        }
+        if (isset($data['quantity'])) {
+            if ($data['quantity'] > 0) {
+                return 1;
+            }
+            return 0;
+        }
+        return null;
     }
 
     private function getSellingPrice($data): ?float
@@ -100,15 +114,12 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         if (isset($data['active'])) {
             return $data['active'];
         }
-
-        if (isset($data['price']) && (float)$data['price'] > 0) {
-            return 1;
-        }
-
-        if (isset($data['price']) && (float)$data['price'] <= 0) {
+        if (isset($data['price'])) {
+            if ((float)$data['price'] > 0) {
+                return 1;
+            }
             return 0;
         }
-
         return null;
     }
 
