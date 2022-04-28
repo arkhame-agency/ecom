@@ -31,6 +31,8 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
             'SKU',
             'Quantity',
             'Price',
+            'Special Price',
+            'Selling Price',
         ];
     }
 
@@ -44,6 +46,8 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
             $product->sku,
             $product->qty,
             $product->price,
+            $product->special_price,
+            $product->selling_price,
         ];
     }
 
@@ -51,6 +55,8 @@ class ProductExport implements FromCollection, FromQuery, WithHeadings, WithMapp
     {
         return [
             'C' => NumberFormat::FORMAT_NUMBER_00,
+            'D' => NumberFormat::FORMAT_NUMBER_00,
+            'E' => NumberFormat::FORMAT_NUMBER_00,
         ];
     }
 }
