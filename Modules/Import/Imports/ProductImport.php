@@ -63,7 +63,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             'selling_price' => $this->getSellingPrice($data),
             'manage_stock' => $data['manage_stock'] ?? null,
             'qty' => isset($data['quantity']) ? (int)$data['quantity'] : null,
-            'in_stock' => $data['in_stock'] ?? isset($data['quantity']) && $data['quantity'] > 0 ? 1 : 0,
+            'in_stock' => $this->inStock($data),
             'new_from' => $data['new_from'] ?? null,
             'new_to' => $data['new_to'] ?? null,
             'up_sells' => $this->explode($data['up_sells'] ?? null),
@@ -79,6 +79,20 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             }
             return $value || is_numeric($value);
         }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    private function inStock($data)
+    {
+        if (isset($data['in_stock'])) {
+            return $data['in_stock'];
+        }
+        if (isset($data['quantity'])) {
+            if ($data['quantity'] > 0) {
+                return 1;
+            }
+            return 0;
+        }
+        return null;
     }
 
     private function getSellingPrice($data): ?float
@@ -100,15 +114,12 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         if (isset($data['active'])) {
             return $data['active'];
         }
-
-        if (isset($data['price']) && (float)$data['price'] > 0) {
+        if (isset($data['price'])) {
+            if ((float)$data['price'] > 0) {
             return 1;
         }
-
-        if (isset($data['price']) && (float)$data['price'] <= 0) {
             return 0;
         }
-
         return null;
     }
 
@@ -123,18 +134,27 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
 
     private function normalizeFiles(array $data)
     {
+        if (is_null($data['base_image'] ?? null)) {
+            return false;
+        }
+
         return [
             'base_image' => $data['base_image'],
-            'additional_images' => $this->explode($data['additional_images']),
+            'additional_images' => $this->explode($data['additional_images'] ?? null),
         ];
     }
 
     private function normalizeMetaData($data)
     {
+        if (is_null($data['meta_title'] ?? null)) {
+            return false;
+        }
+
         return [
             'meta_title' => $data['meta_title'],
-            'meta_description' => $data['meta_description'],
+            'meta_description' => $data['meta_description'] ?? null,
         ];
+
     }
 
     private function normalizeAttributes(array $data)
@@ -156,7 +176,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) {
             preg_match('/^attribute_\d$/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->filter();
     }
 
@@ -196,7 +216,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) {
             preg_match('/^option_\d_name$/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->keys()->map(function ($column) {
             return str_replace('_name', '', $column);
         });
@@ -207,7 +227,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return collect($data)->filter(function ($value, $column) use ($optionPrefix) {
             preg_match("/{$optionPrefix}_.*/", $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->mapWithKeys(function ($value, $column) use ($optionPrefix) {
             $column = str_replace("{$optionPrefix}_", '', $column);
 
@@ -241,7 +261,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return $option->filter(function ($value, $column) {
             preg_match('/value_\d_.+/', $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->keys()->map(function ($column) {
             preg_match('/value_\d/', $column, $matches);
 
@@ -254,7 +274,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         return $option->filter(function ($value, $column) use ($valuePrefix) {
             preg_match("/{$valuePrefix}_.*/", $column, $matches);
 
-            return ! empty($matches);
+            return !empty($matches);
         })->mapWithKeys(function ($value, $column) use ($valuePrefix) {
             $column = str_replace("{$valuePrefix}_", '', $column);
 
