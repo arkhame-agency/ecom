@@ -114,43 +114,12 @@
                                     @change="updatePrice"
                                     @nice-select-updated="updatePrice"
                                 >
-
                                     <div class="product-variants">
-                                        @foreach($product->allCategories as $category)
-                                            @if($category->show_same_products)
-                                                <div class="form-group variant-select">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 col-lg-6">
-                                                            <label for="option-variants">
-                                                                {{ trans('storefront::product.capacitance') }}
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-xl-10 col-lg-12">
-                                                            <div class="form-select">
-                                                                <select onchange="location = this.value;"
-                                                                        class="form-control custom-select-option arrow-black">
-                                                                    <option value=""
-                                                                            selected>{{ trans('storefront::product.options.choose_an_option') }}</option>
-                                                                    @foreach($category->products as $variantProduct)
-                                                                        @if($variantProduct->name !== $product->name)
-                                                                            <option
-                                                                                value="{{ $variantProduct->url() }}">
-                                                                                {!! $variantProduct->name !!}
-                                                                                {{$variantProduct->getCapacitance()}} {{ $variantProduct->formatted_price }}
-                                                                            </option>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
                                         @foreach ($product->options as $option)
                                             @includeIf("public.products.show.custom_options.{$option->type}")
                                         @endforeach
                                     </div>
+
                                     <div class="details-info-middle-actions">
                                         <div class="number-picker">
                                             <label for="qty">{{ trans('storefront::product.quantity') }}</label>
@@ -201,6 +170,7 @@
                                     @if ($product->categories->isNotEmpty())
                                         <li>
                                             <label>{{ trans('storefront::product.categories') }}</label>
+
                                             @foreach ($product->categories as $category)
                                                 <a href="{{ $category->url() }}">{{ $category->name }}</a>{{ $loop->last ? '' : ',' }}
                                             @endforeach

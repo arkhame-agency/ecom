@@ -21,8 +21,6 @@ return [
     'manage_stock' => 'Inventory Management',
     'qty' => 'Qty',
     'in_stock' => 'Stock Availability',
-    'capacitance_uf' => 'Capacitance uF/mF',
-    'capacitance_vdc_vac' => 'Voltage Rating DC/AC',
     'new_from' => 'Product New From',
     'new_to' => 'Product New To',
     'packaging' => [

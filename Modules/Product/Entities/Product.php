@@ -59,8 +59,6 @@ class Product extends Model
         'is_active',
         'new_from',
         'new_to',
-        'capacitance_uf',
-        'capacitance_vdc_vac',
         'weight',
         'length',
         'width',
