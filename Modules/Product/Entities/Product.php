@@ -262,11 +262,15 @@ class Product extends Model
 
     private function finalPrice($price)
     {
-        if (auth()->user() !== null && ! auth()->user()->isCustomer()) {
+        if (auth()->user() !== null && !auth()->user()->isCustomer()) {
+
+            $marge = (auth()->user()->getMargeInterest() / 100) * $price;
+
             if (auth()->user()->isMargeIncrease()) {
-                return ((auth()->user()->getMargeInterest() / 100) * $price) + $price;
+                return $price + $marge;
             }
-            return ($price - (auth()->user()->getMargeInterest() / 100) * $price);
+
+            return $price - $marge;
         }
         return $price;
     }
@@ -477,11 +481,13 @@ class Product extends Model
         }
     }
 
-    public function hasUnit() {
+    public function hasUnit()
+    {
         return $this->unit !== trans('product::products.form.units.none');
     }
 
-    public function getUnit() {
+    public function getUnit()
+    {
         if ($this->hasUnit()) {
             return "<span class='unit'>$this->unit</span>";
         }

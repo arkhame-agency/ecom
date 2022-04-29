@@ -9,6 +9,7 @@ use Modules\Import\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel as ExcelFacade;
 use Modules\Import\Http\Requests\StoreImporterRequest;
 use Modules\Product\Entities\Product;
+use Modules\Support\Money;
 
 class ImporterController
 {
@@ -47,12 +48,23 @@ class ImporterController
 
     public function updatePrices()
     {
+        /**
+         * @var Product $product
+         */
         foreach (Product::query()->get() as $product) {
-            $product->updateQuietly([
-                'price' => $this->finalPrice($product->price->amount()),
-                'special_price' => $this->finalPrice($product->special_price->amount()),
-                'selling_price' => $this->finalPrice($product->selling_price->amount()),
-            ]);
+            if ($product->hasSpecialPrice() && !$product->hasPercentageSpecialPrice()) {
+                $prices = [
+                    'price' => $this->finalPrice($product->price->amount()),
+                    'special_price' => $this->finalPrice($product->getSpecialPrice()->amount()),
+                    'selling_price' => $this->finalPrice($product->selling_price->amount()),
+                ];
+            } else {
+                $prices = [
+                    'price' => $this->finalPrice($product->price->amount()),
+                    'selling_price' => $this->finalPrice($product->selling_price->amount()),
+                ];
+            }
+            $product->updateQuietly($prices);
         }
         return back()->with('success', trans('import::messages.update_prices_has_been_run_successfully'));
     }
@@ -64,10 +76,12 @@ class ImporterController
 
     private function finalPrice($price)
     {
+        $marge = (request()->marge / 100) * $price;
+
         if (request()->increase_or_decrease === '1') {
-            return ((request()->marge / 100) * $price) + $price;
+            return $price + $marge;
         }
-        return $price - ((request()->marge / 100) * $price);
+        return $price - $marge;
     }
 
     private function explode($values)
