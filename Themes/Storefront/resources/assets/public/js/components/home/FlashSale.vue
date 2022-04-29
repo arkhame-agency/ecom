@@ -7,8 +7,11 @@
 <!--                <h4 class="section-title" v-html="title"></h4>-->
 <!--            </div>-->
 
-            <div class="daily-deals" ref="productsPlaceholder">
+            <div class="daily-deals" ref="productsPlaceholder" v-if="products.length">
                 <FlashSaleProductCard v-for="product in products" :key="product.id" :product="product"/>
+            </div>
+            <div v-else>
+                <img src="/themes/storefront/public/images/no-flash-sale.jpg"  alt="no flash sale">
             </div>
         </div>
 </template>
