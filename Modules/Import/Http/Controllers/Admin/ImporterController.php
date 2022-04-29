@@ -50,6 +50,7 @@ class ImporterController
         foreach (Product::query()->get() as $product) {
             $product->updateQuietly([
                 'price' => $this->finalPrice($product->price->amount()),
+                'special_price' => $this->finalPrice($product->special_price->amount()),
                 'selling_price' => $this->finalPrice($product->selling_price->amount()),
             ]);
         }
