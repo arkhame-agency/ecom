@@ -13,6 +13,7 @@ return [
     'quantity' => 'Quantity',
     'add_to_cart' => 'ADD TO CART',
     'sku' => 'SKU:',
+    'brand' => 'Brand:',
     'categories' => 'Categories:',
     'tags' => 'Tags:',
     'share' => 'Share:',

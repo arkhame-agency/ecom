@@ -591,7 +591,7 @@ class Product extends Model
         $productTranslations = ProductTranslation::where('slug', $slug)->firstOrFail();
         return self::with([
             'categories', 'tags', 'attributes.attribute.attributeSet',
-            'options', 'files', 'relatedProducts', 'upSellProducts',
+            'options', 'files', 'relatedProducts', 'upSellProducts', 'brand',
         ])
             ->where('id', $productTranslations->product_id)
             ->firstOrFail();
@@ -685,6 +685,10 @@ class Product extends Model
     public function searchColumns()
     {
         return ['name', 'description'];
+    }
+
+    public function getBrandLogo(){
+        return $this->brand->files->first()->path;
     }
 
     public function getCapacitance()

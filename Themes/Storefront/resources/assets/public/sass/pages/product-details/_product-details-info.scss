@@ -1,6 +1,7 @@
 .product-details-info {
 	width: calc(100% - 600px);
 	padding: 0 15px 0 30px;
+    position: relative;
 
 	.details-info-top {
 		padding-bottom: 17px;
@@ -11,6 +12,13 @@
 		line-height: 30px;
 		margin-bottom: 15px;
 	}
+
+    .product-brand-logo {
+        position: absolute;
+        width: 10%;
+        right: 5%;
+        top: 0;
+    }
 
 	.product-rating {
 		font-size: 16px;

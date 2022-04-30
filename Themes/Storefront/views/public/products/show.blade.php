@@ -62,6 +62,13 @@
                                                     :review-count="totalReviews"></product-rating>
                                 @endif
 
+                                @unless(is_null($product->brand))
+                                    <a href="{{ $product->brand->url() }}" class="brand-image">
+                                        <img class="product-brand-logo" src="{{ $product->getBrandLogo() }}"
+                                             alt="{{ $product->brand->name }}">
+                                    </a>
+                                @endunless
+
                                 @if ($product->isInStock())
                                     @if ($product->manage_stock)
                                         <div class="availability in-stock">
@@ -197,7 +204,14 @@
                                             <label>{{ trans('storefront::product.sku') }}</label> {{ $product->sku }}
                                         </li>
                                     @endunless
-
+                                    @unless(is_null($product->brand))
+                                        <li class="brand">
+                                            <label>{{ trans('storefront::product.brand') }}</label>
+                                            <a href="{{ $product->brand->url() }}" class="brand-image">
+                                                {{ $product->brand->name }}
+                                            </a>
+                                        </li>
+                                    @endunless
                                     @if ($product->categories->isNotEmpty())
                                         <li>
                                             <label>{{ trans('storefront::product.categories') }}</label>
