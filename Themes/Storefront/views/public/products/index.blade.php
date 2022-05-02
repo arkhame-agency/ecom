@@ -47,7 +47,7 @@
         :initial-attribute="{{ json_encode(request('attribute', [])) }}"
         :max-price="{{ $maxPrice }}"
         initial-sort="{{ request('sort', 'latest') }}"
-        :initial-per-page="{{ request('perPage', 30) }}"
+        :initial-per-page="{{ request('perPage', 24) }}"
         :initial-page="{{ request('page', 1) }}"
         initial-view-mode="{{ request('viewMode', 'grid') }}"
         initial-promotions="{{request('promotions', false)}}"
@@ -154,7 +154,7 @@
                                                 @foreach (trans('storefront::products.per_page_options') as $key => $value)
                                                     <option
                                                         value="{{ $key }}"
-                                                        {{ request('perPage', 30) == $key ? 'selected' : '' }}
+                                                        {{ request('perPage', 24) == $key ? 'selected' : '' }}
                                                     >
                                                         {{ $value }}
                                                     </option>
