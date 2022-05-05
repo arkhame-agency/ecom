@@ -1,4 +1,4 @@
-@if (setting('newsletter_enabled') && json_decode(Cookie::get('show_newsletter_popup', true)))
+@if (setting('newsletter_enabled') && setting('newsletter_popup_enabled') && json_decode(Cookie::get('show_newsletter_popup', true)))
     <newsletter-popup inline-template>
         <div class="modal newsletter-wrap fade">
             <div class="modal-dialog modal-dialog-centered">

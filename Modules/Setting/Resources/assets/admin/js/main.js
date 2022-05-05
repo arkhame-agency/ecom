@@ -37,6 +37,10 @@ $('#paypal_enabled').on('change', () => {
     $('#paypal-fields').toggleClass('hide');
 });
 
+$('#newsletter_popup_enabled').on('change', () => {
+    $('#customer-lastname-fields').toggleClass('hide');
+});
+
 $('#stripe_enabled').on('change', () => {
     $('#stripe-fields').toggleClass('hide');
 });

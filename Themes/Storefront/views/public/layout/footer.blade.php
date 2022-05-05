@@ -1,4 +1,4 @@
-<footer class="footer-wrap">
+<footer class="footer-wrap @if(! setting('newsletter_enabled')) border-separator @endif">
     <div class="container">
         <div class="footer">
             <div class="footer-top">
