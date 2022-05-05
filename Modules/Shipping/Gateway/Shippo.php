@@ -66,7 +66,7 @@ class Shippo implements GatewayInterface
         $this->setParcels($request);
 
         // If outside of Canada, create a Customs declaration.
-        if (!in_array(setting('store_country'), $this->getToAddress(), true)) {
+        if (setting('store_country') !== $this->getToAddress()['country']) {
            $this->customs_declaration = $this->createCustomsDeclaration($request);
         }
 
