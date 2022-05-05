@@ -61,7 +61,10 @@ return [
     'email_order_statuses' => 'Email Order Statuses',
 
     'newsletter_enabled' => 'Newsletter',
+    'newsletter_popup' => 'Newsletter Popup',
     'newsletter_last_name_enabled' => 'Name and Last name',
+    'newsletter_popup_enabled' => 'Newsletter popup',
+    'mailchimp_settings' => 'Mailchimp',
     'mailchimp_api_key' => 'Mailchimp API Key',
     'mailchimp_list_id' => 'Mailchimp List ID',
 

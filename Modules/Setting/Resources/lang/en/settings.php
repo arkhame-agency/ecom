@@ -63,6 +63,7 @@ return [
         'send_welcome_email_after_registration' => 'Send welcome email after registration',
         'send_invoice_email' => 'Send invoice email to the customer after checkout',
         'allow_customers_to_subscribe' => 'Allow customers to subscribe to your newsletter.',
+        'allow_newsletter_popup' => 'Show newsletter popup.',
         'allow_customers_last_name' => 'Allow customers to add last name and name',
         'enable_facebook_login' => 'Enable Facebook Login',
         'enable_google_login' => 'Enable Google Login',
