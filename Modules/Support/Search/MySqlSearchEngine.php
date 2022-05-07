@@ -2,9 +2,9 @@
 
 namespace Modules\Support\Search;
 
+use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
-use Illuminate\Support\Facades\DB;
 
 class MySqlSearchEngine extends Engine
 {
@@ -114,6 +114,19 @@ class MySqlSearchEngine extends Engine
     }
 
     /**
+     * Map the given results to instances of the given model via a lazy collection.
+     *
+     * @param \Laravel\Scout\Builder $builder
+     * @param mixed $results
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return \Illuminate\Support\LazyCollection
+     */
+    public function lazyMap(Builder $builder, $results, $model)
+    {
+        //
+    }
+
+    /**
      * Get the total count from a raw result returned by the engine.
      *
      * @param mixed $results
@@ -131,6 +144,29 @@ class MySqlSearchEngine extends Engine
      * @return void
      */
     public function flush($model)
+    {
+        //
+    }
+
+    /**
+     * Create a search index.
+     *
+     * @param string $name
+     * @param array $options
+     * @return mixed
+     */
+    public function createIndex($name, array $options = [])
+    {
+        //
+    }
+
+    /**
+     * Delete a search index.
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function deleteIndex($name)
     {
         //
     }

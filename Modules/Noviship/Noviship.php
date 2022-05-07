@@ -141,6 +141,6 @@ class Noviship
             ]
         ];
         $novishipResponse = $this->call($createShipment);
-        Order::where('id', $order->getOrderId())->update(['noviship_id' => $novishipResponse['id']]);
+        Order::where('id', $order->getOrderId())->update(['shipment_rate_id' => $novishipResponse['id']]);
     }
 }
