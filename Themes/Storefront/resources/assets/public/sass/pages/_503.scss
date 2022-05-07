@@ -1,0 +1,108 @@
+@import '503/_error-page-left',
+'503/_error-page-right';
+
+#maintenance {
+    @keyframes downMotion {
+        0% {
+            transform: translate(0, -15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, -15px);
+        }
+    }
+    @-webkit-keyframes downMotion {
+        0% {
+            transform: translate(0, -15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, -15px);
+        }
+    }
+    @-moz-keyframes downMotion {
+        0% {
+            transform: translate(0, -15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, -15px);
+        }
+    }
+    @keyframes upMotion {
+        0% {
+            transform: translate(0, 15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, 15px);
+        }
+    }
+    @-webkit-keyframes upMotion {
+        0% {
+            transform: translate(0, 15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, 15px);
+        }
+    }
+    @-moz-keyframes upMotion {
+        0% {
+            transform: translate(0, 15px);
+        }
+        50% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, 15px);
+        }
+    }
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @-moz-keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @-o-keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @media only screen and (min-width: 992px) {
+        .container {
+            justify-content: center;
+            height: calc(100vh - 16px);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col-L {
+            width: 50%;
+            margin-right: 10%;
+        }
+    }
+    @media only screen and (max-width: 991px) {
+        .flex-column {
+            flex-direction: column;
+        }
+    }
+}

@@ -1,0 +1,136 @@
+#maintenance {
+    line-height: normal;
+
+    a {
+        color: $color-default;
+        color: var(--color-primary);
+        &:hover {
+            color: $color-default-hover;
+            color: var(--color-primary-hover);
+        }
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .align-center {
+        align-items: center;
+    }
+
+    .container {
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .col-L {
+        padding: 2em;
+    }
+
+    .col-R {
+        max-width: 40%;
+        width: 40%
+    }
+
+    .color-white {
+        fill: #FFFFFF;
+    }
+
+    .logo {
+        padding: 0;
+        margin-bottom: 3em;
+    }
+
+    h1 {
+        font-size: 5vmax;
+        font-size: 36px;
+        font-size: 6vmin;
+        color: $color-default;
+        color: var(--color-primary);
+    }
+
+    h2 {
+        font-size: 3vmax;
+        font-size: 16px;
+        font-size: 3vmin;
+        margin: 1em 0;
+    }
+
+    .st0 {
+        fill: $color-default;
+        fill: var(--color-primary);
+    }
+
+    .st1 {
+        fill: #FFB8B8;
+    }
+
+    .st2, .st4, .st7 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+    }
+
+    .st2 {
+        fill: none;
+    }
+
+    .st3 {
+        fill: #FFFFFF;
+        stroke: #1D1D1B;
+        stroke-width: 0.9847;
+        stroke-miterlimit: 10;
+    }
+
+    .st4 {
+        fill: #00D292;
+    }
+
+    .st5 {
+        fill: #00D292;
+    }
+
+    .st6 {
+        fill: #00CCCB;
+    }
+
+    .st7 {
+        fill: #00CCCB;
+    }
+
+    .st8 {
+        fill: none;
+        stroke: #1D1D1B;
+        stroke-width: 0.9847;
+        stroke-miterlimit: 10;
+    }
+
+    .st4, .st5, .st6 {
+        -webkit-animation: downMotion 8s ease-in-out infinite;
+        -moz-animation: downMotion 8s ease-in-out infinite;
+        animation: downMotion 8s ease-in-out infinite;
+    }
+
+    .st0 {
+        -webkit-animation: upMotion 10s ease-in-out infinite;
+        -moz-animation: upMotion 10s ease-in-out infinite;
+        animation: upMotion 10s ease-in-out infinite;
+    }
+
+    .st7, .run {
+        -webkit-animation: upMotion 6s ease-in-out infinite;
+        -moz-animation: upMotion 6s ease-in-out infinite;
+        animation: upMotion 6s ease-in-out infinite;
+    }
+
+    .rotate {
+        transform-origin: 116px 88px;
+        -webkit-animation: 4s rotate infinite linear;
+        animation: 4s rotate infinite linear;
+    }
+
+    .copyright {
+        text-align: center;
+        margin: 1em;
+        opacity: 0.5;
+    }
+}
