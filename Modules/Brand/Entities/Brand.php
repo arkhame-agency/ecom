@@ -103,7 +103,7 @@ class Brand extends Model
     {
         return self::select('brands.*', 'brand_translations.slug', 'brand_translations.name', 'brand_translations.presentation')->join('brand_translations', 'brand_translations.brand_id', '=', 'brands.id')
             ->where('brand_translations.slug', '=', $slug)
-            ->firstOrNew([]);
+            ->firstOrFail([]);
     }
 
     /**
