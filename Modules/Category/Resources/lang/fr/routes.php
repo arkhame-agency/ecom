@@ -2,5 +2,6 @@
 
 return [
     'categories/slug/products' => 'categories/{category}/produits',
-    'products' => '/produits'
+    'products' => '/produits',
+    'categories' => '/categories'
 ];
