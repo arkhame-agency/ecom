@@ -91,7 +91,7 @@ class Category extends Model
         return static::select('categories.*', 'category_translations.slug', 'category_translations.name')->with('files')
             ->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
             ->where('category_translations.slug', '=', $slug)
-            ->firstOrNew([]);
+            ->firstOrFail([]);
     }
 
     public function isRoot()
