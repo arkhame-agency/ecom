@@ -247,6 +247,26 @@
                                                                         {{ $order->payment_method }}
                                                                     </td>
                                                                 </tr>
+                                                                @if($order->note)
+                                                                <tr>
+                                                                    <td style="font-family: 'Open Sans', sans-serif;
+                                                                            font-weight: 400;
+                                                                            font-size: 15px;
+                                                                            padding: 4px 0;"
+                                                                    >
+                                                                        {{ trans('storefront::invoice.note') }}
+                                                                        :
+                                                                    </td>
+                                                                        <td style="font-family: 'Open Sans', sans-serif;
+                                                                            font-weight: 400;
+                                                                            font-size: 15px;
+                                                                            padding: 4px 0;
+                                                                            word-break: break-all;"
+                                                                        >
+                                                                            {{ $order->note }}
+                                                                        </td>
+                                                                </tr>
+                                                                @endif
                                                                 </tbody>
                                                             </table>
                                                         </td>
@@ -261,8 +281,7 @@
                                                 <table class="shipping-address" style="border-collapse: collapse;
                                                                             width: 50%;
                                                                             float: left;
-                                                                            margin-top: 25px;"
-                                                >
+                                                                            margin-top: 25px;">
                                                     <tbody>
                                                     <tr>
                                                         <td style="padding: 0;">
@@ -277,32 +296,26 @@
                                                             </h5>
                                                         </td>
                                                     </tr>
-
                                                     <tr>
                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                             font-weight: 400;
                                                             font-size: 15px;
-                                                            padding: 0;"
-                                                        >
-                                                        <span style="display: block; padding: 4px 0;">
-                                                            {{ $order->shipping_full_name }}
-                                                        </span>
-
+                                                            padding: 0;">
                                                             <span style="display: block; padding: 4px 0;">
-                                                            {{ $order->shipping_address_1 }}
-                                                        </span>
-
+                                                                {{ $order->shipping_full_name }}
+                                                            </span>
                                                             <span style="display: block; padding: 4px 0;">
-                                                            {{ $order->shipping_address_2 }}
-                                                        </span>
-
+                                                                {{ $order->shipping_address_1 }}
+                                                            </span>
                                                             <span style="display: block; padding: 4px 0;">
-                                                            {{ $order->shipping_city }}, {{ $order->shipping_state_name }} {{ $order->shipping_zip }}
-                                                        </span>
-
+                                                                {{ $order->shipping_address_2 }}
+                                                            </span>
                                                             <span style="display: block; padding: 4px 0;">
-                                                            {{ $order->shipping_country_name }}
-                                                        </span>
+                                                                {{ $order->shipping_city }}, {{ $order->shipping_state_name }} {{ $order->shipping_zip }}
+                                                            </span>
+                                                            <span style="display: block; padding: 4px 0;">
+                                                                {{ $order->shipping_country_name }}
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -311,8 +324,7 @@
                                                 <table class="billing-address" style="border-collapse: collapse;
                                                                             width: 50%;
                                                                             float: left;
-                                                                            margin-top: 25px;"
-                                                >
+                                                                            margin-top: 25px;">
                                                     <tbody>
                                                     <tr>
                                                         <td style="padding: 0;">
@@ -321,13 +333,11 @@
                                                                 font-size: 18px;
                                                                 line-height: 22px;
                                                                 margin: 0 0 8px;
-                                                                color: #444444;"
-                                                            >
+                                                                color: #444444;">
                                                                 {{ trans('storefront::invoice.billing_address') }}
                                                             </h5>
                                                         </td>
                                                     </tr>
-
                                                     <tr>
                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                             font-weight: 400;
@@ -364,24 +374,23 @@
                                             <td style="padding: 30px 0 0;">
                                                 <table style="border-collapse: collapse;
                                                     width: 100%;
-                                                    border-bottom: 1px solid #e9e9e9;"
-                                                >
+                                                    border-bottom: 1px solid #e9e9e9;">
                                                     <tbody>
                                                     <tr>
-                                                        <td style="padding: 14px 0 14px;">
+                                                        <td>
                                                             <table style="border-collapse: collapse; width: 100%">
                                                                 <thead>
                                                                 <tr style="border-bottom: 1px solid #f1f1f1;">
-                                                                    <th style="width:40%;text-align: left">
+                                                                    <th style="padding: 8px 0;width:40%;text-align: left">
                                                                         {{ trans('storefront::invoice.product') }}
                                                                     </th>
-                                                                    <th style="width:20%;text-align: right">
+                                                                    <th style="padding: 8px 0;width:20%;text-align: right">
                                                                         {{ trans('storefront::invoice.unit_price') }}
                                                                     </th>
-                                                                    <th style="width:20%;text-align: right">
+                                                                    <th style="padding: 8px 0;width:20%;text-align: right">
                                                                         {{ trans('storefront::invoice.quantity') }}
                                                                     </th>
-                                                                    <th style="width:20%;text-align: right">
+                                                                    <th style="padding: 8px 0;width:20%;text-align: right">
                                                                         {{ trans('storefront::invoice.line_total') }}
                                                                     </th>
                                                                 </tr>
@@ -389,16 +398,14 @@
                                                                 <tbody>
                                                                 @foreach ($order->products as $product)
                                                                     <tr>
-                                                                        <td style="padding: 0 0 8px;width:40%;text-align: left">
-                                                                            <a href="{{ $product->url() }}"
-                                                                               style="font-family: 'Open Sans', sans-serif;
+                                                                        <td style="padding: 8px 0;width:40%;text-align: left">
+                                                                            <a href="{{ $product->url() }}" style="font-family: 'Open Sans', sans-serif;
                                                                                     font-weight: 400;
                                                                                     font-size: 18px;
                                                                                     line-height: 22px;
                                                                                     color: #444444;
                                                                                     margin: 0;
-                                                                                    text-decoration: none;"
-                                                                            >
+                                                                                    text-decoration: none;">
                                                                                 {{ $product->name }}
                                                                             </a>
                                                                             @if ($product->hasAnyOption())
@@ -409,13 +416,11 @@
                                                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                                                                     font-weight: 400;
                                                                                                     font-size: 14px;
-                                                                                                    padding: 0 0 8px;"
-                                                                                        >
+                                                                                                    padding: 8px 0;">
                                                                                             @foreach ($product->options as $option)
                                                                                                 <span
                                                                                                     style="display: block;">
-                                                                                                        {{ $option->name }}:
-
+                                                                                                    {{ $option->name }}:
                                                                                                     <span
                                                                                                         style="color: #9a9a9a; margin-left: 5px;">
                                                                                                         @if ($option->option->isFieldType())
@@ -424,6 +429,7 @@
                                                                                                             {{ $option->values->implode('label', ', ') }}
                                                                                                         @endif
                                                                                                     </span>
+                                                                                                </span>
                                                                                             @endforeach
                                                                                         </td>
                                                                                     </tr>
@@ -434,8 +440,7 @@
                                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                                                 font-weight: 400;
                                                                                 font-size: 16px;
-                                                                                padding: 0 0 4px;width:20%;text-align: right"
-                                                                        >
+                                                                                padding: 8px 0;width:20%;text-align: right">
                                                                             <span style="margin-left: 5px;">
                                                                                 {{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                                             </span>
@@ -443,8 +448,7 @@
                                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                                                 font-weight: 400;
                                                                                 font-size: 16px;
-                                                                                padding: 0 0 4px;width:20%;text-align: right"
-                                                                        >
+                                                                                padding: 8px 0;width:20%;text-align: right">
                                                                             <span style="margin-left: 5px;">
                                                                                 {{ $product->qty }}
                                                                             </span>
@@ -452,9 +456,7 @@
                                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                                                 font-weight: 400;
                                                                                 font-size: 16px;
-                                                                                padding: 0 0 4px;width:20%;text-align: right"
-                                                                        >
-
+                                                                                padding: 8px 0;width:20%;text-align: right">
                                                                             <span style="margin-left: 5px;">
                                                                                 {{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                                             </span>
@@ -475,15 +477,13 @@
                                                 <table style="border-collapse: collapse;
                                                     width: 300px;
                                                     margin-top: 10px;
-                                                    float: right;"
-                                                >
+                                                    float: right;">
                                                     <tbody>
                                                     <tr>
                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                             font-size: 17px;
                                                             font-weight: 400;
-                                                            padding: 5px 0;"
-                                                        >
+                                                            padding: 5px 0;">
                                                             {{ trans('storefront::invoice.subtotal') }}
                                                         </td>
 
@@ -491,8 +491,7 @@
                                                             font-size: 17px;
                                                             font-weight: 400;
                                                             padding: 5px 0;
-                                                            float: right;"
-                                                        >
+                                                            float: right;">
                                                             {{ $order->sub_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                         </td>
                                                     </tr>
@@ -502,8 +501,7 @@
                                                             <td style="font-family: 'Open Sans', sans-serif;
                                                                 font-size: 17px;
                                                                 font-weight: 400;
-                                                                padding: 5px 0;"
-                                                            >
+                                                                padding: 5px 0;">
                                                                 {{ $order->shipping_method }}
                                                             </td>
 
@@ -511,8 +509,7 @@
                                                                 font-size: 17px;
                                                                 font-weight: 400;
                                                                 padding: 5px 0;
-                                                                float: right;"
-                                                            >
+                                                                float: right;">
                                                                 {{ $order->shipping_cost->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                             </td>
                                                         </tr>
@@ -523,8 +520,7 @@
                                                             <td style="font-family: 'Open Sans', sans-serif;
                                                                 font-size: 17px;
                                                                 font-weight: 400;
-                                                                padding: 5px 0;"
-                                                            >
+                                                                padding: 5px 0;">
                                                                 {{ trans('storefront::invoice.coupon') }}
                                                                 (<span
                                                                     style="color: #444444;">{{ $order->coupon->code }}</span>)
@@ -534,8 +530,7 @@
                                                                 font-size: 17px;
                                                                 font-weight: 400;
                                                                 padding: 5px 0;
-                                                                float: right;"
-                                                            >
+                                                                float: right;">
                                                                 {{ $order->discount->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                             </td>
                                                         </tr>
@@ -546,8 +541,7 @@
                                                             <td style="font-family: 'Open Sans', sans-serif;
                                                                 font-size: 17px;
                                                                 font-weight: 400;
-                                                                padding: 5px 0;"
-                                                            >
+                                                                padding: 5px 0;">
                                                                 {{ $tax->name }}
                                                             </td>
 
@@ -555,8 +549,7 @@
                                                                 font-size: 17px;
                                                                 font-weight: 400;
                                                                 padding: 5px 0;
-                                                                float: right;"
-                                                            >
+                                                                float: right;">
                                                                 {{ $tax->order_tax->amount->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                             </td>
                                                         </tr>
@@ -566,8 +559,7 @@
                                                         <td style="font-family: 'Open Sans', sans-serif;
                                                             font-size: 17px;
                                                             font-weight: 600;
-                                                            padding: 5px 0;"
-                                                        >
+                                                            padding: 5px 0;">
                                                             {{ trans('storefront::invoice.total') }}
                                                         </td>
 
@@ -575,8 +567,7 @@
                                                             font-size: 17px;
                                                             font-weight: 600;
                                                             padding: 5px 0;
-                                                            float: right;"
-                                                        >
+                                                            float: right;">
                                                             {{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                                         </td>
                                                     </tr>
@@ -595,17 +586,16 @@
 
                 <tr>
                     <td style="padding: 0;">
-                                    <span style="font-family: 'Open Sans', sans-serif;
+                        <span style="font-family: 'Open Sans', sans-serif;
                                                 font-weight: 400;
                                                 font-size: 15px;
                                                 line-height: 24px;
                                                 display: block;
                                                 padding: 5px 0 10px;
                                                 color: #666666;
-                                                border-top: 1px solid #e9e9e9;"
-                                    >
-                                        {{ trans('checkout::mail.if_you\’re_having_trouble') }}
-                                    </span>
+                                                border-top: 1px solid #e9e9e9;">
+                            {{ trans('checkout::mail.if_you\’re_having_trouble') }}
+                        </span>
                     </td>
                 </tr>
 
@@ -617,8 +607,7 @@
                                                                 line-height: 26px;
                                                                 text-decoration: underline;
                                                                 color: #31629f;
-                                                                word-break: break-all;"
-                        >
+                                                                word-break: break-all;">
                             {{ route('admin.orders.show', $order) }}
                         </a>
                     </td>
@@ -629,21 +618,19 @@
 
     <tr>
         <td style="padding: 15px 0; background: #f1f3f7; text-align: center;">
-                        <span style="font-family: 'Open Sans', sans-serif;
+            <span style="font-family: 'Open Sans', sans-serif;
                                     font-weight: 400;
                                     font-size: 16px;
                                     line-height: 26px;
                                     display: inline-block;
                                     color: #555555;
-                                    padding: 0 15px;"
-                        >
-                            &copy; {{ date('Y') }}
-                            <a target="_blank" href="{{ route('home') }}"
-                               style="text-decoration: none; color: #31629f;">
-                                {{ setting('store_name') }}.
-                            </a>
-                            {{ trans('storefront::mail.all_rights_reserved') }}
-                        </span>
+                                    padding: 0 15px;">
+                &copy; {{ date('Y') }}
+                <a target="_blank" href="{{ route('home') }}" style="text-decoration: none; color: #31629f;">
+                    {{ setting('store_name') }}.
+                </a>
+                {{ trans('storefront::mail.all_rights_reserved') }}
+            </span>
         </td>
     </tr>
     </tbody>
