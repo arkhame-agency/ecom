@@ -47,6 +47,10 @@
                 <h6>{{ product.name }}</h6>
                 <span class="product-short-description" v-html="product.short_description">
                 </span>
+                <span class="product-brand" v-if="product.brand.name">
+                    <i class="las la-tag"></i>
+                        {{ product.brand.name }}
+                </span>
             </a>
 
             <div class="product-price product-price-clone" v-html="product.formatted_price"></div>
@@ -83,7 +87,7 @@ import ProductRating from './ProductRating.vue';
 import ProductCardMixin from '../mixins/ProductCardMixin';
 
 export default {
-    components: { ProductRating },
+    components: {ProductRating},
 
     mixins: [
         ProductCardMixin,

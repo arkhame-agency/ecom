@@ -175,7 +175,7 @@
     .product-card-middle {
         position: relative;
         display: flex;
-        height: 140px;
+        height: 160px;
         margin-top: auto;
         padding-bottom: 9px;
         flex-direction: column;
@@ -225,6 +225,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         padding: 0 !important;
+        &:empty {
+            display: none;
+        }
     }
 
     .product-card-bottom {
@@ -359,7 +362,7 @@
         }
 
         .product-card-middle {
-            height: 60px;
+            height: 93px;
             padding-bottom: 0;
         }
 

@@ -27,6 +27,10 @@
                     <span class="product-short-description" v-html="product.short_description">
                     </span>
                 </a>
+                <span class="product-brand" v-if="product.brand.name">
+                    <i class="las la-tag"></i>
+                    {{ product.brand.name }}
+                </span>
 
                 <div class="clearfix"></div>
 
@@ -83,7 +87,7 @@ import ProductRating from './../../ProductRating.vue';
 import ProductCardMixin from '../../../mixins/ProductCardMixin';
 
 export default {
-    components: { ProductRating },
+    components: {ProductRating},
 
     mixins: [
         ProductCardMixin,

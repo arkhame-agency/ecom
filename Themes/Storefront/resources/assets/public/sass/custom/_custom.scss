@@ -108,3 +108,9 @@
         }
     }
 }
+
+@media screen and (max-width: $sm) {
+    .product-brand-logo {
+        display: none;
+    }
+}

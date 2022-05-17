@@ -253,14 +253,14 @@
                                     </a>
                                 </li>
 
-                                @if ($product->hasAnyAttribute())
-                                    <li class="nav-item">
-                                        <a href="#specification" data-toggle="tab" class="nav-link"
-                                           :class="{ active: activeTab === 'specification' }">
-                                            {{ trans('storefront::product.specification') }}
-                                        </a>
-                                    </li>
-                                @endif
+{{--                                @if ($product->hasAnyAttribute())--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a href="#specification" data-toggle="tab" class="nav-link"--}}
+{{--                                           :class="{ active: activeTab === 'specification' }">--}}
+{{--                                            {{ trans('storefront::product.specification') }}--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                @endif--}}
 
 
                                 @if ($product->hasDownloadsAttribute())
@@ -284,7 +284,7 @@
 
                             <div class="tab-content">
                                 @include('public.products.show.tab_description')
-                                @include('public.products.show.tab_specification')
+{{--                                @include('public.products.show.tab_specification')--}}
                                 @include('public.products.show.tab_download')
                                 @include('public.products.show.tab_reviews')
                             </div>

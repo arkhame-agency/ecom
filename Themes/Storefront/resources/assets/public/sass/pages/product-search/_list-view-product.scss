@@ -48,6 +48,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         padding: 0 !important;
+        &:empty {
+            display: none;
+        }
     }
 
     .product-image {

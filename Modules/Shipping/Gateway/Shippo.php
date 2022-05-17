@@ -215,16 +215,19 @@ class Shippo implements GatewayInterface
      */
     public function setParcels(Request $request): void
     {
+        $weight = 0;
         foreach ($request->cartItems as $cartItem) {
-            $this->parcels[] = [
-                'length' => $cartItem['product']['length'],
-                'width' => $cartItem['product']['width'],
-                'height' => $cartItem['product']['height'],
-                'distance_unit' => 'cm',
-                'weight' => $cartItem['product']['weight'] * $cartItem['qty'],
-                'mass_unit' => 'kg',
-            ];
+            $weight += $cartItem['product']['weight'] * $cartItem['qty'];
         }
+
+        $this->parcels = [
+            'length' => 18+$weight,
+            'width' => 18+$weight,
+            'height' => 18+$weight,
+            'distance_unit' => 'cm',
+            'weight' => $weight,
+            'mass_unit' => 'kg',
+        ];
     }
 
     /**

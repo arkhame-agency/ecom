@@ -168,6 +168,7 @@ class Product extends Model
             ->withPrice()
             ->withCount('options')
             ->with('reviews')
+            ->with('brand')
             ->addSelect([
                 'products.id',
                 'products.in_stock',
@@ -175,6 +176,7 @@ class Product extends Model
                 'products.qty',
                 'products.new_from',
                 'products.new_to',
+                'products.brand_id',
             ]);
     }
 
