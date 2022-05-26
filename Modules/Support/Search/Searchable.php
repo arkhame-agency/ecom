@@ -3,6 +3,7 @@
 namespace Modules\Support\Search;
 
 use Laravel\Scout\Searchable as ScoutSearchable;
+use Modules\Product\Entities\Product;
 
 trait Searchable
 {
@@ -19,7 +20,7 @@ trait Searchable
      */
     public function search($query, $callback = null)
     {
-        $scoutBuilder = $this->scoutSearch($query, $callback);
+        $scoutBuilder = $this->scoutSearch($query, $callback)->take(Product::all()->count());
 
         return new Builder($this, $scoutBuilder);
     }

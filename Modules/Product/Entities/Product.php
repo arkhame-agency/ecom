@@ -684,9 +684,4 @@ class Product extends Model
     {
         return ['name', 'description'];
     }
-
-    public function getCapacitance()
-    {
-        return $this->capacitance_uf && $this->capacitance_uf ? '(' . $this->capacitance_uf . " " . $this->capacitance_vdc_vac . ')' : null;
-    }
 }
