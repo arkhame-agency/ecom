@@ -13,6 +13,7 @@ return [
     'table' => [
         'id' => 'ID',
         'status' => 'Status',
+        'quantity' => 'Quantity',
         'created' => 'Created',
         'date' => 'Date',
     ],

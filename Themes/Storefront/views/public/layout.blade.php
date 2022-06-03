@@ -38,6 +38,8 @@
                 loggedIn: {{ auth()->check() ? 'true' : 'false' }},
                 csrfToken: '{{ csrf_token() }}',
                 stripePublishableKey: '{{ setting("stripe_publishable_key") }}',
+                defaultCountry: '{{ setting("default_country") }}',
+                locale: '{{ locale() }}',
                 razorpayKeyId: '{{ setting("razorpay_key_id") }}',
                 cart: {!! $cart !!},
                 wishlist: {!! $wishlist !!},
@@ -45,12 +47,10 @@
                 langs: {
                     'storefront::layout.next': '{{ trans("storefront::layout.next") }}',
                     'storefront::layout.prev': '{{ trans("storefront::layout.prev") }}',
-                    'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                     'storefront::layout.all_categories': '{{ trans("storefront::layout.all_categories") }}',
                     'storefront::layout.most_searched': '{{ trans("storefront::layout.most_searched") }}',
                     'storefront::layout.search_for_products': '{{ trans("storefront::layout.search_for_products") }}',
                     'storefront::layout.category_suggestions': '{{ trans("storefront::layout.category_suggestions") }}',
-                    'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                     'storefront::layout.product_suggestions': '{{ trans("storefront::layout.product_suggestions") }}',
                     'storefront::layout.more_results': '{{ trans("storefront::layout.more_results") }}',
                     'storefront::product_card.out_of_stock': '{{ trans("storefront::product_card.out_of_stock") }}',
@@ -68,6 +68,8 @@
                     'storefront::product_card.hours': '{{ trans("storefront::product_card.hours") }}',
                     'storefront::product_card.minutes': '{{ trans("storefront::product_card.minutes") }}',
                     'storefront::product_card.seconds': '{{ trans("storefront::product_card.seconds") }}',
+                    'auth::validation.confirmed': '{{ trans("user::auth.validation.confirmed") }}',
+                    'auth::validation.email': '{{ trans("user::auth.validation.email") }}',
                 },
             };
         </script>
@@ -110,9 +112,10 @@
         @stack('pre-scripts')
 
         <script src="{{ v(Theme::url('public/js/app.js')) }}"></script>
-
+        <script src="/background-check.min.js" type="text/javascript"></script>
         @stack('scripts')
 
         {!! setting('custom_footer_assets') !!}
+        <div class="back-top" title="Top of Page"><i class="las la-arrow-circle-up"></i></div>
     </body>
 </html>

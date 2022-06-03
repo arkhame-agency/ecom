@@ -220,7 +220,7 @@
             }
 
             > .sub-menu {
-                right: -175px;
+                right: -265px;
                 top: 0;
                 animation: menu-in-right 250ms ease;
             }
@@ -356,8 +356,8 @@
 
 @media screen and (max-width: 1400px) {
     .category-nav {
-        width: 245px;
-        min-width: 245px;
+        width: 240px;
+        min-width: 240px;
 
         .category-dropdown-wrap {
             width: 246px;

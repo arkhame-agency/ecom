@@ -13,6 +13,12 @@ export default class {
 
         $('#category-form').on('submit', this.submit);
 
+        if ($('#slug').val() === '') {
+            $('#name').on('blur', function () {
+                $('#slug').val(window.admin.generateSlug($(this).val()));
+            });
+        }
+
         window.admin.removeSubmitButtonOffsetOn('#image', '.category-details-tab li > a');
     }
 
@@ -97,7 +103,14 @@ export default class {
         $('#id-field').removeClass('hide');
 
         $('#id').val(category.id);
+
         $('#name').val(category.name);
+
+        if (category.slug === '') {
+            $('#name').on('blur', function () {
+                $('#slug').val(window.admin.generateSlug($(this).val()));
+            });
+        }
 
         $('#slug').val(category.slug);
         $('#slug-field').removeClass('hide');
@@ -105,6 +118,7 @@ export default class {
 
         $('#is_searchable').prop('checked', category.is_searchable);
         $('#is_active').prop('checked', category.is_active);
+        $('#show_same_products').prop('checked', category.show_same_products);
 
         $('.logo .image-holder-wrapper').html(this.categoryImage('logo', category.logo));
         $('.banner .image-holder-wrapper').html(this.categoryImage('banner', category.banner));

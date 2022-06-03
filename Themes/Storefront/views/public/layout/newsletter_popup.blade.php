@@ -1,4 +1,4 @@
-@if (setting('newsletter_enabled') && json_decode(Cookie::get('show_newsletter_popup', true)))
+@if (setting('newsletter_enabled') && setting('newsletter_popup_enabled') && json_decode(Cookie::get('show_newsletter_popup', true)))
     <newsletter-popup inline-template>
         <div class="modal newsletter-wrap fade">
             <div class="modal-dialog modal-dialog-centered">
@@ -15,6 +15,26 @@
                                 </p>
 
                                 <form @submit.prevent="subscribe" class="newsletter-form">
+                                    @if(setting('newsletter_last_name_enabled'))
+                                        <div class="form-group mb-3">
+                                            <input
+                                                type="text"
+                                                v-model="name"
+                                                class="form-control"
+                                                placeholder="{{ trans('storefront::layout.enter_your_name') }}"
+                                            >
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <input
+                                                type="text"
+                                                v-model="lname"
+                                                class="form-control"
+                                                placeholder="{{ trans('storefront::layout.enter_your_last_name') }}"
+                                            >
+                                        </div>
+                                    @endif
+
                                     <div class="form-group">
                                         <input
                                             type="text"
@@ -43,7 +63,8 @@
                                 </form>
 
                                 <p class="info-text">
-                                    {{ trans('storefront::layout.by_subscribing') }} <a href="{{ $privacyPageUrl }}">{{ trans('storefront::layout.privacy_policy') }}</a>
+                                    {{ trans('storefront::layout.by_subscribing') }} <a
+                                        href="{{ $privacyPageUrl }}">{{ trans('storefront::layout.privacy_policy') }}</a>
                                 </p>
 
                                 <div class="form-group newsletter-checkbox">

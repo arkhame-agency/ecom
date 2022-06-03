@@ -14,13 +14,14 @@
             <h4 class="section-title">{{ trans('setting::settings.form.customer_notification_settings') }}</h4>
 
             {{ Form::checkbox('welcome_email', trans('setting::attributes.welcome_email'), trans('setting::settings.form.send_welcome_email_after_registration'), $errors, $settings) }}
+            {{ Form::checkbox('invoice_email', trans('setting::attributes.invoice_email'), trans('setting::settings.form.send_invoice_email'), $errors, $settings) }}
+
         </div>
 
         <div class="box-content clearfix">
             <h4 class="section-title">{{ trans('setting::settings.form.order_notification_settings') }}</h4>
-
-            {{ Form::checkbox('admin_order_email', trans('setting::attributes.admin_order_email'), trans('setting::settings.form.send_new_order_notification_to_admin'), $errors, $settings) }}
-            {{ Form::checkbox('invoice_email', trans('setting::attributes.invoice_email'), trans('setting::settings.form.send_invoice_email'), $errors, $settings) }}
+            {{ Form::checkbox('order_notification', trans('setting::attributes.enable_disable'), trans('setting::settings.form.send_new_order_notification_to_admin'), $errors, $settings) }}
+            {{ Form::text('admin_order_notification_mail_address', trans('setting::attributes.recipient'), $errors, $settings) }}
             {{ Form::select('email_order_statuses', trans('setting::attributes.email_order_statuses'), $errors, $orderStatuses, $settings, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
         </div>
     </div>

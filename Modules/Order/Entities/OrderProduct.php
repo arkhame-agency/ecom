@@ -2,9 +2,9 @@
 
 namespace Modules\Order\Entities;
 
-use Modules\Support\Money;
-use Modules\Support\Eloquent\Model;
 use Modules\Product\Entities\Product;
+use Modules\Support\Eloquent\Model;
+use Modules\Support\Money;
 
 class OrderProduct extends Model
 {
@@ -85,6 +85,16 @@ class OrderProduct extends Model
      *
      * @return string
      */
+    public function getSkuAttribute()
+    {
+        return $this->product->sku;
+    }
+
+    /**
+     * Get the order product's name.
+     *
+     * @return string
+     */
     public function getNameAttribute()
     {
         return $this->product->name;
@@ -98,6 +108,54 @@ class OrderProduct extends Model
     public function getSlugAttribute()
     {
         return $this->product->slug;
+    }
+
+    /**
+     * Get the order product package's weight.
+     * Cast to int to force null to 0
+     * Cast to string for API
+     *
+     * @return integer
+     */
+    public function getWeightAttribute(): int
+    {
+        return (string)(int)$this->product->weight;
+    }
+
+    /**
+     * Get the order product package's length.
+     * Cast to int to force null to 0
+     * Cast to string for API
+     *
+     * @return integer
+     */
+    public function getLengthAttribute(): int
+    {
+        return (string)(int)$this->product->length;
+    }
+
+    /**
+     * Get the order product package's width.
+     * Cast to int to force null to 0
+     * Cast to string for API
+     *
+     * @return integer
+     */
+    public function getWidthAttribute(): int
+    {
+        return (string)(int)$this->product->width;
+    }
+
+    /**
+     * Get the order product package's height.
+     * Cast to int to force null to 0
+     * Cast to string for API
+     *
+     * @return integer
+     */
+    public function getHeightAttribute(): int
+    {
+        return (string)(int)$this->product->height;
     }
 
     public function getUnitPriceAttribute($unitPrice)

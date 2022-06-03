@@ -49,6 +49,7 @@
                                         {{ Form::text('name', trans('category::attributes.name'), $errors, null, ['required' => true]) }}
                                         {{ Form::checkbox('is_searchable', trans('category::attributes.is_searchable'), trans('category::categories.form.show_this_category_in_search_box'), $errors) }}
                                         {{ Form::checkbox('is_active', trans('category::attributes.is_active'), trans('category::categories.form.enable_the_category'), $errors) }}
+                                        {{ Form::checkbox('show_same_products', trans('category::attributes.show_same_products'), trans('category::categories.form.show_same_products'), $errors) }}
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +78,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="hide" id="slug-field">
-                                            {{ Form::text('slug', trans('category::attributes.slug'), $errors) }}
+                                            {{ Form::text('slug', trans('category::attributes.slug'), $errors, null, ['required' => true]) }}
                                         </div>
                                     </div>
                                 </div>

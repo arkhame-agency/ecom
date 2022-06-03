@@ -16,6 +16,7 @@ return [
     'translatable.store_tagline' => 'Store Tagline',
     'translatable.store_name' => 'Store Name',
     'store_phone' => 'Store Phone',
+    'store_fax' => 'Store Fax',
     'store_email' => 'Store Email',
     'store_address_1' => 'Store Address 1',
     'store_address_2' => 'Store Address 2',
@@ -23,7 +24,7 @@ return [
     'store_country' => 'Store Country',
     'store_state' => 'Store State',
     'store_zip' => 'Store Zip',
-    'store_phone_hide' => 'Hide Store Phone',
+    'store_phone_hide' => 'Hide Store Phone and Fax',
     'store_email_hide' => 'Hide Store Email',
 
     'supported_currencies' => 'Supported Currencies',
@@ -54,11 +55,16 @@ return [
     'mail_password' => 'Mail Password',
     'mail_encryption' => 'Mail Encryption',
     'welcome_email' => 'Welcome Email',
-    'admin_order_email' => 'New Order Admin Email',
+    'enable_disable' => 'Enable/Disable',
+    'recipient' => 'Recipient',
     'invoice_email' => 'Invoice Email',
     'email_order_statuses' => 'Email Order Statuses',
 
     'newsletter_enabled' => 'Newsletter',
+    'newsletter_popup' => 'Newsletter Popup',
+    'newsletter_last_name_enabled' => 'Name and Last name',
+    'newsletter_popup_enabled' => 'Newsletter popup',
+    'mailchimp_settings' => 'Mailchimp',
     'mailchimp_api_key' => 'Mailchimp API Key',
     'mailchimp_list_id' => 'Mailchimp List ID',
 
@@ -76,6 +82,23 @@ return [
     'free_shipping_enabled' => 'Status',
     'translatable.free_shipping_label' => 'Label',
     'free_shipping_min_amount' => 'Minimum Amount',
+
+    'free_shipping_radius_enabled' => 'Status',
+    'free_shipping_radius' => 'Radius',
+
+    'commercial_shipping_enabled' => 'Status',
+    'translatable.commercial_shipping_label' => 'Label',
+    'commercial_shipping_cost' => 'Cost',
+
+    'shippo_shipping_enabled' => 'Status',
+    'translatable.shippo_shipping_label' => 'Shippo is the best multi-carrier shipping software for e-commerce businesses.',
+    'shippo_shipping_api_key' => 'Api Key',
+    'shippo_profit_margin' => 'Profit Marge',
+    'shippo_profit_margin_type' => 'Profit Marge Type',
+    'shippo_profit_margin_types' => [
+        '0' => 'Fixed',
+        '1' => 'Percent',
+    ],
 
     'local_pickup_enabled' => 'Status',
     'translatable.local_pickup_label' => 'Label',

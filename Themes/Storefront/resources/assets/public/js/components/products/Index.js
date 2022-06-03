@@ -7,6 +7,8 @@ export default {
         'initialQuery',
         'initialBrandName',
         'initialBrandBanner',
+        'initialBrandLogo',
+        'initialBrandPresentation',
         'initialBrandSlug',
         'initialCategoryName',
         'initialCategoryBanner',
@@ -19,6 +21,7 @@ export default {
         'initialPerPage',
         'initialPage',
         'initialViewMode',
+        'initialPromotions',
     ],
 
     data() {
@@ -27,6 +30,8 @@ export default {
             products: { data: [] },
             attributeFilters: [],
             brandBanner: this.initialBrandBanner,
+            brandLogo: this.initialBrandLogo,
+            brandPresentation: this.initialBrandPresentation,
             categoryName: this.initialCategoryName,
             categoryBanner: this.initialCategoryBanner,
             viewMode: this.initialViewMode,
@@ -41,6 +46,7 @@ export default {
                 sort: this.initialSort,
                 perPage: this.initialPerPage,
                 page: this.initialPage,
+                promotions: this.initialPromotions,
             },
         };
     },

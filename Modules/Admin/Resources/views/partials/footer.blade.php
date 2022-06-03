@@ -27,5 +27,5 @@
         <i class="fa fa-keyboard-o"></i>
     </a>&nbsp;
 
-    <span>Copyright &copy; {{ date('Y')}} <a href="https://envaysoft.com/fleetcart" target="_blank">FleetCart</a></span>
+    <span>Copyright &copy; {{ date('Y')}} <a href="{{ route('home') }}" target="_blank">{{ env('APP_NAME') }}</a></span>
 </footer>

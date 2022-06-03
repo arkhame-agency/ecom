@@ -1,6 +1,13 @@
 @import 'footer/_footer-top',
         'footer/_footer-bottom';
 
+.footer-wrap.border-separator {
+    margin-top: 50px;
+    border-top: 2px solid;
+    border-color: $color-default;
+    border-color: var(--color-primary);
+}
+
 .footer {
     padding-top: 70px;
 }

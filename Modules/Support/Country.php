@@ -9,7 +9,7 @@ class Country
      *
      * @var string
      */
-    const RESOURCE_PATH = __DIR__ . '/Resources/countries.php';
+    const RESOURCE_PATH = __DIR__ . '/Resources/countries';
 
     /**
      * Array of all countries.
@@ -32,8 +32,11 @@ class Country
      */
     public static function all()
     {
+        $locale = locale();
+
+        $path = self::RESOURCE_PATH . "/{$locale}.php";
         if (is_null(self::$countries)) {
-            self::$countries = require self::RESOURCE_PATH;
+            self::$countries = require $path;
         }
 
         return self::$countries;

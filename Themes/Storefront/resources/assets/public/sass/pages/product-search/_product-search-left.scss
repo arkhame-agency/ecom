@@ -1,4 +1,4 @@
-.product-search-left {
+.product-search-left, .custom-page_product-search-left {
     width: 263px;
     min-width: 263px;
     margin: -6px 30px 0 0;
@@ -20,14 +20,14 @@
 }
 
 @media screen and (max-width: 1400px) {
-    .product-search-left {
+    .product-search-left, .custom-page_product-search-left {
         width: 246px;
         min-width: 246px;
     }
 }
 
 @media screen and (max-width: $lg) {
-    .product-search-left {
+    .product-search-left, .custom-page_product-search-left {
         width: 100%;
         min-width: 0;
         margin: 0;

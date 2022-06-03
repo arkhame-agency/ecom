@@ -6,8 +6,6 @@
 node_modules/
 /vendor/
 /public/storage/
-/public/modules/
-/public/themes/
 /Modules/*/Assets/
 /Themes/*/assets/
 /tags
@@ -16,3 +14,7 @@ npm-debug.log
 yarn-error.log
 *.map
 .env
+/public/favicon/*
+/storage/framework/
+/storage/logs/laravel.log
+/storage/debugbar/

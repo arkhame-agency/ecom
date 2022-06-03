@@ -8,18 +8,18 @@
 
 @section('content')
     <div class="box box-primary">
-        <div class="box-body index-table" id="transactions-table"">
-            @component('admin::components.table')
-                @slot('thead')
-                    <tr>
-                        <th>{{ trans('transaction::transactions.table.order_id') }}</th>
-                        <th>{{ trans('transaction::transactions.table.transaction_id') }}</th>
-                        <th>{{ trans('transaction::transactions.table.payment_method') }}</th>
-                        <th data-sort>{{ trans('admin::admin.table.created') }}</th>
-                    </tr>
-                @endslot
-            @endcomponent
-        </div>
+        <div class="box-body index-table" id="transactions-table">
+        @component('admin::components.table')
+            @slot('thead')
+                <tr>
+                    <th>{{ trans('transaction::transactions.table.order_id') }}</th>
+                    <th>{{ trans('transaction::transactions.table.transaction_id') }}</th>
+                    <th>{{ trans('transaction::transactions.table.payment_method') }}</th>
+                    <th data-sort>{{ trans('admin::admin.table.created') }}</th>
+                </tr>
+            @endslot
+        @endcomponent
+    </div>
     </div>
 @endsection
 
@@ -29,6 +29,7 @@
             index: '{{ "admin.transactions.index" }}',
         });
 
+        // @TODO Link works only for Stripe
         new DataTable('#transactions-table .table', {
             columns: [
                 { data: 'order_id' },

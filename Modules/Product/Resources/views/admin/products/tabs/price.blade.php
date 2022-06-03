@@ -5,5 +5,6 @@
         {{ Form::select('special_price_type', trans('product::attributes.special_price_type'), $errors, trans('product::products.form.price_types'), $product) }}
         {{ Form::text('special_price_start', trans('product::attributes.special_price_start'), $errors, $product, ['class' => 'datetime-picker']) }}
         {{ Form::text('special_price_end', trans('product::attributes.special_price_end'), $errors, $product, ['class' => 'datetime-picker']) }}
+        {{ Form::select('unit', trans('product::attributes.unit'), $errors, ['' => trans('admin::admin.form.please_select')] + trans('product::products.form.units'), $product) }}
     </div>
 </div>

@@ -2,11 +2,11 @@
 
 namespace FleetCart\Install;
 
-use Modules\User\Entities\Role;
-use Modules\Setting\Entities\Setting;
 use Illuminate\Support\Facades\Artisan;
-use Modules\Currency\Entities\CurrencyRate;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use Modules\Currency\Entities\CurrencyRate;
+use Modules\Setting\Entities\Setting;
+use Modules\User\Entities\Role;
 
 class App
 {
@@ -66,6 +66,7 @@ class App
             'translatable' => [
                 'store_name' => 'FleetCart',
                 'free_shipping_label' => 'Free Shipping',
+                'commercial_shipping_label' => 'Commercial Shipping',
                 'local_pickup_label' => 'Local Pickup',
                 'flat_rate_label' => 'Flat Rate',
                 'paypal_label' => 'PayPal',

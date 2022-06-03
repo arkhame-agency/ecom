@@ -2,30 +2,28 @@
 
 namespace Modules\Product\Entities;
 
-use Modules\Support\Money;
-use Modules\Tag\Entities\Tag;
-use Modules\Media\Entities\File;
-use Modules\Brand\Entities\Brand;
-use Modules\Tax\Entities\TaxClass;
-use Modules\Option\Entities\Option;
-use Modules\Review\Entities\Review;
-use Modules\Support\Eloquent\Model;
-use Modules\Media\Eloquent\HasMedia;
-use Modules\Meta\Eloquent\HasMetaData;
-use Modules\Support\Search\Searchable;
-use Modules\Category\Entities\Category;
-use Modules\Product\Admin\ProductTable;
-use Modules\Support\Eloquent\Sluggable;
-use Modules\FlashSale\Entities\FlashSale;
-use Modules\Support\Eloquent\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Attribute\Entities\ProductAttribute;
+use Modules\Brand\Entities\Brand;
+use Modules\Category\Entities\Category;
+use Modules\FlashSale\Entities\FlashSale;
+use Modules\Media\Eloquent\HasMedia;
+use Modules\Media\Entities\File;
+use Modules\Meta\Eloquent\HasMetaData;
+use Modules\Option\Entities\Option;
+use Modules\Product\Admin\ProductTable;
+use Modules\Review\Entities\Review;
+use Modules\Support\Eloquent\Model;
+use Modules\Support\Eloquent\Translatable;
+use Modules\Support\Money;
+use Modules\Support\Search\Searchable;
+use Modules\Tag\Entities\Tag;
+use Modules\Tax\Entities\TaxClass;
 
 class Product extends Model
 {
     use Translatable,
         Searchable,
-        Sluggable,
         HasMedia,
         HasMetaData,
         SoftDeletes;
@@ -47,6 +45,7 @@ class Product extends Model
         'tax_class_id',
         'slug',
         'sku',
+        'unit',
         'price',
         'special_price',
         'special_price_type',
@@ -60,6 +59,10 @@ class Product extends Model
         'is_active',
         'new_from',
         'new_to',
+        'weight',
+        'length',
+        'width',
+        'height',
     ];
 
     /**
@@ -103,7 +106,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name', 'description', 'short_description'];
+    protected $translatedAttributes = ['name', 'description', 'short_description', 'slug'];
 
     /**
      * The attribute that will be slugged.
@@ -120,7 +123,7 @@ class Product extends Model
     protected static function booted()
     {
         static::saved(function ($product) {
-            if (! empty(request()->all())) {
+            if (!empty(request()->all())) {
                 $product->saveRelations(request()->all());
             }
 
@@ -145,7 +148,7 @@ class Product extends Model
         return static::select('id')
             ->withName()
             ->whereIn('id', $ids)
-            ->when(! empty($ids), function ($query) use ($ids) {
+            ->when(!empty($ids), function ($query) use ($ids) {
                 $idsString = collect($ids)->filter()->implode(',');
 
                 $query->orderByRaw("FIELD(id, {$idsString})");
@@ -165,7 +168,6 @@ class Product extends Model
             ->with('reviews')
             ->addSelect([
                 'products.id',
-                'products.slug',
                 'products.in_stock',
                 'products.manage_stock',
                 'products.qty',
@@ -183,12 +185,13 @@ class Product extends Model
             'products.selling_price',
             'products.special_price_start',
             'products.special_price_end',
+            'products.unit',
         ]);
     }
 
     public function scopeWithName($query)
     {
-        $query->with('translations:id,product_id,locale,name');
+        $query->with('translations:id,product_id,locale,name,slug,short_description');
     }
 
     public function scopeWithBaseImage($query)
@@ -204,6 +207,11 @@ class Product extends Model
     }
 
     public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_categories');
+    }
+
+    public function allCategories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');
     }
@@ -262,7 +270,7 @@ class Product extends Model
 
     public function getSpecialPriceAttribute($specialPrice)
     {
-        if (! is_null($specialPrice)) {
+        if (!is_null($specialPrice)) {
             return Money::inDefaultCurrency($specialPrice);
         }
     }
@@ -318,7 +326,10 @@ class Product extends Model
 
     public function hasDownloadsAttribute()
     {
-        return $this->files->isNotEmpty();
+        return $this->files
+            ->where('pivot.zone', 'downloads')
+            ->sortBy('pivot.id')
+            ->flatten()->isNotEmpty();
     }
 
     public function getFormattedPriceAttribute()
@@ -368,6 +379,16 @@ class Product extends Model
         return route('products.show', ['slug' => $this->slug]);
     }
 
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $slugTranslated = $this->getSlugTranslated($this, ProductTranslation::class, $locale);
+            $routeArray[$locale] = trans('product::routes.products', [], $locale) . '/' . $slugTranslated->slug;
+        }
+        return $routeArray;
+    }
+
     public function isInStock()
     {
         if (FlashSale::contains($this)) {
@@ -383,7 +404,7 @@ class Product extends Model
 
     public function isOutOfStock()
     {
-        return ! $this->isInStock();
+        return !$this->isInStock();
     }
 
     public function markAsInStock()
@@ -448,21 +469,32 @@ class Product extends Model
         }
     }
 
+    public function hasUnit() {
+        return $this->unit !== trans('product::products.form.units.none');
+    }
+
+    public function getUnit() {
+        if ($this->hasUnit()) {
+            return "<span class='unit'>$this->unit</span>";
+        }
+        return null;
+    }
+
     public function hasSpecialPrice()
     {
         if (is_null($this->special_price)) {
             return false;
         }
 
-        if ($this->hasSpecialPriceStartDate() && $this->hasSpecialPriceEndDate()) {
+        if ($this->special_price && ($this->hasSpecialPriceStartDate() && $this->hasSpecialPriceEndDate())) {
             return $this->specialPriceStartDateIsValid() && $this->specialPriceEndDateIsValid();
         }
 
-        if ($this->hasSpecialPriceStartDate()) {
+        if ($this->special_price && $this->hasSpecialPriceStartDate()) {
             return $this->specialPriceStartDateIsValid();
         }
 
-        if ($this->hasSpecialPriceEndDate()) {
+        if ($this->special_price && $this->hasSpecialPriceEndDate()) {
             return $this->specialPriceEndDateIsValid();
         }
 
@@ -471,12 +503,12 @@ class Product extends Model
 
     private function hasSpecialPriceStartDate()
     {
-        return ! is_null($this->special_price_start);
+        return !is_null($this->special_price_start);
     }
 
     private function hasSpecialPriceEndDate()
     {
-        return ! is_null($this->special_price_end);
+        return !is_null($this->special_price_end);
     }
 
     private function specialPriceStartDateIsValid()
@@ -513,12 +545,12 @@ class Product extends Model
 
     private function hasNewFromDate()
     {
-        return ! is_null($this->new_from);
+        return !is_null($this->new_from);
     }
 
     private function hasNewToDate()
     {
-        return ! is_null($this->new_to);
+        return !is_null($this->new_to);
     }
 
     private function newFromDateIsValid()
@@ -554,12 +586,13 @@ class Product extends Model
 
     public static function findBySlug($slug)
     {
+        $productTranslations = ProductTranslation::where('slug', $slug)->firstOrFail();
         return self::with([
             'categories', 'tags', 'attributes.attribute.attributeSet',
             'options', 'files', 'relatedProducts', 'upSellProducts',
         ])
-        ->where('slug', $slug)
-        ->firstOrFail();
+            ->where('id', $productTranslations->product_id)
+            ->firstOrFail();
     }
 
     public function clean()
@@ -595,7 +628,7 @@ class Product extends Model
             ->withName()
             ->withBaseImage()
             ->withPrice()
-            ->addSelect(['id', 'is_active', 'created_at'])
+            ->addSelect(['id', 'is_active', 'qty', 'created_at'])
             ->when($request->has('except'), function ($query) use ($request) {
                 $query->whereNotIn('id', explode(',', $request->except));
             });
@@ -649,6 +682,6 @@ class Product extends Model
 
     public function searchColumns()
     {
-        return ['name'];
+        return ['name', 'description'];
     }
 }

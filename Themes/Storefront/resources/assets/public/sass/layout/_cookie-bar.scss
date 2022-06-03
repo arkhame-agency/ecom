@@ -29,6 +29,15 @@
         font-size: 14px;
         margin-right: 100px;
         color: $color-white-dark;
+        a {
+            color: $color-default;
+            color: var(--color-primary);
+
+            &:hover {
+                color: $color-default-hover;
+                color: var(--color-primary-hover);
+            }
+        }
     }
 
     .cookie-bar-action {

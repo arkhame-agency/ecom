@@ -2,16 +2,17 @@
 
 namespace Modules\Cart;
 
-use JsonSerializable;
-use Modules\Support\Money;
-use Modules\Tax\Entities\TaxRate;
+use Darryldecode\Cart\Cart as DarryldecodeCart;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use JsonSerializable;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Product\Entities\Product;
-use Modules\Shipping\Facades\ShippingMethod;
-use Darryldecode\Cart\Cart as DarryldecodeCart;
 use Modules\Product\Services\ChosenProductOptions;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Modules\Shipping\Facades\ShippingMethod;
+use Modules\Support\Money;
+use Modules\Tax\Entities\TaxRate;
 
 class Cart extends DarryldecodeCart implements JsonSerializable
 {
@@ -74,6 +75,9 @@ class Cart extends DarryldecodeCart implements JsonSerializable
         ]);
     }
 
+    /**
+     * @return \Darryldecode\Cart\CartCollection
+     */
     public function items()
     {
         return $this->getContent()->sortBy('attributes.created_at')->map(function ($item) {
@@ -150,7 +154,47 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             return collect();
         }
 
-        return ShippingMethod::available();
+        if (($this->isLessThenFeeShippingMinAmount() || $this->isFreeShippingRadiusEnabled()) && Cache::get('free_shipping')) {
+            return collect(
+                Cache::get('free_shipping')->toArray()
+            );
+        }
+
+        if (($this->isLessThenFeeShippingMinAmount() || setting('shippo_shipping_enabled')) && Cache::get('shippo_shipping_rates')) {
+            return collect(
+                Cache::get('shippo_shipping_rates')->toArray()
+            );
+        }
+
+        if ($this->isLessThenFeeShippingMinAmount()) {
+            return collect(
+                ShippingMethod::available()->toArray()
+            );
+        }
+
+        if ($this->isCommercialCategory()) {
+            return collect(array('commercial_shipping' => ShippingMethod::available()->get('commercial_shipping')));
+        }
+
+        return ShippingMethod::available()->forget(['commercial_shipping', 'flat_rate']);
+    }
+
+    public function isFreeShippingRadiusEnabled(): bool
+    {
+        return setting('free_shipping_radius_enabled') && setting('free_shipping_radius_value') > 0;
+    }
+
+    public function isLessThenFeeShippingMinAmount()
+    {
+        $minimumAmount = Money::inDefaultCurrency(setting('free_shipping_min_amount'));
+        return $this->subTotal()->lessThan($minimumAmount);
+    }
+
+    public function isCommercialCategory()
+    {
+        return $this->items()->every(function (CartItem $cartItem) {
+            return $cartItem->isCommercialCategory();
+        });
     }
 
     public function allItemsAreVirtual()
@@ -167,7 +211,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function shippingMethod()
     {
-        if (! $this->hasShippingMethod()) {
+        if (!$this->hasShippingMethod()) {
             return new NullCartShippingMethod;
         }
 
@@ -229,7 +273,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function coupon()
     {
-        if (! $this->hasCoupon()) {
+        if (!$this->hasCoupon()) {
             return new NullCartCoupon;
         }
 
@@ -251,7 +295,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
         $this->condition(new CartCondition([
             'name' => $coupon->code,
             'type' => 'coupon',
-            'target' => 'total',
+            'target' => 'subtotal',
             'value' => $this->getCouponValue($coupon),
             'order' => 2,
             'attributes' => [
@@ -266,11 +310,35 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             return "-{$this->shippingMethod()->cost()->amount()}";
         }
 
+        if (!is_null($coupon->maximum_rebate) && $coupon->is_percent) {
+            $this->applyCouponForCalcul($coupon);
+            if ($this->coupon()->value()->greaterThan($coupon->maximum_rebate)) {
+                $this->removeCoupon();
+                return "-{$coupon->maximum_rebate->amount()}";
+            }
+        }
+
         if ($coupon->is_percent) {
             return "-{$coupon->value}%";
         }
 
         return "-{$coupon->value->amount()}";
+    }
+
+    private function applyCouponForCalcul($coupon)
+    {
+        $this->removeCoupon();
+
+        $this->condition(new CartCondition([
+            'name' => $coupon->code,
+            'type' => 'coupon',
+            'target' => 'subtotal',
+            'value' => $coupon->is_percent ? "-{$coupon->value}%" : "-{$coupon->value->amount()}",
+            'order' => 2,
+            'attributes' => [
+                'coupon_id' => $coupon->id,
+            ],
+        ]));
     }
 
     public function removeCoupon()
@@ -285,7 +353,7 @@ class Cart extends DarryldecodeCart implements JsonSerializable
 
     public function taxes()
     {
-        if (! $this->hasTax()) {
+        if (!$this->hasTax()) {
             return new Collection;
         }
 
@@ -349,7 +417,13 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             ->map(function (CartItem $cartItem) use ($request) {
                 return $cartItem->findTax($request->only(['billing', 'shipping']));
             })
-            ->filter();
+            ->filter()->first();
+    }
+
+    public function subTotalWithoutConditions()
+    {
+        return Money::inDefaultCurrency($this->getSubTotalWithoutConditions())
+            ->add($this->optionsPrice());
     }
 
     public function subTotal()
@@ -374,7 +448,6 @@ class Cart extends DarryldecodeCart implements JsonSerializable
     {
         return $this->subTotal()
             ->add($this->shippingMethod()->cost())
-            ->subtract($this->coupon()->value())
             ->add($this->tax());
     }
 
@@ -384,8 +457,9 @@ class Cart extends DarryldecodeCart implements JsonSerializable
             'items' => $this->items(),
             'quantity' => $this->quantity(),
             'availableShippingMethods' => $this->availableShippingMethods(),
-            'subTotal' => $this->subTotal(),
-            'shippingCost' => $this->shippingMethod(),
+            'subTotal' => $this->subTotalWithoutConditions(),
+            'shippingMethodName' => $this->shippingMethod()->name(),
+            'shippingCost' => $this->shippingCost(),
             'coupon' => $this->coupon(),
             'taxes' => $this->taxes(),
             'total' => $this->total(),

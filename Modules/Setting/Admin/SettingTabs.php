@@ -4,10 +4,10 @@ namespace Modules\Setting\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
-use Modules\Support\Locale;
-use Modules\Support\Country;
-use Modules\Support\TimeZone;
 use Modules\Currency\Currency;
+use Modules\Support\Country;
+use Modules\Support\Locale;
+use Modules\Support\TimeZone;
 use Modules\User\Entities\Role;
 
 class SettingTabs extends Tabs
@@ -25,7 +25,7 @@ class SettingTabs extends Tabs
             ->add($this->maintenance())
             ->add($this->store())
             ->add($this->currency())
-            ->add($this->sms())
+//            ->add($this->sms())
             ->add($this->mail())
             ->add($this->newsletter())
             ->add($this->customCssJs());
@@ -36,6 +36,8 @@ class SettingTabs extends Tabs
 
         $this->group('shipping_methods', trans('setting::settings.tabs.group.shipping_methods'))
             ->add($this->freeShipping())
+            ->add($this->commercialShipping())
+            ->add($this->shippoShipping())
             ->add($this->localPickup())
             ->add($this->flatRate());
 
@@ -91,6 +93,7 @@ class SettingTabs extends Tabs
                 'translatable.store_name',
                 'translatable.store_tagline',
                 'store_phone',
+                'store_fax',
                 'store_email',
                 'store_address_1',
                 'store_address_2',
@@ -185,7 +188,7 @@ class SettingTabs extends Tabs
     {
         return tap(new Tab('newsletter', trans('setting::settings.tabs.newsletter')), function (Tab $tab) {
             $tab->weight(32);
-            $tab->fields(['newsletter_enabled', 'mailchimp_api_key', 'mailchimp_list_id']);
+            $tab->fields(['newsletter_enabled', 'newsletter_last_name_enabled', 'mailchimp_api_key', 'mailchimp_list_id']);
             $tab->view('setting::admin.settings.tabs.newsletter');
         });
     }
@@ -245,6 +248,37 @@ class SettingTabs extends Tabs
             $tab->weight(45);
             $tab->fields(['local_pickup_enabled', 'translatable.local_pickup_label']);
             $tab->view('setting::admin.settings.tabs.local_pickup');
+        });
+    }
+
+    private function commercialShipping()
+    {
+        return tap(new Tab('commercial_shipping', trans('setting::settings.tabs.commercial_shipping')), function (Tab $tab) {
+            $tab->weight(42);
+
+            $tab->fields([
+                'commercial_shipping_enabled',
+                'translatable.commercial_shipping_label',
+                'commercial_shipping_cost',
+            ]);
+
+            $tab->view('setting::admin.settings.tabs.commercial_shipping');
+        });
+    }
+
+    private function shippoShipping()
+    {
+        return tap(new Tab('shippo_shipping', trans('setting::settings.tabs.shippo_shipping')), function (Tab $tab) {
+            $tab->weight(43);
+
+            $tab->fields([
+                'shippo_shipping_enabled',
+                'shippo_shipping_api',
+                'shippo_profit_margin',
+                'shippo_profit_margin_type'
+            ]);
+
+            $tab->view('setting::admin.settings.tabs.shippo_shipping');
         });
     }
 

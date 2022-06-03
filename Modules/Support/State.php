@@ -26,11 +26,13 @@ class State
      */
     public static function get($code)
     {
+        $locale = locale();
+
         if (isset(self::$states[$code])) {
             return self::$states[$code];
         }
 
-        $path = self::RESOURCE_PATH . "/{$code}.php";
+        $path = self::RESOURCE_PATH . "/{$locale}/{$code}.php";
 
         if (file_exists($path)) {
             return self::$states[$code] = require $path;

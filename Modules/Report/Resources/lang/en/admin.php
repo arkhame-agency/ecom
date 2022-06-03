@@ -9,7 +9,9 @@ return [
         'report_types' => [
             'coupons_report' => 'Coupons Report',
             'customers_order_report' => 'Customers Order Report',
+            'categories_purchase_report' => 'Categories Purchase Report',
             'products_purchase_report' => 'Products Purchase Report',
+            'brands_purchase_report' => 'Brands Purchase Report',
             'products_stock_report' => 'Products Stock Report',
             'products_view_report' => 'Products View Report',
             'branded_products_report' => 'Branded Products Report',

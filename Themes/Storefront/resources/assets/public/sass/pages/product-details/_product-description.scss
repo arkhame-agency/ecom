@@ -46,11 +46,25 @@
     }
 
     th {
+        color: var(--white);
+        padding: 8px 15px;
+        background: var(--color-primary);
         font-weight: 500;
+        border: 1px solid #d9d9d9;
     }
 
     td {
         vertical-align: top;
+        padding: 8px 15px;
+        border: 1px solid #d9d9d9;
+    }
+
+    tr:nth-child(odd) {
+        background: #eeeeee;
+    }
+
+    tr:hover {
+        background: var(--color-primary-transparent-lite);
     }
 }
 

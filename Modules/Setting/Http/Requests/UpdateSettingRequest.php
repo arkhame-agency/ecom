@@ -2,12 +2,12 @@
 
 namespace Modules\Setting\Http\Requests;
 
-use Modules\Support\Locale;
-use Modules\Support\Country;
-use Modules\Support\TimeZone;
-use Modules\Currency\Currency;
 use Illuminate\Validation\Rule;
 use Modules\Core\Http\Requests\Request;
+use Modules\Currency\Currency;
+use Modules\Support\Country;
+use Modules\Support\Locale;
+use Modules\Support\TimeZone;
 
 class UpdateSettingRequest extends Request
 {
@@ -48,6 +48,7 @@ class UpdateSettingRequest extends Request
 
             'translatable.store_name' => 'required',
             'store_phone' => ['required'],
+            'store_fax' => 'nullable',
             'store_email' => 'required|email',
             'store_country' => ['required', Rule::in(Country::codes())],
 
@@ -57,12 +58,12 @@ class UpdateSettingRequest extends Request
             'auto_refresh_currency_rates' => 'required|boolean',
             'auto_refresh_currency_rate_frequency' => ['required_if:auto_refresh_currency_rates,1', Rule::in($this->refreshFrequencies())],
 
-            'sms_service' => ['nullable', Rule::in($this->smsServices())],
-            'vonage_key' => ['required_if:sms_service,vonage'],
-            'vonage_secret' => ['required_if:sms_service,vonage'],
-            'twilio_sid' => ['required_if:sms_service,twilio'],
-            'twilio_token' => ['required_if:sms_service,twilio'],
-            'sms_order_statuses.*' => ['nullable', Rule::in($this->orderStatuses())],
+//            'sms_service' => ['nullable', Rule::in($this->smsServices())],
+//            'vonage_key' => ['required_if:sms_service,vonage'],
+//            'vonage_secret' => ['required_if:sms_service,vonage'],
+//            'twilio_sid' => ['required_if:sms_service,twilio'],
+//            'twilio_token' => ['required_if:sms_service,twilio'],
+//            'sms_order_statuses.*' => ['nullable', Rule::in($this->orderStatuses())],
 
             'mail_from_address' => 'nullable|email',
             'mail_encryption' => ['nullable', Rule::in($this->mailEncryptionProtocols())],
@@ -86,6 +87,10 @@ class UpdateSettingRequest extends Request
             'local_pickup_enabled' => 'required|boolean',
             'translatable.local_pickup_label' => 'required_if:local_pickup_enabled,1',
             'local_pickup_cost' => ['required_if:local_pickup_enabled,1', 'nullable', 'numeric'],
+
+            'commercial_shipping_enabled' => 'required|boolean',
+            'translatable.commercial_shipping_label' => 'required_if:commercial_shipping_enabled,1',
+            'commercial_shipping_cost' => ['required_if:commercial_shipping_enabled,1', 'nullable', 'numeric'],
 
             'flat_rate_enabled' => 'required|boolean',
             'translatable.flat_rate_label' => 'required_if:flat_rate_enabled,1',

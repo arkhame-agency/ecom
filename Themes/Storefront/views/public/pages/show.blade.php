@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', $page->name)
+@section('title', $page->meta->meta_title ?: $page->name)
 
 @push('meta')
     <meta name="title" content="{{ $page->meta->meta_title ?: $page->name }}">
@@ -18,10 +18,15 @@
 @endpush
 
 @section('content')
-    <section class="custom-page-wrap clearfix">
+    <section class="custom-page-wrap">
         <div class="container">
-            <div class="custom-page-content clearfix">
-                {!! $page->body !!}
+            <div class="custom-page-content">
+                <div class="custom-page-left">
+                    @include('public.products.index.latest_products')
+                </div>
+                <div class="custom-page-right">
+                    {!! nl2br_save_html($page->body) !!}
+                </div>
             </div>
         </div>
     </section>

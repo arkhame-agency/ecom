@@ -76,6 +76,28 @@ export default {
             });
         },
 
+        getRates(trigger) {
+            this.loadingOrderSummary = true;
+            this.form.cartItems = this.cart.items;
+            $.ajax({
+                method: 'POST',
+                url: route('cart.shipping.rates'),
+                data: this.form,
+            }).then((cart) => {
+                store.updateCart(cart);
+                if (trigger === 'taxAdded') {
+                    this.changeShippingMethod(this.cart.shippingMethodName);
+                } else {
+                    this.updateShippingMethod(this.cart.shippingMethodName);
+                }
+            }).catch((xhr) => {
+                this.$notify(xhr.responseJSON.message);
+                this.cart.availableShippingMethods = {};
+            }).always(() => {
+                this.loadingOrderSummary = false;
+            });
+        },
+
         updateShippingMethod(shippingMethod) {
             if (typeof shippingMethod === 'string') {
                 shippingMethod = { name: shippingMethod };

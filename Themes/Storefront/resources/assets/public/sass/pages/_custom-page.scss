@@ -1,5 +1,35 @@
 .custom-page-wrap {
     margin-top: 50px;
+
+    .custom-page-content {
+        display: flex;
+
+        p {
+            text-align: justify;
+        }
+    }
+}
+
+@media screen and (max-width: $lg) {
+    .custom-page-wrap {
+        margin-top: 24px;
+    }
+
+    .custom-page-content {
+        flex-direction: column-reverse;
+    }
+}
+
+.form-group.required,
+.form-group.required div,
+.form-check.required,
+.form-check.required div,
+.form-radio.required,
+.form-radio.required div {
+    label::after {
+        content: " *";
+        color: #ff0000;
+    }
 }
 
 .custom-page-content {
@@ -8,12 +38,14 @@
     }
 
     p {
-        line-height: 23px;
+        line-height: revert;
+        margin: revert;
         color: $color-gray;
     }
 
     ul, ol {
-        padding-left: 16px;
+        padding-left: 40px;
+        margin-bottom: revert;
         overflow: hidden;
 
         li {
@@ -53,5 +85,68 @@
 
     td {
         vertical-align: top;
+    }
+
+    .featurette-divider {
+        margin: 2rem 0;
+    }
+}
+
+.custom-page-right {
+    width: calc(100% - 293px);
+}
+
+@media screen and (max-width: 1400px) {
+    .custom-page-right {
+        width: calc(100% - 276px);
+    }
+}
+
+@media screen and (max-width: $lg) {
+    .custom-page-right {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+
+/***** COLONNE LEFT ****/
+.custom-page-left {
+    width: 263px;
+    min-width: 263px;
+    margin: -6px 30px 0 0;
+
+    .section-title {
+        margin-bottom: 24px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid $border-color-lite;
+    }
+
+    .vertical-products {
+        //margin-top: 29px;
+
+        .section-title {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .custom-page-left {
+        width: 246px;
+        min-width: 246px;
+    }
+}
+
+@media screen and (max-width: $lg) {
+    .custom-page-left {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+
+        .vertical-products {
+            margin-top: 44px;
+        }
     }
 }

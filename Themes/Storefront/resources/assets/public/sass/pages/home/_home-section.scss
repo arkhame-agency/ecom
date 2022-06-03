@@ -17,6 +17,10 @@
     .home-banner-wrap {
         width: 33.15%;
         padding: 0 15px;
+
+        a {
+            border: 1px solid $border-color;
+        }
     }
 }
 

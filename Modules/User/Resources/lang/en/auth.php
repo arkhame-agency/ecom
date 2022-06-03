@@ -20,10 +20,15 @@ return [
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'confirm_password' => 'Confirm Password',
+    'valida_email' => 'Validate your email address',
     'i_agree_to_the' => 'I agree to the',
     'privacy_policy' => 'Privacy Policy',
     'reset_password' => 'Reset Password',
     'enter_email' => 'Enter your account email to receive a link allowing you to reset your password.',
     'i_remembered_my_password' => 'I remembered my password',
     'submit' => 'SUBMIT',
+    'validation' => [
+        'confirmed' => 'The passwords does not match.',
+        'email' => 'The emails does not match.',
+    ]
 ];

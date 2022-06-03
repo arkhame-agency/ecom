@@ -20,6 +20,12 @@ Route::put('orders/{order}/status', [
     'middleware' => 'can:admin.orders.edit',
 ]);
 
+Route::post('orders/{order}/create-shipment-label', [
+    'as' => 'admin.orders.create.label.shipment',
+    'uses' => 'OrderStatusController@createLabelShipment',
+    'middleware' => 'can:admin.orders.edit',
+]);
+
 Route::post('orders/{order}/email', [
     'as' => 'admin.orders.email.store',
     'uses' => 'OrderEmailController@store',

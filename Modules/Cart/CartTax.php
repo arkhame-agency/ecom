@@ -35,7 +35,7 @@ class CartTax implements JsonSerializable
 
     private function calculate()
     {
-        return $this->taxCondition->getCalculatedValue($this->productsTotalPrice());
+        return $this->taxCondition->getCalculatedValue($this->cart->subTotal()->amount());
     }
 
     private function productsTotalPrice()

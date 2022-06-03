@@ -35,6 +35,21 @@
         margin: -5px 0 -8px 30px;
     }
 
+    .product-short-description {
+        font-size: 1rem;
+        color: $secondary;
+        -webkit-line-clamp: 3;
+        height: calc(1em * 1.4 * 3);
+        line-height: 1.4;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 !important;
+    }
+
     .product-image {
         position: relative;
         height: 180px;

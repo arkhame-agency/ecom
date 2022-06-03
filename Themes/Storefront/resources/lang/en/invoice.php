@@ -9,6 +9,7 @@ return [
     'email' => 'Email',
     'phone' => 'Phone',
     'payment_method' => 'Payment Method',
+    'note' => 'Note',
     'billing_address' => 'Billing Address',
     'shipping_address' => 'Shipping Address',
     'product' => 'Product',

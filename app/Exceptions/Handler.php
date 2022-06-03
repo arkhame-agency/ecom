@@ -2,6 +2,9 @@
 
 namespace FleetCart\Exceptions;
 
+use Illuminate\Foundation\Events\MaintenanceModeEnabled;
+use Illuminate\Support\Facades\Cache;
+use Mexitek\PHPColors\Color;
 use Throwable;
 use Illuminate\Http\Request;
 use Swift_TransportException;
@@ -42,6 +45,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $e)
     {
+        if (app()->bound('sentry') && $this->shouldReport($e)) {
+            app('sentry')->captureException($e);
+        }
         parent::report($e);
     }
 
@@ -75,6 +81,13 @@ class Handler extends ExceptionHandler
 
         if ($this->shouldShowNotFoundPage($e)) {
             return response()->view('errors.404');
+        }
+
+        if (app()->isDownForMaintenance()) {
+            return response()->view('errors.503', [
+                'themeColor' => $this->getThemeColor(),
+                'logo' => $this->getHeaderLogo(),
+            ]);
         }
 
         return parent::render($request, $e);
@@ -155,6 +168,14 @@ class Handler extends ExceptionHandler
         return $e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException;
     }
 
+    private function maintenanceMode(Throwable $e) {
+        if ($this->inAdminPanel()) {
+            return false;
+        }
+
+        return $e instanceof MaintenanceModeEnabled;
+    }
+
     /**
      * Determine if the request is from admin panel.
      *
@@ -163,5 +184,37 @@ class Handler extends ExceptionHandler
     private function inAdminPanel()
     {
         return $this->container->has('inAdminPanel') && $this->container['inAdminPanel'];
+    }
+
+    /**
+     * For maintenance page
+     * @return Color
+     */
+    private function getThemeColor()
+    {
+        try {
+            return new Color(storefront_theme_color());
+        } catch (\Exception $e) {
+            return new Color('#0068e1');
+        }
+    }
+
+    /**
+     * Return Path logo for maintenance page
+     * @return mixed
+     */
+    private function getHeaderLogo()
+    {
+        return $this->getMedia(setting('storefront_header_logo'))->path;
+    }
+
+    /**
+     * return the object stored on cache.
+     * @param $fileId
+     * @return mixed
+     */
+    private function getMedia($fileId)
+    {
+        return Cache::get(md5("files.{$fileId}"));
     }
 }

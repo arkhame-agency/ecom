@@ -219,6 +219,7 @@ export default {
             }).then((cart) => {
                 store.updateCart(cart);
 
+                this.$root.$refs.sidebarcart.fetchCrossSellProducts();
                 $('.header-cart').trigger('click');
             }).catch((xhr) => {
                 if (xhr.status === 422) {

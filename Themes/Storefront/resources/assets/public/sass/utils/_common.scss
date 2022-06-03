@@ -1,8 +1,8 @@
 @import 'common/_feature',
-        'common/_product',
-        'common/_form-wrap',
-        'common/_product-card',
-        'common/_vertical-product-card';
+'common/_product',
+'common/_form-wrap',
+'common/_product-card',
+'common/_vertical-product-card';
 
 .wrapper {
     position: relative;
@@ -110,7 +110,7 @@
         transition: 500ms ease-in-out;
 
         &.animating {
-            animation: zoomInOut 500ms ease-in-out; 
+            animation: zoomInOut 500ms ease-in-out;
         }
     }
 }
@@ -233,7 +233,6 @@
 
         > i {
             margin-top: 3px;
-            color: $color-default;
             color: var(--color-primary);
             float: left;
         }
@@ -242,8 +241,16 @@
             line-height: 22px;
             display: block;
             margin-left: 24px;
-            word-break: break-all;
+            //word-break: break-all;
             white-space: pre-wrap;
+
+            a {
+                color: $color-gray;
+
+                &:hover {
+                    color: var(--color-primary);
+                }
+            }
         }
     }
 }
@@ -274,6 +281,26 @@
     }
 }
 
+.back-top {
+    position: fixed;
+    bottom: 45px;
+    right: 45px;
+    display: none;
+    color: $color-white;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    background: $color-default;
+    background: var(--color-primary);
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    text-align: center;
+    line-height: 0;
+    box-shadow: -2px -2px 2px 0px #c7c7c7;
+    cursor: pointer;
+}
+
 .captcha-input {
     font-size: 14px;
     height: 45px;
@@ -289,6 +316,14 @@
         border-color: var(--color-primary);
         box-shadow: none;
     }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 @media screen and (max-width: 510px) {

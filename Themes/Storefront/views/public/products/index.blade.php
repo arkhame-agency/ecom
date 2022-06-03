@@ -8,6 +8,21 @@
     @endif
 @endsection
 
+@push('meta')
+    <meta name="title" content="{{ $brand->meta->meta_title ?? $brandName ?? env('APP_NAME') }}">
+    <meta name="description" content="{{ $brand->meta->meta_description ?? '' }}">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ $brand->meta->meta_title ?? $brandName ?? env('APP_NAME')  }}">
+    <meta property="og:description" content="{{ $brand->meta->meta_description ?? ''  }}">
+    <meta property="og:image" content="{{ $brandLogo ?? $logo }}">
+    <meta property="og:locale" content="{{ locale() }}">
+
+    @foreach (supported_locale_keys() as $code)
+        <meta property="og:locale:alternate" content="{{ $code }}">
+    @endforeach
+@endpush
+
 @push('globals')
     <script>
         FleetCart.langs['storefront::products.showing_results'] = '{{ trans("storefront::products.showing_results") }}';
@@ -21,6 +36,8 @@
         initial-query="{{ request('query') }}"
         initial-brand-name="{{ $brandName ?? '' }}"
         initial-brand-banner="{{ $brandBanner ?? '' }}"
+        initial-brand-logo="{{ $brandLogo ?? '' }}"
+        initial-brand-presentation="{{ $brandPresentation ?? '' }}"
         initial-brand-slug="{{ request('brand') }}"
         initial-category-name="{{ $categoryName ?? '' }}"
         initial-category-banner="{{ $categoryBanner ?? '' }}"
@@ -33,9 +50,10 @@
         :initial-per-page="{{ request('perPage', 30) }}"
         :initial-page="{{ request('page', 1) }}"
         initial-view-mode="{{ request('viewMode', 'grid') }}"
+        initial-promotions="{{request('promotions', false)}}"
         inline-template
     >
-        <section class="product-search-wrap">
+        <section class="product-search-wrap" id="product-search-wrap" ref="productsearchwrap">
             <div class="container">
                 <div class="product-search">
                     <div class="product-search-left">
@@ -57,6 +75,13 @@
                         <div class="d-none d-lg-block categories-banner" v-if="brandBanner">
                             <img :src="brandBanner" alt="Brand banner">
                         </div>
+                        <div class="brand-presentation" v-if="brandPresentation">
+                            <div class="col-md-3 brand-image px-0">
+                                <img :src="brandLogo" alt="Brand logo">
+                            </div>
+                            <div class="col-md-15" v-if="brandPresentation" v-html="brandPresentation">
+                            </div>
+                        </div>
 
                         <div class="d-none d-lg-block categories-banner" v-else-if="categoryBanner">
                             <img :src="categoryBanner" alt="Category banner">
@@ -68,7 +93,7 @@
                                     <h4 v-if="queryParams.query">
                                         {{ trans('storefront::products.search_results_for') }} <span>"@{{ queryParams.query }}"</span>
                                     </h4>
-                                    <h4 v-else-if="queryParams.brand" v-text="initialBrandName"></h4>
+                                    <h4 v-else-if="queryParams.brand && !brandPresentation" v-text="initialBrandName"></h4>
                                     <h4 v-else-if="queryParams.category" v-text="categoryName"></h4>
                                     <h4 v-else-if="queryParams.tag" v-text="initialTagName"></h4>
                                     <h4 v-else>{{ trans('storefront::products.shop') }}</h4>
@@ -140,13 +165,16 @@
                                 </div>
                             </div>
 
-                            <div class="search-result-middle" :class="{ empty: emptyProducts, loading: fetchingProducts }">
+                            <div class="search-result-middle"
+                                 :class="{ empty: emptyProducts, loading: fetchingProducts }">
                                 <div class="grid-view-products" v-if="viewMode === 'grid'">
-                                    <product-card-grid-view v-for="product in products.data" :key="product.id" :product="product"></product-card-grid-view>
+                                    <product-card-grid-view v-for="product in products.data" :key="product.id"
+                                                            :product="product"></product-card-grid-view>
                                 </div>
 
                                 <div class="list-view-products" v-if="viewMode === 'list'">
-                                    <product-card-list-view v-for="product in products.data" :key="product.id" :product="product"></product-card-list-view>
+                                    <product-card-list-view v-for="product in products.data" :key="product.id"
+                                                            :product="product"></product-card-list-view>
                                 </div>
 
                                 <div class="empty-message" v-if="! fetchingProducts && emptyProducts">

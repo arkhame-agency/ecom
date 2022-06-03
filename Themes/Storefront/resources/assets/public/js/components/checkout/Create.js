@@ -41,7 +41,7 @@ export default {
         },
 
         firstCountry() {
-            return Object.keys(this.countries)[0];
+            return FleetCart.defaultCountry;
         },
 
         hasBillingStates() {
@@ -54,6 +54,10 @@ export default {
 
         hasNoPaymentMethod() {
             return Object.keys(this.gateways).length === 0;
+        },
+
+        hasMoreThanOnePaymentMethod() {
+            return Object.keys(this.gateways).length > 1 || ! ['stripe'].includes(this.form.payment_method);
         },
 
         firstPaymentMethod() {
@@ -79,30 +83,30 @@ export default {
         'form.shippingAddressId': function () {
             this.mergeSavedAddresses();
         },
-
-        'form.billing.city': function (newCity) {
-            if (newCity) {
-                this.addTaxes();
-            }
-        },
-
-        'form.shipping.city': function (newCity) {
-            if (newCity) {
-                this.addTaxes();
-            }
-        },
-
-        'form.billing.zip': function (newZip) {
-            if (newZip) {
-                this.addTaxes();
-            }
-        },
-
-        'form.shipping.zip': function (newZip) {
-            if (newZip) {
-                this.addTaxes();
-            }
-        },
+        //
+        // 'form.billing.city': function (newCity) {
+        //     if (newCity) {
+        //         this.addTaxes();
+        //     }
+        // },
+        //
+        // 'form.shipping.city': function (newCity) {
+        //     if (newCity) {
+        //         this.addTaxes();
+        //     }
+        // },
+        //
+        // 'form.billing.zip': function (newZip) {
+        //     if (newZip) {
+        //         this.addTaxes(true);
+        //     }
+        // },
+        //
+        // 'form.shipping.zip': function (newZip) {
+        //     if (newZip) {
+        //         this.addTaxes(true);
+        //     }
+        // },
 
         'form.billing.state': function (newState) {
             if (newState) {
@@ -139,6 +143,9 @@ export default {
         if (this.defaultAddress.address_id) {
             this.form.billingAddressId = this.defaultAddress.address_id;
             this.form.shippingAddressId = this.defaultAddress.address_id;
+        } else {
+            this.form.billingAddressId = Object.keys(this.addresses)[0];
+            this.form.shippingAddressId = Object.keys(this.addresses)[0];
         }
 
         if (! this.hasAddress) {
@@ -154,12 +161,14 @@ export default {
                 this.changePaymentMethod(this.firstPaymentMethod);
             }
 
-            if (this.firstShippingMethod) {
+            if (this.cart.shippingMethodName) {
+                this.updateShippingMethod(this.cart.shippingMethodName);
+            } else if (this.firstShippingMethod) {
                 this.updateShippingMethod(this.firstShippingMethod);
             }
 
             if (window.Stripe) {
-                this.stripe = window.Stripe(FleetCart.stripePublishableKey);
+                this.stripe = window.Stripe(FleetCart.stripePublishableKey, { 'locale': FleetCart.locale });
 
                 this.renderStripeElements();
             }
@@ -249,7 +258,13 @@ export default {
         },
 
         changeShippingMethod(shippingMethod) {
-            this.$set(this.form, 'shipping_method', shippingMethod.name);
+
+            if (typeof shippingMethod === 'string') {
+                shippingMethod = { name: shippingMethod };
+            }
+
+            this.shippingMethodName = shippingMethod.name ? this.cart.availableShippingMethods[shippingMethod.name] : this.cart.availableShippingMethods[this.firstShippingMethod];
+            this.$set(this.form, 'shipping_method', this.shippingMethodName.name);
         },
 
         addTaxes() {
@@ -261,10 +276,9 @@ export default {
                 data: this.form,
             }).then((cart) => {
                 store.updateCart(cart);
+                this.getRates('taxAdded');
             }).catch((xhr) => {
                 this.$notify(xhr.responseJSON.message);
-            }).always(() => {
-                this.loadingOrderSummary = false;
             });
         },
 

@@ -3,6 +3,7 @@
 namespace Modules\Transaction\Admin;
 
 use Modules\Admin\Ui\AdminTable;
+use Modules\Transaction\Entities\Transaction;
 
 class TransactionTable extends AdminTable
 {
@@ -11,7 +12,7 @@ class TransactionTable extends AdminTable
      *
      * @var array
      */
-    protected $rawColumns = ['order_id'];
+    protected $rawColumns = ['order_id', 'transaction_id'];
 
     /**
      * Make table response for the resource.
@@ -23,8 +24,31 @@ class TransactionTable extends AdminTable
         return $this->newTable()
             ->addColumn('order_id', function ($transaction) {
                 $orderUrl = route('admin.orders.show', $transaction->order_id);
-
                 return "<a href='{$orderUrl}'>{$transaction->order_id}</a>";
+            })
+            ->addColumn('transaction_id', function ($transaction) {
+                return "<a href='{$this->getUrl($transaction)}' target='_blank'>{$transaction->transaction_id}</a>";
             });
+    }
+
+    /**
+     * @param Transaction $transaction
+     * @return string
+     */
+    private function getUrl(Transaction $transaction): string
+    {
+        switch ($transaction->payment_method) {
+            case setting('paypal_label'):
+                $url_payment_method = 'https://www.paypal.com/activity/payment/'.$transaction->transaction_id;
+                break;
+            case setting('stripe_label'):
+                $url_payment_method = 'https://dashboard.stripe.com/payments/'.$transaction->transaction_id;
+                break;
+            default:
+                $url_payment_method = '#';
+        }
+
+        return $url_payment_method;
+
     }
 }

@@ -104,4 +104,18 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Email Addresses for CustomForm Maison Aspirateur
+    |--------------------------------------------------------------------------
+    |
+    | We can remove it for futur customer.
+    |
+    */
+
+    'email-addresses' => [
+        'email-guarantee' => env('EMAIL_GUARANTEE', 'garantie@maisonaspirateur.com'),
+        'email-installation' => env('EMAIL_INSTALLATION', 'installation@maisonaspirateur.com')
+    ],
 ];

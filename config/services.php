@@ -33,4 +33,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'noviship' => [
+        'key' => env('NOVISHIP_API_KEY'),
+        'base_uri'=>env('NOVISHIP_URL_API'),
+    ],
 ];

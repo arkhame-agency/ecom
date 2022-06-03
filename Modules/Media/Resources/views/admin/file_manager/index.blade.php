@@ -32,6 +32,7 @@
     <div id="notification-toast"></div>
 
     @include('admin::partials.confirmation_modal')
+    @include('admin::partials.viewer_image_modal')
 
     @foreach ($assets->allJs() as $js)
         <script src="{{ v($js) }}"></script>
@@ -56,6 +57,13 @@
                 { data: 'action', orderable: false, searchable: false },
             ],
         });
+        $('.file-manager .table').on('draw.dt', function(e, settings, json) {
+            $('.pop').on('click', function (e) {
+                e.preventDefault();
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodal').modal('show');
+            });
+        })
     </script>
 </body>
 </html>

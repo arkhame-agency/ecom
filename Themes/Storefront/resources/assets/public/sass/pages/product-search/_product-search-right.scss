@@ -21,6 +21,65 @@
             border-radius: $radius-default;
         }
     }
+
+    .brand-presentation {
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: $color-default;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .brand-image {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            transition: $transition-default;
+
+            &:hover {
+                border-color: $color-default-transparent-lite;
+                border-color: var(--color-primary-transparent-lite);
+
+                > img {
+                    opacity: 0.7;
+                }
+            }
+
+            > img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                max-height: 100%;
+                max-width: 100%;
+                transform: translate(-50%, -50%);
+                transition: $transition-default;
+            }
+
+            .image-placeholder {
+                height: 65px;
+                width: 65px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $md) {
+    .brand-presentation {
+        display: none;
+    }
+}
+
+@media screen and (min-width: $md) {
+    .brand-presentation {
+        display: flex;
+        padding-bottom: 1.5rem;
+    }
 }
 
 @media screen and (max-width: 1400px) {

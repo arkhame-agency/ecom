@@ -36,9 +36,37 @@ trait Translatable
     {
         return $query->whereHas('translations', function ($query) use ($key, $values, $locale) {
             $query->whereIn($key, $values)
-                ->when(! is_null($locale), function ($query) use ($locale) {
+                ->when(!is_null($locale), function ($query) use ($locale) {
                     $query->where('locale', $locale);
                 });
+        });
+    }
+
+
+    /**
+     * @param $entity Model
+     * @param $entity_translation string
+     * @param $locale string
+     * @return mixed
+     */
+    public function getSlugTranslated(Model $entity, string $entity_translation, string $locale)
+    {
+        /**
+         * @param $model Model
+         */
+        $model = app($entity_translation);
+        $column = str_replace("translations", "id", $model->getTable());
+        /**
+         * id pour sho product
+         * $column pour le reste.
+         */
+        if (in_array($entity->getTable(), ['products', 'pages', 'categories', 'brands'])) {
+            $columnVal = 'id';
+        } else {
+            $columnVal = $column;
+        }
+        return $model::whereRaw("locale = '{$locale}' AND {$column}={$entity->{$columnVal}}")->firstOr(function () use ($entity, $model, $column, $columnVal) {
+            return $model::whereRaw("locale = '" . setting('default_locale') . "' AND {$column}={$entity->{$columnVal}}")->first();
         });
     }
 }

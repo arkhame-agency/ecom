@@ -24,6 +24,8 @@
             <div class="product-card-right">
                 <a :href="productUrl" class="product-name">
                     <h6>{{ product.name }}</h6>
+                    <span class="product-short-description" v-html="product.short_description">
+                    </span>
                 </a>
 
                 <div class="clearfix"></div>
@@ -34,7 +36,7 @@
 
                 <button
                     v-if="hasNoOption || product.is_out_of_stock"
-                    class="btn btn-default btn-add-to-cart"
+                    class="btn btn-primary btn-add-to-cart"
                     :class="{ 'btn-loading': addingToCart }"
                     :disabled="product.is_out_of_stock"
                     @click="addToCart"
@@ -46,7 +48,7 @@
                 <a
                     v-else
                     :href="productUrl"
-                    class="btn btn-default btn-add-to-cart"
+                    class="btn btn-primary btn-add-to-cart"
                 >
                     <i class="las la-eye"></i>
                     {{ $trans('storefront::product_card.view_options') }}
@@ -77,16 +79,16 @@
 </template>
 
 <script>
-    import ProductRating from './../../ProductRating.vue';
-    import ProductCardMixin from '../../../mixins/ProductCardMixin';
+import ProductRating from './../../ProductRating.vue';
+import ProductCardMixin from '../../../mixins/ProductCardMixin';
 
-    export default {
-        components: { ProductRating },
+export default {
+    components: { ProductRating },
 
-        mixins: [
-            ProductCardMixin,
-        ],
+    mixins: [
+        ProductCardMixin,
+    ],
 
-        props: ['product'],
-    };
+    props: ['product'],
+};
 </script>

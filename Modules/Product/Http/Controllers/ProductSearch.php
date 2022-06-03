@@ -2,12 +2,15 @@
 
 namespace Modules\Product\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use Modules\Product\Entities\Product;
-use Modules\Category\Entities\Category;
 use Modules\Attribute\Entities\Attribute;
-use Modules\Product\Filters\ProductFilter;
+use Modules\Category\Entities\Category;
+use Modules\Product\Entities\Product;
 use Modules\Product\Events\ShowingProductList;
+use Modules\Product\Filters\ProductFilter;
 
 trait ProductSearch
 {
@@ -33,7 +36,22 @@ trait ProductSearch
             $productIds = (clone $query)->select('products.id')->resetOrders()->pluck('id');
         }
 
-        $products = $query->paginate(request('perPage', 30));
+        if (request()->filled('promotions')) {
+            $products = $query->get();
+            $newProduct = array();
+            /**
+             * @var $product Product
+             */
+            foreach ($products as $product) {
+                if ($product->hasSpecialPrice()) {
+                    $newProduct[] = $product;
+                }
+            }
+            $products = $this->paginatePromotions($newProduct, request('perPage', 30));
+        } else {
+            $products = $query->paginate(request('perPage', 30));
+        }
+
 
         event(new ShowingProductList($products));
 
@@ -45,7 +63,7 @@ trait ProductSearch
 
     private function getAttributes($productIds)
     {
-        if (! request()->filled('category') || $this->filteringViaRootCategory()) {
+        if (!request()->filled('category') || $this->filteringViaRootCategory()) {
             return collect();
         }
 
@@ -59,7 +77,7 @@ trait ProductSearch
 
     private function filteringViaRootCategory()
     {
-        return Category::where('slug', request('category'))
+        return Category::where('id', request('category'))
             ->firstOrNew([])
             ->isRoot();
     }
@@ -70,5 +88,24 @@ trait ProductSearch
             ->whereIn('product_id', $productIds)
             ->distinct()
             ->pluck('category_id');
+    }
+
+    /**
+     * Set a pagination that will be used for promotions, since paginate function doesn't support Array|Collection;.
+     *
+     * @param array|Collection $items
+     * @param int $perPage
+     * @param int|null $page
+     * @param array $options
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginatePromotions($items, int $perPage = 15, $page = null, array $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

@@ -27,16 +27,6 @@
                     </span>
                 </li>
 
-                <li v-for="tax in cart.taxes">
-                    <label v-text="tax.name"></label>
-
-                    <span
-                        class="price-amount"
-                        v-html="tax.amount.inCurrentCurrency.formatted"
-                    >
-                    </span>
-                </li>
-
                 <li v-if="hasCoupon" v-cloak>
                     <label>
                         {{ trans('storefront::cart.coupon') }}
@@ -52,6 +42,16 @@
                     <span
                         class="price-amount"
                         v-html="'-' + cart.coupon.value.inCurrentCurrency.formatted"
+                    >
+                    </span>
+                </li>
+
+                <li v-for="tax in cart.taxes">
+                    <label v-text="tax.name"></label>
+
+                    <span
+                        class="price-amount"
+                        v-html="tax.amount.inCurrentCurrency.formatted"
                     >
                     </span>
                 </li>

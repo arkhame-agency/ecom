@@ -10,7 +10,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-    'name' => 'FleetCart',
+    'name' => env('APP_NAME', 'La Maison de l\'Aspirateur'),
 
     'installed' => env('APP_INSTALLED', false),
 
@@ -181,6 +181,7 @@ return [
         FleetCart\Providers\RouteServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Mehedi\Stylist\StylistServiceProvider::class,
+        Geocoder\Laravel\Providers\GeocoderService::class,
     ],
 
     /*

@@ -2,12 +2,12 @@
 
 namespace Modules\Tax\Entities;
 
-use Modules\Admin\Ui\AdminTable;
-use Modules\Support\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Modules\Product\Entities\Product;
-use Modules\Support\Eloquent\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
+use Modules\Admin\Ui\AdminTable;
+use Modules\Product\Entities\Product;
+use Modules\Support\Eloquent\Model;
+use Modules\Support\Eloquent\Translatable;
 
 class TaxClass extends Model
 {
@@ -73,7 +73,7 @@ class TaxClass extends Model
     {
         return $this->taxRates()
             ->findByAddress($this->determineAddress($addresses))
-            ->first();
+            ->get();
     }
 
     public function determineAddress($addresses)

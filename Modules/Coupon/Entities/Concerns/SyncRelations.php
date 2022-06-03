@@ -32,6 +32,20 @@ trait SyncRelations
         );
     }
 
+    protected function syncBrands($brands)
+    {
+        $this->brands()->sync(
+            $this->makeSyncList($brands, ['exclude' => false])
+        );
+    }
+
+    protected function syncExcludeBrands($excludeBrands)
+    {
+        $this->excludeBrands()->sync(
+            $this->makeSyncList($excludeBrands, ['exclude' => true])
+        );
+    }
+
     private function makeSyncList($items, $pivotData)
     {
         $pivotData = array_fill(0, count($items), $pivotData);

@@ -1,5 +1,6 @@
 window.$ = window.jQuery = require('jquery');
 
+require('../../../../../../../public/background-check.min.js');
 require('popper.js');
 require('bootstrap');
 require('jquery-nice-select');

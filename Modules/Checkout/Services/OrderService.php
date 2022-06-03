@@ -118,6 +118,7 @@ class OrderService
             'sub_total' => Cart::subTotal()->amount(),
             'shipping_method' => Cart::shippingMethod()->name(),
             'shipping_cost' => Cart::shippingCost()->amount(),
+            'shipment_rate_id' => Cart::shippingMethod()->shipment_rate_id(),
             'coupon_id' => Cart::coupon()->id(),
             'discount' => Cart::discount()->amount(),
             'total' => Cart::total()->amount(),

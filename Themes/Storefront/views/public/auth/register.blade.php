@@ -8,7 +8,7 @@
             <div class="form-wrap-inner register-wrap-inner">
                 <h2>{{ trans('user::auth.register') }}</h2>
 
-                <form method="POST" action="{{ route('register.post') }}">
+                <form method="POST" action="{{ route('register.post') }}" id="register-form">
                     @csrf
 
                     <div class="form-group">
@@ -45,6 +45,9 @@
                         @error('email')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
+
+                        <input type="text" name="validate_mail" value="{{ old('email') }}" id="validate-email" class="form-control mt-3" placeholder="{{ trans('user::auth.valida_email') }}">
+
                     </div>
 
                     <div class="form-group">

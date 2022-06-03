@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=7.3.0",
+        "php": ">=7.4",
+        "ext-json": "*",
         "cache/filesystem-adapter": "^1.0",
         "cache/predis-adapter": "^1.0",
         "doctrine/dbal": "^2.10",
@@ -21,11 +22,15 @@
         "laravel/tinker": "^2.0",
         "mehedi/stylist": "dev-master",
         "nwidart/laravel-modules": "^8.0",
+        "sentry/sentry-laravel": "^2.12",
+        "shippo/shippo-php": "^2.0",
         "swayok/alternative-laravel-cache": "^5.4",
         "symfony/intl": "^5.0",
+        "toin0u/geocoder-laravel": "^4.4",
         "wikimedia/composer-merge-plugin": "^2.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "barryvdh/laravel-debugbar": "^3.0",
         "beyondcode/laravel-dump-server": "^1.0",
         "beyondcode/laravel-query-detector": "^1.0",
@@ -47,6 +52,12 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan cache:clear"
+        ],
+        "post-install-cmd": [
+            "@php artisan cache:clear"
         ]
     },
     "config": {
@@ -54,7 +65,10 @@
         "sort-packages": true,
         "preferred-install": "dist",
         "platform": {
-            "php": "7.3.0"
+            "php": "7.4.0"
+        },
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "extra": {

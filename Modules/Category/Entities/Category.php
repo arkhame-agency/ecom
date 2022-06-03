@@ -2,18 +2,18 @@
 
 namespace Modules\Category\Entities;
 
-use TypiCMS\NestableTrait;
-use Modules\Media\Entities\File;
-use Modules\Support\Eloquent\Model;
-use Modules\Media\Eloquent\HasMedia;
 use Illuminate\Support\Facades\Cache;
+use Modules\Media\Eloquent\HasMedia;
+use Modules\Media\Entities\File;
 use Modules\Product\Entities\Product;
-use Modules\Support\Eloquent\Sluggable;
+use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use Modules\Support\Money;
+use TypiCMS\NestableTrait;
 
 class Category extends Model
 {
-    use Translatable, Sluggable, HasMedia, NestableTrait;
+    use Translatable, HasMedia, NestableTrait;
 
     /**
      * The relations to eager load on every query.
@@ -27,7 +27,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['parent_id', 'slug', 'position', 'is_searchable', 'is_active'];
+    protected $fillable = ['parent_id', 'position', 'is_searchable', 'is_active',  'show_same_products'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,6 +44,7 @@ class Category extends Model
     protected $casts = [
         'is_searchable' => 'boolean',
         'is_active' => 'boolean',
+        'show_same_products' => 'boolean',
     ];
 
     /**
@@ -51,7 +52,17 @@ class Category extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name'];
+    protected $translatedAttributes = ['name', 'slug'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
 
     /**
      * The attribute that will be slugged.
@@ -69,10 +80,18 @@ class Category extends Model
     {
         static::addActiveGlobalScope();
     }
-
+    /**
+     * Find a specific category by the given slug.
+     *
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|Category
+     */
     public static function findBySlug($slug)
     {
-        return static::with('files')->where('slug', $slug)->firstOrNew([]);
+        return static::select('categories.*', 'category_translations.slug', 'category_translations.name')->with('files')
+            ->join('category_translations', 'category_translations.category_id', '=', 'categories.id')
+            ->where('category_translations.slug', '=', $slug)
+            ->firstOrFail([]);
     }
 
     public function isRoot()
@@ -83,6 +102,16 @@ class Category extends Model
     public function url()
     {
         return route('categories.products.index', ['category' => $this->slug]);
+    }
+
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $slugTranslated = $this->getSlugTranslated($this, CategoryTranslation::class, $locale);
+            $routeArray[$locale] = '/categories/'.$slugTranslated->slug.trans('category::routes.products', [], $locale);
+        }
+        return $routeArray;
     }
 
     public static function tree()
@@ -125,6 +154,11 @@ class Category extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories');
+    }
+
+    public function getTotalAttribute($total)
+    {
+        return Money::inDefaultCurrency($total);
     }
 
     public function getLogoAttribute()

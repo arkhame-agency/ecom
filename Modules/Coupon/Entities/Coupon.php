@@ -2,6 +2,7 @@
 
 namespace Modules\Coupon\Entities;
 
+use Modules\Brand\Entities\Brand;
 use Modules\Support\Money;
 use Modules\Cart\Facades\Cart;
 use Modules\User\Entities\User;
@@ -225,6 +226,20 @@ class Coupon extends Model
             ->wherePivot('exclude', true);
     }
 
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'coupon_brands')
+            ->withPivot('exclude')
+            ->wherePivot('exclude', false);
+    }
+
+    public function excludeBrands()
+    {
+        return $this->belongsToMany(Brand::class, 'coupon_brands')
+            ->withPivot('exclude')
+            ->wherePivot('exclude', true);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class)->withTrashed();
@@ -293,5 +308,8 @@ class Coupon extends Model
 
         $this->syncCategories(array_get($attributes, 'categories', []));
         $this->syncExcludeCategories(array_get($attributes, 'exclude_categories', []));
+
+        $this->syncBrands(array_get($attributes, 'brands', []));
+        $this->syncExcludeBrands(array_get($attributes, 'exclude_brands', []));
     }
 }

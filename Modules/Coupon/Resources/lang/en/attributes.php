@@ -13,6 +13,8 @@ return [
     'maximum_spend' => 'Maximum Spend',
     'products' => 'Products',
     'exclude_products' => 'Exclude Products',
+    'brands' => 'Brands',
+    'exclude_brands' => 'Exclude Brands',
     'categories' => 'Categories',
     'exclude_categories' => 'Exclude Categories',
     'usage_limit_per_coupon' => 'Usage Limit Per Coupon',

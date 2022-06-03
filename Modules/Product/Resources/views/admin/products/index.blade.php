@@ -25,6 +25,7 @@
                 { data: 'thumbnail', orderable: false, searchable: false, width: '10%' },
                 { data: 'name', name: 'translations.name', orderable: false, defaultContent: '' },
                 { data: 'price', searchable: false },
+                { data: 'qty', orderable: false, searchable: false, defaultContent: '0' },
                 { data: 'status', name: 'is_active', searchable: false },
                 { data: 'created', name: 'created_at' },
             ],

@@ -3,11 +3,13 @@
 namespace Modules\Product\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Modules\Review\Entities\Review;
+use Illuminate\Support\Facades\Cache;
+use Modules\Media\Entities\File;
 use Modules\Product\Entities\Product;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Http\Middleware\SetProductSortOption;
+use Modules\Review\Entities\Review;
 
 class ProductController extends Controller
 {
@@ -36,7 +38,10 @@ class ProductController extends Controller
             return $this->searchProducts($model, $productFilter);
         }
 
-        return view('public.products.index');
+        return view('public.products.index', [
+            'logo' => $this->getHeaderLogo(),
+            'routeArray' => $this->getUrls(),
+        ]);
     }
 
     /**
@@ -51,6 +56,8 @@ class ProductController extends Controller
          * @var $product Product
          */
         $product = Product::findBySlug($slug);
+
+        $routeArray = $product->getUrls();
         $relatedProducts = $product->relatedProducts()->forCard()->get();
         $upSellProducts = $product->upSellProducts()->forCard()->get();
         $downloadFiles = $product->getDownloadsAttribute();
@@ -58,15 +65,57 @@ class ProductController extends Controller
 
         event(new ProductViewed($product));
 
-        return view('public.products.show', compact('product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
+        return view('public.products.show', compact('routeArray', 'product', 'relatedProducts', 'upSellProducts', 'review', 'downloadFiles'));
     }
 
     private function getReviewData(Product $product)
     {
-        if (! setting('reviews_enabled')) {
+        if (!setting('reviews_enabled')) {
             return;
         }
 
         return Review::countAndAvgRating($product);
+    }
+
+    /**
+     * Display a listing of promotions.
+     *
+     * @param string $slug
+     * @param \Modules\Product\Entities\Product $model
+     * @param \Modules\Product\Filters\ProductFilter $productFilter
+     * @return \Illuminate\Http\Response
+     */
+    public function promotions(Product $model, ProductFilter $productFilter)
+    {
+        request()->merge(['promotions' => true]);
+
+        if (request()->expectsJson()) {
+            return $this->searchProducts($model, $productFilter);
+        }
+
+        return view('public.products.index', [
+            'logo' => $this->getHeaderLogo(),
+        ]);
+    }
+
+    private function getHeaderLogo()
+    {
+        return $this->getMedia(setting('storefront_header_logo'))->path;
+    }
+
+    private function getMedia($fileId)
+    {
+        return Cache::rememberForever(md5("files.{$fileId}"), function () use ($fileId) {
+            return File::findOrNew($fileId);
+        });
+    }
+
+    public function getUrls()
+    {
+        $routeArray = [];
+        foreach (supported_locales() as $locale => $language) {
+            $routeArray[$locale] = trans('product::routes.products', [], $locale);
+        }
+        return $routeArray;
     }
 }

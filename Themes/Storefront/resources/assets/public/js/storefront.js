@@ -274,6 +274,26 @@ $(() => {
     let homeSlider = $('.home-slider');
 
     if (homeSlider.length !== 0) {
+
+        // homeSlider.on('init', function () {
+        //     BackgroundCheck.init({
+        //         targets: '.caption-1, .caption-2',
+        //         images: '.slider-image',
+        //     });
+        // });
+        //
+        // homeSlider.on('beforeChange', function () {
+        //     BackgroundCheck.refresh();
+        // });
+        //
+        // homeSlider.on('afterChange', function () {
+        //     BackgroundCheck.refresh();
+        // });
+        //
+        // homeSlider.on('lazyLoaded', function () {
+        //     BackgroundCheck.refresh();
+        // });
+
         homeSlider.slick({
             rows: 0,
             rtl: window.FleetCart.rtl,

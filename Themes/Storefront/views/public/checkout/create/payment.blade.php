@@ -1,7 +1,7 @@
-<div class="payment-method" v-cloak>
-    <h4 class="title">{{ trans('storefront::checkout.payment_method') }}</h4>
+<div class="payment-method checkout-form" v-cloak>
+    <h4 class="section-title">{{ trans('storefront::checkout.payment_method') }}</h4>
 
-    <div class="payment-method-form">
+    <div class="payment-method-form" v-if="hasMoreThanOnePaymentMethod">
         <div class="form-group">
             <div class="form-radio" v-for="(gateway, name) in gateways">
                 <input

@@ -1,9 +1,9 @@
-<footer class="footer-wrap">
+<footer class="footer-wrap @if(! setting('newsletter_enabled')) border-separator @endif">
     <div class="container">
         <div class="footer">
             <div class="footer-top">
                 <div class="row">
-                    <div class="col-lg-5 col-md-8">
+                    <div class="col-lg-5 col-md-9">
                         <div class="contact-us">
                             <h4 class="title">{{ trans('storefront::layout.contact_us') }}</h4>
 
@@ -11,21 +11,31 @@
                                 @if (setting('store_phone') && ! setting('store_phone_hide'))
                                     <li>
                                         <i class="las la-phone"></i>
-                                        <span>{{ setting('store_phone') }}</span>
+                                        <span><a
+                                                href="tel:{{ setting('store_phone') }}">{{ format_phone_number(setting('store_phone')) }}</a></span>
+                                        @if (setting('store_fax') && ! setting('store_phone_hide'))
+                                            <i class="las la-fax"></i>
+                                            <span>{{ format_phone_number(setting('store_fax')) }}</span>
+                                        @endif
                                     </li>
                                 @endif
 
                                 @if (setting('store_email') && ! setting('store_email_hide'))
                                     <li>
                                         <i class="las la-envelope"></i>
-                                        <span>{{ setting('store_email') }}</span>
+                                        <span>
+                                            <a href="mailto:{{ setting('store_email') }}">{{ setting('store_email') }}</a>
+                                        </span>
                                     </li>
                                 @endif
 
                                 @if (setting('storefront_address'))
                                     <li>
                                         <i class="las la-map"></i>
-                                        <span>{{ setting('storefront_address') }}</span>
+                                        <span>
+                                            <a href="https://www.google.com/maps/search/{{ setting('storefront_address') }}"
+                                               target="_blank">{{ setting('store_address_1') }}<br/>{{ setting('store_city') }}, {{ stateName(setting('store_country'), setting('store_state'))}}, {{ setting('store_zip') }}, {{ countryName(setting('store_country')) }}</a>
+                                        </span>
                                     </li>
                                 @endif
                             </ul>
@@ -34,7 +44,7 @@
                                 <ul class="list-inline social-links">
                                     @foreach (social_links() as $icon => $socialLink)
                                         <li>
-                                            <a href="{{ $socialLink }}">
+                                            <a href="{{ $socialLink }}" target="_blank">
                                                 <i class="{{ $icon }}"></i>
                                             </a>
                                         </li>
@@ -44,54 +54,15 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-5">
-                        <div class="footer-links">
-                            <h4 class="title">{{ trans('storefront::layout.my_account') }}</h4>
-
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="{{ route('account.dashboard.index') }}">
-                                        {{ trans('storefront::account.pages.dashboard') }}
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('account.orders.index') }}">
-                                        {{ trans('storefront::account.pages.my_orders') }}
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('account.reviews.index') }}">
-                                        {{ trans('storefront::account.pages.my_reviews') }}
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('account.profile.edit') }}">
-                                        {{ trans('storefront::account.pages.my_profile') }}
-                                    </a>
-                                </li>
-
-                                @auth
-                                    <li>
-                                        <a href="{{ route('logout') }}">
-                                            {{ trans('storefront::account.pages.logout') }}
-                                        </a>
-                                    </li>
-                                @endauth
-                            </ul>
-                        </div>
-                    </div>
-
                     @if ($footerMenuOne->isNotEmpty())
-                        <div class="col-lg-3 col-md-5">
+                        <div class="col-lg-5 col-md-9">
                             <div class="footer-links">
                                 <h4 class="title">{{ setting('storefront_footer_menu_one_title') }}</h4>
-
+                                {{-- Categories --}}
                                 <ul class="list-inline">
                                     @foreach ($footerMenuOne as $menuItem)
                                         <li>
+                                            <i class="las la-check" aria-hidden="true"></i>
                                             <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
                                                 {{ $menuItem->name }}
                                             </a>
@@ -102,14 +73,60 @@
                         </div>
                     @endif
 
+                    <div class="col-lg-4 col-md-9">
+                        <div class="footer-links">
+                            <h4 class="title">{{ trans('storefront::layout.my_account') }}</h4>
+                            {{-- My account --}}
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
+                                    <a href="{{ route('account.dashboard.index') }}">
+                                        {{ trans('storefront::account.pages.dashboard') }}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
+                                    <a href="{{ route('account.orders.index') }}">
+                                        {{ trans('storefront::account.pages.my_orders') }}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
+                                    <a href="{{ route('account.reviews.index') }}">
+                                        {{ trans('storefront::account.pages.my_reviews') }}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <i class="las la-check" aria-hidden="true"></i>
+                                    <a href="{{ route('account.profile.edit') }}">
+                                        {{ trans('storefront::account.pages.my_profile') }}
+                                    </a>
+                                </li>
+
+                                @auth
+                                    <li>
+                                        <i class="las la-check" aria-hidden="true"></i>
+                                        <a href="{{ route('logout') }}">
+                                            {{ trans('storefront::account.pages.logout') }}
+                                        </a>
+                                    </li>
+                                @endauth
+                            </ul>
+                        </div>
+                    </div>
+
                     @if ($footerMenuTwo->isNotEmpty())
-                        <div class="col-lg-3 col-md-5">
+                        <div class="col-lg-4 col-md-9">
                             <div class="footer-links">
                                 <h4 class="title">{{ setting('storefront_footer_menu_two_title') }}</h4>
 
                                 <ul class="list-inline">
                                     @foreach ($footerMenuTwo as $menuItem)
                                         <li>
+                                            <i class="las la-check" aria-hidden="true"></i>
                                             <a href="{{ $menuItem->url() }}" target="{{ $menuItem->target }}">
                                                 {{ $menuItem->name }}
                                             </a>

@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', $product->name)
+@section('title', $product->meta->meta_title ?: $product->name)
 
 @push('meta')
     <meta name="title" content="{{ $product->meta->meta_title ?: $product->name }}">
@@ -58,7 +58,8 @@
                                 <h1 class="product-name">{{ $product->name }}</h1>
 
                                 @if (setting('reviews_enabled'))
-                                    <product-rating :rating-percent="ratingPercent" :review-count="totalReviews"></product-rating>
+                                    <product-rating :rating-percent="ratingPercent"
+                                                    :review-count="totalReviews"></product-rating>
                                 @endif
 
                                 @if ($product->isInStock())
@@ -137,8 +138,10 @@
                                                 >
 
                                                 <span class="btn-wrapper">
-                                                    <button type="button" class="btn btn-number btn-plus" data-type="plus"> + </button>
-                                                    <button type="button" class="btn btn-number btn-minus" data-type="minus" disabled> - </button>
+                                                    <button type="button" class="btn btn-number btn-plus"
+                                                            data-type="plus"> + </button>
+                                                    <button type="button" class="btn btn-number btn-minus"
+                                                            data-type="minus" disabled> - </button>
                                                 </span>
                                             </div>
                                         </div>
@@ -200,7 +203,8 @@
                         <div class="product-details-tab clearfix">
                             <ul class="nav nav-tabs tabs">
                                 <li class="nav-item">
-                                    <a href="#description" data-toggle="tab" class="nav-link" :class="{ active: activeTab === 'description' }">
+                                    <a href="#description" data-toggle="tab" class="nav-link"
+                                       :class="{ active: activeTab === 'description' }">
                                         {{ trans('storefront::product.description') }}
                                     </a>
                                 </li>

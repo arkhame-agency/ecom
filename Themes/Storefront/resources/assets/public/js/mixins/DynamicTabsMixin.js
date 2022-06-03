@@ -25,6 +25,9 @@ export default {
                 active: this.activeTab === tab && ! this.loading,
             };
         },
+        title(tab) {
+            return tab.label;
+        },
 
         change(activeTab) {
             if (this.activeTab === activeTab) {

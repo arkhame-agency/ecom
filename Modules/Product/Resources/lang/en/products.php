@@ -23,6 +23,7 @@ return [
         'up_sells' => 'Up-Sells',
         'cross_sells' => 'Cross-Sells',
         'additional' => 'Additional',
+        'packaging' => 'Packaging'
     ],
     'form' => [
         'the_product_won\'t_be_shipped' => 'The product won\'t be shipped',
@@ -38,6 +39,13 @@ return [
         'stock_availability_states' => [
             '1' => 'In Stock',
             '0' => 'Out of Stock',
+        ],
+        'units' => [
+            'each' => 'Each',
+            'pair' => 'Pair',
+            'set' => 'Set',
+            'feet' => 'Feet',
+            'inch' => 'Inch',
         ],
         'base_image' => 'Base Image',
         'additional_images' => 'Additional Images',

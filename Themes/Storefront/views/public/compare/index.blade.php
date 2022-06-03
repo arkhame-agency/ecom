@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>{{ trans('storefront::compare.description') }}</td>
 
-                                    <td v-for="product in products" v-text="product.short_description || '-'"></td>
+                                    <td v-for="product in products" v-html="product.short_description || '-'"></td>
                                 </tr>
 
                                 <tr>
