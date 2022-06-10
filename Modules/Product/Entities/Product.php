@@ -124,14 +124,15 @@ class Product extends Model
      */
     protected static function booted()
     {
-        /**
-         * Update the selling price.
-         */
-        static::retrieved(function ($product) {
-            $product->withoutEvents(function () use ($product) {
-                $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
-            });
-        });
+        // @TODO Improve this function.
+//        /**
+//         * Update the selling price.
+//         */
+//        static::retrieved(function ($product) {
+//            $product->withoutEvents(function () use ($product) {
+//                $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
+//            });
+//        });
 
         static::saved(function ($product) {
             if (!empty(request()->all())) {
