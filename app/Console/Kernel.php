@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ScaffoldModuleCommand::class,
         Commands\ScaffoldEntityCommand::class,
+        Commands\ResetSellingPrice::class,
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('reset:price')->daily();
         // $schedule->command('inspire')
         //          ->hourly();
     }
