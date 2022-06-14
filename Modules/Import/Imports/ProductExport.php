@@ -24,7 +24,6 @@ class ProductExport implements FromCollection, WithHeadings, WithMapping, WithCo
             'Quantity',
             'Price',
             'Special Price',
-            'Selling Price',
         ];
     }
 
@@ -39,7 +38,6 @@ class ProductExport implements FromCollection, WithHeadings, WithMapping, WithCo
             $product->qty,
             $product->price,
             $product->special_price,
-            $product->selling_price,
         ];
     }
 
@@ -48,7 +46,6 @@ class ProductExport implements FromCollection, WithHeadings, WithMapping, WithCo
         return [
             'C' => NumberFormat::FORMAT_NUMBER_00,
             'D' => NumberFormat::FORMAT_NUMBER_00,
-            'E' => NumberFormat::FORMAT_NUMBER_00,
         ];
     }
 }
