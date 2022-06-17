@@ -213,11 +213,11 @@ export default {
         },
 
         changeBillingZip(zip) {
-            this.$set(this.form.billing, 'zip', zip);
+            this.$set(this.form.billing, 'zip', zip.replace(/-|\s/g,''));
         },
 
         changeShippingZip(zip) {
-            this.$set(this.form.shipping, 'zip', zip);
+            this.$set(this.form.shipping, 'zip', zip.replace(/-|\s/g,''));
         },
 
         changeBillingCountry(country) {

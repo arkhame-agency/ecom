@@ -70,7 +70,7 @@ export default {
         },
 
         changeShippingZip(zip) {
-            this.$set(this.form.shipping, 'zip', zip);
+            this.$set(this.form.shipping, 'zip', zip.replace(/-|\s/g,''));
         },
 
         changeShippingCountry(country) {
