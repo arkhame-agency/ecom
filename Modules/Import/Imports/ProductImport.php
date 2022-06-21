@@ -90,6 +90,11 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
             if ($data['quantity'] > 0) {
                 return 1;
             }
+            if (isset($data['manage_stock'])) {
+                if(!$data['manage_stock'] && !$data['quantity']) {
+                    return 1;
+                }
+            }
             return 0;
         }
         return null;
