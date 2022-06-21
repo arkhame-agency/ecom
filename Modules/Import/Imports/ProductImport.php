@@ -47,7 +47,7 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
     {
         return array_filter([
             'name' => $data['name'] ?? null,
-            'sku' => $data['sku'] ?? null,
+            'sku' => (string)$data['sku'],
             'description' => $data['description'] ?? null,
             'short_description' => $data['short_description'] ?? null,
             'is_active' => $this->isActive($data),
@@ -89,6 +89,11 @@ class ProductImport implements OnEachRow, WithChunkReading, WithHeadingRow
         if (isset($data['quantity'])) {
             if ($data['quantity'] > 0) {
                 return 1;
+            }
+            if (isset($data['manage_stock'])) {
+                if(!$data['manage_stock'] && !$data['quantity']) {
+                    return 1;
+                }
             }
             return 0;
         }
